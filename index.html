@@ -160,8 +160,8 @@
 
     /* Recorte CSS para extraer cada fase lunar de la imagen lunasOscuras.jpg (matriz 4x2) */
     .moon-sprite {
-      width: 120px;
-      height: 120px;
+      width: 160px;
+      height: 160px;
       background-image: url('lunasOscuras.jpg');
       background-size: 400% 200%;
       background-repeat: no-repeat;
@@ -193,40 +193,38 @@
     <header id="mainHeader" class="flex flex-col w-full relative transition-all duration-500">
       
       <!-- Fila Superior: Fecha Completa y Selector -->
-      <div class="flex flex-wrap md:flex-nowrap items-center justify-between w-full bg-[#121316] rounded-2xl px-4 md:px-5 py-3 mb-4 relative z-10 shadow-sm gap-4">
-        <div class="flex items-center gap-3 text-xs font-mono text-zinc-300 flex-wrap">
-           
-           <div class="flex items-center gap-1 bg-[#16171b] rounded-lg p-1 flex-shrink-0 shadow-sm">
-             <button type="button" onclick="navigateDay(-1)" class="p-1.5 text-zinc-400 hover:text-zinc-100 transition rounded-md hover:bg-zinc-800"><i data-lucide="chevron-left" class="w-4 h-4"></i></button>
-             <button type="button" onclick="goToToday()" id="btnGoTodayNav" class="px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-zinc-300 hover:text-white transition bg-[#23252b] rounded-md shadow-sm">HOY</button>
-             <button type="button" onclick="navigateDay(1)" class="p-1.5 text-zinc-400 hover:text-zinc-100 transition rounded-md hover:bg-zinc-800"><i data-lucide="chevron-right" class="w-4 h-4"></i></button>
-             <div class="w-px h-4 bg-zinc-800 mx-0.5"></div>
-             <button type="button" onclick="openCalendarPicker()" class="p-1.5 text-zinc-400 hover:text-white transition relative rounded-md hover:bg-zinc-800">
-               <i data-lucide="calendar" class="w-4 h-4"></i>
-               <input type="date" id="nativeDatePicker" onchange="handleNativeDateSelect(event)" class="absolute inset-0 opacity-0 cursor-pointer w-full h-full" style="color-scheme: dark;">
-             </button>
-           </div>
-           
-           <div class="w-px h-5 bg-zinc-800 hidden sm:block"></div>
-           
-           <div class="flex items-center gap-2">
-             <i data-lucide="sparkles" class="w-4 h-4 text-[#8da89b]"></i>
-             <span id="fullDateDisplay" class="font-serif-luxury text-base font-bold text-zinc-100">Sábado, 7 de Noviembre de 2026</span>
-           </div>
+      <div class="flex flex-nowrap items-center justify-between w-full bg-[#121316] rounded-2xl px-2 sm:px-5 py-2 sm:py-3 mb-4 relative z-10 shadow-sm gap-1.5 sm:gap-4">
+        
+        <!-- Controles Izquierda (Flechas y Hoy) -->
+        <div class="flex items-center gap-0.5 sm:gap-1 bg-[#16171b] rounded-lg p-0.5 sm:p-1 flex-shrink-0 shadow-sm">
+          <button type="button" onclick="navigateDay(-1)" class="p-1 sm:p-1.5 text-zinc-400 hover:text-zinc-100 transition rounded-md hover:bg-zinc-800"><i data-lucide="chevron-left" class="w-3 h-3 sm:w-4 sm:h-4"></i></button>
+          <button type="button" onclick="goToToday()" id="btnGoTodayNav" class="px-1.5 sm:px-3 py-1 text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-zinc-300 hover:text-white transition bg-[#23252b] rounded-md shadow-sm">HOY</button>
+          <button type="button" onclick="navigateDay(1)" class="p-1 sm:p-1.5 text-zinc-400 hover:text-zinc-100 transition rounded-md hover:bg-zinc-800"><i data-lucide="chevron-right" class="w-3 h-3 sm:w-4 sm:h-4"></i></button>
+          <div class="w-px h-3 sm:h-4 bg-zinc-800 mx-0.5"></div>
+          <button type="button" onclick="openCalendarPicker()" class="p-1 sm:p-1.5 text-zinc-400 hover:text-white transition relative rounded-md hover:bg-zinc-800">
+            <i data-lucide="calendar" class="w-3 h-3 sm:w-4 sm:h-4"></i>
+            <input type="date" id="nativeDatePicker" onchange="handleNativeDateSelect(event)" class="absolute inset-0 opacity-0 cursor-pointer w-full h-full" style="color-scheme: dark;">
+          </button>
         </div>
         
-        <div class="flex items-center gap-3 text-xs font-mono text-zinc-300 mt-2 md:mt-0">
-           <button onclick="openMoonModal()" class="flex items-center gap-2 px-3 py-2 bg-[#16171b] rounded-xl hover:bg-zinc-800 transition">
-             <i data-lucide="moon" class="w-4 h-4 text-[#8da89b]"></i>
-             <span id="headerMoonPhaseName" class="font-semibold">Luna Nueva</span>
+        <!-- Fecha Central -->
+        <div class="flex items-center justify-center flex-1 min-w-0 px-1 sm:px-2">
+          <i data-lucide="sparkles" class="w-3 h-3 text-[#8da89b] hidden sm:block mr-1.5 flex-shrink-0"></i>
+          <span id="fullDateDisplay" class="font-serif-luxury text-[11px] sm:text-base font-bold text-zinc-100 truncate">Sábado, 7 de Noviembre de 2026</span>
+        </div>
+        
+        <!-- Botón Luna -->
+        <div class="flex items-center flex-shrink-0">
+           <button onclick="openMoonModal()" class="flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-1.5 sm:py-2 bg-[#16171b] rounded-xl hover:bg-zinc-800 transition">
+             <i data-lucide="moon" class="w-3 h-3 sm:w-4 sm:h-4 text-[#8da89b] flex-shrink-0"></i>
+             <span id="headerMoonPhaseName" class="font-semibold text-[9px] sm:text-xs truncate max-w-[50px] sm:max-w-none">Luna Nueva</span>
            </button>
         </div>
       </div>
 
-      <!-- Navegación Principal: Los 4 Botones en una Sola Fila con tus Emblemas PNG -->
+      <!-- Navegación Principal -->
       <div class="flex flex-col gap-3 relative z-10 w-full pb-2">
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 w-full">
-          
           <!-- Agenda -->
           <button onclick="switchView('agenda')" id="cardAgenda" class="nav-emblem-btn flex items-center gap-2.5 rounded-2xl px-3 py-2 text-left group">
              <div class="flex-shrink-0">
@@ -270,7 +268,6 @@
               <span class="font-serif-luxury text-xs text-zinc-100 font-bold leading-tight mt-0.5 truncate">Familiares</span>
             </div>
           </button>
-
         </div>
       </div>
     </header>
@@ -766,7 +763,7 @@
       { name: "El Mago", num: "I", symbol: "🪄", up: "Manifestación, poder personal, habilidad, concentración, recursos.", rev: "Manipulación, talento desperdiciado, ilusiones, falta de foco.", advice: "Tienes todas las herramientas necesarias en tu altar interior." },
       { name: "La Sacerdotisa", num: "II", symbol: "📜", up: "Intuición, misterio, sabiduría interior, el subconsciente, silencio.", rev: "Secretos ocultos, desconexión de la intuición, superficialidad.", advice: "Escucha la voz sutil de tus sueños y corazonadas." },
       { name: "La Emperatriz", num: "III", symbol: "👑", up: "Abundancia, fertilidad, naturaleza, creatividad, nutrición emocional.", rev: "Dependencia, bloqueo creativo, exceso de control, vacío.", advice: "Cultiva tus proyectos con amor y paciencia." },
-      { name: "El Emperador", num: "IV", symbol: "🏛️", up: "Autoridad, estructura, estabilidad, liderazgo, orden cósmico.", rev: "Tiranía, rigidez, abuso de poder, desorganización.", advice: "Establece bases firmes y disciplina en tu camino." },
+      { name: "El Emperador", num: "IV", symbol: "🏛️", up: "Autoridad, structure, estabilidad, liderazgo, orden cósmico.", rev: "Tiranía, rigidez, abuso de poder, desorganización.", advice: "Establece bases firmes y disciplina en tu camino." },
       { name: "El Hierofante", num: "V", symbol: "🗝️", up: "Tradición, guía espiritual, sabiduría ancestral, instituciones.", rev: "Dogmatismo, rebeldía ciega, falsas creencias, ortodoxia.", advice: "Busca el consejo de quienes ya recorrieron el sendero." },
       { name: "Los Enamorados", num: "VI", symbol: "❤️", up: "Unión sagrada, elecciones del corazón, armonía, dualidad.", rev: "Desarmonía, indecisión, valores opuestos, ruptura.", advice: "Elige desde el amor y no desde el miedo." },
       { name: "El Carro", num: "VII", symbol: "🛡️", up: "Victoria, determinación, control sobre los opuestos, avance.", rev: "Falta de dirección, agresividad, obstáculos descontrolados.", advice: "Mantén las riendas firmes de tu destino." },
@@ -842,27 +839,29 @@
       updateMoonHeaderInfo();
     }
 
-    function getLunarData(dateObj) {
+    // Calcula la fase lunar y devuelve un índice del 0 al 7
+    function getLunarPhaseData(dateObj) {
       const baseDate = new Date(2000, 0, 6);
       const diffDays = (dateObj - baseDate) / (1000 * 60 * 60 * 24);
       const cycle = 29.5305877057;
       const moonAge = diffDays % cycle;
       
-      let phaseIndex = 0;
       let phaseName = "Luna Nueva";
-      if (moonAge > 1 && moonAge < 6) { phaseIndex = 1; phaseName = "Luna Creciente"; }
-      else if (moonAge >= 6 && moonAge < 9) { phaseIndex = 2; phaseName = "Cuarto Creciente"; }
-      else if (moonAge >= 9 && moonAge < 13) { phaseIndex = 3; phaseName = "Gibosa Creciente"; }
-      else if (moonAge >= 13 && moonAge < 16) { phaseIndex = 4; phaseName = "Luna Llena"; }
-      else if (moonAge >= 16 && moonAge < 20) { phaseIndex = 5; phaseName = "Gibosa Menguante"; }
-      else if (moonAge >= 20 && moonAge < 23) { phaseIndex = 6; phaseName = "Cuarto Menguante"; }
-      else if (moonAge >= 23 && moonAge < 28) { phaseIndex = 7; phaseName = "Menguante Balsámica"; }
+      let phaseIndex = 0;
+      
+      if (moonAge > 1 && moonAge < 6) { phaseName = "Luna Creciente"; phaseIndex = 1; }
+      else if (moonAge >= 6 && moonAge < 9) { phaseName = "Cuarto Creciente"; phaseIndex = 2; }
+      else if (moonAge >= 9 && moonAge < 13) { phaseName = "Gibosa Creciente"; phaseIndex = 3; }
+      else if (moonAge >= 13 && moonAge < 16) { phaseName = "Luna Llena"; phaseIndex = 4; }
+      else if (moonAge >= 16 && moonAge < 20) { phaseName = "Gibosa Menguante"; phaseIndex = 5; }
+      else if (moonAge >= 20 && moonAge < 23) { phaseName = "Cuarto Menguante"; phaseIndex = 6; }
+      else if (moonAge >= 23 && moonAge < 28) { phaseName = "Menguante Balsámica"; phaseIndex = 7; }
 
-      return { phaseIndex, phaseName };
+      return { phaseName, phaseIndex };
     }
 
     function updateMoonHeaderInfo() {
-      const lunar = getLunarData(currentDate);
+      const lunar = getLunarPhaseData(currentDate);
       document.getElementById('headerMoonPhaseName').innerText = lunar.phaseName;
     }
 
@@ -1352,13 +1351,14 @@
     function openMoonModal() {
       const m = document.getElementById('moonModal');
       m.classList.remove('hidden');
-      const lunar = getLunarData(currentDate);
+      const lunar = getLunarPhaseData(currentDate);
       document.getElementById('lunarModalContent').innerHTML = `
         <div class="moon-sprite phase-${lunar.phaseIndex} mx-auto mb-4"></div>
         <h4 class="font-serif-luxury text-xl font-bold text-zinc-100 mb-1">${lunar.phaseName}</h4>
         <p class="text-xs text-zinc-400 font-handwritten text-xl leading-relaxed mt-3">Momento propicio para la introspección profunda, consagración de amuletos y siembra de intenciones en el plano astral.</p>
       `;
     }
+    
     function closeMoonModal() {
       document.getElementById('moonModal').classList.add('hidden');
     }
