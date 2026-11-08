@@ -1,0 +1,12 @@
+{
+  "background_color": "#ffffff",
+  "dir": "ltr",
+  "display": "fullscreen",
+  "name": "inseinrulz.github",
+  "orientation": "natural",
+  "scope": "/",
+  "short_name": "inseinrulz.github",
+  "start_url": "https://inseinrulz.github.io/mi-grimorio/",
+  "theme_color": "#ffffff",
+  "lang": "es"
+}
