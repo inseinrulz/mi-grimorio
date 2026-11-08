@@ -160,36 +160,31 @@
 
     /* MINIATURA FASE LUNAR (BOTÓN) */
     .moon-sprite-mini {
-      width: 28px;
-      height: 28px;
-      background-image: url('lunasOscuras.png');
-      background-size: 400% 200%;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
       background-repeat: no-repeat;
-      border-radius: 50%;
-      box-shadow: 0 0 8px rgba(141, 168, 155, 0.4);
     }
 
     /* FASE LUNAR GRANDE (POP-UP) */
     .moon-sprite {
-      width: 220px;
-      height: 220px;
-      background-image: url('lunasOscuras.png');
-      background-size: 400% 200%;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
       background-repeat: no-repeat;
-      border-radius: 50%;
-      box-shadow: 0 0 35px rgba(141, 168, 155, 0.4);
-      border: 2px solid rgba(141, 168, 155, 0.3);
     }
 
-    /* COORDENADAS SPRITE */
-    .phase-0 { background-position: 0% 0%; }     /* Luna Nueva */
-    .phase-1 { background-position: 33.33% 0%; } /* Creciente */
-    .phase-2 { background-position: 66.66% 0%; } /* Cuarto Creciente */
-    .phase-3 { background-position: 100% 0%; }    /* Gibosa Creciente */
-    .phase-4 { background-position: 0% 100%; }    /* Luna Llena */
-    .phase-5 { background-position: 33.33% 100%; }/* Gibosa Menguante */
-    .phase-6 { background-position: 66.66% 100%; }/* Cuarto Menguante */
-    .phase-7 { background-position: 100% 100%; }   /* Menguante Balsámica */
+    /* ASIGNACIÓN DE LUNAS INDIVIDUALES */
+    .phase-0 { background-image: url('lunasOscuras1.png'); } /* Luna Nueva */
+    .phase-1 { background-image: url('lunasOscuras2.png'); } /* Creciente */
+    .phase-2 { background-image: url('lunasOscuras3.png'); } /* Cuarto Creciente */
+    .phase-3 { background-image: url('lunasOscuras4.png'); } /* Gibosa Creciente */
+    .phase-4 { background-image: url('lunasOscuras5.png'); } /* Luna Llena */
+    .phase-5 { background-image: url('lunasOscuras6.png'); } /* Gibosa Menguante */
+    .phase-6 { background-image: url('lunasOscuras7.png'); } /* Cuarto Menguante */
+    .phase-7 { background-image: url('lunasOscuras8.png'); } /* Menguante Balsámica */
   </style>
 </head>
 <body class="antialiased min-h-screen flex flex-col relative pb-32">
@@ -210,7 +205,9 @@
         
         <!-- 1. Botón Luna al principio (Mejorado el centrado) -->
         <button onclick="openMoonModal()" class="flex items-center justify-center flex-shrink-0 w-10 h-10 bg-[#16171b] rounded-xl hover:bg-zinc-800 transition shadow-sm border border-zinc-800/50 hover:border-[#8da89b]/50" title="Ver Fase Lunar">
-          <div id="headerMoonPhaseIcon" class="moon-sprite-mini phase-0 block"></div>
+          <div class="w-[26px] h-[26px] rounded-full overflow-hidden flex items-center justify-center">
+            <div id="headerMoonPhaseIcon" class="moon-sprite-mini phase-0 block"></div>
+          </div>
         </button>
         
         <!-- 2. Fecha Central -->
@@ -417,45 +414,31 @@
         </div>
 
         <!-- CONTENEDOR RESPONSIVO (MÓVIL / ESCRITORIO) -->
-        <div class="relative w-full mystic-wicca-card py-10 md:py-14 px-4 md:px-6 mt-2 mb-4 overflow-hidden flex flex-col md:flex-row items-center justify-center gap-10 md:gap-4 shadow-[inset_0_0_50px_rgba(0,0,0,0.8)] md:shadow-[inset_0_0_80px_rgba(0,0,0,1)]">
+        <div class="relative w-full mystic-wicca-card py-12 md:py-14 px-4 md:px-6 mt-2 mb-4 overflow-hidden flex flex-col md:flex-row items-center justify-center gap-12 md:gap-4 shadow-[inset_0_0_50px_rgba(0,0,0,0.8)] md:shadow-[inset_0_0_80px_rgba(0,0,0,1)]">
           
-          <!-- FONDO ESCRITORIO (Círculo Giratorio) -->
-          <div class="absolute inset-0 hidden md:flex justify-center items-center pointer-events-none opacity-20">
-            <svg viewBox="0 0 400 400" class="w-[120%] h-auto animate-[spin_120s_linear_infinite]">
+          <!-- FONDO UNIFICADO (Geometría Sagrada Giratoria Centrada) -->
+          <div class="absolute inset-0 flex justify-center items-center pointer-events-none opacity-20 overflow-hidden">
+            <svg viewBox="0 0 400 400" class="w-[220%] sm:w-[120%] max-w-[700px] aspect-square animate-[spin_120s_linear_infinite]">
               <circle cx="200" cy="200" r="180" fill="none" stroke="#9b8da8" stroke-width="0.5" stroke-dasharray="2 8"/>
-              <circle cx="200" cy="200" r="170" fill="none" stroke="#9b8da8" stroke-width="1"/>
-              <circle cx="200" cy="200" r="90" fill="none" stroke="#9b8da8" stroke-width="0.5"/>
-              <polygon points="200,30 347,285 53,285" fill="none" stroke="#9b8da8" stroke-width="1.5"/>
-              <polygon points="200,370 347,115 53,115" fill="none" stroke="#9b8da8" stroke-width="1.5"/>
-            </svg>
-          </div>
-
-          <!-- FONDO MÓVIL (Geometría Sagrada Giratoria) -->
-          <div class="absolute inset-0 flex md:hidden justify-center items-center pointer-events-none opacity-20 overflow-hidden">
-            <svg viewBox="0 0 300 600" class="w-[180%] h-auto animate-[spin_150s_linear_infinite]">
-              <!-- Círculos exteriores y órbita -->
-              <circle cx="150" cy="300" r="280" fill="none" stroke="#9b8da8" stroke-width="0.5" stroke-dasharray="4 6"/>
-              <circle cx="150" cy="300" r="160" fill="none" stroke="#9b8da8" stroke-width="1"/>
-              <!-- Estrella Sagrada (Hexagrama) -->
-              <polygon points="150,140 288,380 12,380" fill="none" stroke="#9b8da8" stroke-width="1"/>
-              <polygon points="150,460 288,220 12,220" fill="none" stroke="#9b8da8" stroke-width="1"/>
+              <circle cx="200" cy="200" r="150" fill="none" stroke="#9b8da8" stroke-width="1"/>
+              <!-- Hexagrama Místico -->
+              <polygon points="200,50 330,275 70,275" fill="none" stroke="#9b8da8" stroke-width="1"/>
+              <polygon points="200,350 330,125 70,125" fill="none" stroke="#9b8da8" stroke-width="1"/>
+              <!-- Anillos Interiores -->
+              <circle cx="200" cy="200" r="86.6" fill="none" stroke="#c3b4c7" stroke-width="0.5"/>
+              <circle cx="200" cy="200" r="30" fill="none" stroke="#9b8da8" stroke-width="0.5" stroke-dasharray="2 4"/>
               <!-- Nodos de Poder -->
-              <circle cx="150" cy="140" r="30" fill="none" stroke="#c3b4c7" stroke-width="0.5"/>
-              <circle cx="288" cy="220" r="30" fill="none" stroke="#c3b4c7" stroke-width="0.5"/>
-              <circle cx="288" cy="380" r="30" fill="none" stroke="#c3b4c7" stroke-width="0.5"/>
-              <circle cx="150" cy="460" r="30" fill="none" stroke="#c3b4c7" stroke-width="0.5"/>
-              <circle cx="12" cy="380" r="30" fill="none" stroke="#c3b4c7" stroke-width="0.5"/>
-              <circle cx="12" cy="220" r="30" fill="none" stroke="#c3b4c7" stroke-width="0.5"/>
-              <circle cx="150" cy="300" r="45" fill="none" stroke="#9b8da8" stroke-width="1"/>
-              <!-- Ejes conectores -->
-              <line x1="150" y1="140" x2="150" y2="460" stroke="#9b8da8" stroke-width="0.5"/>
-              <line x1="12" y1="220" x2="288" y2="380" stroke="#9b8da8" stroke-width="0.5"/>
-              <line x1="12" y1="380" x2="288" y2="220" stroke="#9b8da8" stroke-width="0.5"/>
+              <circle cx="200" cy="50" r="8" fill="#121316" stroke="#c3b4c7" stroke-width="1.5"/>
+              <circle cx="330" cy="275" r="8" fill="#121316" stroke="#c3b4c7" stroke-width="1.5"/>
+              <circle cx="70" cy="275" r="8" fill="#121316" stroke="#c3b4c7" stroke-width="1.5"/>
+              <circle cx="200" cy="350" r="8" fill="#121316" stroke="#c3b4c7" stroke-width="1.5"/>
+              <circle cx="330" cy="125" r="8" fill="#121316" stroke="#c3b4c7" stroke-width="1.5"/>
+              <circle cx="70" cy="125" r="8" fill="#121316" stroke="#c3b4c7" stroke-width="1.5"/>
             </svg>
           </div>
 
           <div onclick="openEsotericDetail('sol_escorpio')" class="relative z-10 flex flex-col items-center text-center w-full md:w-1/3 group cursor-pointer">
-             <div class="w-24 h-24 mb-4 relative flex items-center justify-center bg-[#090a0c]/80 md:bg-transparent rounded-full shadow-[0_0_15px_rgba(155,141,168,0.15)] md:shadow-none border border-[#9b8da8]/20 md:border-transparent">
+             <div class="w-24 h-24 mb-4 relative flex items-center justify-center bg-[#090a0c]/90 md:bg-transparent rounded-full shadow-[0_0_15px_rgba(155,141,168,0.2)] md:shadow-none border border-[#9b8da8]/30 md:border-transparent">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" class="w-12 h-12 text-[#e0d6e8] relative z-10 group-hover:scale-110 transition-transform">
                   <path d="M4 17V8c0-2.2 1.8-4 4-4s4 1.8 4 4v9"/>
                   <path d="M12 17V8c0-2.2 1.8-4 4-4s4 1.8 4 4v4"/>
@@ -469,7 +452,7 @@
           </div>
 
           <div onclick="openEsotericDetail('luna_acuario')" class="relative z-10 flex flex-col items-center text-center w-full md:w-1/3 group md:-translate-y-10 cursor-pointer">
-             <div class="w-24 h-24 md:w-28 md:h-28 mb-4 relative flex items-center justify-center bg-[#090a0c]/80 md:bg-transparent rounded-full shadow-[0_0_15px_rgba(195,180,199,0.15)] md:shadow-none border border-[#c3b4c7]/20 md:border-transparent">
+             <div class="w-24 h-24 md:w-28 md:h-28 mb-4 relative flex items-center justify-center bg-[#090a0c]/90 md:bg-transparent rounded-full shadow-[0_0_20px_rgba(195,180,199,0.25)] md:shadow-none border border-[#c3b4c7]/30 md:border-transparent">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" class="w-12 h-12 md:w-14 md:h-14 text-white relative z-10 group-hover:scale-110 transition-transform">
                   <path d="M2 15h4l3-3 4 3h5l3-3"/>
                   <path d="M2 9h4l3-3 4 3h5l3-3"/>
@@ -481,7 +464,7 @@
           </div>
 
           <div onclick="openEsotericDetail('asc_tauro')" class="relative z-10 flex flex-col items-center text-center w-full md:w-1/3 group cursor-pointer">
-             <div class="w-24 h-24 mb-4 relative flex items-center justify-center bg-[#090a0c]/80 md:bg-transparent rounded-full shadow-[0_0_15px_rgba(155,141,168,0.15)] md:shadow-none border border-[#9b8da8]/20 md:border-transparent">
+             <div class="w-24 h-24 mb-4 relative flex items-center justify-center bg-[#090a0c]/90 md:bg-transparent rounded-full shadow-[0_0_15px_rgba(155,141,168,0.2)] md:shadow-none border border-[#9b8da8]/30 md:border-transparent">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" class="w-12 h-12 text-[#e0d6e8] relative z-10 group-hover:scale-110 transition-transform">
                   <circle cx="12" cy="14" r="5"/>
                   <path d="M6 8a6 6 0 0 1 12 0"/>
@@ -1415,7 +1398,9 @@
       m.classList.remove('hidden');
       const lunar = getLunarPhaseData(currentDate);
       document.getElementById('lunarModalContent').innerHTML = `
-        <div class="moon-sprite phase-${lunar.phaseIndex} mx-auto mb-4"></div>
+        <div class="w-36 h-36 mx-auto rounded-full bg-black border-2 border-[#8da89b]/50 shadow-[0_0_35px_rgba(141,168,155,0.3)] flex items-center justify-center mb-4 overflow-hidden">
+          <div class="moon-sprite phase-${lunar.phaseIndex}"></div>
+        </div>
         <h4 class="font-serif-luxury text-xl font-bold text-zinc-100 mb-1">${lunar.phaseName}</h4>
         <p class="text-xs text-zinc-400 font-handwritten text-xl leading-relaxed mt-3">Momento propicio para la introspección profunda, consagración de amuletos y siembra de intenciones en el plano astral.</p>
       `;

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'grimorio-cache-v3';
+const CACHE_NAME = 'grimorio-cache-v4';
 const ASSETS = [
   './',
   './index.html',
@@ -7,7 +7,6 @@ const ASSETS = [
   './Grimorio místico de cuero envejecido_2.png',
   './Emblema Gótico de Fases Lunares_2.png',
   './Emblema de Huella Gótica Verde_2.png',
-  './lunasOscuras.png',
   './cat1.png',
   './cat2.png',
   './cat3.png',
@@ -16,7 +15,15 @@ const ASSETS = [
   './bat3.png',
   './rat1.png',
   './rat2.png',
-  './rat3.png'
+  './rat3.png',
+  './lunasOscuras1.png',
+  './lunasOscuras2.png',
+  './lunasOscuras3.png',
+  './lunasOscuras4.png',
+  './lunasOscuras5.png',
+  './lunasOscuras6.png',
+  './lunasOscuras7.png',
+  './lunasOscuras8.png'
 ];
 
 self.addEventListener('install', (event) => {
