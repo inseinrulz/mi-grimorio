@@ -157,6 +157,26 @@
       border-color: rgba(141, 168, 155, 0.6);
       transform: translateY(-2px);
     }
+
+    /* Recorte CSS para extraer cada fase lunar de la imagen lunasOscuras.jpg (matriz 4x2) */
+    .moon-sprite {
+      width: 120px;
+      height: 120px;
+      background-image: url('lunasOscuras.jpg');
+      background-size: 400% 200%;
+      background-repeat: no-repeat;
+      border-radius: 50%;
+      box-shadow: 0 0 25px rgba(141, 168, 155, 0.3);
+      border: 2px solid rgba(141, 168, 155, 0.4);
+    }
+    .phase-0 { background-position: 0% 0%; }     /* Luna Nueva */
+    .phase-1 { background-position: 33.33% 0%; } /* Creciente */
+    .phase-2 { background-position: 66.66% 0%; } /* Cuarto Creciente */
+    .phase-3 { background-position: 100% 0%; }    /* Gibosa Creciente */
+    .phase-4 { background-position: 0% 100%; }    /* Luna Llena */
+    .phase-5 { background-position: 33.33% 100%; }/* Gibosa Menguante */
+    .phase-6 { background-position: 66.66% 100%; }/* Cuarto Menguante */
+    .phase-7 { background-position: 100% 100%; }   /* Menguante Balsámica */
   </style>
 </head>
 <body class="antialiased min-h-screen flex flex-col relative pb-32">
@@ -589,7 +609,7 @@
       <button type="button" onclick="closeMoonModal()" class="absolute top-4 right-4 text-zinc-500 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
       <div class="flex flex-col items-center">
         <h3 class="font-serif-luxury text-2xl text-zinc-100 mb-6 font-semibold">Estado Lunar</h3>
-        <div id="lunarModalContent" class="text-center w-full"></div>
+        <div id="lunarModalContent" class="text-center w-full flex flex-col items-center"></div>
       </div>
     </div>
   </div>
@@ -822,22 +842,28 @@
       updateMoonHeaderInfo();
     }
 
-    function updateMoonHeaderInfo() {
+    function getLunarData(dateObj) {
       const baseDate = new Date(2000, 0, 6);
-      const diffDays = (currentDate - baseDate) / (1000 * 60 * 60 * 24);
+      const diffDays = (dateObj - baseDate) / (1000 * 60 * 60 * 24);
       const cycle = 29.5305877057;
       const moonAge = diffDays % cycle;
       
+      let phaseIndex = 0;
       let phaseName = "Luna Nueva";
-      if (moonAge > 1 && moonAge < 6) phaseName = "Luna Creciente";
-      else if (moonAge >= 6 && moonAge < 9) phaseName = "Cuarto Creciente";
-      else if (moonAge >= 9 && moonAge < 13) phaseName = "Gibosa Creciente";
-      else if (moonAge >= 13 && moonAge < 16) phaseName = "Luna Llena";
-      else if (moonAge >= 16 && moonAge < 20) phaseName = "Gibosa Menguante";
-      else if (moonAge >= 20 && moonAge < 23) phaseName = "Cuarto Menguante";
-      else if (moonAge >= 23 && moonAge < 28) phaseName = "Menguante Balsámica";
+      if (moonAge > 1 && moonAge < 6) { phaseIndex = 1; phaseName = "Luna Creciente"; }
+      else if (moonAge >= 6 && moonAge < 9) { phaseIndex = 2; phaseName = "Cuarto Creciente"; }
+      else if (moonAge >= 9 && moonAge < 13) { phaseIndex = 3; phaseName = "Gibosa Creciente"; }
+      else if (moonAge >= 13 && moonAge < 16) { phaseIndex = 4; phaseName = "Luna Llena"; }
+      else if (moonAge >= 16 && moonAge < 20) { phaseIndex = 5; phaseName = "Gibosa Menguante"; }
+      else if (moonAge >= 20 && moonAge < 23) { phaseIndex = 6; phaseName = "Cuarto Menguante"; }
+      else if (moonAge >= 23 && moonAge < 28) { phaseIndex = 7; phaseName = "Menguante Balsámica"; }
 
-      document.getElementById('headerMoonPhaseName').innerText = phaseName;
+      return { phaseIndex, phaseName };
+    }
+
+    function updateMoonHeaderInfo() {
+      const lunar = getLunarData(currentDate);
+      document.getElementById('headerMoonPhaseName').innerText = lunar.phaseName;
     }
 
     function navigateDay(dir) {
@@ -1326,10 +1352,10 @@
     function openMoonModal() {
       const m = document.getElementById('moonModal');
       m.classList.remove('hidden');
-      const phaseName = document.getElementById('headerMoonPhaseName').innerText;
+      const lunar = getLunarData(currentDate);
       document.getElementById('lunarModalContent').innerHTML = `
-        <div class="text-5xl mb-4">🌑</div>
-        <h4 class="font-serif-luxury text-xl font-bold text-zinc-100 mb-1">${phaseName}</h4>
+        <div class="moon-sprite phase-${lunar.phaseIndex} mx-auto mb-4"></div>
+        <h4 class="font-serif-luxury text-xl font-bold text-zinc-100 mb-1">${lunar.phaseName}</h4>
         <p class="text-xs text-zinc-400 font-handwritten text-xl leading-relaxed mt-3">Momento propicio para la introspección profunda, consagración de amuletos y siembra de intenciones en el plano astral.</p>
       `;
     }
