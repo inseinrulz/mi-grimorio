@@ -1,12 +1,22 @@
-const CACHE_NAME = 'grimorio-cache-v1';
+const CACHE_NAME = 'grimorio-cache-v3';
 const ASSETS = [
-  './agenda_escolar.html',
+  './',
+  './index.html',
   './manifest.json',
   './Calendario gótico con reloj celta_2.png',
   './Grimorio místico de cuero envejecido_2.png',
   './Emblema Gótico de Fases Lunares_2.png',
   './Emblema de Huella Gótica Verde_2.png',
-  './imagen_2026-11-07_182209379.jpg'
+  './lunasOscuras.png',
+  './cat1.png',
+  './cat2.png',
+  './cat3.png',
+  './bat1.png',
+  './bat2.png',
+  './bat3.png',
+  './rat1.png',
+  './rat2.png',
+  './rat3.png'
 ];
 
 self.addEventListener('install', (event) => {
@@ -38,7 +48,7 @@ self.addEventListener('fetch', (event) => {
     caches.match(event.request).then((cachedResponse) => {
       return cachedResponse || fetch(event.request).catch(() => {
         if (event.request.mode === 'navigate') {
-          return caches.match('./agenda_escolar.html');
+          return caches.match('./index.html');
         }
       });
     })
