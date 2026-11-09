@@ -171,7 +171,7 @@
     .moon-sprite {
       width: 100%;
       height: 100%;
-      background-size: cover;
+      background-size: contain;
       background-position: center;
       background-repeat: no-repeat;
     }
@@ -1398,11 +1398,11 @@
       m.classList.remove('hidden');
       const lunar = getLunarPhaseData(currentDate);
       document.getElementById('lunarModalContent').innerHTML = `
-        <div class="w-36 h-36 mx-auto rounded-full bg-black border-2 border-[#8da89b]/50 shadow-[0_0_35px_rgba(141,168,155,0.3)] flex items-center justify-center mb-4 overflow-hidden">
+        <div class="w-56 h-56 mx-auto flex items-center justify-center mb-6 drop-shadow-[0_0_25px_rgba(141,168,155,0.3)]">
           <div class="moon-sprite phase-${lunar.phaseIndex}"></div>
         </div>
-        <h4 class="font-serif-luxury text-xl font-bold text-zinc-100 mb-1">${lunar.phaseName}</h4>
-        <p class="text-xs text-zinc-400 font-handwritten text-xl leading-relaxed mt-3">Momento propicio para la introspección profunda, consagración de amuletos y siembra de intenciones en el plano astral.</p>
+        <h4 class="font-serif-luxury text-3xl font-bold text-zinc-100 mb-2">${lunar.phaseName}</h4>
+        <p class="text-zinc-300 font-handwritten text-2xl leading-relaxed mt-2 px-2">Momento propicio para la introspección profunda, consagración de amuletos y siembra de intenciones en el plano astral.</p>
       `;
     }
     
