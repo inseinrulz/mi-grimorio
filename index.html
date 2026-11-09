@@ -203,11 +203,9 @@
       <!-- Fila Superior: Fecha Completa y Selector -->
       <div class="flex flex-nowrap items-center justify-between w-full bg-[#121316] rounded-2xl px-2 sm:px-5 py-2 sm:py-3 mb-4 relative z-10 shadow-sm gap-2">
         
-        <!-- 1. Botón Luna al principio (Mejorado el centrado) -->
+        <!-- 1. Botón Luna al principio (Sin recortes ni bordes redondos) -->
         <button onclick="openMoonModal()" class="flex items-center justify-center flex-shrink-0 w-10 h-10 bg-[#16171b] rounded-xl hover:bg-zinc-800 transition shadow-sm border border-zinc-800/50 hover:border-[#8da89b]/50" title="Ver Fase Lunar">
-          <div class="w-[26px] h-[26px] rounded-full overflow-hidden flex items-center justify-center">
-            <div id="headerMoonPhaseIcon" class="moon-sprite-mini phase-0 block"></div>
-          </div>
+          <img id="headerMoonPhaseIcon" src="lunasOscuras1.png" class="w-7 h-7 object-contain drop-shadow-md" alt="Fase Lunar">
         </button>
         
         <!-- 2. Fecha Central -->
@@ -903,10 +901,8 @@
       const lunar = getLunarPhaseData(currentDate);
       const iconEl = document.getElementById('headerMoonPhaseIcon');
       if (iconEl) {
-        // Limpiamos clases previas
-        for(let i=0; i<=7; i++) iconEl.classList.remove(`phase-${i}`);
-        // Aplicamos la correcta
-        iconEl.classList.add(`phase-${lunar.phaseIndex}`);
+        // Asignamos la imagen directamente sin usar clases CSS que recorten
+        iconEl.src = `lunasOscuras${lunar.phaseIndex + 1}.png`;
       }
     }
 
@@ -1397,10 +1393,9 @@
       const m = document.getElementById('moonModal');
       m.classList.remove('hidden');
       const lunar = getLunarPhaseData(currentDate);
+      // Mostramos la imagen limpia sin ningún div circular ni overflow-hidden que la corte
       document.getElementById('lunarModalContent').innerHTML = `
-        <div class="w-56 h-56 mx-auto flex items-center justify-center mb-6 drop-shadow-[0_0_25px_rgba(141,168,155,0.3)]">
-          <div class="moon-sprite phase-${lunar.phaseIndex}"></div>
-        </div>
+        <img src="lunasOscuras${lunar.phaseIndex + 1}.png" class="w-56 h-56 object-contain drop-shadow-[0_0_25px_rgba(141,168,155,0.4)] mb-4" alt="${lunar.phaseName}">
         <h4 class="font-serif-luxury text-3xl font-bold text-zinc-100 mb-2">${lunar.phaseName}</h4>
         <p class="text-zinc-300 font-handwritten text-2xl leading-relaxed mt-2 px-2">Momento propicio para la introspección profunda, consagración de amuletos y siembra de intenciones en el plano astral.</p>
       `;
