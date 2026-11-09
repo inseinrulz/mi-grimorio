@@ -158,33 +158,6 @@
       transform: translateY(-2px);
     }
 
-    /* MINIATURA FASE LUNAR (BOTÓN) */
-    .moon-sprite-mini {
-      width: 100%;
-      height: 100%;
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-    }
-
-    /* FASE LUNAR GRANDE (POP-UP) */
-    .moon-sprite {
-      width: 100%;
-      height: 100%;
-      background-size: contain;
-      background-position: center;
-      background-repeat: no-repeat;
-    }
-
-    /* ASIGNACIÓN DE LUNAS INDIVIDUALES */
-    .phase-0 { background-image: url('lunasOscuras1.png'); } /* Luna Nueva */
-    .phase-1 { background-image: url('lunasOscuras2.png'); } /* Creciente */
-    .phase-2 { background-image: url('lunasOscuras3.png'); } /* Cuarto Creciente */
-    .phase-3 { background-image: url('lunasOscuras4.png'); } /* Gibosa Creciente */
-    .phase-4 { background-image: url('lunasOscuras5.png'); } /* Luna Llena */
-    .phase-5 { background-image: url('lunasOscuras6.png'); } /* Gibosa Menguante */
-    .phase-6 { background-image: url('lunasOscuras7.png'); } /* Cuarto Menguante */
-    .phase-7 { background-image: url('lunasOscuras8.png'); } /* Menguante Balsámica */
   </style>
 </head>
 <body class="antialiased min-h-screen flex flex-col relative pb-32">
@@ -204,8 +177,8 @@
       <div class="flex flex-nowrap items-center justify-between w-full bg-[#121316] rounded-2xl px-2 sm:px-5 py-2 sm:py-3 mb-4 relative z-10 shadow-sm gap-2">
         
         <!-- 1. Botón Luna al principio (Sin recortes ni bordes redondos) -->
-        <button onclick="openMoonModal()" class="flex items-center justify-center flex-shrink-0 w-10 h-10 bg-[#16171b] rounded-xl hover:bg-zinc-800 transition shadow-sm border border-zinc-800/50 hover:border-[#8da89b]/50" title="Ver Fase Lunar">
-          <img id="headerMoonPhaseIcon" src="lunasOscuras1.png" class="w-7 h-7 object-contain drop-shadow-md" alt="Fase Lunar">
+        <button onclick="openMoonModal()" class="flex items-center justify-center flex-shrink-0 w-12 h-12 bg-transparent hover:bg-zinc-800/50 rounded-xl transition" title="Ver Fase Lunar">
+          <img id="headerMoonPhaseIcon" src="lunasOscuras1.png" class="w-10 h-10 object-contain drop-shadow-md" alt="Fase Lunar">
         </button>
         
         <!-- 2. Fecha Central -->
@@ -414,24 +387,80 @@
         <!-- CONTENEDOR RESPONSIVO (MÓVIL / ESCRITORIO) -->
         <div class="relative w-full mystic-wicca-card py-12 md:py-14 px-4 md:px-6 mt-2 mb-4 overflow-hidden flex flex-col md:flex-row items-center justify-center gap-12 md:gap-4 shadow-[inset_0_0_50px_rgba(0,0,0,0.8)] md:shadow-[inset_0_0_80px_rgba(0,0,0,1)]">
           
-          <!-- FONDO UNIFICADO (Geometría Sagrada Giratoria Centrada) -->
-          <div class="absolute inset-0 flex justify-center items-center pointer-events-none opacity-20 overflow-hidden">
-            <svg viewBox="0 0 400 400" class="w-[220%] sm:w-[120%] max-w-[700px] aspect-square animate-[spin_120s_linear_infinite]">
-              <circle cx="200" cy="200" r="180" fill="none" stroke="#9b8da8" stroke-width="0.5" stroke-dasharray="2 8"/>
-              <circle cx="200" cy="200" r="150" fill="none" stroke="#9b8da8" stroke-width="1"/>
-              <!-- Hexagrama Místico -->
-              <polygon points="200,50 330,275 70,275" fill="none" stroke="#9b8da8" stroke-width="1"/>
-              <polygon points="200,350 330,125 70,125" fill="none" stroke="#9b8da8" stroke-width="1"/>
-              <!-- Anillos Interiores -->
-              <circle cx="200" cy="200" r="86.6" fill="none" stroke="#c3b4c7" stroke-width="0.5"/>
-              <circle cx="200" cy="200" r="30" fill="none" stroke="#9b8da8" stroke-width="0.5" stroke-dasharray="2 4"/>
-              <!-- Nodos de Poder -->
-              <circle cx="200" cy="50" r="8" fill="#121316" stroke="#c3b4c7" stroke-width="1.5"/>
-              <circle cx="330" cy="275" r="8" fill="#121316" stroke="#c3b4c7" stroke-width="1.5"/>
-              <circle cx="70" cy="275" r="8" fill="#121316" stroke="#c3b4c7" stroke-width="1.5"/>
-              <circle cx="200" cy="350" r="8" fill="#121316" stroke="#c3b4c7" stroke-width="1.5"/>
-              <circle cx="330" cy="125" r="8" fill="#121316" stroke="#c3b4c7" stroke-width="1.5"/>
-              <circle cx="70" cy="125" r="8" fill="#121316" stroke="#c3b4c7" stroke-width="1.5"/>
+          <!-- FONDO UNIFICADO (Cubo de Metatrón Giratorio Centrado) -->
+          <div class="absolute inset-0 flex justify-center items-center pointer-events-none opacity-30 overflow-hidden">
+            <svg viewBox="0 0 400 400" class="w-[240%] sm:w-[130%] max-w-[750px] aspect-square animate-[spin_150s_linear_infinite]">
+              <defs>
+                <radialGradient id="metatronGlow" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#c3b4c7" stop-opacity="0.15"/>
+                  <stop offset="100%" stop-color="#9b8da8" stop-opacity="0"/>
+                </radialGradient>
+              </defs>
+              
+              <!-- Fondo radial místico -->
+              <circle cx="200" cy="200" r="180" fill="url(#metatronGlow)" />
+              
+              <!-- Anillos Exteriores -->
+              <circle cx="200" cy="200" r="160" fill="none" stroke="#9b8da8" stroke-width="0.5" stroke-dasharray="2 6"/>
+              <circle cx="200" cy="200" r="150" fill="none" stroke="#c3b4c7" stroke-width="1"/>
+
+              <!-- Líneas del Cubo de Metatrón -->
+              <g stroke="#9b8da8" stroke-width="0.8" opacity="0.7">
+                <!-- Ejes Centrales -->
+                <line x1="200" y1="200" x2="200" y2="50" />
+                <line x1="200" y1="200" x2="330" y2="125" />
+                <line x1="200" y1="200" x2="330" y2="275" />
+                <line x1="200" y1="200" x2="200" y2="350" />
+                <line x1="200" y1="200" x2="70" y2="275" />
+                <line x1="200" y1="200" x2="70" y2="125" />
+
+                <!-- Hexágono Exterior -->
+                <polygon points="200,50 330,125 330,275 200,350 70,275 70,125" fill="none" />
+                
+                <!-- Hexágono Interior -->
+                <polygon points="200,125 265,162.5 265,237.5 200,275 135,237.5 135,162.5" fill="none" />
+
+                <!-- Estrellas Tetraédricas (Triángulos Exteriores e Interiores) -->
+                <polygon points="200,50 330,275 70,275" fill="none" />
+                <polygon points="200,350 330,125 70,125" fill="none" />
+                <polygon points="200,125 265,237.5 135,237.5" fill="none" />
+                <polygon points="200,275 265,162.5 135,162.5" fill="none" />
+
+                <!-- Conexiones Cruzadas de Metatrón -->
+                <line x1="200" y1="50" x2="265" y2="237.5" />
+                <line x1="200" y1="50" x2="135" y2="237.5" />
+                <line x1="200" y1="350" x2="265" y2="162.5" />
+                <line x1="200" y1="350" x2="135" y2="162.5" />
+                <line x1="330" y1="125" x2="135" y2="237.5" />
+                <line x1="330" y1="125" x2="200" y2="275" />
+                <line x1="70" y1="125" x2="265" y2="237.5" />
+                <line x1="70" y1="125" x2="200" y2="275" />
+                <line x1="330" y1="275" x2="135" y2="162.5" />
+                <line x1="330" y1="275" x2="200" y2="125" />
+                <line x1="70" y1="275" x2="265" y2="162.5" />
+                <line x1="70" y1="275" x2="200" y2="125" />
+              </g>
+
+              <!-- Los 13 Círculos (Fruto de la Vida) -->
+              <g fill="#121316" stroke="#c3b4c7" stroke-width="1.5">
+                <!-- Centro -->
+                <circle cx="200" cy="200" r="16"/>
+                <circle cx="200" cy="200" r="6" fill="#9b8da8"/>
+                <!-- 6 Internos -->
+                <circle cx="200" cy="125" r="16"/>
+                <circle cx="265" cy="162.5" r="16"/>
+                <circle cx="265" cy="237.5" r="16"/>
+                <circle cx="200" cy="275" r="16"/>
+                <circle cx="135" cy="237.5" r="16"/>
+                <circle cx="135" cy="162.5" r="16"/>
+                <!-- 6 Externos -->
+                <circle cx="200" cy="50" r="16"/>
+                <circle cx="330" cy="125" r="16"/>
+                <circle cx="330" cy="275" r="16"/>
+                <circle cx="200" cy="350" r="16"/>
+                <circle cx="70" cy="275" r="16"/>
+                <circle cx="70" cy="125" r="16"/>
+              </g>
             </svg>
           </div>
 
@@ -547,26 +576,26 @@
         
         <div class="md:col-span-1 flex flex-col gap-3">
           <button onclick="changePetType('cat', event)" id="btnSelectCat" class="flex items-center gap-3 p-3 rounded-2xl bg-[#121316] hover:bg-[#16171b] transition text-left relative overflow-hidden group">
-            <div class="w-10 h-10 rounded-xl bg-[#c75665]/10 text-[#c75665] flex items-center justify-center z-10"><i data-lucide="cat" class="w-5 h-5"></i></div>
+            <img src="cat1.png" class="w-10 h-10 object-contain rounded bg-[#c75665]/10 border border-[#c75665]/20 z-10">
             <div class="flex flex-col z-10">
               <span class="font-serif-luxury text-lg text-zinc-100 font-semibold">Gato</span>
-              <span class="text-[10px] font-mono text-zinc-400 uppercase tracking-widest">Fase 1</span>
+              <span class="text-[10px] font-mono text-zinc-400 uppercase tracking-widest">Fase <span id="lvlCat">1</span></span>
             </div>
           </button>
           
           <button onclick="changePetType('bat', event)" id="btnSelectBat" class="flex items-center gap-3 p-3 rounded-2xl bg-[#121316] hover:bg-[#16171b] transition text-left relative overflow-hidden group">
-            <div class="w-10 h-10 rounded-xl bg-[#9b8da8]/10 text-[#9b8da8] flex items-center justify-center z-10"><i data-lucide="moon" class="w-5 h-5"></i></div>
+            <img src="bat1.png" class="w-10 h-10 object-contain rounded bg-[#9b8da8]/10 border border-[#9b8da8]/20 z-10">
             <div class="flex flex-col z-10">
               <span class="font-serif-luxury text-lg text-zinc-100 font-semibold">Murciélago</span>
-              <span class="text-[10px] font-mono text-zinc-400 uppercase tracking-widest">Fase 1</span>
+              <span class="text-[10px] font-mono text-zinc-400 uppercase tracking-widest">Fase <span id="lvlBat">1</span></span>
             </div>
           </button>
           
           <button onclick="changePetType('rat', event)" id="btnSelectRat" class="flex items-center gap-3 p-3 rounded-2xl bg-[#121316] hover:bg-[#16171b] transition text-left relative overflow-hidden group">
-            <div class="w-10 h-10 rounded-xl bg-[#8da89b]/10 text-[#8da89b] flex items-center justify-center z-10"><i data-lucide="paw-print" class="w-5 h-5"></i></div>
+            <img src="rat1.png" class="w-10 h-10 object-contain rounded bg-[#8da89b]/10 border border-[#8da89b]/20 z-10">
             <div class="flex flex-col z-10">
               <span class="font-serif-luxury text-lg text-zinc-100 font-semibold">Rata</span>
-              <span class="text-[10px] font-mono text-zinc-400 uppercase tracking-widest">Fase 1</span>
+              <span class="text-[10px] font-mono text-zinc-400 uppercase tracking-widest">Fase <span id="lvlRat">1</span></span>
             </div>
           </button>
         </div>
@@ -576,8 +605,8 @@
           <h3 class="font-serif-luxury text-3xl text-zinc-100 font-bold z-10 mb-1" id="activePetName">Cachorro Felino</h3>
           <p class="text-xs font-mono text-[#c75665] tracking-widest uppercase mb-6 z-10" id="activePetStageLabel">Fase 1</p>
 
-          <div class="w-36 h-36 rounded-full bg-[#090a0c] border-2 border-[#9b2a3a]/50 shadow-[0_0_30px_rgba(199,86,101,0.3)] flex items-center justify-center mb-8 z-10 pet-float relative overflow-hidden p-2">
-            <img id="activePetImg" src="imagen_2026-11-07_182209379.jpg" alt="Mascota" class="w-full h-full object-contain filter drop-shadow-[0_0_10px_rgba(141,168,155,0.6)]">
+          <div class="w-48 h-48 rounded-full bg-[#090a0c] border border-zinc-800 shadow-[0_0_30px_rgba(199,86,101,0.2)] flex items-center justify-center mb-8 z-10 pet-float relative overflow-hidden p-2">
+            <img id="activePetImg" src="cat1.png" alt="Mascota" class="w-full h-full object-contain filter drop-shadow-[0_0_10px_rgba(141,168,155,0.6)]">
           </div>
 
           <div class="w-full max-w-sm flex flex-col gap-4 z-10">
@@ -621,12 +650,9 @@
 
   <!-- MODALES -->
   <div id="moonModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 z-50 hidden">
-    <div class="bg-[#121316] border border-zinc-800 rounded-2xl max-w-sm w-full p-6 shadow-2xl relative">
-      <button type="button" onclick="closeMoonModal()" class="absolute top-4 right-4 text-zinc-500 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
-      <div class="flex flex-col items-center">
-        <h3 class="font-serif-luxury text-2xl text-zinc-100 mb-6 font-semibold">Estado Lunar</h3>
-        <div id="lunarModalContent" class="text-center w-full flex flex-col items-center"></div>
-      </div>
+    <div class="bg-[#121316] border border-zinc-800 rounded-2xl max-w-sm w-full p-8 shadow-2xl relative flex flex-col items-center">
+      <button type="button" onclick="closeMoonModal()" class="absolute top-4 right-4 text-zinc-500 hover:text-white"><i data-lucide="x" class="w-6 h-6"></i></button>
+      <div id="lunarModalContent" class="text-center w-full flex flex-col items-center mt-4"></div>
     </div>
   </div>
 
@@ -794,7 +820,7 @@
 
     let petState = {
       type: 'cat',
-      level: 1,
+      levels: { cat: 1, bat: 1, rat: 1 },
       xp: 0,
       medals: 3,
       hunger: 100,
@@ -802,9 +828,9 @@
     };
 
     const PET_DATA = {
-      cat: { name: "Gato", stages: ["Cachorro Felino", "Gato Alquimista", "Familiar Sombra Mística"], img: "imagen_2026-11-07_182209379.jpg" },
-      bat: { name: "Murciélago", stages: ["Cría Nocturna", "Vampiro Astral", "Señor de la Cripta"], img: "imagen_2026-11-07_182209379.jpg" },
-      rat: { name: "Rata", stages: ["Roedor Sabio", "Rata de Biblioteca", "Oráculo Subterráneo"], img: "imagen_2026-11-07_182209379.jpg" }
+      cat: { name: "Gato", stages: ["Cachorro Felino", "Gato Alquimista", "Familiar Sombra Mística"], files: ["cat1.png", "cat2.png", "cat3.png"] },
+      bat: { name: "Murciélago", stages: ["Cría Nocturna", "Vampiro Astral", "Señor de la Cripta"], files: ["bat1.png", "bat2.png", "bat3.png"] },
+      rat: { name: "Rata", stages: ["Roedor Sabio", "Rata de Biblioteca", "Oráculo Subterráneo"], files: ["rat1.png", "rat2.png", "rat3.png"] }
     };
 
     window.onload = function() {
@@ -827,6 +853,8 @@
       if (savedPets) {
         try { petState = JSON.parse(savedPets); } catch(e) {}
       }
+      // Ensure levels structure exists
+      if (!petState.levels) petState.levels = { cat: 1, bat: 1, rat: 1 };
     }
 
     function saveData() {
@@ -1339,11 +1367,16 @@
 
     function renderPetsView() {
       const p = PET_DATA[petState.type];
-      const stageIdx = petState.level - 1;
+      const lvl = petState.levels[petState.type] || 1;
+      const stageIdx = lvl - 1;
       
       document.getElementById('activePetName').innerText = p.stages[stageIdx];
-      document.getElementById('activePetStageLabel').innerText = `Fase ${petState.level}: ${p.name}`;
-      document.getElementById('activePetImg').src = p.img;
+      document.getElementById('activePetStageLabel').innerText = `Fase ${lvl}: ${p.name}`;
+      document.getElementById('activePetImg').src = p.files[stageIdx];
+
+      document.getElementById('lvlCat').innerText = petState.levels.cat || 1;
+      document.getElementById('lvlBat').innerText = petState.levels.bat || 1;
+      document.getElementById('lvlRat').innerText = petState.levels.rat || 1;
 
       document.getElementById('petGlobalMedals').innerText = petState.medals;
       document.getElementById('petGlobalXP').innerText = petState.xp;
@@ -1352,9 +1385,9 @@
       document.getElementById('viewPetHappyBar').style.width = `${petState.happiness}%`;
 
       const btnEvolve = document.getElementById('viewBtnEvolvePet');
-      if (petState.level < 3) {
+      if (lvl < 3) {
         btnEvolve.classList.remove('hidden');
-        document.getElementById('viewEvolveCostLabel').innerText = petState.level * 5;
+        document.getElementById('viewEvolveCostLabel').innerText = lvl * 5;
       } else {
         btnEvolve.classList.add('hidden');
       }
@@ -1377,10 +1410,12 @@
     }
 
     function evolveActivePet(e) {
-      const cost = petState.level * 5;
-      if (petState.medals >= cost && petState.level < 3) {
+      const lvl = petState.levels[petState.type] || 1;
+      const cost = lvl * 5;
+      
+      if (petState.medals >= cost && lvl < 3) {
         petState.medals -= cost;
-        petState.level += 1;
+        petState.levels[petState.type] = lvl + 1;
         saveData();
         renderPetsView();
         showToast('¡Tu familiar ha ascendido de fase!');
@@ -1393,11 +1428,10 @@
       const m = document.getElementById('moonModal');
       m.classList.remove('hidden');
       const lunar = getLunarPhaseData(currentDate);
-      // Mostramos la imagen limpia sin ningún div circular ni overflow-hidden que la corte
       document.getElementById('lunarModalContent').innerHTML = `
-        <img src="lunasOscuras${lunar.phaseIndex + 1}.png" class="w-56 h-56 object-contain drop-shadow-[0_0_25px_rgba(141,168,155,0.4)] mb-4" alt="${lunar.phaseName}">
-        <h4 class="font-serif-luxury text-3xl font-bold text-zinc-100 mb-2">${lunar.phaseName}</h4>
-        <p class="text-zinc-300 font-handwritten text-2xl leading-relaxed mt-2 px-2">Momento propicio para la introspección profunda, consagración de amuletos y siembra de intenciones en el plano astral.</p>
+        <img src="lunasOscuras${lunar.phaseIndex + 1}.png" class="w-64 h-64 object-contain drop-shadow-[0_0_35px_rgba(141,168,155,0.4)] mb-8" alt="${lunar.phaseName}">
+        <h4 class="font-serif-luxury text-4xl font-bold text-zinc-100 mb-4">${lunar.phaseName}</h4>
+        <p class="text-zinc-200 font-handwritten text-3xl leading-relaxed px-2">Momento propicio para la introspección profunda, consagración de amuletos y siembra de intenciones en el plano astral.</p>
       `;
     }
     
