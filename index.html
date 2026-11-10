@@ -214,15 +214,12 @@
 </head>
 <body class="antialiased min-h-screen flex flex-col relative pb-32 overflow-hidden" id="mainBody">
 
-  <!-- PANTALLA DE BLOQUEO -->
-  <div id="lockScreen" class="fixed inset-0 z-[100] bg-[#050608] transition-all duration-1000 overflow-hidden flex flex-col justify-between py-6 px-4">
-    
-    <!-- ESFERA CELESTIAL UNIFICADA (Estrellas densas detrás del cubo, 15 constelaciones únicas en dos aros externos) -->
-    <div class="absolute inset-0 pointer-events-none overflow-hidden z-0 flex items-center justify-center">
-      <div class="absolute w-[140vw] h-[140vw] sm:w-[95vw] sm:h-[95vw] max-w-[1000px] max-h-[1000px] celestial-sphere-reverse opacity-95">
-        <svg class="w-full h-full" stroke="#8da89b" stroke-width="1.2" fill="none" viewBox="0 0 1000 1000">
-          <!-- CAMPO ESTELAR MASIVO: Repleto de estrellas por todo el fondo, incluyendo estrictamente DETRÁS del cubo -->
-          <g fill="#ffffff" stroke="none" opacity="0.95">
+  <!-- FONDO CÓSMICO GLOBAL EN TODA LA APP (Estrellas y 15 constelaciones) -->
+  <div class="fixed inset-0 pointer-events-none overflow-hidden z-[-2] flex items-center justify-center bg-[#050608]">
+    <div class="absolute w-[140vw] h-[140vw] sm:w-[95vw] sm:h-[95vw] max-w-[1000px] max-h-[1000px] celestial-sphere-reverse opacity-95">
+      <svg class="w-full h-full" stroke="#8da89b" stroke-width="1.2" fill="none" viewBox="0 0 1000 1000">
+        <!-- CAMPO ESTELAR MASIVO: Repleto de estrellas por todo el fondo, incluyendo estrictamente DETRÁS del cubo -->
+        <g fill="#ffffff" stroke="none" opacity="0.95">
             <circle cx="150" cy="120" r="2"/><circle cx="280" cy="90" r="2.5"/><circle cx="430" cy="70" r="1.5"/><circle cx="610" cy="85" r="2.5"/><circle cx="820" cy="110" r="2"/><circle cx="910" cy="200" r="2.5"/>
             <circle cx="950" cy="350" r="1.5"/><circle cx="890" cy="480" r="2.5"/><circle cx="930" cy="620" r="2"/><circle cx="860" cy="790" r="2.5"/><circle cx="740" cy="910" r="1.5"/><circle cx="580" cy="940" r="2.5"/>
             <circle cx="390" cy="920" r="2"/><circle cx="210" cy="890" r="2.5"/><circle cx="90" cy="820" r="1.5"/><circle cx="60" cy="670" r="2.5"/><circle cx="40" cy="490" r="2"/><circle cx="70" cy="280" r="2.5"/>
@@ -315,6 +312,9 @@
       </div>
     </div>
 
+  <!-- PANTALLA DE BLOQUEO -->
+  <div id="lockScreen" class="fixed inset-0 z-[100] bg-transparent transition-all duration-1000 overflow-hidden flex flex-col justify-between py-6 px-4">
+    
     <!-- CONTENEDOR GENERAL DE BLOQUEO -->
     <div id="lockContent" class="w-full h-full flex flex-col justify-between items-center relative z-20 max-w-md mx-auto py-2">
       
@@ -378,7 +378,7 @@
     <span id="toastText">Actualizado</span>
   </div>
 
-  <div class="max-w-4xl mx-auto w-full px-3 py-6 relative z-10 flex-grow flex flex-col gap-6">
+  <div id="appInterfaceWrapper" class="max-w-4xl mx-auto w-full px-3 py-6 relative z-10 flex-grow flex flex-col gap-6 opacity-0 pointer-events-none transition-opacity duration-1000">
     
     <header id="mainHeader" class="flex flex-col w-full relative transition-all duration-500 gap-4">
       
@@ -994,7 +994,7 @@
   </div>
 
   <!-- FAMILIAR GLOBAL FLOTANTE -->
-  <div id="globalCompanion" onclick="triggerCuteMove()" class="fixed bottom-6 right-6 md:bottom-10 md:right-10 z-[45] cursor-pointer hover:drop-shadow-[0_0_20px_rgba(155,141,168,0.6)] transition-all flex flex-col items-center justify-end" title="Tu familiar">
+  <div id="globalCompanion" onclick="triggerCuteMove()" class="fixed bottom-6 right-6 md:bottom-10 md:right-10 z-[45] cursor-pointer hover:drop-shadow-[0_0_20px_rgba(155,141,168,0.6)] transition-opacity duration-1000 flex flex-col items-center justify-end opacity-0 pointer-events-none" title="Tu familiar">
     <div id="companionReaction" class="absolute -top-6 text-xl opacity-0 transition-opacity duration-300 pointer-events-none font-bold drop-shadow-md">✨</div>
     <div class="relative w-20 h-20 sm:w-24 sm:h-24">
       <img id="globalCompanionImg" src="cat1.png" class="w-full h-full object-contain anim-breathe drop-shadow-[0_0_10px_rgba(141,168,155,0.4)]" alt="Mascota">
@@ -1924,6 +1924,8 @@
         setTimeout(() => {
           lockScreen.style.display = 'none';
           document.getElementById('mainBody').classList.remove('overflow-hidden');
+          document.getElementById('appInterfaceWrapper').classList.remove('opacity-0', 'pointer-events-none');
+          document.getElementById('globalCompanion').classList.remove('opacity-0', 'pointer-events-none');
         }, 1000);
       }, 700);
     }
