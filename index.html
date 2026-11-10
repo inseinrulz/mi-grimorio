@@ -183,111 +183,111 @@
   <!-- PANTALLA DE BLOQUEO -->
   <div id="lockScreen" class="fixed inset-0 z-[100] bg-[#050608] transition-all duration-1000 overflow-hidden flex flex-col justify-between py-6 px-4">
     
-    <!-- ESFERA CELESTIAL UNIFICADA (Fondo girando al doble de lento y en dirección contraria, con 15 constelaciones dispuestas limpiamente alrededor del cubo y lluvia densa de estrellas) -->
+    <!-- ESFERA CELESTIAL UNIFICADA (Ajustada 100% responsiva para móvil y PC) -->
     <div class="absolute inset-0 pointer-events-none overflow-hidden z-0 flex items-center justify-center">
-      <div class="absolute w-[1100px] h-[1100px] celestial-sphere-reverse opacity-85">
-        <svg class="w-full h-full" stroke="#8da89b" stroke-width="0.8" fill="none" viewBox="0 0 1000 1000">
+      <div class="absolute w-[140vw] h-[140vw] sm:w-[95vw] sm:h-[95vw] max-w-[1000px] max-h-[1000px] celestial-sphere-reverse opacity-90">
+        <svg class="w-full h-full" stroke="#8da89b" stroke-width="1.2" fill="none" viewBox="0 0 1000 1000">
           <!-- Lluvia masiva de estrellas de fondo en la esfera -->
-          <g fill="#ffffff" stroke="none" opacity="0.9">
-            <circle cx="150" cy="120" r="1.5"/><circle cx="280" cy="90" r="2"/><circle cx="430" cy="70" r="1"/><circle cx="610" cy="85" r="2"/><circle cx="820" cy="110" r="1.5"/><circle cx="910" cy="200" r="2"/>
-            <circle cx="950" cy="350" r="1"/><circle cx="890" cy="480" r="2"/><circle cx="930" cy="620" r="1.5"/><circle cx="860" cy="790" r="2"/><circle cx="740" cy="910" r="1"/><circle cx="580" cy="940" r="2"/>
-            <circle cx="390" cy="920" r="1.5"/><circle cx="210" cy="890" r="2"/><circle cx="90" cy="820" r="1"/><circle cx="60" cy="670" r="2"/><circle cx="40" cy="490" r="1.5"/><circle cx="70" cy="280" r="2"/>
-            <circle cx="180" cy="200" r="1"/><circle cx="340" cy="160" r="1.5"/><circle cx="520" cy="140" r="2"/><circle cx="700" cy="170" r="1"/><circle cx="840" cy="260" r="1.5"/><circle cx="880" cy="410" r="2"/>
-            <circle cx="830" cy="570" r="1"/><circle cx="780" cy="740" r="1.5"/><circle cx="660" cy="860" r="2"/><circle cx="480" cy="880" r="1"/><circle cx="300" cy="840" r="1.5"/><circle cx="140" cy="750" r="2"/>
-            <circle cx="100" cy="580" r="1"/><circle cx="120" cy="390" r="1.5"/><circle cx="230" cy="260" r="2"/><circle cx="410" cy="220" r="1"/><circle cx="590" cy="230" r="1.5"/><circle cx="750" cy="310" r="2"/>
+          <g fill="#ffffff" stroke="none" opacity="0.95">
+            <circle cx="150" cy="120" r="2"/><circle cx="280" cy="90" r="2.5"/><circle cx="430" cy="70" r="1.5"/><circle cx="610" cy="85" r="2.5"/><circle cx="820" cy="110" r="2"/><circle cx="910" cy="200" r="2.5"/>
+            <circle cx="950" cy="350" r="1.5"/><circle cx="890" cy="480" r="2.5"/><circle cx="930" cy="620" r="2"/><circle cx="860" cy="790" r="2.5"/><circle cx="740" cy="910" r="1.5"/><circle cx="580" cy="940" r="2.5"/>
+            <circle cx="390" cy="920" r="2"/><circle cx="210" cy="890" r="2.5"/><circle cx="90" cy="820" r="1.5"/><circle cx="60" cy="670" r="2.5"/><circle cx="40" cy="490" r="2"/><circle cx="70" cy="280" r="2.5"/>
+            <circle cx="180" cy="200" r="1.5"/><circle cx="340" cy="160" r="2"/><circle cx="520" cy="140" r="2.5"/><circle cx="700" cy="170" r="1.5"/><circle cx="840" cy="260" r="2"/><circle cx="880" cy="410" r="2.5"/>
+            <circle cx="830" cy="570" r="1.5"/><circle cx="780" cy="740" r="2"/><circle cx="660" cy="860" r="2.5"/><circle cx="480" cy="880" r="1.5"/><circle cx="300" cy="840" r="2"/><circle cx="140" cy="750" r="2.5"/>
+            <circle cx="100" cy="580" r="1.5"/><circle cx="120" cy="390" r="2"/><circle cx="230" cy="260" r="2.5"/><circle cx="410" cy="220" r="1.5"/><circle cx="590" cy="230" r="2"/><circle cx="750" cy="310" r="2.5"/>
           </g>
 
           <!-- 1. Orión (Superior Izquierda) -->
           <g transform="translate(180, 160)">
             <polyline points="40,90 80,60 110,85 130,120 90,140 60,110 40,90" />
             <line x1="80" y1="60" x2="90" y2="140" />
-            <circle cx="40" cy="90" r="2" fill="#fff" /><circle cx="80" cy="60" r="2.5" fill="#fff" /><circle cx="110" cy="85" r="1.5" fill="#fff" /><circle cx="130" cy="120" r="2" fill="#fff" /><circle cx="90" cy="140" r="3" fill="#fff" /><circle cx="60" cy="110" r="1.5" fill="#fff" />
+            <circle cx="40" cy="90" r="2.5" fill="#fff" /><circle cx="80" cy="60" r="3" fill="#fff" /><circle cx="110" cy="85" r="2" fill="#fff" /><circle cx="130" cy="120" r="2.5" fill="#fff" /><circle cx="90" cy="140" r="3.5" fill="#fff" /><circle cx="60" cy="110" r="2" fill="#fff" />
           </g>
 
           <!-- 2. Casiopea (Superior Derecha) -->
           <g transform="translate(680, 150)">
             <polyline points="280,50 310,90 350,60 380,95 420,55" stroke="#b4c7be" />
-            <circle cx="280" cy="50" r="2.5" fill="#fff" /><circle cx="310" cy="90" r="2" fill="#fff" /><circle cx="350" cy="60" r="2.5" fill="#fff" /><circle cx="380" cy="95" r="2" fill="#fff" /><circle cx="420" cy="55" r="3" fill="#fff" />
+            <circle cx="280" cy="50" r="3" fill="#fff" /><circle cx="310" cy="90" r="2.5" fill="#fff" /><circle cx="350" cy="60" r="3" fill="#fff" /><circle cx="380" cy="95" r="2.5" fill="#fff" /><circle cx="420" cy="55" r="3.5" fill="#fff" />
           </g>
 
           <!-- 3. Osa Mayor (Izquierda Lejana Superior) -->
           <g transform="translate(60, 370)">
             <polyline points="30,220 70,230 110,225 140,255 180,250 200,280 150,290 140,255" />
-            <circle cx="30" cy="220" r="2" fill="#fff" /><circle cx="70" cy="230" r="1.5" fill="#fff" /><circle cx="110" cy="225" r="2" fill="#fff" /><circle cx="140" cy="255" r="2.5" fill="#fff" /><circle cx="180" cy="250" r="2" fill="#fff" /><circle cx="200" cy="280" r="3" fill="#fff" /><circle cx="150" cy="290" r="1.5" fill="#fff" />
+            <circle cx="30" cy="220" r="2.5" fill="#fff" /><circle cx="70" cy="230" r="2" fill="#fff" /><circle cx="110" cy="225" r="2.5" fill="#fff" /><circle cx="140" cy="255" r="3" fill="#fff" /><circle cx="180" cy="250" r="2.5" fill="#fff" /><circle cx="200" cy="280" r="3.5" fill="#fff" /><circle cx="150" cy="290" r="2" fill="#fff" />
           </g>
 
           <!-- 4. Cisne (Derecha Lejana Superior) -->
           <g transform="translate(720, 360)">
             <polyline points="300,200 370,240 440,200" stroke="#b4c7be" />
             <line x1="370" y1="160" x2="370" y2="300" />
-            <circle cx="300" cy="200" r="2" fill="#fff" /><circle cx="370" cy="240" r="3" fill="#fff" /><circle cx="440" cy="200" r="2" fill="#fff" /><circle cx="370" cy="160" r="1.5" fill="#fff" /><circle cx="370" cy="300" r="2.5" fill="#fff" />
+            <circle cx="300" cy="200" r="2.5" fill="#fff" /><circle cx="370" cy="240" r="3.5" fill="#fff" /><circle cx="440" cy="200" r="2.5" fill="#fff" /><circle cx="370" cy="160" r="2" fill="#fff" /><circle cx="370" cy="300" r="3" fill="#fff" />
           </g>
 
           <!-- 5. Lira (Inferior Izquierda) -->
           <g transform="translate(200, 680)">
             <polyline points="70,370 110,350 130,390 90,410 70,370" />
-            <circle cx="70" cy="370" r="3" fill="#fff" /><circle cx="110" cy="350" r="2" fill="#fff" /><circle cx="130" cy="390" r="1.5" fill="#fff" /><circle cx="90" cy="410" r="2" fill="#fff" />
+            <circle cx="70" cy="370" r="3.5" fill="#fff" /><circle cx="110" cy="350" r="2.5" fill="#fff" /><circle cx="130" cy="390" r="2" fill="#fff" /><circle cx="90" cy="410" r="2.5" fill="#fff" />
           </g>
 
           <!-- 6. Pegaso (Inferior Derecha) -->
           <g transform="translate(620, 670)">
             <polyline points="260,380 320,360 380,390 340,440 260,380" stroke="#b4c7be" />
-            <circle cx="260" cy="380" r="2.5" fill="#fff" /><circle cx="320" cy="360" r="2" fill="#fff" /><circle cx="380" cy="390" r="2.5" fill="#fff" /><circle cx="340" cy="440" r="3" fill="#fff" />
+            <circle cx="260" cy="380" r="3" fill="#fff" /><circle cx="320" cy="360" r="2.5" fill="#fff" /><circle cx="380" cy="390" r="3" fill="#fff" /><circle cx="340" cy="440" r="3.5" fill="#fff" />
           </g>
 
           <!-- 7. Cruz del Sur (Zenit Superior Central) -->
           <g transform="translate(440, 50)">
             <polyline points="100,50 100,130" stroke="#b4c7be" />
             <line x1="80" y1="80" x2="120" y2="80" />
-            <circle cx="100" cy="50" r="2" fill="#fff" /><circle cx="100" cy="130" r="3" fill="#fff" /><circle cx="80" cy="80" r="2" fill="#fff" /><circle cx="120" cy="80" r="2" fill="#fff" />
+            <circle cx="100" cy="50" r="2.5" fill="#fff" /><circle cx="100" cy="130" r="3.5" fill="#fff" /><circle cx="80" cy="80" r="2.5" fill="#fff" /><circle cx="120" cy="80" r="2.5" fill="#fff" />
           </g>
 
           <!-- 8. Escorpio (Flanco Izquierdo Central) -->
           <g transform="translate(40, 530)">
             <polyline points="50,40 80,70 120,60 150,90 130,120" stroke="#b4c7be" />
-            <circle cx="50" cy="40" r="2.5" fill="#fff" /><circle cx="80" cy="70" r="2" fill="#fff" /><circle cx="120" cy="60" r="3" fill="#fff" /><circle cx="150" cy="90" r="2" fill="#fff" /><circle cx="130" cy="120" r="2" fill="#fff" />
+            <circle cx="50" cy="40" r="3" fill="#fff" /><circle cx="80" cy="70" r="2.5" fill="#fff" /><circle cx="120" cy="60" r="3.5" fill="#fff" /><circle cx="150" cy="90" r="2.5" fill="#fff" /><circle cx="130" cy="120" r="2.5" fill="#fff" />
           </g>
 
           <!-- 9. Tauro (Flanco Derecho Central) -->
           <g transform="translate(800, 520)">
             <polyline points="300,50 340,80 390,70 420,110" stroke="#b4c7be" />
-            <circle cx="300" cy="50" r="2" fill="#fff" /><circle cx="340" cy="80" r="3" fill="#fff" /><circle cx="390" cy="70" r="2" fill="#fff" /><circle cx="420" cy="110" r="2.5" fill="#fff" />
+            <circle cx="300" cy="50" r="2.5" fill="#fff" /><circle cx="340" cy="80" r="3.5" fill="#fff" /><circle cx="390" cy="70" r="2.5" fill="#fff" /><circle cx="420" cy="110" r="3" fill="#fff" />
           </g>
 
           <!-- 10. Andrómeda (Superior Intermedia Izquierda) -->
           <g transform="translate(320, 90)">
             <polyline points="50,50 90,70 140,60 190,90" stroke="#b4c7be" />
-            <circle cx="50" cy="50" r="2" fill="#fff" /><circle cx="90" cy="70" r="2.5" fill="#fff" /><circle cx="140" cy="60" r="2" fill="#fff" /><circle cx="190" cy="90" r="3" fill="#fff" />
+            <circle cx="50" cy="50" r="2.5" fill="#fff" /><circle cx="90" cy="70" r="3" fill="#fff" /><circle cx="140" cy="60" r="2.5" fill="#fff" /><circle cx="190" cy="90" r="3.5" fill="#fff" />
           </g>
 
           <!-- 11. Perseo (Superior Intermedia Derecha) -->
           <g transform="translate(540, 90)">
             <polyline points="200,60 240,90 280,70 330,100" stroke="#b4c7be" />
-            <circle cx="200" cy="60" r="2.5" fill="#fff" /><circle cx="240" cy="90" r="2" fill="#fff" /><circle cx="280" cy="70" r="3" fill="#fff" /><circle cx="330" cy="100" r="2" fill="#fff" />
+            <circle cx="200" cy="60" r="3" fill="#fff" /><circle cx="240" cy="90" r="2.5" fill="#fff" /><circle cx="280" cy="70" r="3.5" fill="#fff" /><circle cx="330" cy="100" r="2.5" fill="#fff" />
           </g>
 
           <!-- 12. Aquila (Inferior Intermedia Izquierda) -->
           <g transform="translate(330, 810)">
             <polyline points="70,70 110,50 150,80 110,110 70,70" stroke="#b4c7be" />
-            <circle cx="70" cy="70" r="2" fill="#fff" /><circle cx="110" cy="50" r="3" fill="#fff" /><circle cx="150" cy="80" r="2" fill="#fff" /><circle cx="110" cy="110" r="2" fill="#fff" />
+            <circle cx="70" cy="70" r="2.5" fill="#fff" /><circle cx="110" cy="50" r="3.5" fill="#fff" /><circle cx="150" cy="80" r="2.5" fill="#fff" /><circle cx="110" cy="110" r="2.5" fill="#fff" />
           </g>
 
           <!-- 13. Sagitario (Inferior Intermedia Derecha) -->
           <g transform="translate(530, 800)">
             <polyline points="220,80 270,50 310,90 260,110 220,80" stroke="#b4c7be" />
-            <circle cx="220" cy="80" r="2" fill="#fff" /><circle cx="270" cy="50" r="3" fill="#fff" /><circle cx="310" cy="90" r="2" fill="#fff" /><circle cx="260" cy="110" r="2.5" fill="#fff" />
+            <circle cx="220" cy="80" r="2.5" fill="#fff" /><circle cx="270" cy="50" r="3.5" fill="#fff" /><circle cx="310" cy="90" r="2.5" fill="#fff" /><circle cx="260" cy="110" r="3" fill="#fff" />
           </g>
 
           <!-- 14. Aries (Izquierda Bajo Osa Mayor) -->
           <g transform="translate(80, 710)">
             <polyline points="50,50 80,70 120,60" stroke="#b4c7be" />
-            <circle cx="50" cy="50" r="2" fill="#fff" /><circle cx="80" cy="70" r="3" fill="#fff" /><circle cx="120" cy="60" r="2" fill="#fff" />
+            <circle cx="50" cy="50" r="2.5" fill="#fff" /><circle cx="80" cy="70" r="3.5" fill="#fff" /><circle cx="120" cy="60" r="2.5" fill="#fff" />
           </g>
 
           <!-- 15. Hydra (Derecha Bajo Cisne) -->
           <g transform="translate(790, 700)">
             <polyline points="280,60 320,90 360,70 410,100 450,80" stroke="#b4c7be" />
-            <circle cx="280" cy="60" r="2" fill="#fff" /><circle cx="320" cy="90" r="2.5" fill="#fff" /><circle cx="360" cy="70" r="3" fill="#fff" /><circle cx="410" cy="100" r="2" fill="#fff" /><circle cx="450" cy="80" r="2" fill="#fff" />
+            <circle cx="280" cy="60" r="2.5" fill="#fff" /><circle cx="320" cy="90" r="3" fill="#fff" /><circle cx="360" cy="70" r="3.5" fill="#fff" /><circle cx="410" cy="100" r="2.5" fill="#fff" /><circle cx="450" cy="80" r="2.5" fill="#fff" />
           </g>
         </svg>
       </div>
@@ -304,7 +304,7 @@
 
       <!-- VENTANA 2: CUBO DE METATRÓN (100% TRANSPARENTE, SIN BORDES, CENTRADO) -->
       <div class="w-full flex-grow flex flex-col items-center justify-center relative my-auto">
-        <div class="relative w-full max-w-[360px] aspect-square flex items-center justify-center p-2">
+        <div class="relative w-full max-w-[320px] sm:max-w-[360px] aspect-square flex items-center justify-center p-2">
           
           <svg viewBox="0 0 400 400" class="absolute inset-0 w-full h-full animate-[spin_120s_linear_infinite] pointer-events-none opacity-85">
             <defs>
