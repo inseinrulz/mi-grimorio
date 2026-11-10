@@ -21,7 +21,7 @@
 
   <style>
     :root {
-      --bg-grain: #090a0c;
+      --bg-grain: #050608;
       --card-bg: #121316;
       --accent-sage: #8da89b;
       --accent-sage-light: #b4c7be;
@@ -47,7 +47,7 @@
       top: 0; left: 0; width: 100vw; height: 100vh;
       z-index: -1;
       pointer-events: none;
-      opacity: 0.7;
+      opacity: 0.8;
     }
 
     .font-serif-luxury {
@@ -149,23 +149,6 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    @keyframes slideShuffle {
-      0% { transform: translateX(0) rotate(0deg); z-index: 1; }
-      50% { transform: translateX(40px) rotate(5deg); z-index: 10; }
-      100% { transform: translateX(0) rotate(0deg); z-index: 10; }
-    }
-    .shuffling {
-      animation: slideShuffle 0.6s infinite alternate ease-in-out;
-    }
-    .tarot-card-reveal {
-      animation: revealCard 1s ease-out forwards;
-      opacity: 0;
-      transform: translateY(20px) scale(0.95);
-    }
-    @keyframes revealCard {
-      to { opacity: 1; transform: translateY(0) scale(1); }
-    }
-
     .mystic-wicca-card {
       position: relative;
       background: linear-gradient(135deg, #111216 0%, #0c0d10 100%);
@@ -188,45 +171,168 @@
 </head>
 <body class="antialiased min-h-screen flex flex-col relative pb-32 overflow-hidden" id="mainBody">
 
-  <!-- PANTALLA DE BIENVENIDA Y BLOQUEO (SELLO DE HUELLA) -->
-  <div id="lockScreen" class="fixed inset-0 z-[100] bg-[#090a0c] transition-all duration-1000 overflow-hidden">
-    <div class="absolute inset-0 flex justify-center items-center pointer-events-none opacity-20">
-      <svg viewBox="20 20 360 360" class="w-[150%] max-w-[800px] aspect-square animate-[spin_240s_linear_infinite]">
-        <circle cx="200" cy="200" r="160" fill="none" stroke="#9b8da8" stroke-width="0.5" stroke-dasharray="2 6"/>
-        <polygon points="200,50 330,275 70,275" fill="none" stroke="#9b8da8" stroke-width="0.5"/>
-        <polygon points="200,350 330,125 70,125" fill="none" stroke="#9b8da8" stroke-width="0.5"/>
+  <!-- PANTALLA DE BLOQUEO: FONDO ESPACIAL PROFUNDO CON 10 CONSTELACIONES Y MULTITUD DE ESTRELLAS -->
+  <div id="lockScreen" class="fixed inset-0 z-[100] bg-[#050608] transition-all duration-1000 overflow-hidden flex flex-col justify-between py-6 px-4">
+    
+    <!-- FONDO ESPACIAL PROFUNDO -->
+    <div class="absolute inset-0 pointer-events-none overflow-hidden z-0">
+      <!-- Nebulosas difusas en varias esquinas -->
+      <div class="absolute top-[5%] left-[5%] w-[600px] h-[600px] bg-radial from-[#131d24]/40 via-transparent to-transparent rounded-full blur-3xl"></div>
+      <div class="absolute top-[40%] right-[2%] w-[700px] h-[700px] bg-radial from-[#1f121a]/35 via-transparent to-transparent rounded-full blur-3xl"></div>
+      <div class="absolute bottom-[5%] left-[10%] w-[650px] h-[650px] bg-radial from-[#151122]/35 via-transparent to-transparent rounded-full blur-3xl"></div>
+      <div class="absolute top-[70%] right-[30%] w-[500px] h-[500px] bg-radial from-[#10221c]/30 via-transparent to-transparent rounded-full blur-3xl"></div>
+      
+      <!-- 10 Constelaciones Únicas Repartidas por Toda la Pantalla -->
+      <svg class="absolute inset-0 w-full h-full opacity-55" stroke="#8da89b" stroke-width="0.8" fill="none">
+        <!-- 1. Orión (Superior Izquierda) -->
+        <g transform="translate(20, 30)">
+          <polyline points="40,90 80,60 110,85 130,120 90,140 60,110 40,90" />
+          <line x1="80" y1="60" x2="90" y2="140" />
+          <circle cx="40" cy="90" r="2" fill="#fff" /><circle cx="80" cy="60" r="2.5" fill="#fff" /><circle cx="110" cy="85" r="1.5" fill="#fff" /><circle cx="130" cy="120" r="2" fill="#fff" /><circle cx="90" cy="140" r="3" fill="#fff" /><circle cx="60" cy="110" r="1.5" fill="#fff" />
+        </g>
+
+        <!-- 2. Casiopea 'W' (Superior Derecha) -->
+        <g transform="translate(200, 20)">
+          <polyline points="280,50 310,90 350,60 380,95 420,55" stroke="#b4c7be" />
+          <circle cx="280" cy="50" r="2.5" fill="#fff" /><circle cx="310" cy="90" r="2" fill="#fff" /><circle cx="350" cy="60" r="2.5" fill="#fff" /><circle cx="380" cy="95" r="2" fill="#fff" /><circle cx="420" cy="55" r="3" fill="#fff" />
+        </g>
+
+        <!-- 3. Osa Mayor (Centro Izquierda) -->
+        <g transform="translate(10, 220)">
+          <polyline points="30,220 70,230 110,225 140,255 180,250 200,280 150,290 140,255" />
+          <circle cx="30" cy="220" r="2" fill="#fff" /><circle cx="70" cy="230" r="1.5" fill="#fff" /><circle cx="110" cy="225" r="2" fill="#fff" /><circle cx="140" cy="255" r="2.5" fill="#fff" /><circle cx="180" cy="250" r="2" fill="#fff" /><circle cx="200" cy="280" r="3" fill="#fff" /><circle cx="150" cy="290" r="1.5" fill="#fff" />
+        </g>
+
+        <!-- 4. Cisne / Cygnus (Centro Derecha) -->
+        <g transform="translate(180, 190)">
+          <polyline points="300,200 370,240 440,200" stroke="#b4c7be" />
+          <line x1="370" y1="160" x2="370" y2="300" />
+          <circle cx="300" cy="200" r="2" fill="#fff" /><circle cx="370" cy="240" r="3" fill="#fff" /><circle cx="440" cy="200" r="2" fill="#fff" /><circle cx="370" cy="160" r="1.5" fill="#fff" /><circle cx="370" cy="300" r="2.5" fill="#fff" />
+        </g>
+
+        <!-- 5. Lira (Inferior Izquierda) -->
+        <g transform="translate(30, 440)">
+          <polyline points="70,370 110,350 130,390 90,410 70,370" />
+          <circle cx="70" cy="370" r="3" fill="#fff" /><circle cx="110" cy="350" r="2" fill="#fff" /><circle cx="130" cy="390" r="1.5" fill="#fff" /><circle cx="90" cy="410" r="2" fill="#fff" />
+        </g>
+
+        <!-- 6. Pegaso (Inferior Derecha) -->
+        <g transform="translate(150, 400)">
+          <polyline points="260,380 320,360 380,390 340,440 260,380" stroke="#b4c7be" />
+          <circle cx="260" cy="380" r="2.5" fill="#fff" /><circle cx="320" cy="360" r="2" fill="#fff" /><circle cx="380" cy="390" r="2.5" fill="#fff" /><circle cx="340" cy="440" r="3" fill="#fff" />
+        </g>
+
+        <!-- 7. Dragón (Centro Fondo) -->
+        <g transform="translate(60, 110)">
+          <polyline points="150,470 190,450 230,480 270,460 310,490" />
+          <circle cx="150" cy="470" r="2" fill="#fff" /><circle cx="190" cy="450" r="1.5" fill="#fff" /><circle cx="230" cy="480" r="2.5" fill="#fff" /><circle cx="270" cy="460" r="2" fill="#fff" /><circle cx="310" cy="490" r="3" fill="#fff" />
+        </g>
+
+        <!-- 8. Tauro (Nueva Constelación Superior Centro) -->
+        <g transform="translate(120, 10)">
+          <polyline points="100,70 140,50 170,80 210,60" stroke="#b4c7be" />
+          <circle cx="100" cy="70" r="2.5" fill="#fff" /><circle cx="140" cy="50" r="3" fill="#fff" /><circle cx="170" cy="80" r="2" fill="#fff" /><circle cx="210" cy="60" r="2.5" fill="#fff" />
+        </g>
+
+        <!-- 9. Escorpio (Nueva Constelación Lateral Inferior Izquierda) -->
+        <g transform="translate(10, 330)">
+          <polyline points="50,150 90,130 130,140 160,170 140,210 110,230" stroke="#b4c7be" />
+          <circle cx="50" cy="150" r="2.5" fill="#fff" /><circle cx="90" cy="130" r="3" fill="#fff" /><circle cx="130" cy="140" r="2" fill="#fff" /><circle cx="160" cy="170" r="2.5" fill="#fff" /><circle cx="140" cy="210" r="2" fill="#fff" /><circle cx="110" cy="230" r="2" fill="#fff" />
+        </g>
+
+        <!-- 10. Cruz del Sur (Nueva Constelación Lateral Derecha) -->
+        <g transform="translate(240, 310)">
+          <polyline points="100,50 100,130" stroke="#b4c7be" />
+          <line x1="80" y1="80" x2="120" y2="80" />
+          <circle cx="100" cy="50" r="2" fill="#fff" /><circle cx="100" cy="130" r="3" fill="#fff" /><circle cx="80" cy="80" r="2" fill="#fff" /><circle cx="120" cy="80" r="2" fill="#fff" />
+        </g>
       </svg>
+
+      <!-- Multitud de Puntos Blancos y Estrellas Sueltas Repartidas por Toda la Pantalla -->
+      <div class="absolute top-[3%] left-[12%] w-1.5 h-1.5 bg-white rounded-full opacity-90 shadow-[0_0_6px_#fff]"></div>
+      <div class="absolute top-[6%] left-[45%] w-1 h-1 bg-white rounded-full opacity-80"></div>
+      <div class="absolute top-[12%] left-[88%] w-2 h-2 bg-[#b4c7be] rounded-full opacity-90 shadow-[0_0_8px_#8da89b]"></div>
+      <div class="absolute top-[18%] left-[25%] w-1 h-1 bg-white rounded-full opacity-95"></div>
+      <div class="absolute top-[24%] left-[70%] w-1.5 h-1.5 bg-white rounded-full opacity-85"></div>
+      <div class="absolute top-[31%] left-[8%] w-2 h-2 bg-white rounded-full opacity-90 shadow-[0_0_6px_#fff]"></div>
+      <div class="absolute top-[37%] left-[53%] w-1 h-1 bg-[#b4c7be] rounded-full opacity-75"></div>
+      <div class="absolute top-[44%] left-[85%] w-1.5 h-1.5 bg-white rounded-full opacity-85"></div>
+      <div class="absolute top-[50%] left-[32%] w-2 h-2 bg-white rounded-full opacity-95 shadow-[0_0_7px_#fff]"></div>
+      <div class="absolute top-[57%] left-[15%] w-1 h-1 bg-white rounded-full opacity-80"></div>
+      <div class="absolute top-[63%] left-[68%] w-1.5 h-1.5 bg-white rounded-full opacity-90"></div>
+      <div class="absolute top-[70%] left-[90%] w-2 h-2 bg-[#8da89b] rounded-full opacity-90 shadow-[0_0_8px_#8da89b]"></div>
+      <div class="absolute top-[76%] left-[42%] w-1 h-1 bg-white rounded-full opacity-85"></div>
+      <div class="absolute top-[82%] left-[22%] w-1.5 h-1.5 bg-white rounded-full opacity-90"></div>
+      <div class="absolute top-[88%] left-[78%] w-2 h-2 bg-white rounded-full opacity-95 shadow-[0_0_7px_#fff]"></div>
+      <div class="absolute top-[94%] left-[50%] w-1 h-1 bg-white rounded-full opacity-80"></div>
+      
+      <!-- Estrellas diminutas extra para saturar el firmamento -->
+      <div class="absolute top-[10%] left-[35%] w-0.5 h-0.5 bg-white rounded-full opacity-60"></div>
+      <div class="absolute top-[22%] left-[12%] w-0.5 h-0.5 bg-white rounded-full opacity-70"></div>
+      <div class="absolute top-[38%] left-[75%] w-0.5 h-0.5 bg-white rounded-full opacity-65"></div>
+      <div class="absolute top-[52%] left-[48%] w-0.5 h-0.5 bg-white rounded-full opacity-70"></div>
+      <div class="absolute top-[66%] left-[28%] w-0.5 h-0.5 bg-white rounded-full opacity-60"></div>
+      <div class="absolute top-[80%] left-[62%] w-0.5 h-0.5 bg-white rounded-full opacity-75"></div>
+      <div class="absolute top-[90%] left-[18%] w-0.5 h-0.5 bg-white rounded-full opacity-70"></div>
+      <div class="absolute top-[95%] left-[88%] w-0.5 h-0.5 bg-white rounded-full opacity-65"></div>
     </div>
 
-    <div id="lockContent" class="absolute inset-0 w-full h-full transition-all duration-700">
-      <div class="absolute top-4 sm:top-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 z-30 w-full max-w-xs px-4">
-        
-        <!-- LOGO.PNG EN LA PANTALLA DE BLOQUEO -->
-        <div class="flex flex-col items-center gap-1 text-center">
-          <img src="logo.png" alt="Logo" class="w-20 h-20 object-contain mb-1 drop-shadow-[0_0_15px_rgba(141,168,155,0.3)]" onerror="this.style.display='none'">
-          <h1 class="font-serif-luxury text-4xl sm:text-5xl text-zinc-100 font-bold tracking-widest drop-shadow-[0_0_15px_rgba(141,168,155,0.2)]">
-            Grimorio
-          </h1>
-        </div>
-
-        <div id="authContainer" class="w-full flex flex-col items-center gap-4 bg-[#121316]/80 p-6 rounded-2xl border border-zinc-800 backdrop-blur-md shadow-[0_0_30px_rgba(0,0,0,0.5)] mt-2">
-          <p id="pinPromptText" class="text-xs font-mono tracking-widest uppercase text-[#8da89b] font-bold text-center">Iniciando Sello...</p>
-          <input type="password" id="authPin" inputmode="numeric" pattern="[0-9]*" maxlength="6" placeholder="• • • • • •" class="w-full max-w-[220px] px-4 py-3 bg-[#090a0c] border border-zinc-800 rounded-xl text-zinc-200 placeholder-zinc-700 font-mono text-3xl tracking-[0.3em] text-center focus:outline-none focus:border-[#8da89b] transition" autocomplete="off">
-        </div>
+    <!-- CONTENEDOR GENERAL DE BLOQUEO -->
+    <div id="lockContent" class="w-full h-full flex flex-col justify-between items-center relative z-20 max-w-md mx-auto py-2">
+      
+      <!-- VENTANA 1: CAJA DE PIN (SUPERIOR, SEPARADA) -->
+      <div class="w-full flex flex-col items-center gap-2 bg-[#121316]/95 p-4 rounded-2xl border border-zinc-800 backdrop-blur-md shadow-[0_10px_30px_rgba(0,0,0,0.8)] mt-2">
+        <p id="pinPromptText" class="text-[10px] font-mono tracking-widest uppercase text-[#8da89b] font-bold text-center">Introduce tu Sello Numérico</p>
+        <input type="password" id="authPin" inputmode="numeric" pattern="[0-9]*" maxlength="6" placeholder="• • • • • •" class="w-full max-w-[180px] px-3 py-2 bg-[#090a0c] border border-zinc-800 rounded-xl text-zinc-200 placeholder-zinc-700 font-mono text-xl tracking-[0.3em] text-center focus:outline-none focus:border-[#8da89b] transition" autocomplete="off">
       </div>
 
-      <div class="absolute top-[75%] sm:top-[60%] left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center z-20 w-full mt-4 sm:mt-0">
-        <div class="relative w-32 h-32 flex items-center justify-center">
-          <svg class="absolute inset-0 w-full h-full transform -rotate-90 pointer-events-none drop-shadow-[0_0_10px_rgba(141,168,155,0.5)]" viewBox="0 0 100 100">
-            <circle cx="50" cy="50" r="46" fill="none" stroke="#16171b" stroke-width="2"></circle>
-            <circle id="unlockProgress" cx="50" cy="50" r="46" fill="none" stroke="#8da89b" stroke-width="2.5" stroke-dasharray="289" stroke-dashoffset="289" class="transition-all" style="transition-duration: 30ms;"></circle>
+      <!-- VENTANA 2: CUBO DE METATRÓN (100% TRANSPARENTE, SIN BORDES, OCUPANDO TODO EL ESPACIO INFERIOR) -->
+      <div class="w-full flex-grow flex flex-col items-center justify-center relative my-auto">
+        <div class="relative w-full max-w-[360px] aspect-square flex items-center justify-center p-2">
+          
+          <!-- Cubo de Metatrón giratorio al 100% -->
+          <svg viewBox="0 0 400 400" class="absolute inset-0 w-full h-full animate-[spin_120s_linear_infinite] pointer-events-none opacity-85">
+            <defs>
+              <radialGradient id="lockMetatronGlow" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#8da89b" stop-opacity="0.2"/>
+                <stop offset="100%" stop-color="#090a0c" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+            <circle cx="200" cy="200" r="190" fill="url(#lockMetatronGlow)" />
+            <circle cx="200" cy="200" r="175" fill="none" stroke="#8da89b" stroke-width="0.8" stroke-dasharray="3 9"/>
+            <g stroke="#8da89b" stroke-width="1" opacity="0.85">
+              <line x1="200" y1="200" x2="200" y2="40" /><line x1="200" y1="200" x2="338" y2="120" /><line x1="200" y1="200" x2="338" y2="280" /><line x1="200" y1="200" x2="200" y2="360" /><line x1="200" y1="200" x2="62" y2="280" /><line x1="200" y1="200" x2="62" y2="120" />
+              <polygon points="200,40 338,120 338,280 200,360 62,280 62,120" fill="none" />
+              <polygon points="200,120 269,160 269,240 200,280 131,240 131,160" fill="none" />
+              <polygon points="200,40 338,280 62,280" fill="none" />
+              <polygon points="200,360 338,120 62,120" fill="none" />
+              <line x1="200" y1="40" x2="269" y2="240" /><line x1="200" y1="40" x2="131" y2="240" /><line x1="200" y1="360" x2="269" y2="160" /><line x1="200" y1="360" x2="131" y2="160" /><line x1="338" y1="120" x2="131" y2="240" /><line x1="338" y1="120" x2="200" y2="280" /><line x1="62" y1="120" x2="269" y2="240" /><line x1="62" y1="120" x2="200" y2="280" />
+            </g>
+            <g fill="#08090b" stroke="#b4c7be" stroke-width="1.8">
+              <circle cx="200" cy="200" r="18"/><circle cx="200" cy="200" r="6" fill="#8da89b"/>
+              <circle cx="200" cy="120" r="14"/><circle cx="269" cy="160" r="14"/><circle cx="269" cy="240" r="14"/><circle cx="200" cy="280" r="14"/><circle cx="131" cy="240" r="14"/><circle cx="131" cy="160" r="14"/>
+              <circle cx="200" cy="40" r="14"/><circle cx="338" cy="120" r="14"/><circle cx="338" cy="280" r="14"/><circle cx="200" cy="360" r="14"/><circle cx="62" cy="280" r="14"/><circle cx="62" cy="120" r="14"/>
+            </g>
           </svg>
-          <button id="fingerprintBtn" class="w-24 h-24 rounded-full bg-[#121316] flex items-center justify-center shadow-[0_0_40px_rgba(0,0,0,0.8)] border border-zinc-800 transition-transform cursor-pointer relative z-10 select-none touch-none">
-            <i data-lucide="fingerprint" class="w-12 h-12 text-zinc-600 transition-all duration-300" id="fingerprintIcon"></i>
-          </button>
+
+          <!-- BOTÓN DE ROMPER EL SELLO (EXACTAMENTE EN EL CENTRO DEL CUBO) -->
+          <div class="relative w-32 h-32 flex items-center justify-center z-20">
+            <svg class="absolute inset-0 w-full h-full transform -rotate-90 pointer-events-none drop-shadow-[0_0_15px_rgba(141,168,155,0.7)]" viewBox="0 0 100 100">
+              <circle cx="50" cy="50" r="46" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="2"></circle>
+              <circle id="unlockProgress" cx="50" cy="50" r="46" fill="none" stroke="#8da89b" stroke-width="2.5" stroke-dasharray="289" stroke-dashoffset="289" class="transition-all" style="transition-duration: 30ms;"></circle>
+            </svg>
+            <button id="fingerprintBtn" class="w-24 h-24 rounded-full bg-[#0d0e12]/80 backdrop-blur-sm flex items-center justify-center shadow-[0_0_40px_rgba(0,0,0,0.9)] border border-[#8da89b]/40 transition-transform cursor-pointer relative z-30 select-none touch-none">
+              <i data-lucide="fingerprint" class="w-12 h-12 text-[#8da89b]/70 transition-all duration-300" id="fingerprintIcon"></i>
+            </button>
+          </div>
+          
         </div>
-        <p id="unlockHint" class="font-handwritten text-xl text-zinc-500 opacity-0 transition-opacity duration-300 mt-4 absolute top-full whitespace-nowrap">Canalizando energía...</p>
+        <p id="unlockHint" class="font-handwritten text-xl text-zinc-300 opacity-0 transition-opacity duration-300 mt-2 absolute bottom-2 whitespace-nowrap drop-shadow">Canalizando energía astral...</p>
       </div>
+
+      <!-- ZONA INFERIOR: ESPACIADOR DE EQUILIBRIO -->
+      <div class="h-6"></div>
+
     </div>
   </div>
 
