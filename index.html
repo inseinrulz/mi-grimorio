@@ -176,9 +176,9 @@
       <!-- Fila Superior: Fecha Completa y Selector -->
       <div class="flex flex-nowrap items-center justify-between w-full bg-[#121316] rounded-2xl px-2 sm:px-5 py-2 sm:py-3 mb-4 relative z-10 shadow-sm gap-2">
         
-        <!-- 1. Botón Luna al principio (Sin recortes ni bordes redondos) -->
+        <!-- 1. Botón Luna al principio (Icono original completo con su marco) -->
         <button onclick="openMoonModal()" class="flex items-center justify-center flex-shrink-0 w-12 h-12 bg-transparent hover:bg-zinc-800/50 rounded-xl transition" title="Ver Fase Lunar">
-          <img id="headerMoonPhaseIcon" src="lunasOscuras1.png" class="w-10 h-10 object-contain drop-shadow-md" alt="Fase Lunar">
+          <img id="headerMoonPhaseIcon" src="lunasOscuras1.png" class="w-10 h-10 object-contain drop-shadow-[0_0_8px_rgba(141,168,155,0.3)]" alt="Fase Lunar">
         </button>
         
         <!-- 2. Fecha Central -->
@@ -1456,8 +1456,8 @@
       m.classList.remove('hidden');
       const lunar = getLunarPhaseData(currentDate);
       document.getElementById('lunarModalContent').innerHTML = `
-        <div class="w-64 h-64 rounded-full overflow-hidden flex items-center justify-center mb-8 drop-shadow-[0_0_35px_rgba(141,168,155,0.4)]">
-            <img src="lunasOscuras${lunar.phaseIndex + 1}.png" class="w-full h-full object-cover scale-[1.45] transform" alt="${lunar.phaseName}">
+        <div class="w-48 h-48 rounded-full overflow-hidden bg-[#090a0c] flex items-center justify-center mb-6 shadow-[0_0_50px_rgba(141,168,155,0.25)] mx-auto relative">
+            <img src="lunasOscuras${lunar.phaseIndex + 1}.png" class="w-full h-full object-cover scale-[1.45]" alt="${lunar.phaseName}">
         </div>
         <h4 class="font-serif-luxury text-4xl font-bold text-zinc-100 mb-4">${lunar.phaseName}</h4>
         <p class="text-zinc-200 font-handwritten text-3xl leading-relaxed px-2">Momento propicio para la introspección profunda, consagración de amuletos y siembra de intenciones en el plano astral.</p>
