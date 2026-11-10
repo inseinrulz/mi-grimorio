@@ -6,7 +6,7 @@
   <title>Agenda Ejecutiva & Santuario Místico</title>
   <link rel="manifest" href="./manifest.json" crossorigin="use-credentials">
   <meta name="theme-color" content="#121316">
-  <link rel="apple-touch-icon" href="Grimorio%20m%C3%ADstico%20de%20cuero%20envejecido_2.png">
+  <link rel="apple-touch-icon" href="logo.png">
   
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -1125,7 +1125,7 @@
         document.getElementById(id).classList.remove('flex');
       });
 
-      const activeId = viewName === 'agenda' ? 'viewAgenda' : viewName === 'grimoire' ? 'viewGrimorio' : viewName === 'tarot' ? 'viewTarot' : 'viewPets';
+      const activeId = viewName === 'agenda' ? 'viewAgenda' : viewName === 'grimoire' ? 'viewGrimorio' : viewName === 'tarot' ? 'viewPets';
       const el = document.getElementById(activeId);
       if (el) {
         el.classList.remove('hidden');
@@ -1837,9 +1837,8 @@
     fBtn.addEventListener('mousedown', startUnlock);
     fBtn.addEventListener('touchstart', startUnlock, {passive: false});
     window.addEventListener('mouseup', stopUnlock);
-    window.addEventListener('touchend', stopUnlock);
     window.addEventListener('touchcancel', stopUnlock);
-
+    window.addEventListener('touchend', stopUnlock);
   </script>
 </body>
 </html>

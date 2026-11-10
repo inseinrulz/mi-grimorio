@@ -1,4 +1,4 @@
-const CACHE_NAME = 'grimorio-cache-v5';
+const CACHE_NAME = 'grimorio-cache-v7';
 const ASSETS = [
   './',
   './index.html',
@@ -7,7 +7,7 @@ const ASSETS = [
   './Grimorio místico de cuero envejecido_2.png',
   './Emblema Gótico de Fases Lunares_2.png',
   './Emblema de Huella Gótica Verde_2.png',
-  './imagen_2026-11-07_182209379.jpg'
+  './logo.png'
 ];
 
 self.addEventListener('install', (event) => {

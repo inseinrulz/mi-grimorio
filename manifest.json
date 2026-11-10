@@ -10,13 +10,13 @@
 "description": "Tu agenda personal, grimorio y oraculo mistico gotico.",
 "icons": [
 {
-"src": "Grimorio%20m%C3%ADstico%20de%20cuero%20envejecido_2.png",
+"src": "logo.png",
 "sizes": "192x192",
 "type": "image/png",
 "purpose": "any"
 },
 {
-"src": "Grimorio%20m%C3%ADstico%20de%20cuero%20envejecido_2.png",
+"src": "logo.png",
 "sizes": "512x512",
 "type": "image/png",
 "purpose": "any maskable"
