@@ -1047,7 +1047,8 @@
       xp: 0,
       medals: 3,
       hunger: 100,
-      happiness: 100
+      happiness: 100,
+      lastUpdated: Date.now()
     };
 
     const PET_DATA = {
@@ -1079,10 +1080,24 @@
       }
       if (!petState.levels) petState.levels = { cat: 1, bat: 1, rat: 1 };
       
+      // Sistema de desgaste por tiempo (2% cada hora)
+      const now = Date.now();
+      if (petState.lastUpdated) {
+        const hoursPassed = (now - petState.lastUpdated) / (1000 * 60 * 60);
+        if (hoursPassed > 1) {
+          const decay = Math.floor(hoursPassed * 2);
+          petState.hunger = Math.max(0, petState.hunger - decay);
+          petState.happiness = Math.max(0, petState.happiness - decay);
+        }
+      }
+      petState.lastUpdated = now;
+      saveData();
+      
       updateGlobalCompanionImage();
     }
 
     function saveData() {
+      petState.lastUpdated = Date.now();
       localStorage.setItem('agenda_esoterica_data_v10', JSON.stringify(appData));
       localStorage.setItem('mystic_pets_data_v4', JSON.stringify(petState));
       showToast('Sincronizado');
@@ -1268,6 +1283,11 @@
       const key = getDateKey(currentDate);
       if (appData[key] && appData[key].appointments[idx]) {
         appData[key].appointments[idx].completed = !appData[key].appointments[idx].completed;
+        
+        if (appData[key].appointments[idx].completed) {
+          rewardPet(5, 1, 'Tarea superada');
+        }
+        
         saveData();
         renderAgendaView();
         showToast(appData[key].appointments[idx].completed ? 'Cita completada' : 'Cita restaurada');
@@ -1464,6 +1484,9 @@
       const body = document.getElementById('quickNoteBodyInput').value;
       if (!appData.grimoireNotes) appData.grimoireNotes = [];
       appData.grimoireNotes.unshift({ title, body });
+      
+      rewardPet(10, 1, 'Eco plasmado');
+      
       saveData();
       closeQuickNoteModal();
       renderGrimorioView();
@@ -1577,6 +1600,9 @@
       if (!appData[key]) appData[key] = { appointments: [], habits: {}, morning: "", night: "", tarotSlots: [null, null, null] };
       if (!appData[key].tarotSlots) appData[key].tarotSlots = [null, null, null];
       appData[key].tarotSlots[activeTarotIndex] = { cards: drawn, notes: "" };
+      
+      rewardPet(15, 2, 'Oráculo leído');
+      
       saveData();
       renderTarotView();
       showToast('Premonición revelada y guardada');
@@ -1637,6 +1663,16 @@
       triggerGlobalPetAnimation('anim-cute', '💖');
     }
 
+    // Nueva función centralizada de recompensas
+    function rewardPet(addedXp, addedMedals, reason) {
+      petState.xp += addedXp;
+      petState.medals += addedMedals;
+      saveData();
+      if(currentView === 'pets') renderPetsView();
+      showToast(`+${addedXp} XP | +${addedMedals} 🩸 (${reason})`);
+      triggerGlobalPetAnimation('anim-cute', '✨');
+    }
+
     function renderPetsView() {
       const p = PET_DATA[petState.type];
       const lvl = petState.levels[petState.type] || 1;
@@ -1667,7 +1703,16 @@
       const btnEvolve = document.getElementById('viewBtnEvolvePet');
       if (lvl < 3) {
         btnEvolve.classList.remove('hidden');
-        document.getElementById('viewEvolveCostLabel').innerText = lvl * 5;
+        const reqXp = lvl === 1 ? 150 : 400;
+        const reqMedals = lvl === 1 ? 5 : 15;
+        document.getElementById('viewEvolveCostLabel').innerText = `${reqXp} XP y ${reqMedals}`;
+        
+        // Efecto visual si puede evolucionar
+        if (petState.xp >= reqXp && petState.medals >= reqMedals) {
+          btnEvolve.classList.add('animate-pulse', 'border', 'border-[#c75665]');
+        } else {
+          btnEvolve.classList.remove('animate-pulse', 'border', 'border-[#c75665]');
+        }
       } else {
         btnEvolve.classList.add('hidden');
       }
@@ -1677,20 +1722,26 @@
 
     function interactPet(action, e) {
       if (action === 'feed') {
-        petState.hunger = Math.min(100, petState.hunger + 25);
-        petState.xp += 10;
+        if (petState.hunger >= 100) { showToast('Ya está plenamente saciado'); return; }
+        petState.hunger = Math.min(100, petState.hunger + 30);
         triggerGlobalPetAnimation('anim-eat', '🍖');
         showToast('Familiar alimentado');
       } else if (action === 'pet') {
-        petState.happiness = Math.min(100, petState.happiness + 20);
-        petState.xp += 15;
+        if (petState.happiness >= 100) { showToast('Su vínculo contigo ya es máximo'); return; }
+        petState.happiness = Math.min(100, petState.happiness + 30);
         triggerGlobalPetAnimation('anim-pet', '💕');
         showToast('Vínculo fortalecido');
       } else if (action === 'play') {
+        if (petState.hunger < 20 || petState.happiness < 20) {
+          showToast('Falta energía o vínculo para viajes astrales');
+          return;
+        }
+        petState.hunger -= 20;
+        petState.happiness -= 20;
         petState.medals += 1;
         petState.xp += 25;
         triggerGlobalPetAnimation('anim-cute', '✨');
-        showToast('Invocación completada');
+        showToast('Viaje astral: +1 🩸 | +25 XP');
       }
       saveData();
       renderPetsView();
@@ -1698,15 +1749,19 @@
 
     function evolveActivePet(e) {
       const lvl = petState.levels[petState.type] || 1;
-      const cost = lvl * 5;
-      if (petState.medals >= cost && lvl < 3) {
-        petState.medals -= cost;
+      const reqXp = lvl === 1 ? 150 : 400;
+      const reqMedals = lvl === 1 ? 5 : 15;
+      
+      if (petState.xp >= reqXp && petState.medals >= reqMedals && lvl < 3) {
+        petState.medals -= reqMedals;
+        petState.xp -= reqXp; // Consumimos la energía para transmutar
         petState.levels[petState.type] = lvl + 1;
         saveData();
         renderPetsView();
-        showToast('Transmutación completada');
-      } else if (petState.medals < cost) {
-        showToast('Insuficientes tributos');
+        showToast('Transmutación completada con éxito');
+        triggerGlobalPetAnimation('anim-cute', '🔮');
+      } else if (lvl < 3) {
+        showToast(`Faltan requisitos: ${reqXp} XP y ${reqMedals} 🩸`);
       }
     }
 
