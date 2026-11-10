@@ -188,7 +188,46 @@
 
   </style>
 </head>
-<body class="antialiased min-h-screen flex flex-col relative pb-32">
+<body class="antialiased min-h-screen flex flex-col relative pb-32 overflow-hidden" id="mainBody">
+
+  <!-- PANTALLA DE BIENVENIDA Y BLOQUEO (SELLO DE HUELLA) -->
+  <div id="lockScreen" class="fixed inset-0 z-[100] bg-[#090a0c] flex flex-col items-center justify-center transition-all duration-1000">
+    <!-- Fondo decorativo místico -->
+    <div class="absolute inset-0 flex justify-center items-center pointer-events-none opacity-20">
+      <svg viewBox="20 20 360 360" class="w-[150%] max-w-[800px] aspect-square animate-[spin_240s_linear_infinite]">
+        <circle cx="200" cy="200" r="160" fill="none" stroke="#9b8da8" stroke-width="0.5" stroke-dasharray="2 6"/>
+        <polygon points="200,50 330,275 70,275" fill="none" stroke="#9b8da8" stroke-width="0.5"/>
+        <polygon points="200,350 330,125 70,125" fill="none" stroke="#9b8da8" stroke-width="0.5"/>
+      </svg>
+    </div>
+
+    <div class="flex flex-col items-center gap-10 relative z-10" id="lockContent">
+      <div class="flex flex-col items-center gap-3 text-center px-6">
+        <i data-lucide="moon-star" class="w-8 h-8 text-[#8da89b] opacity-80 mb-2"></i>
+        <h1 class="font-serif-luxury text-4xl sm:text-5xl text-zinc-100 font-bold tracking-widest drop-shadow-[0_0_15px_rgba(141,168,155,0.2)]">
+          Santuario Gótico
+        </h1>
+        <p class="font-mono text-[10px] tracking-widest text-zinc-400 uppercase max-w-xs leading-relaxed">
+          El Grimorio permanece sellado.<br>Mantén pulsada tu huella para acceder.
+        </p>
+      </div>
+
+      <div class="relative w-36 h-36 flex items-center justify-center">
+        <!-- Anillo de progreso SVG -->
+        <svg class="absolute inset-0 w-full h-full transform -rotate-90 pointer-events-none drop-shadow-[0_0_10px_rgba(141,168,155,0.5)]" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="46" fill="none" stroke="#16171b" stroke-width="2"></circle>
+          <circle id="unlockProgress" cx="50" cy="50" r="46" fill="none" stroke="#8da89b" stroke-width="2.5" stroke-dasharray="289" stroke-dashoffset="289" class="transition-all" style="transition-duration: 30ms;"></circle>
+        </svg>
+
+        <!-- Botón de Huella -->
+        <button id="fingerprintBtn" class="w-28 h-28 rounded-full bg-[#121316] flex items-center justify-center shadow-[0_0_40px_rgba(0,0,0,0.8)] border border-zinc-800 transition-transform cursor-pointer relative z-10 select-none touch-none">
+          <i data-lucide="fingerprint" class="w-14 h-14 text-zinc-600 transition-all duration-300" id="fingerprintIcon"></i>
+        </button>
+      </div>
+      
+      <p id="unlockHint" class="font-handwritten text-xl text-zinc-500 opacity-0 transition-opacity duration-300">Canalizando energía...</p>
+    </div>
+  </div>
 
   <canvas id="atmosphereCanvas"></canvas>
 
@@ -1625,6 +1664,85 @@
       }
       animate();
     }
+
+    // --- LÓGICA DEL SELLO MÁGICO (PANTALLA DE BLOQUEO) ---
+    const fBtn = document.getElementById('fingerprintBtn');
+    const fProgress = document.getElementById('unlockProgress');
+    const fIcon = document.getElementById('fingerprintIcon');
+    const uHint = document.getElementById('unlockHint');
+    const maxDash = 289;
+    
+    let unlockTimer;
+    let unlockValue = 0;
+    let isUnlocking = false;
+    let hasUnlocked = false;
+
+    function startUnlock(e) {
+      if (hasUnlocked) return;
+      if (e.cancelable) e.preventDefault(); // Evita scroll y menús nativos
+      
+      isUnlocking = true;
+      fIcon.classList.replace('text-zinc-600', 'text-[#8da89b]');
+      fIcon.classList.add('drop-shadow-[0_0_15px_rgba(141,168,155,0.8)]');
+      uHint.classList.remove('opacity-0');
+      fBtn.style.transform = 'scale(0.95)';
+
+      unlockTimer = setInterval(() => {
+        unlockValue += 2.5; // Velocidad de llenado (ajusta este número)
+        const offset = maxDash - (unlockValue / 100) * maxDash;
+        fProgress.style.strokeDashoffset = Math.max(0, offset);
+
+        if (unlockValue >= 100) {
+          completeUnlock();
+        }
+      }, 30);
+    }
+
+    function stopUnlock() {
+      if (hasUnlocked || !isUnlocking) return;
+      isUnlocking = false;
+      clearInterval(unlockTimer);
+      
+      // Resetear si no se completó
+      unlockValue = 0;
+      fProgress.style.strokeDashoffset = maxDash;
+      fIcon.classList.replace('text-[#8da89b]', 'text-zinc-600');
+      fIcon.classList.remove('drop-shadow-[0_0_15px_rgba(141,168,155,0.8)]');
+      uHint.classList.add('opacity-0');
+      fBtn.style.transform = 'scale(1)';
+    }
+
+    function completeUnlock() {
+      hasUnlocked = true;
+      clearInterval(unlockTimer);
+      
+      fIcon.classList.replace('text-[#8da89b]', 'text-white');
+      fIcon.classList.add('drop-shadow-[0_0_20px_rgba(255,255,255,1)]');
+      fBtn.style.transform = 'scale(1.1)';
+      uHint.innerText = "Sello Roto. Bienvenido.";
+      uHint.classList.add('text-[#8da89b]');
+
+      setTimeout(() => {
+        const lockScreen = document.getElementById('lockScreen');
+        document.getElementById('lockContent').style.transform = 'scale(1.1)';
+        document.getElementById('lockContent').style.opacity = '0';
+        lockScreen.style.opacity = '0';
+        lockScreen.style.backdropFilter = 'blur(0px)';
+        
+        setTimeout(() => {
+          lockScreen.style.display = 'none';
+          document.getElementById('mainBody').classList.remove('overflow-hidden');
+        }, 1000);
+      }, 600);
+    }
+
+    // Eventos para ratón (PC) y táctil (Móvil)
+    fBtn.addEventListener('mousedown', startUnlock);
+    fBtn.addEventListener('touchstart', startUnlock, {passive: false});
+    window.addEventListener('mouseup', stopUnlock);
+    window.addEventListener('touchend', stopUnlock);
+    window.addEventListener('touchcancel', stopUnlock);
+
   </script>
 </body>
 </html>
