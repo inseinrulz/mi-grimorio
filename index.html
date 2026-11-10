@@ -1004,17 +1004,31 @@
         apptsList.innerHTML = `<div class="text-center py-12 text-zinc-600 font-mono text-xs italic">Sin cronología para este día.</div>`;
       } else {
         apptsList.innerHTML = day.appointments.map((appt, idx) => `
-          <div onclick="openAppointmentDetail(${idx})" class="flex items-center justify-between p-3 mb-2 rounded-xl bg-[#121316] hover:bg-[#16171b] transition cursor-pointer group">
-            <div class="flex items-center gap-3">
-              <span class="font-mono text-xs text-[#8da89b] font-bold">${appt.time}</span>
-              <span class="font-handwritten text-xl text-zinc-200">${appt.title}</span>
+          <div onclick="openAppointmentDetail(${idx})" class="flex items-center justify-between p-3 mb-2 rounded-xl bg-[#121316] hover:bg-[#16171b] transition cursor-pointer group ${appt.completed ? 'opacity-60' : ''}">
+            <div class="flex items-center gap-3 overflow-hidden w-full">
+              <input type="checkbox" class="executive-checkbox flex-shrink-0" ${appt.completed ? 'checked' : ''} onclick="toggleAppointmentCompletion(${idx}, event)">
+              <div class="flex items-center gap-3 truncate ${appt.completed ? 'line-through' : ''}">
+                <span class="font-mono text-xs ${appt.completed ? 'text-zinc-500' : 'text-[#8da89b]'} font-bold">${appt.time}</span>
+                <span class="font-handwritten text-xl ${appt.completed ? 'text-zinc-500' : 'text-zinc-200'} truncate">${appt.title}</span>
+              </div>
             </div>
-            <i data-lucide="chevron-right" class="w-4 h-4 text-zinc-600 group-hover:text-[#8da89b] transition"></i>
+            <i data-lucide="chevron-right" class="w-4 h-4 text-zinc-600 group-hover:text-[#8da89b] transition flex-shrink-0 ml-2"></i>
           </div>
         `).join('');
       }
 
       renderHabitsList();
+    }
+
+    function toggleAppointmentCompletion(idx, event) {
+      event.stopPropagation(); // Evita que se abra la ventana de detalles al hacer clic en el checkbox
+      const key = getDateKey(currentDate);
+      if (appData[key] && appData[key].appointments[idx]) {
+        appData[key].appointments[idx].completed = !appData[key].appointments[idx].completed;
+        saveData();
+        renderAgendaView();
+        showToast(appData[key].appointments[idx].completed ? 'Cita completada' : 'Cita restaurada');
+      }
     }
 
     function onNotesInput(type, val) {
@@ -1442,7 +1456,9 @@
       m.classList.remove('hidden');
       const lunar = getLunarPhaseData(currentDate);
       document.getElementById('lunarModalContent').innerHTML = `
-        <img src="lunasOscuras${lunar.phaseIndex + 1}.png" class="w-64 h-64 object-contain drop-shadow-[0_0_35px_rgba(141,168,155,0.4)] mb-8" alt="${lunar.phaseName}">
+        <div class="w-64 h-64 rounded-full overflow-hidden flex items-center justify-center mb-8 drop-shadow-[0_0_35px_rgba(141,168,155,0.4)]">
+            <img src="lunasOscuras${lunar.phaseIndex + 1}.png" class="w-full h-full object-cover scale-[1.45] transform" alt="${lunar.phaseName}">
+        </div>
         <h4 class="font-serif-luxury text-4xl font-bold text-zinc-100 mb-4">${lunar.phaseName}</h4>
         <p class="text-zinc-200 font-handwritten text-3xl leading-relaxed px-2">Momento propicio para la introspección profunda, consagración de amuletos y siembra de intenciones en el plano astral.</p>
       `;
