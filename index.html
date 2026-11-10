@@ -203,7 +203,7 @@
 
     <div id="lockContent" class="absolute inset-0 w-full h-full transition-all duration-700">
       
-      <!-- BLOQUE SUPERIOR: Título y Formulario -->
+      <!-- BLOQUE SUPERIOR: Título y PIN -->
       <div class="absolute top-4 sm:top-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 z-30 w-full max-w-xs px-4">
         <div class="flex flex-col items-center gap-1 text-center">
           <i data-lucide="moon-star" class="w-8 h-8 text-[#8da89b] opacity-80 mb-1"></i>
@@ -212,36 +212,15 @@
           </h1>
         </div>
 
-        <!-- FORMULARIO DE ACCESO Y PACTO -->
-        <div id="authContainer" class="w-full flex flex-col gap-3.5 bg-[#121316]/80 p-5 rounded-2xl border border-zinc-800 backdrop-blur-md shadow-[0_0_30px_rgba(0,0,0,0.5)]">
-          <div class="flex justify-center gap-6 border-b border-zinc-800 pb-3 mb-1">
-            <button id="tabLogin" type="button" onclick="switchAuthMode('login')" class="text-xs font-mono tracking-widest uppercase text-[#8da89b] font-bold transition drop-shadow-[0_0_8px_rgba(141,168,155,0.5)]">Acceso</button>
-            <button id="tabRegister" type="button" onclick="switchAuthMode('register')" class="text-xs font-mono tracking-widest uppercase text-zinc-500 hover:text-zinc-300 transition">Pacto Nuevo</button>
-          </div>
-          
-          <input type="text" id="authUsername" autocomplete="off" placeholder="Nombre Místico..." class="w-full px-3 py-2 bg-[#090a0c] border border-zinc-800 rounded-xl text-zinc-200 placeholder-zinc-600 font-handwritten text-xl sm:text-2xl focus:outline-none focus:border-[#8da89b] transition">
-          <input type="password" id="authPassword" placeholder="Palabra de Paso..." class="w-full px-3 py-2 bg-[#090a0c] border border-zinc-800 rounded-xl text-zinc-200 placeholder-zinc-600 font-handwritten text-xl sm:text-2xl focus:outline-none focus:border-[#8da89b] transition">
-          
-          <div id="registerFields" class="hidden flex-col gap-2.5 mt-1 pt-3 border-t border-zinc-800/80">
-            <p class="text-[9px] text-zinc-500 font-mono uppercase tracking-widest text-center mb-1">Tu Tríada Astral</p>
-            <select id="signSun" class="w-full px-3 py-2 bg-[#090a0c] border border-zinc-800 rounded-xl text-zinc-300 text-xs font-mono uppercase tracking-wider focus:outline-none focus:border-[#8da89b] appearance-none text-center">
-              <option value="">-- Signo Solar --</option>
-              <option value="Aries ♈">Aries ♈</option><option value="Tauro ♉">Tauro ♉</option><option value="Géminis ♊">Géminis ♊</option><option value="Cáncer ♋">Cáncer ♋</option><option value="Leo ♌">Leo ♌</option><option value="Virgo ♍">Virgo ♍</option><option value="Libra ♎">Libra ♎</option><option value="Escorpio ♏">Escorpio ♏</option><option value="Sagitario ♐">Sagitario ♐</option><option value="Capricornio ♑">Capricornio ♑</option><option value="Acuario ♒">Acuario ♒</option><option value="Piscis ♓">Piscis ♓</option>
-            </select>
-            <select id="signMoon" class="w-full px-3 py-2 bg-[#090a0c] border border-zinc-800 rounded-xl text-zinc-300 text-xs font-mono uppercase tracking-wider focus:outline-none focus:border-[#8da89b] appearance-none text-center">
-              <option value="">-- Signo Lunar --</option>
-              <option value="Aries ♈">Aries ♈</option><option value="Tauro ♉">Tauro ♉</option><option value="Géminis ♊">Géminis ♊</option><option value="Cáncer ♋">Cáncer ♋</option><option value="Leo ♌">Leo ♌</option><option value="Virgo ♍">Virgo ♍</option><option value="Libra ♎">Libra ♎</option><option value="Escorpio ♏">Escorpio ♏</option><option value="Sagitario ♐">Sagitario ♐</option><option value="Capricornio ♑">Capricornio ♑</option><option value="Acuario ♒">Acuario ♒</option><option value="Piscis ♓">Piscis ♓</option>
-            </select>
-            <select id="signAsc" class="w-full px-3 py-2 bg-[#090a0c] border border-zinc-800 rounded-xl text-zinc-300 text-xs font-mono uppercase tracking-wider focus:outline-none focus:border-[#8da89b] appearance-none text-center">
-              <option value="">-- Ascendente --</option>
-              <option value="Aries ♈">Aries ♈</option><option value="Tauro ♉">Tauro ♉</option><option value="Géminis ♊">Géminis ♊</option><option value="Cáncer ♋">Cáncer ♋</option><option value="Leo ♌">Leo ♌</option><option value="Virgo ♍">Virgo ♍</option><option value="Libra ♎">Libra ♎</option><option value="Escorpio ♏">Escorpio ♏</option><option value="Sagitario ♐">Sagitario ♐</option><option value="Capricornio ♑">Capricornio ♑</option><option value="Acuario ♒">Acuario ♒</option><option value="Piscis ♓">Piscis ♓</option>
-            </select>
-          </div>
+        <!-- FORMULARIO DE ACCESO (PIN de 6 dígitos) -->
+        <div id="authContainer" class="w-full flex flex-col items-center gap-4 bg-[#121316]/80 p-6 rounded-2xl border border-zinc-800 backdrop-blur-md shadow-[0_0_30px_rgba(0,0,0,0.5)]">
+          <p id="pinPromptText" class="text-xs font-mono tracking-widest uppercase text-[#8da89b] font-bold text-center">Iniciando Sello...</p>
+          <input type="password" id="authPin" inputmode="numeric" pattern="[0-9]*" maxlength="6" placeholder="• • • • • •" class="w-full max-w-[220px] px-4 py-3 bg-[#090a0c] border border-zinc-800 rounded-xl text-zinc-200 placeholder-zinc-700 font-mono text-3xl tracking-[0.3em] text-center focus:outline-none focus:border-[#8da89b] transition" autocomplete="off">
         </div>
       </div>
 
       <!-- BLOQUE CENTRAL: Escáner de Huella (Centrado con la geometría) -->
-      <div class="absolute top-[65%] sm:top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center z-20 w-full mt-4 sm:mt-0">
+      <div class="absolute top-[70%] sm:top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center z-20 w-full mt-4 sm:mt-0">
         <div class="relative w-32 h-32 flex items-center justify-center">
           <!-- Anillo de progreso SVG -->
           <svg class="absolute inset-0 w-full h-full transform -rotate-90 pointer-events-none drop-shadow-[0_0_10px_rgba(141,168,155,0.5)]" viewBox="0 0 100 100">
@@ -275,7 +254,7 @@
       <!-- Fila Superior: Fecha Completa y Selector -->
       <div class="flex flex-nowrap items-center justify-between w-full bg-[#121316] rounded-2xl px-2 sm:px-5 py-2 sm:py-3 mb-4 relative z-10 shadow-sm gap-2">
         
-        <!-- 1. Botón Luna al principio (Icono original completo con su marco) -->
+        <!-- 1. Botón Luna al principio -->
         <button onclick="openMoonModal()" class="flex items-center justify-center flex-shrink-0 w-12 h-12 bg-transparent hover:bg-zinc-800/50 rounded-xl transition" title="Ver Fase Lunar">
           <img id="headerMoonPhaseIcon" src="lunasOscuras1.png" class="w-10 h-10 object-contain drop-shadow-[0_0_8px_rgba(141,168,155,0.3)]" alt="Fase Lunar">
         </button>
@@ -286,10 +265,15 @@
           <span id="fullDateDisplay" class="font-serif-luxury text-sm sm:text-lg font-bold text-zinc-100 truncate text-center">8 Nov 2026</span>
         </div>
         
-        <!-- 3. Botón de Configuración/Respaldo -->
-        <button onclick="openBackupModal()" class="flex items-center justify-center flex-shrink-0 w-12 h-12 bg-transparent hover:bg-zinc-800/50 rounded-xl transition" title="Custodia del Grimorio (Respaldo)">
-          <i data-lucide="shield" class="w-5 h-5 text-[#8da89b]"></i>
-        </button>
+        <!-- 3. Botones de Configuración y Respaldo -->
+        <div class="flex items-center flex-shrink-0 gap-1">
+          <button onclick="openSettingsModal()" class="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 bg-transparent hover:bg-zinc-800/50 rounded-xl transition" title="Ajustes">
+            <i data-lucide="settings" class="w-5 h-5 text-zinc-400 hover:text-white transition"></i>
+          </button>
+          <button onclick="openBackupModal()" class="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 bg-transparent hover:bg-zinc-800/50 rounded-xl transition" title="Custodia del Grimorio (Respaldo)">
+            <i data-lucide="shield" class="w-5 h-5 text-[#8da89b]"></i>
+          </button>
+        </div>
       </div>
 
       <!-- Fila Inferior: Navegación de 4 vistas -->
@@ -549,7 +533,7 @@
             <!-- CONJUNTO ASTRAL ALINEADO -->
             
             <!-- Sol (Arriba Izquierda - Coordinado matemáticamente al nuevo marco) -->
-            <div onclick="openEsotericDetail('sol_escorpio')" class="absolute top-[18.6%] left-[18.6%] -translate-x-1/2 -translate-y-1/2 flex justify-center items-center group cursor-pointer z-20">
+            <div onclick="openEsotericDetail('sol')" class="absolute top-[18.6%] left-[18.6%] -translate-x-1/2 -translate-y-1/2 flex justify-center items-center group cursor-pointer z-20">
                <div class="w-16 h-16 sm:w-20 sm:h-20 relative flex items-center justify-center bg-[#090a0c]/90 rounded-full shadow-[0_0_15px_rgba(155,141,168,0.2)] border border-[#9b8da8]/30">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 sm:w-10 sm:h-10 text-[#e0d6e8] relative z-10 group-hover:scale-110 transition-transform">
                     <path d="M4 17V8c0-2.2 1.8-4 4-4s4 1.8 4 4v9"/>
@@ -562,7 +546,7 @@
             </div>
 
             <!-- Luna (Centro Absoluto - Exactamente en el núcleo) -->
-            <div onclick="openEsotericDetail('luna_acuario')" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex justify-center items-center group cursor-pointer z-30">
+            <div onclick="openEsotericDetail('luna')" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex justify-center items-center group cursor-pointer z-30">
                <div class="w-20 h-20 sm:w-24 sm:h-24 relative flex items-center justify-center bg-[#090a0c]/95 rounded-full shadow-[0_0_25px_rgba(195,180,199,0.3)] border border-[#c3b4c7]/40">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" class="w-10 h-10 sm:w-12 sm:h-12 text-white relative z-10 group-hover:scale-110 transition-transform">
                     <path d="M2 15h4l3-3 4 3h5l3-3"/>
@@ -573,7 +557,7 @@
             </div>
 
             <!-- Ascendente (Abajo Derecha - Coordinado matemáticamente al nuevo marco) -->
-            <div onclick="openEsotericDetail('asc_tauro')" class="absolute top-[81.4%] left-[81.4%] -translate-x-1/2 -translate-y-1/2 flex justify-center items-center group cursor-pointer z-20">
+            <div onclick="openEsotericDetail('asc')" class="absolute top-[81.4%] left-[81.4%] -translate-x-1/2 -translate-y-1/2 flex justify-center items-center group cursor-pointer z-20">
                <div class="w-16 h-16 sm:w-20 sm:h-20 relative flex items-center justify-center bg-[#090a0c]/90 rounded-full shadow-[0_0_15px_rgba(155,141,168,0.2)] border border-[#9b8da8]/30">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 sm:w-10 sm:h-10 text-[#e0d6e8] relative z-10 group-hover:scale-110 transition-transform">
                     <circle cx="12" cy="14" r="5"/>
@@ -731,7 +715,60 @@
 
   </div>
 
-  <!-- MODALES -->
+  <!-- MODALES DE CONFIGURACIÓN Y FUNCIONES -->
+  <div id="settingsModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 z-50 hidden">
+    <div class="bg-[#15141c] border border-zinc-800 rounded-2xl max-w-sm w-full p-5 shadow-2xl transform transition-all scale-95 opacity-0 duration-200" id="settingsModalCard">
+      <div class="flex justify-between items-center border-b border-zinc-800 pb-3 mb-4">
+        <h3 class="font-serif-luxury text-xl text-zinc-100 font-semibold flex items-center gap-2">
+          <i data-lucide="settings" class="w-5 h-5 text-[#8da89b]"></i> Ajustes
+        </h3>
+        <button type="button" onclick="closeSettingsModal()" class="text-zinc-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+      <div class="space-y-4 text-xs">
+        <div>
+          <p class="text-[10px] text-[#8da89b] font-mono uppercase tracking-widest mb-2 border-b border-zinc-800/50 pb-1">Tu Carta Natal</p>
+          <div class="flex flex-col gap-2.5">
+            <select id="setSignSun" class="w-full px-3 py-2 bg-[#0f1013] border border-zinc-800 rounded-xl text-zinc-300 text-xs font-mono uppercase tracking-wider focus:outline-none focus:border-[#8da89b] appearance-none text-center">
+              <option value="Aries ♈">Aries ♈</option><option value="Tauro ♉">Tauro ♉</option><option value="Géminis ♊">Géminis ♊</option><option value="Cáncer ♋">Cáncer ♋</option><option value="Leo ♌">Leo ♌</option><option value="Virgo ♍">Virgo ♍</option><option value="Libra ♎">Libra ♎</option><option value="Escorpio ♏">Escorpio ♏</option><option value="Sagitario ♐">Sagitario ♐</option><option value="Capricornio ♑">Capricornio ♑</option><option value="Acuario ♒">Acuario ♒</option><option value="Piscis ♓">Piscis ♓</option>
+            </select>
+            <select id="setSignMoon" class="w-full px-3 py-2 bg-[#0f1013] border border-zinc-800 rounded-xl text-zinc-300 text-xs font-mono uppercase tracking-wider focus:outline-none focus:border-[#8da89b] appearance-none text-center">
+              <option value="Aries ♈">Aries ♈</option><option value="Tauro ♉">Tauro ♉</option><option value="Géminis ♊">Géminis ♊</option><option value="Cáncer ♋">Cáncer ♋</option><option value="Leo ♌">Leo ♌</option><option value="Virgo ♍">Virgo ♍</option><option value="Libra ♎">Libra ♎</option><option value="Escorpio ♏">Escorpio ♏</option><option value="Sagitario ♐">Sagitario ♐</option><option value="Capricornio ♑">Capricornio ♑</option><option value="Acuario ♒">Acuario ♒</option><option value="Piscis ♓">Piscis ♓</option>
+            </select>
+            <select id="setSignAsc" class="w-full px-3 py-2 bg-[#0f1013] border border-zinc-800 rounded-xl text-zinc-300 text-xs font-mono uppercase tracking-wider focus:outline-none focus:border-[#8da89b] appearance-none text-center">
+              <option value="Aries ♈">Aries ♈</option><option value="Tauro ♉">Tauro ♉</option><option value="Géminis ♊">Géminis ♊</option><option value="Cáncer ♋">Cáncer ♋</option><option value="Leo ♌">Leo ♌</option><option value="Virgo ♍">Virgo ♍</option><option value="Libra ♎">Libra ♎</option><option value="Escorpio ♏">Escorpio ♏</option><option value="Sagitario ♐">Sagitario ♐</option><option value="Capricornio ♑">Capricornio ♑</option><option value="Acuario ♒">Acuario ♒</option><option value="Piscis ♓">Piscis ♓</option>
+            </select>
+          </div>
+        </div>
+        <div class="flex justify-end pt-3 border-t border-zinc-800">
+          <button type="button" onclick="saveSettings()" class="px-4 py-1.5 bg-[#8da89b] hover:bg-[#b4c7be] text-zinc-950 font-semibold rounded-xl shadow transition active:scale-95">Guardar Ajustes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="backupModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-[#15141c] max-w-lg w-full p-6 flex flex-col gap-5 border border-[#8da89b]/40 shadow-2xl rounded-2xl">
+      <div class="flex items-center justify-between border-b border-zinc-800 pb-3">
+        <h3 class="font-serif-luxury text-xl text-zinc-100 font-bold flex items-center gap-2">
+          <i data-lucide="shield" class="w-5 h-5 text-[#8da89b]"></i> Custodia del Grimorio
+        </h3>
+        <button onclick="closeBackupModal()" class="text-zinc-400 hover:text-white p-1"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+      <p class="text-xs text-zinc-300 leading-relaxed">
+        Exporta todos tus datos (citas, tareas, reflexiones, tiradas de tarot y nivel de tus familiares) en un archivo de respaldo seguro, o restaura un respaldo previo.
+      </p>
+      <div class="grid grid-cols-2 gap-4 pt-2">
+        <button onclick="exportBackup()" class="py-3 bg-[#8da89b] hover:bg-[#b4c7be] text-zinc-950 font-bold text-xs uppercase tracking-wider rounded-xl transition shadow flex items-center justify-center gap-2">
+          <i data-lucide="download" class="w-4 h-4"></i> Exportar
+        </button>
+        <label class="py-3 bg-[#14161a] hover:bg-zinc-800 border border-zinc-800 text-zinc-200 font-bold text-xs uppercase tracking-wider rounded-xl transition shadow flex items-center justify-center gap-2 cursor-pointer">
+          <i data-lucide="upload" class="w-4 h-4 text-[#8da89b]"></i> Importar
+          <input type="file" accept=".json" onchange="importBackup(event)" class="hidden">
+        </label>
+      </div>
+    </div>
+  </div>
+
   <div id="moonModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 z-50 hidden">
     <div class="bg-[#121316] border border-zinc-800 rounded-2xl max-w-sm w-full p-8 shadow-2xl relative flex flex-col items-center">
       <button type="button" onclick="closeMoonModal()" class="absolute top-4 right-4 text-zinc-500 hover:text-white"><i data-lucide="x" class="w-6 h-6"></i></button>
@@ -922,6 +959,20 @@
       { name: "La Justicia", num: "XI", symbol: "⚖️", up: "Verdad, equidad, ley kármica, decisiones justas y objetivas.", rev: "Injusticia, deshonestidad, evasión de responsabilidades.", advice: "Actúa con integridad y asume las consecuencias." }
     ];
 
+    const ESOTERIC_DATA = {
+      kabbalah: { title: "Kabbalah & Árbol de Vida", sub: "Misticismo Hebreo", desc: "La Kabbalah busca desvelar el orden oculto del universo. A través del Árbol de la Vida (Sefirot), se estudian las diez emanaciones divinas que conectan el infinito con el plano material." },
+      mentalismo: { title: "El Mentalismo", sub: "Primer Principio Hermético", desc: "\"El Todo es Mente; el Universo es mental.\" Todo lo que existe fue creado primero como un pensamiento en la mente divina. Tus pensamientos moldean tu realidad." },
+      correspondencia: { title: "La Correspondencia", sub: "Segundo Principio", desc: "\"Como es arriba, es abajo; como es abajo, es arriba.\" Los patrones del macrocosmos (universo) se repiten en el microcosmos (el ser humano)." },
+      vibracion: { title: "La Vibración", sub: "Tercer Principio", desc: "\"Nada descansa; todo se mueve; todo vibra.\" La materia, la energía y el espíritu son solo diferentes frecuencias de vibración." },
+      polaridad: { title: "La Polaridad", sub: "Cuarto Principio", desc: "\"Todo es doble; todo tiene dos polos; todo, su par de opuestos.\" Calor y frío, luz y oscuridad son lo mismo, solo difieren en grado." },
+      ritmo: { title: "El Ritmo", sub: "Quinto Principio", desc: "\"Todo fluye y refluye; todo tiene sus períodos de avance y retroceso.\" Como el péndulo, lo que sube debe bajar. Aprende a fluir con los ciclos." },
+      causa: { title: "Causa y Efecto", sub: "Sexto Principio", desc: "\"Toda causa tiene su efecto; todo efecto tiene su causa.\" No existe la casualidad, solo causas que aún no comprendemos." },
+      genero: { title: "El Género", sub: "Séptimo Principio", desc: "\"El género está en todo; todo tiene sus principios masculino y femenino.\" Es la base de toda creación y generación en todos los planos." },
+      sol: { title: "Tu Sol de Esencia", sub: "El Yo Consciente", desc: "El Sol representa tu núcleo vital, tu identidad profunda y tu propósito fundamental en esta encarnación." },
+      luna: { title: "Tu Luna Emocional", sub: "El Subconsciente", desc: "La Luna gobierna tus reacciones instintivas, tus necesidades de seguridad y tu mundo emocional íntimo." },
+      asc: { title: "Tu Ascendente", sub: "La Máscara Física", desc: "El Ascendente es tu proyección externa, cómo te ven los demás a primera vista y cómo inicias nuevos caminos." }
+    };
+
     let petState = {
       type: 'cat',
       levels: { cat: 1, bat: 1, rat: 1 },
@@ -944,6 +995,7 @@
       loadData();
       initCanvas();
       updateHeaderDisplay();
+      applySettingsToTriad();
       renderCurrentView();
       lucide.createIcons();
     };
@@ -957,10 +1009,8 @@
       if (savedPets) {
         try { petState = JSON.parse(savedPets); } catch(e) {}
       }
-      // Ensure levels structure exists
       if (!petState.levels) petState.levels = { cat: 1, bat: 1, rat: 1 };
       
-      // Asegurar que la mascota global se inicializa
       updateGlobalCompanionImage();
     }
 
@@ -992,26 +1042,8 @@
       document.getElementById('headerDayNumName').innerText = `${dayNum} ${dayName.substring(0,3)}`;
 
       updateMoonHeaderInfo();
-
-      // Lógica inteligente para el botón HOY / VOLVER
-      const today = new Date();
-      const isToday = (today.getDate() === dayNum && today.getMonth() === currentDate.getMonth() && today.getFullYear() === year);
-      const btnHoy = document.getElementById('btnGoTodayNav');
-      
-      if (btnHoy) {
-        if (isToday) {
-          btnHoy.innerText = "HOY";
-          btnHoy.classList.add('text-zinc-300', 'bg-[#23252b]');
-          btnHoy.classList.remove('text-zinc-950', 'bg-[#8da89b]');
-        } else {
-          btnHoy.innerText = "VOLVER";
-          btnHoy.classList.add('text-zinc-950', 'bg-[#8da89b]');
-          btnHoy.classList.remove('text-zinc-300', 'bg-[#23252b]');
-        }
-      }
     }
 
-    // Calcula la fase lunar y devuelve un índice del 0 al 7
     function getLunarPhaseData(dateObj) {
       const baseDate = new Date(2000, 0, 6);
       const diffDays = (dateObj - baseDate) / (1000 * 60 * 60 * 24);
@@ -1020,49 +1052,70 @@
       
       let phaseName = "Luna Nueva";
       let phaseIndex = 0;
+      let phaseDesc = "Siembra de intenciones";
       
-      if (moonAge > 1 && moonAge < 6) { phaseName = "Luna Creciente"; phaseIndex = 1; }
-      else if (moonAge >= 6 && moonAge < 9) { phaseName = "Cuarto Creciente"; phaseIndex = 2; }
-      else if (moonAge >= 9 && moonAge < 13) { phaseName = "Gibosa Creciente"; phaseIndex = 3; }
-      else if (moonAge >= 13 && moonAge < 16) { phaseName = "Luna Llena"; phaseIndex = 4; }
-      else if (moonAge >= 16 && moonAge < 20) { phaseName = "Gibosa Menguante"; phaseIndex = 5; }
-      else if (moonAge >= 20 && moonAge < 23) { phaseName = "Cuarto Menguante"; phaseIndex = 6; }
-      else if (moonAge >= 23 && moonAge < 28) { phaseName = "Menguante Balsámica"; phaseIndex = 7; }
+      if (moonAge > 1 && moonAge < 6) { phaseName = "Luna Creciente"; phaseIndex = 1; phaseDesc = "Impulso y desarrollo"; }
+      else if (moonAge >= 6 && moonAge < 9) { phaseName = "Cuarto Creciente"; phaseIndex = 2; phaseDesc = "Acción y construcción"; }
+      else if (moonAge >= 9 && moonAge < 13) { phaseName = "Gibosa Creciente"; phaseIndex = 3; phaseDesc = "Ajustes y paciencia"; }
+      else if (moonAge >= 13 && moonAge < 16) { phaseName = "Luna Llena"; phaseIndex = 4; phaseDesc = "Culminación y cosecha"; }
+      else if (moonAge >= 16 && moonAge < 20) { phaseName = "Gibosa Menguante"; phaseIndex = 5; phaseDesc = "Gratitud y revisión"; }
+      else if (moonAge >= 20 && moonAge < 23) { phaseName = "Cuarto Menguante"; phaseIndex = 6; phaseDesc = "Liberación y limpieza"; }
+      else if (moonAge >= 23 && moonAge < 28) { phaseName = "Menguante Balsámica"; phaseIndex = 7; phaseDesc = "Descanso y sanación"; }
 
-      return { phaseName, phaseIndex };
+      return { phaseName, phaseIndex, phaseDesc };
     }
 
     function updateMoonHeaderInfo() {
       const lunar = getLunarPhaseData(currentDate);
       const iconEl = document.getElementById('headerMoonPhaseIcon');
       if (iconEl) {
-        // Asignamos la imagen directamente sin usar clases CSS que recorten
         iconEl.src = `lunasOscuras${lunar.phaseIndex + 1}.png`;
       }
     }
 
-    function navigateDay(dir) {
-      currentDate.setDate(currentDate.getDate() + dir);
-      updateHeaderDisplay();
-      renderCurrentView();
+    function initCanvas() {
+      const canvas = document.getElementById('atmosphereCanvas');
+      const ctx = canvas.getContext('2d');
+      let w = canvas.width = window.innerWidth;
+      let h = canvas.height = window.innerHeight;
+      window.addEventListener('resize', () => { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; });
+      const stars = Array.from({ length: 35 }, () => ({ x: Math.random() * w, y: Math.random() * h, size: Math.random() * 1.5, alpha: Math.random() * 0.5 + 0.2, speed: Math.random() * 0.15 + 0.05 }));
+      function animate() {
+        ctx.clearRect(0, 0, w, h);
+        ctx.fillStyle = '#8da89b';
+        stars.forEach(s => {
+          s.y -= s.speed;
+          if (s.y < 0) s.y = h;
+          ctx.globalAlpha = s.alpha;
+          ctx.fillRect(s.x, s.y, s.size, s.size);
+        });
+        requestAnimationFrame(animate);
+      }
+      animate();
     }
 
-    function goToToday() {
-      currentDate = new Date();
-      updateHeaderDisplay();
-      renderCurrentView();
+    function openMoonModal() {
+      const lunar = getLunarPhaseData(currentDate);
+      const modal = document.getElementById('moonModal');
+      const content = document.getElementById('lunarModalContent');
+      
+      content.innerHTML = `
+        <div class="w-40 h-40 rounded-full bg-[#090a0c] overflow-hidden flex items-center justify-center mb-6 shadow-[0_0_40px_rgba(141,168,155,0.2)] border-2 border-[#8da89b]/30">
+           <img src="lunasOscuras${lunar.phaseIndex + 1}.png" class="w-full h-full object-cover scale-[1.45]" alt="Fase Lunar">
+        </div>
+        <h3 class="font-serif-luxury text-3xl text-zinc-100 font-bold tracking-wide">${lunar.phaseName}</h3>
+        <p class="text-xs font-mono text-[#8da89b] tracking-widest uppercase mt-2 mb-6">${lunar.phaseDesc}</p>
+        <div class="bg-[#16171b] p-4 rounded-xl border border-zinc-800/80 w-full text-center shadow-inner">
+          <p class="text-sm text-zinc-300 font-serif-luxury leading-relaxed">
+            La energía lunar del día de hoy baña tu grimorio. Aprovecha esta influencia astral para guiar tus intenciones y rituales.
+          </p>
+        </div>
+      `;
+      modal.classList.remove('hidden');
     }
-
-    function openCalendarPicker() {
-      document.getElementById('nativeDatePicker').showPicker();
-    }
-
-    function handleNativeDateSelect(e) {
-      if (!e.target.value) return;
-      const parts = e.target.value.split('-');
-      currentDate = new Date(parts[0], parts[1]-1, parts[2]);
-      updateHeaderDisplay();
-      renderCurrentView();
+    
+    function closeMoonModal() {
+      document.getElementById('moonModal').classList.add('hidden');
     }
 
     function switchView(viewName) {
@@ -1118,12 +1171,11 @@
           </div>
         `).join('');
       }
-
       renderHabitsList();
     }
 
     function toggleAppointmentCompletion(idx, event) {
-      event.stopPropagation(); // Evita que se abra la ventana de detalles al hacer clic en el checkbox
+      event.stopPropagation();
       const key = getDateKey(currentDate);
       if (appData[key] && appData[key].appointments[idx]) {
         appData[key].appointments[idx].completed = !appData[key].appointments[idx].completed;
@@ -1192,23 +1244,14 @@
       selectedAppointmentIndex = idx;
       const key = getDateKey(currentDate);
       const appt = appData[key].appointments[idx];
-
       document.getElementById('detailApptTime').innerText = appt.time;
       document.getElementById('detailApptTitle').innerText = appt.title;
       document.getElementById('detailApptDesc').innerText = appt.desc || "Sin descripción detallada.";
-      
       document.getElementById('appointmentDetailModal').classList.remove('hidden');
     }
 
-    function closeAppointmentDetail() {
-      document.getElementById('appointmentDetailModal').classList.add('hidden');
-    }
-
-    function editCurrentDetailAppointment() {
-      closeAppointmentDetail();
-      openAppointmentModal(selectedAppointmentIndex);
-    }
-
+    function closeAppointmentDetail() { document.getElementById('appointmentDetailModal').classList.add('hidden'); }
+    function editCurrentDetailAppointment() { closeAppointmentDetail(); openAppointmentModal(selectedAppointmentIndex); }
     function deleteCurrentDetailAppointment() {
       const key = getDateKey(currentDate);
       appData[key].appointments.splice(selectedAppointmentIndex, 1);
@@ -1225,12 +1268,7 @@
       if (!appData[key]) appData[key] = { appointments: [], habits: {}, morning: "", night: "", tarotSlots: [null, null, null] };
       const day = appData[key];
       const container = document.getElementById('habitsContainer');
-
-      if (globalHabits.length === 0) {
-        container.innerHTML = `<div class="text-center py-10 text-zinc-600 font-mono text-xs">No hay hábitos configurados.</div>`;
-        return;
-      }
-
+      if (globalHabits.length === 0) { container.innerHTML = `<div class="text-center py-10 text-zinc-600 font-mono text-xs">No hay hábitos configurados.</div>`; return; }
       container.innerHTML = globalHabits.map((hName) => {
         const isChecked = day.habits && day.habits[hName];
         return `
@@ -1242,13 +1280,8 @@
       }).join('');
     }
 
-    function openHabitModal() {
-      document.getElementById('habitModal').classList.remove('hidden');
-      renderHabitCatalog();
-    }
-    function closeHabitModal() {
-      document.getElementById('habitModal').classList.add('hidden');
-    }
+    function openHabitModal() { document.getElementById('habitModal').classList.remove('hidden'); renderHabitCatalog(); }
+    function closeHabitModal() { document.getElementById('habitModal').classList.add('hidden'); }
     function renderHabitCatalog() {
       const list = document.getElementById('habitCatalogList');
       list.innerHTML = globalHabits.map((h, i) => `
@@ -1340,7 +1373,6 @@
       e.preventDefault();
       const title = document.getElementById('quickNoteTitleInput').value;
       const body = document.getElementById('quickNoteBodyInput').value;
-
       if (!appData.grimoireNotes) appData.grimoireNotes = [];
       appData.grimoireNotes.unshift({ title, body });
       saveData();
@@ -1349,11 +1381,7 @@
       document.getElementById('quickNoteTitleInput').value = "";
       document.getElementById('quickNoteBodyInput').value = "";
     }
-    function deleteGrimoireNote(idx) {
-      appData.grimoireNotes.splice(idx, 1);
-      saveData();
-      renderGrimorioView();
-    }
+    function deleteGrimoireNote(idx) { appData.grimoireNotes.splice(idx, 1); saveData(); renderGrimorioView(); }
 
     function openProjectModal() {
       const modal = document.getElementById('projectModal');
@@ -1375,15 +1403,8 @@
       renderGrimorioView();
       document.getElementById('projectTitleInput').value = "";
     }
-    function deleteProject(idx) {
-      appData.projects.splice(idx, 1);
-      saveData();
-      renderGrimorioView();
-    }
-    function updateProjectProgress(idx, val) {
-      appData.projects[idx].progress = parseInt(val);
-      saveData();
-    }
+    function deleteProject(idx) { appData.projects.splice(idx, 1); saveData(); renderGrimorioView(); }
+    function updateProjectProgress(idx, val) { appData.projects[idx].progress = parseInt(val); saveData(); }
 
     function switchTarotSlot(slotIdx) {
       activeTarotIndex = slotIdx;
@@ -1413,7 +1434,6 @@
         revealState.classList.remove('hidden');
         revealState.classList.add('grid');
         notesArea.value = slotData.notes || "";
-
         revealState.innerHTML = slotData.cards.map((card, i) => `
           <div class="mystic-wicca-card p-5 flex flex-col items-center text-center tarot-card-reveal">
             <span class="text-[9px] font-mono tracking-widest text-[#9b8da8] uppercase mb-2">Arcano ${i === 0 ? 'I · Pasado' : i === 1 ? 'II · Presente' : 'III · Futuro'}</span>
@@ -1458,11 +1478,9 @@
         const isReversed = Math.random() < 0.25;
         return { ...card, isReversed };
       });
-
       const key = getDateKey(currentDate);
       if (!appData[key]) appData[key] = { appointments: [], habits: {}, morning: "", night: "", tarotSlots: [null, null, null] };
       if (!appData[key].tarotSlots) appData[key].tarotSlots = [null, null, null];
-
       appData[key].tarotSlots[activeTarotIndex] = { cards: drawn, notes: "" };
       saveData();
       renderTarotView();
@@ -1501,26 +1519,20 @@
     function triggerGlobalPetAnimation(animClass, reactionEmoji = '') {
       const globalImg = document.getElementById('globalCompanionImg');
       const reaction = document.getElementById('companionReaction');
-      
       if (!globalImg) return;
-      
-      // Remover animación de respiración y añadir la nueva
       globalImg.classList.remove('anim-breathe', 'anim-eat', 'anim-pet', 'anim-cute');
-      void globalImg.offsetWidth; // Forzar reflow para reiniciar animación
+      void globalImg.offsetWidth; 
       globalImg.classList.add(animClass);
       
-      // Mostrar emoji de reacción
       if (reactionEmoji) {
         reaction.innerText = reactionEmoji;
         reaction.classList.remove('opacity-0');
         reaction.classList.add('-translate-y-4');
       }
 
-      // Volver a la respiración normal después de la animación
       setTimeout(() => {
         globalImg.classList.remove(animClass);
         globalImg.classList.add('anim-breathe');
-        
         reaction.classList.add('opacity-0');
         reaction.classList.remove('-translate-y-4');
       }, 1000);
@@ -1592,23 +1604,28 @@
     function evolveActivePet(e) {
       const lvl = petState.levels[petState.type] || 1;
       const cost = lvl * 5;
-      
       if (petState.medals >= cost && lvl < 3) {
         petState.medals -= cost;
         petState.levels[petState.type] = lvl + 1;
         saveData();
         renderPetsView();
         showToast('Transmutación completada');
+      } else if (petState.medals < cost) {
+        showToast('Insuficientes tributos');
       }
     }
 
     function openEsotericDetail(key) {
+      const info = ESOTERIC_DATA[key];
+      if(!info) return;
+      document.getElementById('esotericDetailTitle').innerText = info.title;
+      document.getElementById('esotericDetailSubtitle').innerText = info.sub;
+      document.getElementById('esotericDetailBody').innerText = info.desc;
+
       const modal = document.getElementById('esotericDetailModal');
       modal.classList.remove('hidden');
       modal.classList.add('flex');
-      setTimeout(() => {
-        document.getElementById('esotericDetailModalCard').classList.remove('scale-95', 'opacity-0');
-      }, 10);
+      setTimeout(() => { document.getElementById('esotericDetailModalCard').classList.remove('scale-95', 'opacity-0'); }, 10);
     }
     
     function closeEsotericDetail() {
@@ -1619,31 +1636,102 @@
       }, 300);
     }
 
-    // --- LÓGICA DEL SELLO MÁGICO Y AUTENTICACIÓN ---
-    let authMode = 'login';
-    let userAuthData = JSON.parse(localStorage.getItem('grimorio_auth_v1')) || null;
+    // --- LÓGICA DEL SELLO MÁGICO, PIN Y AJUSTES ---
+    let savedPin = localStorage.getItem('grimorio_pin_v1');
+    let userSettings = JSON.parse(localStorage.getItem('grimorio_settings_v1')) || {
+      sun: "Escorpio ♏",
+      moon: "Acuario ♒",
+      asc: "Tauro ♉"
+    };
 
-    function switchAuthMode(mode) {
-      authMode = mode;
-      const tLog = document.getElementById('tabLogin');
-      const tReg = document.getElementById('tabRegister');
-      const fReg = document.getElementById('registerFields');
+    const pinPrompt = document.getElementById('pinPromptText');
+    if (pinPrompt) {
+      pinPrompt.innerText = savedPin ? "Introduce tu Sello Numérico" : "Establece un PIN de 6 dígitos";
+    }
 
-      if (mode === 'login') {
-        tLog.classList.replace('text-zinc-500', 'text-[#8da89b]');
-        tLog.classList.add('drop-shadow-[0_0_8px_rgba(141,168,155,0.5)]');
-        tReg.classList.replace('text-[#8da89b]', 'text-zinc-500');
-        tReg.classList.remove('drop-shadow-[0_0_8px_rgba(141,168,155,0.5)]');
-        fReg.classList.add('hidden');
-        fReg.classList.remove('flex');
-      } else {
-        tReg.classList.replace('text-zinc-500', 'text-[#8da89b]');
-        tReg.classList.add('drop-shadow-[0_0_8px_rgba(141,168,155,0.5)]');
-        tLog.classList.replace('text-[#8da89b]', 'text-zinc-500');
-        tLog.classList.remove('drop-shadow-[0_0_8px_rgba(141,168,155,0.5)]');
-        fReg.classList.remove('hidden');
-        fReg.classList.add('flex');
+    function applySettingsToTriad() {
+      if (document.getElementById('dynSignSun')) {
+        document.getElementById('dynSignSun').innerText = "Sol " + userSettings.sun.split(' ')[0];
+        document.getElementById('dynSignMoon').innerText = "Luna " + userSettings.moon.split(' ')[0];
+        document.getElementById('dynSignAsc').innerText = "Asc. " + userSettings.asc.split(' ')[0];
       }
+      if (document.getElementById('setSignSun')) {
+        document.getElementById('setSignSun').value = userSettings.sun;
+        document.getElementById('setSignMoon').value = userSettings.moon;
+        document.getElementById('setSignAsc').value = userSettings.asc;
+      }
+    }
+
+    function openSettingsModal() {
+      const modal = document.getElementById('settingsModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      setTimeout(() => { document.getElementById('settingsModalCard').classList.remove('scale-95', 'opacity-0'); }, 10);
+    }
+
+    function closeSettingsModal() {
+      document.getElementById('settingsModalCard').classList.add('scale-95', 'opacity-0');
+      setTimeout(() => {
+        document.getElementById('settingsModal').classList.add('hidden');
+        document.getElementById('settingsModal').classList.remove('flex');
+      }, 200);
+    }
+
+    function saveSettings() {
+      userSettings = {
+        sun: document.getElementById('setSignSun').value,
+        moon: document.getElementById('setSignMoon').value,
+        asc: document.getElementById('setSignAsc').value
+      };
+      localStorage.setItem('grimorio_settings_v1', JSON.stringify(userSettings));
+      applySettingsToTriad();
+      closeSettingsModal();
+      showToast('Ajustes guardados');
+    }
+
+    function openBackupModal() {
+      const modal = document.getElementById('backupModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeBackupModal() {
+      const modal = document.getElementById('backupModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function exportBackup() {
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(appData));
+      const dlAnchor = document.createElement('a');
+      dlAnchor.setAttribute("href", dataStr);
+      dlAnchor.setAttribute("download", "grimorio_respaldo.json");
+      document.body.appendChild(dlAnchor);
+      dlAnchor.click();
+      dlAnchor.remove();
+      showToast('Respaldo exportado');
+      closeBackupModal();
+    }
+
+    function importBackup(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        try {
+          const parsed = JSON.parse(evt.target.result);
+          if (parsed && typeof parsed === 'object') {
+            appData = parsed;
+            saveData();
+            renderCurrentView();
+            closeBackupModal();
+            showToast('Respaldo importado con éxito');
+          }
+        } catch(err) {
+          showToast('El archivo no es válido');
+        }
+      };
+      reader.readAsText(file);
     }
 
     const fBtn = document.getElementById('fingerprintBtn');
@@ -1656,11 +1744,6 @@
     let unlockValue = 0;
     let isUnlocking = false;
     let hasUnlocked = false;
-
-    // Precargar usuario si ya existe
-    if (userAuthData && document.getElementById('authUsername')) {
-      document.getElementById('authUsername').value = userAuthData.username;
-    }
 
     function flashError() {
       fIcon.classList.remove('text-[#8da89b]', 'text-zinc-600');
@@ -1678,36 +1761,18 @@
       if (hasUnlocked) return;
       if (e.cancelable) e.preventDefault();
       
-      // Validación del Formulario de Pacto
-      const user = document.getElementById('authUsername').value.trim();
-      const pass = document.getElementById('authPassword').value.trim();
+      const inputPin = document.getElementById('authPin').value.trim();
       
-      if (!user || !pass) {
-        showToast("Faltan credenciales");
+      if (inputPin.length !== 6 || isNaN(inputPin)) {
+        showToast("El PIN debe tener 6 números");
         flashError();
         return;
       }
 
-      if (authMode === 'login') {
-        if (!userAuthData) {
-          showToast("Ningún pacto registrado. Elige 'Pacto Nuevo'.");
-          flashError();
-          return;
-        }
-        if (userAuthData.username !== user || userAuthData.password !== pass) {
-          showToast("El Grimorio no te reconoce");
-          flashError();
-          return;
-        }
-      } else {
-        const sun = document.getElementById('signSun').value;
-        const moon = document.getElementById('signMoon').value;
-        const asc = document.getElementById('signAsc').value;
-        if (!sun || !moon || !asc) {
-          showToast("Completa tu Tríada Astral");
-          flashError();
-          return;
-        }
+      if (savedPin && inputPin !== savedPin) {
+        showToast("Sello incorrecto");
+        flashError();
+        return;
       }
 
       isUnlocking = true;
@@ -1722,7 +1787,7 @@
         fProgress.style.strokeDashoffset = Math.max(0, offset);
 
         if (unlockValue >= 100) {
-          completeUnlock();
+          completeUnlock(inputPin);
         }
       }, 30);
     }
@@ -1740,33 +1805,19 @@
       fBtn.style.transform = 'scale(1)';
     }
 
-    function completeUnlock() {
+    function completeUnlock(inputPin) {
       hasUnlocked = true;
       clearInterval(unlockTimer);
       
-      // Guardar el pacto si es registro nuevo
-      if (authMode === 'register') {
-        userAuthData = {
-          username: document.getElementById('authUsername').value.trim(),
-          password: document.getElementById('authPassword').value.trim(),
-          sun: document.getElementById('signSun').value,
-          moon: document.getElementById('signMoon').value,
-          asc: document.getElementById('signAsc').value
-        };
-        localStorage.setItem('grimorio_auth_v1', JSON.stringify(userAuthData));
-      }
-
-      // Actualizar automáticamente los nombres en la Tríada Astral del Grimorio
-      if (userAuthData) {
-        document.getElementById('dynSignSun').innerText = "Sol " + userAuthData.sun.split(' ')[0];
-        document.getElementById('dynSignMoon').innerText = "Luna " + userAuthData.moon.split(' ')[0];
-        document.getElementById('dynSignAsc').innerText = "Asc. " + userAuthData.asc.split(' ')[0];
+      if (!savedPin) {
+        savedPin = inputPin;
+        localStorage.setItem('grimorio_pin_v1', savedPin);
       }
 
       fIcon.classList.replace('text-[#8da89b]', 'text-white');
       fIcon.classList.add('drop-shadow-[0_0_20px_rgba(255,255,255,1)]');
       fBtn.style.transform = 'scale(1.1)';
-      uHint.innerText = "Sello Roto. Bienvenido, " + userAuthData.username + ".";
+      uHint.innerText = "Sello Roto. Bienvenido.";
       uHint.classList.add('text-[#8da89b]');
 
       setTimeout(() => {
@@ -1783,7 +1834,6 @@
       }, 700);
     }
 
-    // Eventos para ratón (PC) y táctil (Móvil)
     fBtn.addEventListener('mousedown', startUnlock);
     fBtn.addEventListener('touchstart', startUnlock, {passive: false});
     window.addEventListener('mouseup', stopUnlock);
