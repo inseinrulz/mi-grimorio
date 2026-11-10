@@ -167,130 +167,81 @@
       border-color: rgba(141, 168, 155, 0.6);
       transform: translateY(-2px);
     }
+
+    @keyframes celestialRotateDoubleSlow {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(-360deg); }
+    }
+    .celestial-sphere-reverse {
+      animation: celestialRotateDoubleSlow 240s linear infinite;
+      transform-origin: center center;
+    }
   </style>
 </head>
 <body class="antialiased min-h-screen flex flex-col relative pb-32 overflow-hidden" id="mainBody">
 
-  <!-- PANTALLA DE BLOQUEO: FONDO ESPACIAL PROFUNDO CON 10 CONSTELACIONES Y MULTITUD DE ESTRELLAS -->
+  <!-- PANTALLA DE BLOQUEO -->
   <div id="lockScreen" class="fixed inset-0 z-[100] bg-[#050608] transition-all duration-1000 overflow-hidden flex flex-col justify-between py-6 px-4">
     
-    <!-- FONDO ESPACIAL PROFUNDO -->
-    <div class="absolute inset-0 pointer-events-none overflow-hidden z-0">
-      <!-- Nebulosas difusas en varias esquinas -->
-      <div class="absolute top-[5%] left-[5%] w-[600px] h-[600px] bg-radial from-[#131d24]/40 via-transparent to-transparent rounded-full blur-3xl"></div>
-      <div class="absolute top-[40%] right-[2%] w-[700px] h-[700px] bg-radial from-[#1f121a]/35 via-transparent to-transparent rounded-full blur-3xl"></div>
-      <div class="absolute bottom-[5%] left-[10%] w-[650px] h-[650px] bg-radial from-[#151122]/35 via-transparent to-transparent rounded-full blur-3xl"></div>
-      <div class="absolute top-[70%] right-[30%] w-[500px] h-[500px] bg-radial from-[#10221c]/30 via-transparent to-transparent rounded-full blur-3xl"></div>
-      
-      <!-- 10 Constelaciones Únicas Repartidas por Toda la Pantalla -->
-      <svg class="absolute inset-0 w-full h-full opacity-55" stroke="#8da89b" stroke-width="0.8" fill="none">
-        <!-- 1. Orión (Superior Izquierda) -->
-        <g transform="translate(20, 30)">
-          <polyline points="40,90 80,60 110,85 130,120 90,140 60,110 40,90" />
-          <line x1="80" y1="60" x2="90" y2="140" />
-          <circle cx="40" cy="90" r="2" fill="#fff" /><circle cx="80" cy="60" r="2.5" fill="#fff" /><circle cx="110" cy="85" r="1.5" fill="#fff" /><circle cx="130" cy="120" r="2" fill="#fff" /><circle cx="90" cy="140" r="3" fill="#fff" /><circle cx="60" cy="110" r="1.5" fill="#fff" />
-        </g>
-
-        <!-- 2. Casiopea 'W' (Superior Derecha) -->
-        <g transform="translate(200, 20)">
-          <polyline points="280,50 310,90 350,60 380,95 420,55" stroke="#b4c7be" />
-          <circle cx="280" cy="50" r="2.5" fill="#fff" /><circle cx="310" cy="90" r="2" fill="#fff" /><circle cx="350" cy="60" r="2.5" fill="#fff" /><circle cx="380" cy="95" r="2" fill="#fff" /><circle cx="420" cy="55" r="3" fill="#fff" />
-        </g>
-
-        <!-- 3. Osa Mayor (Centro Izquierda) -->
-        <g transform="translate(10, 220)">
-          <polyline points="30,220 70,230 110,225 140,255 180,250 200,280 150,290 140,255" />
-          <circle cx="30" cy="220" r="2" fill="#fff" /><circle cx="70" cy="230" r="1.5" fill="#fff" /><circle cx="110" cy="225" r="2" fill="#fff" /><circle cx="140" cy="255" r="2.5" fill="#fff" /><circle cx="180" cy="250" r="2" fill="#fff" /><circle cx="200" cy="280" r="3" fill="#fff" /><circle cx="150" cy="290" r="1.5" fill="#fff" />
-        </g>
-
-        <!-- 4. Cisne / Cygnus (Centro Derecha) -->
-        <g transform="translate(180, 190)">
-          <polyline points="300,200 370,240 440,200" stroke="#b4c7be" />
-          <line x1="370" y1="160" x2="370" y2="300" />
-          <circle cx="300" cy="200" r="2" fill="#fff" /><circle cx="370" cy="240" r="3" fill="#fff" /><circle cx="440" cy="200" r="2" fill="#fff" /><circle cx="370" cy="160" r="1.5" fill="#fff" /><circle cx="370" cy="300" r="2.5" fill="#fff" />
-        </g>
-
-        <!-- 5. Lira (Inferior Izquierda) -->
-        <g transform="translate(30, 440)">
-          <polyline points="70,370 110,350 130,390 90,410 70,370" />
-          <circle cx="70" cy="370" r="3" fill="#fff" /><circle cx="110" cy="350" r="2" fill="#fff" /><circle cx="130" cy="390" r="1.5" fill="#fff" /><circle cx="90" cy="410" r="2" fill="#fff" />
-        </g>
-
-        <!-- 6. Pegaso (Inferior Derecha) -->
-        <g transform="translate(150, 400)">
-          <polyline points="260,380 320,360 380,390 340,440 260,380" stroke="#b4c7be" />
-          <circle cx="260" cy="380" r="2.5" fill="#fff" /><circle cx="320" cy="360" r="2" fill="#fff" /><circle cx="380" cy="390" r="2.5" fill="#fff" /><circle cx="340" cy="440" r="3" fill="#fff" />
-        </g>
-
-        <!-- 7. Dragón (Centro Fondo) -->
-        <g transform="translate(60, 110)">
-          <polyline points="150,470 190,450 230,480 270,460 310,490" />
-          <circle cx="150" cy="470" r="2" fill="#fff" /><circle cx="190" cy="450" r="1.5" fill="#fff" /><circle cx="230" cy="480" r="2.5" fill="#fff" /><circle cx="270" cy="460" r="2" fill="#fff" /><circle cx="310" cy="490" r="3" fill="#fff" />
-        </g>
-
-        <!-- 8. Tauro (Nueva Constelación Superior Centro) -->
-        <g transform="translate(120, 10)">
-          <polyline points="100,70 140,50 170,80 210,60" stroke="#b4c7be" />
-          <circle cx="100" cy="70" r="2.5" fill="#fff" /><circle cx="140" cy="50" r="3" fill="#fff" /><circle cx="170" cy="80" r="2" fill="#fff" /><circle cx="210" cy="60" r="2.5" fill="#fff" />
-        </g>
-
-        <!-- 9. Escorpio (Nueva Constelación Lateral Inferior Izquierda) -->
-        <g transform="translate(10, 330)">
-          <polyline points="50,150 90,130 130,140 160,170 140,210 110,230" stroke="#b4c7be" />
-          <circle cx="50" cy="150" r="2.5" fill="#fff" /><circle cx="90" cy="130" r="3" fill="#fff" /><circle cx="130" cy="140" r="2" fill="#fff" /><circle cx="160" cy="170" r="2.5" fill="#fff" /><circle cx="140" cy="210" r="2" fill="#fff" /><circle cx="110" cy="230" r="2" fill="#fff" />
-        </g>
-
-        <!-- 10. Cruz del Sur (Nueva Constelación Lateral Derecha) -->
-        <g transform="translate(240, 310)">
-          <polyline points="100,50 100,130" stroke="#b4c7be" />
-          <line x1="80" y1="80" x2="120" y2="80" />
-          <circle cx="100" cy="50" r="2" fill="#fff" /><circle cx="100" cy="130" r="3" fill="#fff" /><circle cx="80" cy="80" r="2" fill="#fff" /><circle cx="120" cy="80" r="2" fill="#fff" />
-        </g>
-      </svg>
-
-      <!-- Multitud de Puntos Blancos y Estrellas Sueltas Repartidas por Toda la Pantalla -->
-      <div class="absolute top-[3%] left-[12%] w-1.5 h-1.5 bg-white rounded-full opacity-90 shadow-[0_0_6px_#fff]"></div>
-      <div class="absolute top-[6%] left-[45%] w-1 h-1 bg-white rounded-full opacity-80"></div>
-      <div class="absolute top-[12%] left-[88%] w-2 h-2 bg-[#b4c7be] rounded-full opacity-90 shadow-[0_0_8px_#8da89b]"></div>
-      <div class="absolute top-[18%] left-[25%] w-1 h-1 bg-white rounded-full opacity-95"></div>
-      <div class="absolute top-[24%] left-[70%] w-1.5 h-1.5 bg-white rounded-full opacity-85"></div>
-      <div class="absolute top-[31%] left-[8%] w-2 h-2 bg-white rounded-full opacity-90 shadow-[0_0_6px_#fff]"></div>
-      <div class="absolute top-[37%] left-[53%] w-1 h-1 bg-[#b4c7be] rounded-full opacity-75"></div>
-      <div class="absolute top-[44%] left-[85%] w-1.5 h-1.5 bg-white rounded-full opacity-85"></div>
-      <div class="absolute top-[50%] left-[32%] w-2 h-2 bg-white rounded-full opacity-95 shadow-[0_0_7px_#fff]"></div>
-      <div class="absolute top-[57%] left-[15%] w-1 h-1 bg-white rounded-full opacity-80"></div>
-      <div class="absolute top-[63%] left-[68%] w-1.5 h-1.5 bg-white rounded-full opacity-90"></div>
-      <div class="absolute top-[70%] left-[90%] w-2 h-2 bg-[#8da89b] rounded-full opacity-90 shadow-[0_0_8px_#8da89b]"></div>
-      <div class="absolute top-[76%] left-[42%] w-1 h-1 bg-white rounded-full opacity-85"></div>
-      <div class="absolute top-[82%] left-[22%] w-1.5 h-1.5 bg-white rounded-full opacity-90"></div>
-      <div class="absolute top-[88%] left-[78%] w-2 h-2 bg-white rounded-full opacity-95 shadow-[0_0_7px_#fff]"></div>
-      <div class="absolute top-[94%] left-[50%] w-1 h-1 bg-white rounded-full opacity-80"></div>
-      
-      <!-- Estrellas diminutas extra para saturar el firmamento -->
-      <div class="absolute top-[10%] left-[35%] w-0.5 h-0.5 bg-white rounded-full opacity-60"></div>
-      <div class="absolute top-[22%] left-[12%] w-0.5 h-0.5 bg-white rounded-full opacity-70"></div>
-      <div class="absolute top-[38%] left-[75%] w-0.5 h-0.5 bg-white rounded-full opacity-65"></div>
-      <div class="absolute top-[52%] left-[48%] w-0.5 h-0.5 bg-white rounded-full opacity-70"></div>
-      <div class="absolute top-[66%] left-[28%] w-0.5 h-0.5 bg-white rounded-full opacity-60"></div>
-      <div class="absolute top-[80%] left-[62%] w-0.5 h-0.5 bg-white rounded-full opacity-75"></div>
-      <div class="absolute top-[90%] left-[18%] w-0.5 h-0.5 bg-white rounded-full opacity-70"></div>
-      <div class="absolute top-[95%] left-[88%] w-0.5 h-0.5 bg-white rounded-full opacity-65"></div>
+    <!-- ESFERA CELESTIAL UNIFICADA (Fondo girando al doble de lento y en dirección contraria, con constelaciones dispuestas limpiamente alrededor del cubo) -->
+    <div class="absolute inset-0 pointer-events-none overflow-hidden z-0 flex items-center justify-center">
+      <div class="absolute w-[950px] h-[950px] celestial-sphere-reverse opacity-75">
+        <svg class="w-full h-full" stroke="#8da89b" stroke-width="0.9" fill="none" viewBox="0 0 900 900">
+          <!-- 1. Orión (Arriba a la Izquierda del cubo) -->
+          <g transform="translate(220, 150)">
+            <polyline points="40,90 80,60 110,85 130,120 90,140 60,110 40,90" />
+            <line x1="80" y1="60" x2="90" y2="140" />
+            <circle cx="40" cy="90" r="2" fill="#fff" /><circle cx="80" cy="60" r="2.5" fill="#fff" /><circle cx="110" cy="85" r="1.5" fill="#fff" /><circle cx="130" cy="120" r="2" fill="#fff" /><circle cx="90" cy="140" r="3" fill="#fff" /><circle cx="60" cy="110" r="1.5" fill="#fff" />
+          </g>
+          <!-- 2. Casiopea (Arriba a la Derecha del cubo) -->
+          <g transform="translate(560, 160)">
+            <polyline points="280,50 310,90 350,60 380,95 420,55" stroke="#b4c7be" />
+            <circle cx="280" cy="50" r="2.5" fill="#fff" /><circle cx="310" cy="90" r="2" fill="#fff" /><circle cx="350" cy="60" r="2.5" fill="#fff" /><circle cx="380" cy="95" r="2" fill="#fff" /><circle cx="420" cy="55" r="3" fill="#fff" />
+          </g>
+          <!-- 3. Osa Mayor (Izquierda Lejana) -->
+          <g transform="translate(80, 400)">
+            <polyline points="30,220 70,230 110,225 140,255 180,250 200,280 150,290 140,255" />
+            <circle cx="30" cy="220" r="2" fill="#fff" /><circle cx="70" cy="230" r="1.5" fill="#fff" /><circle cx="110" cy="225" r="2" fill="#fff" /><circle cx="140" cy="255" r="2.5" fill="#fff" /><circle cx="180" cy="250" r="2" fill="#fff" /><circle cx="200" cy="280" r="3" fill="#fff" /><circle cx="150" cy="290" r="1.5" fill="#fff" />
+          </g>
+          <!-- 4. Cisne (Derecha Lejana) -->
+          <g transform="translate(620, 390)">
+            <polyline points="300,200 370,240 440,200" stroke="#b4c7be" />
+            <line x1="370" y1="160" x2="370" y2="300" />
+            <circle cx="300" cy="200" r="2" fill="#fff" /><circle cx="370" cy="240" r="3" fill="#fff" /><circle cx="440" cy="200" r="2" fill="#fff" /><circle cx="370" cy="160" r="1.5" fill="#fff" /><circle cx="370" cy="300" r="2.5" fill="#fff" />
+          </g>
+          <!-- 5. Lira (Abajo a la Izquierda) -->
+          <g transform="translate(240, 620)">
+            <polyline points="70,370 110,350 130,390 90,410 70,370" />
+            <circle cx="70" cy="370" r="3" fill="#fff" /><circle cx="110" cy="350" r="2" fill="#fff" /><circle cx="130" cy="390" r="1.5" fill="#fff" /><circle cx="90" cy="410" r="2" fill="#fff" />
+          </g>
+          <!-- 6. Pegaso (Abajo a la Derecha) -->
+          <g transform="translate(520, 610)">
+            <polyline points="260,380 320,360 380,390 340,440 260,380" stroke="#b4c7be" />
+            <circle cx="260" cy="380" r="2.5" fill="#fff" /><circle cx="320" cy="360" r="2" fill="#fff" /><circle cx="380" cy="390" r="2.5" fill="#fff" /><circle cx="340" cy="440" r="3" fill="#fff" />
+          </g>
+          <!-- 7. Cruz del Sur (Superior Central) -->
+          <g transform="translate(410, 60)">
+            <polyline points="100,50 100,130" stroke="#b4c7be" />
+            <line x1="80" y1="80" x2="120" y2="80" />
+            <circle cx="100" cy="50" r="2" fill="#fff" /><circle cx="100" cy="130" r="3" fill="#fff" /><circle cx="80" cy="80" r="2" fill="#fff" /><circle cx="120" cy="80" r="2" fill="#fff" />
+          </g>
+        </svg>
+      </div>
     </div>
 
     <!-- CONTENEDOR GENERAL DE BLOQUEO -->
     <div id="lockContent" class="w-full h-full flex flex-col justify-between items-center relative z-20 max-w-md mx-auto py-2">
       
-      <!-- VENTANA 1: CAJA DE PIN (SUPERIOR, SEPARADA) -->
-      <div class="w-full flex flex-col items-center gap-2 bg-[#121316]/95 p-4 rounded-2xl border border-zinc-800 backdrop-blur-md shadow-[0_10px_30px_rgba(0,0,0,0.8)] mt-2">
+      <!-- VENTANA 1: CAJA DE PIN (SUPERIOR, TRANSLÚCIDA Y SEPARADA) -->
+      <div class="w-full flex flex-col items-center gap-2 bg-[#121316]/75 backdrop-blur-md p-4 rounded-2xl border border-zinc-800 shadow-[0_10px_30px_rgba(0,0,0,0.8)] mt-2">
         <p id="pinPromptText" class="text-[10px] font-mono tracking-widest uppercase text-[#8da89b] font-bold text-center">Introduce tu Sello Numérico</p>
-        <input type="password" id="authPin" inputmode="numeric" pattern="[0-9]*" maxlength="6" placeholder="• • • • • •" class="w-full max-w-[180px] px-3 py-2 bg-[#090a0c] border border-zinc-800 rounded-xl text-zinc-200 placeholder-zinc-700 font-mono text-xl tracking-[0.3em] text-center focus:outline-none focus:border-[#8da89b] transition" autocomplete="off">
+        <input type="password" id="authPin" inputmode="numeric" pattern="[0-9]*" maxlength="6" placeholder="• • • • • •" class="w-full max-w-[180px] px-3 py-2 bg-[#090a0c]/80 border border-zinc-800 rounded-xl text-zinc-200 placeholder-zinc-700 font-mono text-xl tracking-[0.3em] text-center focus:outline-none focus:border-[#8da89b] transition" autocomplete="off">
       </div>
 
-      <!-- VENTANA 2: CUBO DE METATRÓN (100% TRANSPARENTE, SIN BORDES, OCUPANDO TODO EL ESPACIO INFERIOR) -->
+      <!-- VENTANA 2: CUBO DE METATRÓN (100% TRANSPARENTE, SIN BORDES, CENTRADO) -->
       <div class="w-full flex-grow flex flex-col items-center justify-center relative my-auto">
         <div class="relative w-full max-w-[360px] aspect-square flex items-center justify-center p-2">
           
-          <!-- Cubo de Metatrón giratorio al 100% -->
           <svg viewBox="0 0 400 400" class="absolute inset-0 w-full h-full animate-[spin_120s_linear_infinite] pointer-events-none opacity-85">
             <defs>
               <radialGradient id="lockMetatronGlow" cx="50%" cy="50%" r="50%">
@@ -315,7 +266,7 @@
             </g>
           </svg>
 
-          <!-- BOTÓN DE ROMPER EL SELLO (EXACTAMENTE EN EL CENTRO DEL CUBO) -->
+          <!-- BOTÓN DE ROMPER EL SELLO (CENTRO EXACTO DEL CUBO) -->
           <div class="relative w-32 h-32 flex items-center justify-center z-20">
             <svg class="absolute inset-0 w-full h-full transform -rotate-90 pointer-events-none drop-shadow-[0_0_15px_rgba(141,168,155,0.7)]" viewBox="0 0 100 100">
               <circle cx="50" cy="50" r="46" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="2"></circle>
@@ -330,9 +281,7 @@
         <p id="unlockHint" class="font-handwritten text-xl text-zinc-300 opacity-0 transition-opacity duration-300 mt-2 absolute bottom-2 whitespace-nowrap drop-shadow">Canalizando energía astral...</p>
       </div>
 
-      <!-- ZONA INFERIOR: ESPACIADOR DE EQUILIBRIO -->
       <div class="h-6"></div>
-
     </div>
   </div>
 
@@ -346,7 +295,6 @@
   <div class="max-w-4xl mx-auto w-full px-3 py-6 relative z-10 flex-grow flex flex-col gap-6">
     
     <header id="mainHeader" class="flex flex-col w-full relative transition-all duration-500 gap-4">
-      
       <div class="flex flex-nowrap items-center justify-between w-full bg-[#121316] rounded-2xl px-2 sm:px-5 py-2 sm:py-3 relative z-10 shadow-sm gap-2">
         <button onclick="openMoonModal()" class="flex items-center justify-center flex-shrink-0 w-12 h-12 bg-transparent hover:bg-zinc-800/50 rounded-xl transition" title="Ver Fase Lunar">
           <img id="headerMoonPhaseIcon" src="lunasOscuras1.png" class="w-10 h-10 object-contain drop-shadow-[0_0_8px_rgba(141,168,155,0.3)]" alt="Fase Lunar">
@@ -379,7 +327,6 @@
 
       <nav class="w-full relative z-10">
         <div class="grid grid-cols-4 gap-2 sm:gap-4">
-          
           <button onclick="switchView('agenda')" id="cardAgenda" class="nav-emblem-btn p-2 sm:p-3 rounded-2xl flex flex-col items-center text-center gap-1.5 group relative">
             <div class="w-12 h-12 sm:w-16 sm:h-16 rounded-xl overflow-hidden bg-black/60 border border-[#8da89b]/30 flex items-center justify-center shadow group-hover:scale-105 transition flex-shrink-0">
                <img src="Calendario gótico con reloj celta_2.png" alt="Agenda" class="w-full h-full object-cover">
@@ -415,7 +362,6 @@
               <span class="font-serif-luxury text-[11px] sm:text-sm font-bold text-zinc-200 tracking-wide truncate">Vínculo</span>
             </div>
           </button>
-
         </div>
       </nav>
     </header>
@@ -425,9 +371,7 @@
       <section class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
         <div class="mystic-wicca-card flex flex-col h-80">
           <div class="px-5 py-3.5 flex items-center justify-between bg-[#131418] z-10 relative">
-            <h2 class="font-serif-luxury text-xl text-zinc-100 font-bold tracking-wide flex items-center gap-3">
-              Cronología
-            </h2>
+            <h2 class="font-serif-luxury text-xl text-zinc-100 font-bold tracking-wide flex items-center gap-3">Cronología</h2>
             <button type="button" onclick="openAppointmentModal()" class="text-zinc-400 hover:text-[#8da89b] transition" title="Añadir cita">
               <i data-lucide="plus" class="w-5 h-5"></i>
             </button>
@@ -437,9 +381,7 @@
 
         <div class="mystic-wicca-card flex flex-col h-80">
           <div class="px-5 py-3.5 flex items-center justify-between bg-[#131418] z-10 relative">
-            <h2 class="font-serif-luxury text-xl text-zinc-100 font-bold tracking-wide flex items-center gap-3">
-              Rituales
-            </h2>
+            <h2 class="font-serif-luxury text-xl text-zinc-100 font-bold tracking-wide flex items-center gap-3">Rituales</h2>
             <button type="button" onclick="openHabitModal()" class="text-zinc-400 hover:text-zinc-100 transition" title="Gestionar hábitos">
               <i data-lucide="list-plus" class="w-5 h-5"></i>
             </button>
@@ -449,24 +391,18 @@
       </section>
 
       <section class="flex flex-col gap-3 relative z-10">
-        <h2 class="font-serif-luxury text-2xl text-zinc-100 font-bold tracking-wide pl-3 border-l-2 border-[#8da89b] flex items-center gap-3">
-          Pergamino del Día
-        </h2>
+        <h2 class="font-serif-luxury text-2xl text-zinc-100 font-bold tracking-wide pl-3 border-l-2 border-[#8da89b] flex items-center gap-3">Pergamino del Día</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div class="mystic-wicca-card flex flex-col">
             <div class="flex items-center justify-between px-3.5 py-3 bg-[#131418] z-10 relative">
-              <div class="flex items-center gap-3">
-                <span class="font-serif-luxury text-lg font-bold text-zinc-200 tracking-wide">Despertar del Alba · Intención</span>
-              </div>
+              <span class="font-serif-luxury text-lg font-bold text-zinc-200 tracking-wide">Despertar del Alba · Intención</span>
             </div>
             <textarea id="morningNotesTextarea" oninput="onNotesInput('morning', this.value)" placeholder="¿Con qué intención despiertas hoy?..." class="w-full h-44 sm:h-52 lined-journal px-3.5 py-2 text-zinc-200 placeholder-zinc-600 focus:outline-none resize-none font-handwritten text-xl sm:text-2xl tracking-wide relative z-10"></textarea>
           </div>
 
           <div class="mystic-wicca-card flex flex-col">
             <div class="flex items-center justify-between px-3.5 py-3 bg-[#131418] z-10 relative">
-              <div class="flex items-center gap-3">
-                <span class="font-serif-luxury text-lg font-bold text-zinc-200 tracking-wide">Velo Nocturno · Cierre</span>
-              </div>
+              <span class="font-serif-luxury text-lg font-bold text-zinc-200 tracking-wide">Velo Nocturno · Cierre</span>
             </div>
             <textarea id="nightNotesTextarea" oninput="onNotesInput('night', this.value)" placeholder="Balance nocturno: ¿Qué aprendiste hoy?..." class="w-full h-44 sm:h-52 lined-journal px-3.5 py-2 text-zinc-200 placeholder-zinc-600 focus:outline-none resize-none font-handwritten text-xl sm:text-2xl tracking-wide relative z-10"></textarea>
           </div>
@@ -479,9 +415,7 @@
       <section class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
         <div class="mystic-wicca-card flex flex-col h-96">
           <div class="px-5 py-3.5 flex items-center justify-between bg-[#131418] z-10 relative">
-            <h2 class="font-serif-luxury text-xl text-zinc-100 font-bold tracking-wide flex items-center gap-3">
-              Ecos del Alma
-            </h2>
+            <h2 class="font-serif-luxury text-xl text-zinc-100 font-bold tracking-wide flex items-center gap-3">Ecos del Alma</h2>
             <button type="button" onclick="openQuickNoteModal()" class="text-zinc-400 hover:text-[#9b8da8] transition" title="Nueva Reflexión">
               <i data-lucide="plus" class="w-5 h-5"></i>
             </button>
@@ -491,9 +425,7 @@
 
         <div class="mystic-wicca-card flex flex-col h-96">
           <div class="px-5 py-3.5 flex items-center justify-between bg-[#131418] z-10 relative">
-            <h2 class="font-serif-luxury text-xl text-zinc-100 font-bold tracking-wide flex items-center gap-3">
-              Manifestaciones
-            </h2>
+            <h2 class="font-serif-luxury text-xl text-zinc-100 font-bold tracking-wide flex items-center gap-3">Manifestaciones</h2>
             <button type="button" onclick="openProjectModal()" class="text-zinc-400 hover:text-[#c3b4c7] transition" title="Añadir Proyecto">
               <i data-lucide="plus-circle" class="w-5 h-5"></i>
             </button>
@@ -612,9 +544,7 @@
     <!-- VISTA 3: PREMONICIÓN -->
     <div id="viewTarot" class="hidden flex-col gap-6 day-fade">
       <div class="mystic-wicca-card p-6 md:p-8 flex flex-col items-center">
-        <h2 class="font-serif-luxury text-3xl text-zinc-100 font-bold mb-2 flex items-center gap-4 z-10 relative">
-          Voz de los Arcanos
-        </h2>
+        <h2 class="font-serif-luxury text-3xl text-zinc-100 font-bold mb-2 flex items-center gap-4 z-10 relative">Voz de los Arcanos</h2>
         <p class="text-sm text-zinc-400 font-mono tracking-wide mb-6 text-center max-w-lg z-10 relative">Consulta la sabiduría de los Arcanos Mayores. Puedes almacenar hasta 3 tiradas diarias con sus reflexiones.</p>
         
         <div class="flex items-center gap-2 mb-6 z-10 relative" id="tarotSlotsTabs">
@@ -639,9 +569,7 @@
       
       <div id="tarotNotesSection" class="mystic-wicca-card flex flex-col mt-2 mb-4">
         <div class="flex items-center justify-between px-4 py-3 bg-[#131418] z-10 relative">
-          <div class="flex items-center gap-3">
-            <span class="font-serif-luxury text-lg font-bold text-zinc-200 tracking-wide">Reflexión de la Tirada Activa</span>
-          </div>
+          <span class="font-serif-luxury text-lg font-bold text-zinc-200 tracking-wide">Reflexión de la Tirada Activa</span>
         </div>
         <textarea id="tarotNotesTextarea" oninput="onTarotNotesInput(this.value)" placeholder="Plasma aquí tu intención y la reflexión detallada de esta tirada..." class="w-full h-36 lined-journal px-4 py-2 text-zinc-200 placeholder-zinc-600 focus:outline-none resize-none font-handwritten text-xl sm:text-2xl tracking-wide z-10 relative"></textarea>
       </div>
@@ -655,9 +583,7 @@
             <span class="text-3xl drop-shadow-[0_0_8px_rgba(199,86,101,0.5)]">🩸</span>
           </div>
           <div>
-            <h2 class="font-serif-luxury text-2xl text-zinc-100 font-bold tracking-wide flex items-center gap-3">
-              Vínculo de Sangre
-            </h2>
+            <h2 class="font-serif-luxury text-2xl text-zinc-100 font-bold tracking-wide flex items-center gap-3">Vínculo de Sangre</h2>
             <p class="text-xs text-zinc-400 font-mono tracking-widest uppercase mt-1">Interacciona y evoluciona tus familiares</p>
           </div>
         </div>
@@ -785,9 +711,7 @@
         </h3>
         <button onclick="closeBackupModal()" class="text-zinc-400 hover:text-white p-1"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
-      <p class="text-xs text-zinc-300 leading-relaxed">
-        Exporta todos tus datos (citas, tareas, reflexiones, tiradas de tarot y nivel de tus familiares) en un archivo de respaldo seguro, o restaura un respaldo previo.
-      </p>
+      <p class="text-xs text-zinc-300 leading-relaxed">Exporta todos tus datos en un archivo de respaldo seguro, o restaura un respaldo previo.</p>
       <div class="grid grid-cols-2 gap-4 pt-2">
         <button onclick="exportBackup()" class="py-3 bg-[#8da89b] hover:bg-[#b4c7be] text-zinc-950 font-bold text-xs uppercase tracking-wider rounded-xl transition shadow flex items-center justify-center gap-2">
           <i data-lucide="download" class="w-4 h-4"></i> Exportar
@@ -835,7 +759,7 @@
         </div>
         <div>
           <label class="block text-zinc-400 uppercase tracking-wider font-semibold mb-1">Descripción Detallada:</label>
-          <textarea id="apptDescInput" rows="3" placeholder="Notas adicionales o detalles largos..." class="w-full px-3 py-2 bg-[#0f1013] border border-zinc-800 rounded-xl text-zinc-200 placeholder-zinc-600 focus:outline-none font-handwritten text-lg resize-none"></textarea>
+          <textarea id="apptDescInput" rows="3" placeholder="Notas adicionales..." class="w-full px-3 py-2 bg-[#0f1013] border border-zinc-800 rounded-xl text-zinc-200 placeholder-zinc-600 focus:outline-none font-handwritten text-lg resize-none"></textarea>
         </div>
         <div class="flex justify-end gap-2.5 pt-3">
           <button type="button" onclick="closeAppointmentModal()" class="px-3 py-1.5 rounded-xl text-zinc-400 hover:text-white transition">Cancelar</button>
@@ -853,7 +777,7 @@
       </div>
       <h3 class="font-serif-luxury text-2xl font-bold text-zinc-100 mb-3" id="detailApptTitle">Título</h3>
       <div class="bg-[#0f1013] p-4 rounded-xl mb-6 border border-zinc-800">
-        <p class="font-handwritten text-xl text-zinc-300 whitespace-pre-wrap leading-relaxed" id="detailApptDesc">Sin descripción detallada.</p>
+        <p class="font-handwritten text-xl text-zinc-300 whitespace-pre-wrap leading-relaxed" id="detailApptDesc">Sin descripción.</p>
       </div>
       <div class="flex justify-end gap-3">
         <button type="button" onclick="editCurrentDetailAppointment()" class="px-4 py-2 bg-zinc-800 hover:bg-zinc-700 text-zinc-200 text-xs font-semibold rounded-xl transition">Editar</button>
@@ -870,15 +794,15 @@
       </div>
       <form onsubmit="handleSaveHabit(event)" class="space-y-3.5 text-xs">
         <div>
-          <label class="block text-zinc-400 uppercase tracking-wider font-semibold mb-1">Nombre del Hábito / Reto:</label>
-          <input type="text" id="habitNameInput" required placeholder="Ej: Lectura, Meditación..." class="w-full px-3 py-2 bg-[#0f1013] border border-zinc-800 rounded-xl text-zinc-200 placeholder-zinc-600 font-handwritten text-lg focus:outline-none">
+          <label class="block text-zinc-400 uppercase tracking-wider font-semibold mb-1">Nombre del Hábito:</label>
+          <input type="text" id="habitNameInput" required placeholder="Ej: Lectura..." class="w-full px-3 py-2 bg-[#0f1013] border border-zinc-800 rounded-xl text-zinc-200 placeholder-zinc-600 font-handwritten text-lg focus:outline-none">
         </div>
         <div class="flex justify-end gap-2.5 pt-3 border-t border-zinc-800">
-          <button type="submit" class="px-4 py-1.5 bg-zinc-200 hover:bg-white text-zinc-900 font-semibold rounded-xl transition active:scale-95">Añadir al Seguimiento</button>
+          <button type="submit" class="px-4 py-1.5 bg-zinc-200 hover:bg-white text-zinc-900 font-semibold rounded-xl transition active:scale-95">Añadir</button>
         </div>
       </form>
       <div class="mt-4 pt-4 border-t border-zinc-800">
-        <h4 class="text-zinc-500 uppercase tracking-widest text-[10px] font-semibold mb-2">Hábitos Activos en el Catálogo:</h4>
+        <h4 class="text-zinc-500 uppercase tracking-widest text-[10px] font-semibold mb-2">Hábitos Activos:</h4>
         <div id="habitCatalogList" class="space-y-1.5 max-h-32 overflow-y-auto custom-scroll pr-1"></div>
       </div>
     </div>
@@ -887,12 +811,12 @@
   <div id="quickNoteModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 z-50 hidden">
     <div class="bg-[#15141c] border border-zinc-800 rounded-2xl max-w-md w-full p-5 shadow-2xl transform transition-all scale-95 opacity-0 duration-200" id="quickNoteModalCard">
       <div class="flex justify-between items-center border-b border-zinc-800 pb-3 mb-4">
-        <h3 class="font-serif-luxury text-xl text-zinc-100 font-semibold flex items-center gap-2">Nuevo Eco del Alma</h3>
+        <h3 class="font-serif-luxury text-xl text-zinc-100 font-semibold">Nuevo Eco del Alma</h3>
         <button type="button" onclick="closeQuickNoteModal()" class="text-zinc-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
       <form onsubmit="handleSaveQuickNote(event)" class="space-y-3.5 text-xs">
         <div>
-          <label class="block text-zinc-400 uppercase tracking-wider font-semibold mb-1">Título de la Reflexión:</label>
+          <label class="block text-zinc-400 uppercase tracking-wider font-semibold mb-1">Título:</label>
           <input type="text" id="quickNoteTitleInput" required class="w-full px-3 py-2 bg-[#0f1013] border border-zinc-800 rounded-xl text-zinc-200 focus:outline-none font-handwritten text-lg" placeholder="Título...">
         </div>
         <div>
@@ -909,16 +833,16 @@
   <div id="projectModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 z-50 hidden">
     <div class="bg-[#15141c] border border-zinc-800 rounded-2xl max-w-sm w-full p-5 shadow-2xl transform transition-all scale-95 opacity-0 duration-200" id="projectModalCard">
       <div class="flex justify-between items-center border-b border-zinc-800 pb-3 mb-4">
-        <h3 class="font-serif-luxury text-xl text-zinc-100 font-semibold flex items-center gap-2">Nueva Manifestación</h3>
+        <h3 class="font-serif-luxury text-xl text-zinc-100 font-semibold">Nueva Manifestación</h3>
         <button type="button" onclick="closeProjectModal()" class="text-zinc-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
       <form onsubmit="handleSaveProject(event)" class="space-y-3.5 text-xs">
         <div>
-          <label class="block text-zinc-400 uppercase tracking-wider font-semibold mb-1">Título de la Manifestación:</label>
+          <label class="block text-zinc-400 uppercase tracking-wider font-semibold mb-1">Título:</label>
           <input type="text" id="projectTitleInput" required class="w-full px-3 py-2 bg-[#0f1013] border border-zinc-800 rounded-xl text-zinc-200 focus:outline-none font-handwritten text-lg" placeholder="Proyecto...">
         </div>
         <div class="flex justify-end pt-3">
-          <button type="submit" class="px-4 py-1.5 bg-zinc-200 text-zinc-950 font-semibold rounded-xl shadow transition">Crear Manifestación</button>
+          <button type="submit" class="px-4 py-1.5 bg-zinc-200 text-zinc-950 font-semibold rounded-xl shadow transition">Crear</button>
         </div>
       </form>
     </div>
@@ -937,7 +861,7 @@
             <div class="h-px bg-gradient-to-l from-transparent to-[#9b8da8]/50 flex-1"></div>
         </div>
         <div class="text-zinc-200 font-handwritten text-2xl sm:text-3xl leading-relaxed text-center w-full bg-black/40 p-5 rounded-2xl border border-[#9b8da8]/20 shadow-inner">
-          <p id="esotericDetailBody">Descripción detallada...</p>
+          <p id="esotericDetailBody">Descripción...</p>
         </div>
       </div>
       <div class="mt-8 flex justify-center relative z-10">
@@ -964,32 +888,32 @@
     const DAY_NAMES = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
 
     const TAROT_CARDS = [
-      { name: "El Loco", num: "0", symbol: "🃏", up: "Nuevos comienzos, inocencia, espontaneidad, fe ciega en el universo.", rev: "Imprudencia, riesgo innecesario, ingenuidad, miedo a dar el salto.", advice: "Atrévete a explorar lo desconocido con confianza." },
-      { name: "El Mago", num: "I", symbol: "🪄", up: "Manifestación, poder personal, habilidad, concentración, recursos.", rev: "Manipulación, talento desperdiciado, ilusiones, falta de foco.", advice: "Tienes todas las herramientas necesarias en tu altar interior." },
-      { name: "La Sacerdotisa", num: "II", symbol: "📜", up: "Intuición, misterio, sabiduría interior, el subconsciente, silencio.", rev: "Secretos ocultos, desconexión de la intuición, superficialidad.", advice: "Escucha la voz sutil de tus sueños y corazonadas." },
-      { name: "La Emperatriz", num: "III", symbol: "👑", up: "Abundancia, fertilidad, naturaleza, creatividad, nutrición emocional.", rev: "Dependencia, bloqueo creativo, exceso de control, vacío.", advice: "Cultiva tus proyectos con amor y paciencia." },
-      { name: "El Emperador", num: "IV", symbol: "🏛️", up: "Autoridad, estructura, estabilidad, liderazgo, orden cósmico.", rev: "Tiranía, rigidez, abuso de poder, desorganización.", advice: "Establece bases firmes y disciplina en tu camino." },
-      { name: "El Hierofante", num: "V", symbol: "🗝️", up: "Tradición, guía espiritual, sabiduría ancestral, instituciones.", rev: "Dogmatismo, rebeldía ciega, falsas creencias, ortodoxia.", advice: "Busca el consejo de quienes ya recorrieron el sendero." },
-      { name: "Los Enamorados", num: "VI", symbol: "❤️", up: "Unión sagrada, elecciones del corazón, armonía, dualidad.", rev: "Desarmonía, indecisión, valores opuestos, ruptura.", advice: "Elige desde el amor y no desde el miedo." },
-      { name: "El Carro", num: "VII", symbol: "🛡️", up: "Victoria, determinación, control sobre los opuestos, avance.", rev: "Falta de dirección, agresividad, obstáculos descontrolados.", advice: "Mantén las riendas firmes de tu destino." },
-      { name: "La Fuerza", num: "VIII", symbol: "🦁", up: "Dominio suave, coraje, paciencia, compasión sobre la bestia.", rev: "Dudas, debilidad interior, impulsividad, pérdida de control.", advice: "La verdadera fuerza reside en la serenidad del espíritu." },
-      { name: "El Ermitaño", num: "IX", symbol: "🏮", up: "Introspección, búsqueda de la verdad, luz interior, retiro.", rev: "Soledad extrema, aislamiento, rechazo a los demás, pérdida.", advice: "Apártate del ruido para escuchar tu propia alma." },
-      { name: "La Rueda de la Fortuna", num: "X", symbol: "🎡", up: "Ciclos cósmicos, destino, buena fortuna, cambios inevitables.", rev: "Mala racha temporal, resistencia al cambio, ciclos repetitivos.", advice: "Fluye con los giros del destino; todo es impermanente." },
-      { name: "La Justicia", num: "XI", symbol: "⚖️", up: "Verdad, equidad, ley kármica, decisiones justas y objetivas.", rev: "Injusticia, deshonestidad, evasión de responsabilidades.", advice: "Actúa con integridad y asume las consecuencias." }
+      { name: "El Loco", num: "0", symbol: "🃏", up: "Nuevos comienzos, inocencia, espontaneidad, fe ciega.", rev: "Imprudencia, riesgo innecesario, miedo.", advice: "Atrévete a explorar lo desconocido." },
+      { name: "El Mago", num: "I", symbol: "🪄", up: "Manifestación, poder personal, habilidad, recursos.", rev: "Manipulación, talento desperdiciado, falta de foco.", advice: "Tienes todas las herramientas en tu interior." },
+      { name: "La Sacerdotisa", num: "II", symbol: "📜", up: "Intuición, misterio, sabiduría interior, silencio.", rev: "Secretos ocultos, desconexión.", advice: "Escucha la voz de tus sueños." },
+      { name: "La Emperatriz", num: "III", symbol: "👑", up: "Abundancia, fertilidad, naturaleza, creatividad.", rev: "Dependencia, bloqueo creativo.", advice: "Cultiva tus proyectos con amor." },
+      { name: "El Emperador", num: "IV", symbol: "🏛️", up: "Autoridad, estructura, estabilidad, liderazgo.", rev: "Tiranía, rigidez, desorganización.", advice: "Establece bases firmes." },
+      { name: "El Hierofante", num: "V", symbol: "🗝️", up: "Tradición, guía espiritual, sabiduría ancestral.", rev: "Dogmatismo, rebeldía ciega.", advice: "Busca consejo sabio." },
+      { name: "Los Enamorados", num: "VI", symbol: "❤️", up: "Unión sagrada, elecciones del corazón, armonía.", rev: "Desarmonía, indecisión.", advice: "Elige desde el amor." },
+      { name: "El Carro", num: "VII", symbol: "🛡️", up: "Victoria, determinación, avance.", rev: "Falta de dirección, obstáculos.", advice: "Mantén las riendas firmes." },
+      { name: "La Fuerza", num: "VIII", symbol: "🦁", up: "Dominio suave, coraje, paciencia.", rev: "Dudas, debilidad, impulsividad.", advice: "La fuerza reside en la serenidad." },
+      { name: "El Ermitaño", num: "IX", symbol: "🏮", up: "Introspección, búsqueda de la verdad, luz interior.", rev: "Aislamiento, soledad extrema.", advice: "Escucha tu propia alma." },
+      { name: "La Rueda de la Fortuna", num: "X", symbol: "🎡", up: "Ciclos cósmicos, destino, cambios inevitables.", rev: "Resistencia al cambio.", advice: "Fluye con los giros del destino." },
+      { name: "La Justicia", num: "XI", symbol: "⚖️", up: "Verdad, equidad, ley kármica, decisiones justas.", rev: "Injusticia, deshonestidad.", advice: "Actúa con integridad." }
     ];
 
     const ESOTERIC_DATA = {
-      kabbalah: { title: "Kabbalah & Árbol de Vida", sub: "Misticismo Hebreo", desc: "La Kabbalah busca desvelar el orden oculto del universo. A través del Árbol de la Vida (Sefirot), se estudian las diez emanaciones divinas que conectan el infinito con el plano material." },
-      mentalismo: { title: "El Mentalismo", sub: "Primer Principio Hermético", desc: "\"El Todo es Mente; el Universo es mental.\" Todo lo que existe fue creado primero como un pensamiento en la mente divina. Tus pensamientos moldean tu realidad." },
-      correspondencia: { title: "La Correspondencia", sub: "Segundo Principio", desc: "\"Como es arriba, es abajo; como es abajo, es arriba.\" Los patrones del macrocosmos (universo) se repiten en el microcosmos (el ser humano)." },
-      vibracion: { title: "La Vibración", sub: "Tercer Principio", desc: "\"Nada descansa; todo se mueve; todo vibra.\" La materia, la energía y el espíritu son solo diferentes frecuencias de vibración." },
-      polaridad: { title: "La Polaridad", sub: "Cuarto Principio", desc: "\"Todo es doble; todo tiene dos polos; todo, su par de opuestos.\" Calor y frío, luz y oscuridad son lo mismo, solo difieren en grado." },
-      ritmo: { title: "El Ritmo", sub: "Quinto Principio", desc: "\"Todo fluye y refluye; todo tiene sus períodos de avance y retroceso.\" Como el péndulo, lo que sube debe bajar. Aprende a fluir con los ciclos." },
-      causa: { title: "Causa y Efecto", sub: "Sexto Principio", desc: "\"Toda causa tiene su efecto; todo efecto tiene su causa.\" No existe la casualidad, solo causas que aún no comprendemos." },
-      genero: { title: "El Género", sub: "Séptimo Principio", desc: "\"El género está en todo; todo tiene sus principios masculino y femenino.\" Es la base de toda creación y generación en todos los planos." },
-      sol: { title: "Tu Sol de Esencia", sub: "El Yo Consciente", desc: "El Sol representa tu núcleo vital, tu identidad profunda y tu propósito fundamental en esta encarnación." },
-      luna: { title: "Tu Luna Emocional", sub: "El Subconsciente", desc: "La Luna gobierna tus reacciones instintivas, tus necesidades de seguridad y tu mundo emocional íntimo." },
-      asc: { title: "Tu Ascendente", sub: "La Máscara Física", desc: "El Ascendente es tu proyección externa, cómo te ven los demás a primera vista y cómo inicias nuevos caminos." }
+      kabbalah: { title: "Kabbalah & Árbol de Vida", sub: "Misticismo Hebreo", desc: "La Kabbalah busca desvelar el orden oculto del universo mediante las diez emanaciones divinas (Sefirot)." },
+      mentalismo: { title: "El Mentalismo", sub: "Primer Principio Hermético", desc: "\"El Todo es Mente; el Universo es mental.\" Tus pensamientos moldean tu realidad." },
+      correspondencia: { title: "La Correspondencia", sub: "Segundo Principio", desc: "\"Como es arriba, es abajo; como es abajo, es arriba.\"" },
+      vibracion: { title: "La Vibración", sub: "Tercer Principio", desc: "\"Nada descansa; todo se mueve; todo vibra.\"" },
+      polaridad: { title: "La Polaridad", sub: "Cuarto Principio", desc: "\"Todo es doble; todo tiene dos polos y sus opuestos.\"" },
+      ritmo: { title: "El Ritmo", sub: "Quinto Principio", desc: "\"Todo fluye y refluye; todo tiene sus períodos de avance y retroceso.\"" },
+      causa: { title: "Causa y Efecto", sub: "Sexto Principio", desc: "\"Toda causa tiene su efecto; todo efecto tiene su causa.\"" },
+      genero: { title: "El Género", sub: "Séptimo Principio", desc: "\"El género está en todo; todo tiene sus principios masculino y femenino.\"" },
+      sol: { title: "Tu Sol de Esencia", sub: "El Yo Consciente", desc: "El Sol representa tu núcleo vital y tu propósito fundamental." },
+      luna: { title: "Tu Luna Emocional", sub: "El Subconsciente", desc: "La Luna gobierna tus reacciones instintivas y tu mundo emocional." },
+      asc: { title: "Tu Ascendente", sub: "La Máscara Física", desc: "Tu proyección externa y cómo te ven los demás a primera vista." }
     };
 
     let petState = {
@@ -1021,13 +945,9 @@
 
     function loadData() {
       const saved = localStorage.getItem('agenda_esoterica_data_v10');
-      if (saved) {
-        try { appData = JSON.parse(saved); } catch(e) { appData = {}; }
-      }
+      if (saved) { try { appData = JSON.parse(saved); } catch(e) { appData = {}; } }
       const savedPets = localStorage.getItem('mystic_pets_data_v4');
-      if (savedPets) {
-        try { petState = JSON.parse(savedPets); } catch(e) {}
-      }
+      if (savedPets) { try { petState = JSON.parse(savedPets); } catch(e) {} }
       if (!petState.levels) petState.levels = { cat: 1, bat: 1, rat: 1 };
       updateGlobalCompanionImage();
     }
@@ -1069,10 +989,9 @@
       const dayName = DAY_NAMES[currentDate.getDay()];
       const dayNum = currentDate.getDate();
       const monthName = MONTH_NAMES[currentDate.getMonth()];
-      const shortMonth = monthName.substring(0, 3);
       const year = currentDate.getFullYear();
 
-      document.getElementById('fullDateDisplay').innerText = `${dayNum} ${shortMonth} ${year}`;
+      document.getElementById('fullDateDisplay').innerText = `${dayNum} ${monthName.substring(0,3)} ${year}`;
       document.getElementById('headerDayNumName').innerText = `${dayNum} ${dayName.substring(0,3)}`;
       
       const y = currentDate.getFullYear();
@@ -1107,9 +1026,7 @@
     function updateMoonHeaderInfo() {
       const lunar = getLunarPhaseData(currentDate);
       const iconEl = document.getElementById('headerMoonPhaseIcon');
-      if (iconEl) {
-        iconEl.src = `lunasOscuras${lunar.phaseIndex + 1}.png`;
-      }
+      if (iconEl) iconEl.src = `lunasOscuras${lunar.phaseIndex + 1}.png`;
     }
 
     function initCanvas() {
@@ -1145,17 +1062,13 @@
         <h3 class="font-serif-luxury text-3xl text-zinc-100 font-bold tracking-wide">${lunar.phaseName}</h3>
         <p class="text-xs font-mono text-[#8da89b] tracking-widest uppercase mt-2 mb-6">${lunar.phaseDesc}</p>
         <div class="bg-[#16171b] p-4 rounded-xl border border-zinc-800/80 w-full text-center shadow-inner">
-          <p class="text-sm text-zinc-300 font-serif-luxury leading-relaxed">
-            La energía lunar del día de hoy baña tu grimorio. Aprovecha esta influencia astral para guiar tus intenciones y rituales.
-          </p>
+          <p class="text-sm text-zinc-300 font-serif-luxury leading-relaxed">La energía lunar del día de hoy baña tu grimorio. Aprovecha esta influencia astral.</p>
         </div>
       `;
       modal.classList.remove('hidden');
     }
     
-    function closeMoonModal() {
-      document.getElementById('moonModal').classList.add('hidden');
-    }
+    function closeMoonModal() { document.getElementById('moonModal').classList.add('hidden'); }
 
     function switchView(viewName) {
       currentView = viewName;
@@ -1185,9 +1098,7 @@
 
     function renderAgendaView() {
       const key = getDateKey(currentDate);
-      if (!appData[key]) {
-        appData[key] = { appointments: [], habits: {}, morning: "", night: "", tarotSlots: [null, null, null] };
-      }
+      if (!appData[key]) appData[key] = { appointments: [], habits: {}, morning: "", night: "", tarotSlots: [null, null, null] };
       const day = appData[key];
 
       document.getElementById('morningNotesTextarea').value = day.morning || "";
@@ -1234,7 +1145,6 @@
     function openAppointmentModal(editIndex = null) {
       const modal = document.getElementById('appointmentModal');
       const titleEl = document.getElementById('apptModalTitle');
-      
       if (editIndex !== null) {
         const key = getDateKey(currentDate);
         const appt = appData[key].appointments[editIndex];
@@ -1253,9 +1163,7 @@
       modal.classList.remove('hidden');
     }
 
-    function closeAppointmentModal() {
-      document.getElementById('appointmentModal').classList.add('hidden');
-    }
+    function closeAppointmentModal() { document.getElementById('appointmentModal').classList.add('hidden'); }
 
     function handleSaveAppointment(e) {
       e.preventDefault();
@@ -1285,7 +1193,7 @@
       const appt = appData[key].appointments[idx];
       document.getElementById('detailApptTime').innerText = appt.time;
       document.getElementById('detailApptTitle').innerText = appt.title;
-      document.getElementById('detailApptDesc').innerText = appt.desc || "Sin descripción detallada.";
+      document.getElementById('detailApptDesc').innerText = appt.desc || "Sin descripción.";
       document.getElementById('appointmentDetailModal').classList.remove('hidden');
     }
 
@@ -1307,7 +1215,7 @@
       if (!appData[key]) appData[key] = { appointments: [], habits: {}, morning: "", night: "", tarotSlots: [null, null, null] };
       const day = appData[key];
       const container = document.getElementById('habitsContainer');
-      if (globalHabits.length === 0) { container.innerHTML = `<div class="text-center py-10 text-zinc-600 font-mono text-xs">No hay hábitos configurados.</div>`; return; }
+      if (globalHabits.length === 0) { container.innerHTML = `<div class="text-center py-10 text-zinc-600 font-mono text-xs">Sin hábitos.</div>`; return; }
       container.innerHTML = globalHabits.map((hName) => {
         const isChecked = day.habits && day.habits[hName];
         return `
@@ -1363,7 +1271,7 @@
       const notesList = document.getElementById('grimoireNotesList');
       if (notesList) {
         if (appData.grimoireNotes.length === 0) {
-          notesList.innerHTML = `<div class="text-center py-16 text-zinc-600 font-mono text-xs italic">Reflexiones y sentires del alma... Pulsa + para registrar un eco.</div>`;
+          notesList.innerHTML = `<div class="text-center py-16 text-zinc-600 font-mono text-xs italic">Reflexiones del alma...</div>`;
         } else {
           notesList.innerHTML = appData.grimoireNotes.map((n, idx) => `
             <div class="p-4 rounded-xl bg-[#121316] hover:bg-[#16171b] transition relative group">
@@ -1380,7 +1288,7 @@
       const projContainer = document.getElementById('projectsContainer');
       if (projContainer) {
         if (appData.projects.length === 0) {
-          projContainer.innerHTML = `<div class="text-center py-16 text-zinc-600 font-mono text-xs italic">Tus metas y propósitos activos... Pulsa + para manifestar.</div>`;
+          projContainer.innerHTML = `<div class="text-center py-16 text-zinc-600 font-mono text-xs italic">Tus metas activas...</div>`;
         } else {
           projContainer.innerHTML = appData.projects.map((p, idx) => `
             <div class="p-4 rounded-xl bg-[#121316] hover:bg-[#16171b] flex flex-col gap-3 group">
@@ -1500,14 +1408,14 @@
     function startTarotShuffle() {
       const deck = document.getElementById('theDeck');
       deck.classList.add('shuffling');
-      document.getElementById('btnShuffle').innerText = "Barajando el Eter...";
+      document.getElementById('btnShuffle').innerText = "Barajando...";
       setTimeout(() => {
         deck.classList.remove('shuffling');
         document.getElementById('btnShuffle').innerText = "1. Barajado";
         const btnCut = document.getElementById('btnCut');
         btnCut.disabled = false;
         btnCut.classList.remove('opacity-50', 'cursor-not-allowed');
-        showToast('Cartas barajadas con éxito');
+        showToast('Cartas barajadas');
       }, 1200);
     }
 
@@ -1529,7 +1437,7 @@
       appData[key].tarotSlots[activeTarotIndex] = { cards: drawn, notes: "" };
       saveData();
       renderTarotView();
-      showToast('Premonición revelada y guardada');
+      showToast('Premonición revelada');
     }
 
     function onTarotNotesInput(val) {
@@ -1548,17 +1456,14 @@
       renderPetsView();
       updateGlobalCompanionImage();
       triggerGlobalPetAnimation('anim-cute', '✨');
-      showToast(`Has invocado a ${PET_DATA[type].name}`);
+      showToast(`Invocado: ${PET_DATA[type].name}`);
     }
 
     function updateGlobalCompanionImage() {
       const p = PET_DATA[petState.type];
       const lvl = petState.levels[petState.type] || 1;
-      const stageIdx = lvl - 1;
       const globalImg = document.getElementById('globalCompanionImg');
-      if (globalImg) {
-        globalImg.src = p.files[stageIdx];
-      }
+      if (globalImg) globalImg.src = p.files[lvl - 1];
     }
 
     function triggerGlobalPetAnimation(animClass, reactionEmoji = '') {
@@ -1583,30 +1488,23 @@
       }, 1000);
     }
 
-    function triggerCuteMove() {
-      triggerGlobalPetAnimation('anim-cute', '💖');
-    }
+    function triggerCuteMove() { triggerGlobalPetAnimation('anim-cute', '💖'); }
 
     function renderPetsView() {
       const p = PET_DATA[petState.type];
       const lvl = petState.levels[petState.type] || 1;
-      const stageIdx = lvl - 1;
       
-      document.getElementById('activePetName').innerText = p.stages[stageIdx];
+      document.getElementById('activePetName').innerText = p.stages[lvl - 1];
       document.getElementById('activePetStageLabel').innerText = `Fase ${lvl}: ${p.name}`;
-      document.getElementById('activePetImg').src = p.files[stageIdx];
+      document.getElementById('activePetImg').src = p.files[lvl - 1];
 
-      const catLvl = petState.levels.cat || 1;
-      const batLvl = petState.levels.bat || 1;
-      const ratLvl = petState.levels.rat || 1;
+      document.getElementById('lvlCat').innerText = petState.levels.cat || 1;
+      document.getElementById('lvlBat').innerText = petState.levels.bat || 1;
+      document.getElementById('lvlRat').innerText = petState.levels.rat || 1;
 
-      document.getElementById('lvlCat').innerText = catLvl;
-      document.getElementById('lvlBat').innerText = batLvl;
-      document.getElementById('lvlRat').innerText = ratLvl;
-
-      document.getElementById('thumbCat').src = PET_DATA.cat.files[catLvl - 1];
-      document.getElementById('thumbBat').src = PET_DATA.bat.files[batLvl - 1];
-      document.getElementById('thumbRat').src = PET_DATA.rat.files[ratLvl - 1];
+      document.getElementById('thumbCat').src = PET_DATA.cat.files[(petState.levels.cat || 1) - 1];
+      document.getElementById('thumbBat').src = PET_DATA.bat.files[(petState.levels.bat || 1) - 1];
+      document.getElementById('thumbRat').src = PET_DATA.rat.files[(petState.levels.rat || 1) - 1];
 
       document.getElementById('petGlobalMedals').innerText = petState.medals;
       document.getElementById('petGlobalXP').innerText = petState.xp;
@@ -1621,7 +1519,6 @@
       } else {
         btnEvolve.classList.add('hidden');
       }
-      
       updateGlobalCompanionImage();
     }
 
@@ -1630,7 +1527,7 @@
         petState.hunger = Math.min(100, petState.hunger + 25);
         petState.xp += 10;
         triggerGlobalPetAnimation('anim-eat', '🍖');
-        showToast('Familiar alimentado');
+        showToast('Alimentado');
       } else if (action === 'pet') {
         petState.happiness = Math.min(100, petState.happiness + 20);
         petState.xp += 15;
@@ -1682,16 +1579,10 @@
     }
 
     let savedPin = localStorage.getItem('grimorio_pin_v1');
-    let userSettings = JSON.parse(localStorage.getItem('grimorio_settings_v1')) || {
-      sun: "Escorpio ♏",
-      moon: "Acuario ♒",
-      asc: "Tauro ♉"
-    };
+    let userSettings = JSON.parse(localStorage.getItem('grimorio_settings_v1')) || { sun: "Escorpio ♏", moon: "Acuario ♒", asc: "Tauro ♉" };
 
     const pinPrompt = document.getElementById('pinPromptText');
-    if (pinPrompt) {
-      pinPrompt.innerText = savedPin ? "Introduce tu Sello Numérico" : "Establece un PIN de 6 dígitos";
-    }
+    if (pinPrompt) pinPrompt.innerText = savedPin ? "Introduce tu Sello Numérico" : "Establece un PIN de 6 dígitos";
 
     function applySettingsToTriad() {
       if (document.getElementById('dynSignSun')) {
@@ -1722,28 +1613,15 @@
     }
 
     function saveSettings() {
-      userSettings = {
-        sun: document.getElementById('setSignSun').value,
-        moon: document.getElementById('setSignMoon').value,
-        asc: document.getElementById('setSignAsc').value
-      };
+      userSettings = { sun: document.getElementById('setSignSun').value, moon: document.getElementById('setSignMoon').value, asc: document.getElementById('setSignAsc').value };
       localStorage.setItem('grimorio_settings_v1', JSON.stringify(userSettings));
       applySettingsToTriad();
       closeSettingsModal();
       showToast('Ajustes guardados');
     }
 
-    function openBackupModal() {
-      const modal = document.getElementById('backupModal');
-      modal.classList.remove('hidden');
-      modal.classList.add('flex');
-    }
-
-    function closeBackupModal() {
-      const modal = document.getElementById('backupModal');
-      modal.classList.add('hidden');
-      modal.classList.remove('flex');
-    }
+    function openBackupModal() { document.getElementById('backupModal').classList.remove('hidden'); document.getElementById('backupModal').classList.add('flex'); }
+    function closeBackupModal() { document.getElementById('backupModal').classList.add('hidden'); document.getElementById('backupModal').classList.remove('flex'); }
 
     function exportBackup() {
       const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(appData));
@@ -1769,11 +1647,9 @@
             saveData();
             renderCurrentView();
             closeBackupModal();
-            showToast('Respaldo importado con éxito');
+            showToast('Respaldo importado');
           }
-        } catch(err) {
-          showToast('El archivo no es válido');
-        }
+        } catch(err) { showToast('Archivo no válido'); }
       };
       reader.readAsText(file);
     }
@@ -1830,9 +1706,7 @@
         const offset = maxDash - (unlockValue / 100) * maxDash;
         fProgress.style.strokeDashoffset = Math.max(0, offset);
 
-        if (unlockValue >= 100) {
-          completeUnlock(inputPin);
-        }
+        if (unlockValue >= 100) completeUnlock(inputPin);
       }, 30);
     }
 
