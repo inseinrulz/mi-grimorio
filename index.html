@@ -106,6 +106,34 @@
       border-radius: 9999px;
     }
 
+    /* --- ANIMACIONES DEL FAMILIAR --- */
+    @keyframes breathe {
+      0%, 100% { transform: scaleY(1) scaleX(1); }
+      50% { transform: scaleY(1.04) scaleX(0.98) translateY(-2px); }
+    }
+    @keyframes nibble {
+      0%, 100% { transform: translateY(0) rotate(0); }
+      25% { transform: translateY(-5px) rotate(-8deg); }
+      50% { transform: translateY(0) rotate(8deg); }
+      75% { transform: translateY(-5px) rotate(-8deg); }
+    }
+    @keyframes wiggleHappy {
+      0%, 100% { transform: rotate(0) scale(1); }
+      25% { transform: rotate(-12deg) scale(1.1); }
+      50% { transform: rotate(12deg) scale(1.1); }
+      75% { transform: rotate(-12deg) scale(1.1); }
+    }
+    @keyframes cuteSpin {
+      0% { transform: scale(1) rotate(0); }
+      40% { transform: scale(1.2) rotate(-15deg) translateY(-15px); }
+      100% { transform: scale(1) rotate(360deg) translateY(0); }
+    }
+    
+    .anim-breathe { animation: breathe 3.5s ease-in-out infinite; transform-origin: bottom center; }
+    .anim-eat { animation: nibble 0.5s ease-in-out; transform-origin: bottom center; }
+    .anim-pet { animation: wiggleHappy 0.6s ease-in-out; transform-origin: bottom center; }
+    .anim-cute { animation: cuteSpin 0.7s ease-in-out; transform-origin: center center; }
+
     @keyframes floatPet {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-5px); }
@@ -164,7 +192,7 @@
 
   <canvas id="atmosphereCanvas"></canvas>
 
-  <div id="toastMessage" class="fixed bottom-6 right-6 bg-[#16171b] text-zinc-200 px-4 py-2.5 rounded-xl shadow-2xl text-xs font-medium flex items-center gap-2.5 z-50 transform translate-y-16 opacity-0 transition-all duration-300 pointer-events-none">
+  <div id="toastMessage" class="fixed top-6 left-1/2 -translate-x-1/2 bg-[#16171b] border border-zinc-800 text-zinc-200 px-6 py-3 rounded-full shadow-[0_10px_30px_rgba(0,0,0,0.8)] text-xs font-mono font-bold tracking-widest uppercase flex items-center gap-3 z-50 transform -translate-y-16 opacity-0 transition-all duration-300 pointer-events-none">
     <span id="toastIcon" class="text-[#8da89b]">✦</span>
     <span id="toastText">Actualizado</span>
   </div>
@@ -797,6 +825,14 @@
     </div>
   </div>
 
+  <!-- FAMILIAR GLOBAL FLOTANTE (ESQUINA INFERIOR DERECHA) -->
+  <div id="globalCompanion" onclick="triggerCuteMove()" class="fixed bottom-6 right-6 md:bottom-10 md:right-10 z-[45] cursor-pointer hover:drop-shadow-[0_0_20px_rgba(155,141,168,0.6)] transition-all flex flex-col items-center justify-end" title="Tu familiar">
+    <div id="companionReaction" class="absolute -top-6 text-xl opacity-0 transition-opacity duration-300 pointer-events-none font-bold drop-shadow-md">✨</div>
+    <div class="relative w-20 h-20 sm:w-24 sm:h-24">
+      <img id="globalCompanionImg" src="cat1.png" class="w-full h-full object-contain anim-breathe drop-shadow-[0_0_10px_rgba(141,168,155,0.4)]" alt="Mascota">
+    </div>
+  </div>
+
   <!-- JAVASCRIPT -->
   <script>
     let currentDate = new Date();
@@ -860,6 +896,9 @@
       }
       // Ensure levels structure exists
       if (!petState.levels) petState.levels = { cat: 1, bat: 1, rat: 1 };
+      
+      // Asegurar que la mascota global se inicializa
+      updateGlobalCompanionImage();
     }
 
     function saveData() {
@@ -871,8 +910,8 @@
     function showToast(text) {
       const t = document.getElementById('toastMessage');
       document.getElementById('toastText').innerText = text;
-      t.classList.remove('translate-y-16', 'opacity-0');
-      setTimeout(() => { t.classList.add('translate-y-16', 'opacity-0'); }, 2500);
+      t.classList.remove('-translate-y-16', 'opacity-0');
+      setTimeout(() => { t.classList.add('-translate-y-16', 'opacity-0'); }, 2500);
     }
 
     function getDateKey(d) {
@@ -1381,7 +1420,51 @@
       petState.type = type;
       saveData();
       renderPetsView();
-      showToast(`Has seleccionado a ${PET_DATA[type].name}`);
+      updateGlobalCompanionImage();
+      triggerGlobalPetAnimation('anim-cute', '✨');
+      showToast(`Has invocado a ${PET_DATA[type].name}`);
+    }
+
+    function updateGlobalCompanionImage() {
+      const p = PET_DATA[petState.type];
+      const lvl = petState.levels[petState.type] || 1;
+      const stageIdx = lvl - 1;
+      const globalImg = document.getElementById('globalCompanionImg');
+      if (globalImg) {
+        globalImg.src = p.files[stageIdx];
+      }
+    }
+
+    function triggerGlobalPetAnimation(animClass, reactionEmoji = '') {
+      const globalImg = document.getElementById('globalCompanionImg');
+      const reaction = document.getElementById('companionReaction');
+      
+      if (!globalImg) return;
+      
+      // Remover animación de respiración y añadir la nueva
+      globalImg.classList.remove('anim-breathe', 'anim-eat', 'anim-pet', 'anim-cute');
+      void globalImg.offsetWidth; // Forzar reflow para reiniciar animación
+      globalImg.classList.add(animClass);
+      
+      // Mostrar emoji de reacción
+      if (reactionEmoji) {
+        reaction.innerText = reactionEmoji;
+        reaction.classList.remove('opacity-0');
+        reaction.classList.add('-translate-y-4');
+      }
+
+      // Volver a la respiración normal después de la animación
+      setTimeout(() => {
+        globalImg.classList.remove(animClass);
+        globalImg.classList.add('anim-breathe');
+        
+        reaction.classList.add('opacity-0');
+        reaction.classList.remove('-translate-y-4');
+      }, 1000);
+    }
+
+    function triggerCuteMove() {
+      triggerGlobalPetAnimation('anim-cute', '💖');
     }
 
     function renderPetsView() {
@@ -1418,22 +1501,29 @@
       } else {
         btnEvolve.classList.add('hidden');
       }
+      
+      updateGlobalCompanionImage();
     }
 
     function interactPet(action, e) {
       if (action === 'feed') {
         petState.hunger = Math.min(100, petState.hunger + 25);
         petState.xp += 10;
+        triggerGlobalPetAnimation('anim-eat', '🍖');
+        showToast('Familiar alimentado');
       } else if (action === 'pet') {
         petState.happiness = Math.min(100, petState.happiness + 20);
         petState.xp += 15;
+        triggerGlobalPetAnimation('anim-pet', '💕');
+        showToast('Vínculo fortalecido');
       } else if (action === 'play') {
         petState.medals += 1;
         petState.xp += 25;
+        triggerGlobalPetAnimation('anim-cute', '✨');
+        showToast('Invocación completada');
       }
       saveData();
       renderPetsView();
-      showToast('Vínculo fortalecido');
     }
 
     function evolveActivePet(e) {
