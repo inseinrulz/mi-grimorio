@@ -403,7 +403,7 @@
             <i data-lucide="chevron-right" class="w-5 h-5"></i>
           </button>
 
-          <!-- NUEVO BOTÓN DE CALENDARIO DIRECTO -->
+          <!-- BOTÓN DE CALENDARIO DIRECTO -->
           <button onclick="document.getElementById('datePickerInput').showPicker?.() || document.getElementById('datePickerInput').click()" class="p-1.5 hover:bg-zinc-800 rounded-xl text-zinc-400 hover:text-[#8da89b] transition" title="Seleccionar Fecha en Calendario">
             <i data-lucide="calendar" class="w-5 h-5"></i>
           </button>
@@ -864,8 +864,8 @@
         </div>
         <div class="grid grid-cols-2 gap-3">
           <div>
-            <label class="block text-zinc-400 uppercase tracking-wider font-semibold mb-1">Hora:</label>
-            <input type="time" id="apptTimeInput" required class="w-full px-3 py-2 bg-[#0f1013] border border-zinc-800 rounded-xl text-zinc-200 focus:outline-none" style="color-scheme: dark;">
+            <label class="block text-zinc-400 uppercase tracking-wider font-semibold mb-1">Hora (Opcional):</label>
+            <input type="time" id="apptTimeInput" class="w-full px-3 py-2 bg-[#0f1013] border border-zinc-800 rounded-xl text-zinc-200 focus:outline-none" style="color-scheme: dark;">
           </div>
           <div>
             <label class="block text-zinc-400 uppercase tracking-wider font-semibold mb-1">Categoría:</label>
@@ -892,7 +892,7 @@
     <div class="bg-[#15141c] border border-zinc-800 rounded-2xl max-w-sm w-full p-6 shadow-2xl relative">
       <button type="button" onclick="closeAppointmentDetail()" class="absolute top-4 right-4 text-zinc-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
       <div class="flex items-center gap-2 mb-3">
-        <span class="font-mono text-xs text-[#8da89b] font-bold bg-[#8da89b]/10 px-2 py-0.5 rounded" id="detailApptTime">00:00</span>
+        <span class="font-mono text-xs text-[#8da89b] font-bold bg-[#8da89b]/10 px-2 py-0.5 rounded" id="detailApptTime">Todo el día</span>
       </div>
       <h3 class="font-serif-luxury text-2xl font-bold text-zinc-100 mb-3" id="detailApptTitle">Título</h3>
       <div class="bg-[#0f1013] p-4 rounded-xl mb-6 border border-zinc-800">
@@ -1270,7 +1270,7 @@
             <div class="flex items-center gap-3 overflow-hidden w-full">
               <input type="checkbox" class="executive-checkbox flex-shrink-0" ${appt.completed ? 'checked' : ''} onclick="toggleAppointmentCompletion(${idx}, event)">
               <div class="flex items-center gap-3 truncate ${appt.completed ? 'line-through' : ''}">
-                <span class="font-mono text-xs ${appt.completed ? 'text-zinc-500' : 'text-[#8da89b]'} font-bold">${appt.time}</span>
+                <span class="font-mono text-xs ${appt.completed ? 'text-zinc-500' : 'text-[#8da89b]'} font-bold">${appt.time ? appt.time : '—'}</span>
                 <span class="font-handwritten text-xl ${appt.completed ? 'text-zinc-500' : 'text-zinc-200'} truncate">${appt.title}</span>
               </div>
             </div>
@@ -1314,7 +1314,7 @@
         titleEl.innerText = "Editar Cita";
         document.getElementById('apptEditIndex').value = editIndex;
         document.getElementById('apptTitleInput').value = appt.title;
-        document.getElementById('apptTimeInput').value = appt.time;
+        document.getElementById('apptTimeInput').value = appt.time || "";
         document.getElementById('apptDescInput').value = appt.desc || "";
       } else {
         titleEl.innerText = "Nueva Fecha Importante";
@@ -1346,7 +1346,14 @@
         appData[key].appointments.push({ title, time, desc, completed: false });
       }
 
-      appData[key].appointments.sort((a,b) => a.time.localeCompare(b.time));
+      appData[key].appointments.sort((a,b) => {
+        const tA = a.time || "";
+        const tB = b.time || "";
+        if (!tA && tB) return -1;
+        if (tA && !tB) return 1;
+        return tA.localeCompare(tB);
+      });
+      
       saveData();
       closeAppointmentModal();
       renderAgendaView();
@@ -1356,7 +1363,7 @@
       selectedAppointmentIndex = idx;
       const key = getDateKey(currentDate);
       const appt = appData[key].appointments[idx];
-      document.getElementById('detailApptTime').innerText = appt.time;
+      document.getElementById('detailApptTime').innerText = appt.time ? appt.time : 'Todo el día';
       document.getElementById('detailApptTitle').innerText = appt.title;
       document.getElementById('detailApptDesc').innerText = appt.desc || "Sin descripción detallada.";
       document.getElementById('appointmentDetailModal').classList.remove('hidden');
