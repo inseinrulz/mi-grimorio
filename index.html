@@ -682,7 +682,7 @@
           </div>
         </div>
 
-        <div id="tarotRevealState" class="hidden w-full grid grid-cols-1 md:grid-cols-3 gap-6 z-10 relative"></div>
+        <div id="tarotRevealState" class="hidden w-full flex-col gap-4 z-10 relative"></div>
       </div>
       
       <div id="tarotNotesSection" class="mystic-wicca-card flex flex-col mt-2 mb-4">
@@ -1002,6 +1002,57 @@
     </div>
   </div>
 
+  <!-- POP-UP DE CARTA DE TAROT EN GRANDE -->
+  <div id="tarotCardDetailModal" onclick="if(event.target === this) closeTarotCardModal()" class="fixed inset-0 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 z-50 hidden">
+    <div class="bg-gradient-to-b from-[#16151e] to-[#0b0c0f] border border-[#9b8da8]/50 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-[0_0_60px_rgba(155,141,168,0.3)] transform transition-all scale-95 opacity-0 duration-300 relative overflow-hidden" id="tarotCardDetailModalCard">
+      
+      <div class="absolute top-0 left-0 w-full h-full pointer-events-none opacity-20 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#9b8da8] via-transparent to-transparent"></div>
+      
+      <button type="button" onclick="closeTarotCardModal()" class="absolute top-4 right-4 text-[#9b8da8] hover:text-white transition z-20 bg-black/60 p-2 rounded-full border border-[#9b8da8]/30">
+        <i data-lucide="x" class="w-4 h-4"></i>
+      </button>
+
+      <div class="flex flex-col items-center text-center relative z-10">
+        <span id="modalTarotPosition" class="text-[10px] font-mono tracking-widest text-[#8da89b] uppercase mb-3 px-3 py-1 rounded-full bg-[#8da89b]/10 border border-[#8da89b]/30">Arcano I · Pasado</span>
+
+        <!-- Carta en Grande -->
+        <div id="modalTarotCardVisual" class="w-40 h-60 sm:w-44 sm:h-64 rounded-2xl bg-[#090a0c] border-2 border-[#b09ba8] shadow-[0_0_30px_rgba(176,155,168,0.3)] flex flex-col items-center justify-between p-4 mb-5 relative transition-transform duration-500">
+          <div class="w-full flex justify-between items-center text-[10px] font-mono text-[#9b8da8]/70">
+            <span>✦</span>
+            <span id="modalTarotNumTop" class="font-serif-luxury text-sm font-bold text-zinc-300">I</span>
+            <span>✦</span>
+          </div>
+          <div class="my-auto flex flex-col items-center justify-center">
+            <span id="modalTarotSymbol" class="text-6xl sm:text-7xl drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">🪄</span>
+          </div>
+          <div class="w-full flex justify-between items-center text-[10px] font-mono text-[#9b8da8]/70 border-t border-zinc-800/80 pt-2">
+            <span>✦</span>
+            <span class="uppercase tracking-widest text-[8px] text-zinc-400">Arcano Mayor</span>
+            <span>✦</span>
+          </div>
+        </div>
+
+        <h3 id="modalTarotTitle" class="font-serif-luxury text-3xl text-zinc-100 font-bold mb-1 tracking-wide">El Mago</h3>
+        <span id="modalTarotOrientation" class="text-[10px] font-mono uppercase tracking-widest text-[#8da89b] mb-4">Posición al Derecho · Flujo Armónico</span>
+
+        <div class="w-full bg-black/45 p-4 rounded-2xl border border-[#9b8da8]/25 shadow-inner text-left mb-4">
+          <p class="text-[10px] font-mono uppercase tracking-widest text-[#c3b4c7] font-bold mb-1.5 flex items-center gap-1.5">
+            <span>📜</span> Significado del Arcano
+          </p>
+          <p id="modalTarotDesc" class="text-sm text-zinc-200 leading-relaxed font-serif-luxury text-base"></p>
+        </div>
+
+        <div class="w-full bg-[#8da89b]/10 p-3.5 rounded-xl border border-[#8da89b]/30 text-center">
+          <p id="modalTarotAdvice" class="font-handwritten text-xl text-[#b4c7be] italic leading-snug"></p>
+        </div>
+
+        <button type="button" onclick="closeTarotCardModal()" class="mt-6 px-8 py-2.5 bg-black/60 border border-[#9b8da8]/50 text-[#c3b4c7] hover:bg-[#9b8da8]/20 hover:text-white font-mono text-[10px] uppercase tracking-widest font-bold rounded-xl transition shadow-lg">
+          Cerrar Arcano
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- FAMILIAR GLOBAL FLOTANTE -->
   <div id="globalCompanion" onclick="triggerCuteMove()" class="fixed bottom-6 right-6 md:bottom-10 md:right-10 z-[45] cursor-pointer hover:drop-shadow-[0_0_20px_rgba(155,141,168,0.6)] transition-opacity duration-1000 flex flex-col items-center justify-end opacity-0 pointer-events-none" title="Tu familiar">
     <div id="companionReaction" class="absolute -top-6 text-xl opacity-0 transition-opacity duration-300 pointer-events-none font-bold drop-shadow-md">✨</div>
@@ -1016,6 +1067,7 @@
     let currentView = 'agenda';
     let appData = {};
     let activeTarotIndex = 0;
+    let selectedTarotCardIndex = 0;
     let selectedAppointmentIndex = null;
 
     const MONTH_NAMES = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
@@ -1707,6 +1759,7 @@
 
     function switchTarotSlot(slotIdx) {
       activeTarotIndex = slotIdx;
+      selectedTarotCardIndex = 0;
       for (let i = 0; i < 3; i++) {
         const btn = document.getElementById(`tarotSlotBtn${i}`);
         if (i === slotIdx) {
@@ -1716,6 +1769,78 @@
         }
       }
       renderTarotView();
+    }
+
+    function generateJointTarotReading(cards) {
+      if (!cards || cards.length < 3) return "";
+      const [c1, c2, c3] = cards;
+      const reversedCount = cards.filter(c => c.isReversed).length;
+
+      const cleanText = (txt) => txt.replace(/\.$/, '').toLowerCase();
+      const c1Meaning = cleanText(c1.isReversed ? c1.rev : c1.up);
+      const c2Meaning = cleanText(c2.isReversed ? c2.rev : c2.up);
+      const c3Meaning = cleanText(c3.isReversed ? c3.rev : c3.up);
+
+      let toneIntro = "";
+      if (reversedCount === 0) {
+        toneIntro = "La alineación de tus tres arcanos fluye sin bloqueos, augurando un ciclo de claridad y manifestación directa.";
+      } else if (reversedCount === 1) {
+        toneIntro = "La combinación de tus cartas muestra un sendero de evolución con un punto de aprendizaje kármico que requiere tu atención consciente.";
+      } else if (reversedCount === 2) {
+        toneIntro = "La combinación de tus cartas sugiere que estás atravesando una profunda transmutación interna donde las sombras revelan verdades ocultas.";
+      } else {
+        toneIntro = "Los tres arcanos invertidos señalan un momento de introspección absoluta: el oráculo te invita a liberar viejas resistencias antes de actuar.";
+      }
+
+      return `${toneIntro} En tu raíz (Pasado), <strong>${c1.name}${c1.isReversed ? ' (Invertida)' : ''}</strong> señala que vienes de una etapa marcada por ${c1Meaning}. Esa huella converge hoy en tu Presente con <strong>${c2.name}${c2.isReversed ? ' (Invertida)' : ''}</strong>, indicando que tu energía actual gira en torno a ${c2Meaning}. Si integras esta lección, el Futuro se abre bajo el sello de <strong>${c3.name}${c3.isReversed ? ' (Invertida)' : ''}</strong>, conduciéndote hacia ${c3Meaning}. <br><br><span class="text-[#b4c7be] italic">✦ Consejo Maestro de la Tirada: "${c2.advice} ${c3.advice}"</span>`;
+    }
+
+    function openTarotCardModal(cardIdx) {
+      const key = getDateKey(currentDate);
+      const slotData = appData[key]?.tarotSlots?.[activeTarotIndex];
+      if (!slotData || !slotData.cards[cardIdx]) return;
+
+      selectedTarotCardIndex = cardIdx;
+      renderTarotView();
+
+      const card = slotData.cards[cardIdx];
+      const posNames = ["Arcano I · Pasado", "Arcano II · Presente", "Arcano III · Futuro"];
+
+      document.getElementById('modalTarotPosition').innerText = posNames[cardIdx] || "Arcano Mayor";
+      document.getElementById('modalTarotNumTop').innerText = card.num;
+      document.getElementById('modalTarotSymbol').innerText = card.symbol;
+      document.getElementById('modalTarotTitle').innerText = card.name;
+
+      const visualEl = document.getElementById('modalTarotCardVisual');
+      const orientEl = document.getElementById('modalTarotOrientation');
+
+      if (card.isReversed) {
+        visualEl.className = "w-40 h-60 sm:w-44 sm:h-64 rounded-2xl bg-[#090a0c] border-2 border-rose-500 shadow-[0_0_30px_rgba(244,63,94,0.35)] flex flex-col items-center justify-between p-4 mb-5 relative transition-transform duration-500 rotate-180";
+        orientEl.innerText = "Carta Invertida · Energía en Sombra o Bloqueo";
+        orientEl.className = "text-[10px] font-mono uppercase tracking-widest text-rose-400 mb-4";
+      } else {
+        visualEl.className = "w-40 h-60 sm:w-44 sm:h-64 rounded-2xl bg-[#090a0c] border-2 border-[#b09ba8] shadow-[0_0_30px_rgba(176,155,168,0.3)] flex flex-col items-center justify-between p-4 mb-5 relative transition-transform duration-500";
+        orientEl.innerText = "Carta al Derecho · Flujo Armónico";
+        orientEl.className = "text-[10px] font-mono uppercase tracking-widest text-[#8da89b] mb-4";
+      }
+
+      document.getElementById('modalTarotDesc').innerText = `Has seleccionado ${card.name} (${card.num})${card.isReversed ? ' en posición invertida' : ''}: ${card.isReversed ? card.rev : card.up}`;
+      document.getElementById('modalTarotAdvice').innerText = `"${card.advice}"`;
+
+      const modal = document.getElementById('tarotCardDetailModal');
+      modal.classList.remove('hidden');
+      setTimeout(() => {
+        document.getElementById('tarotCardDetailModalCard').classList.remove('scale-95', 'opacity-0');
+      }, 10);
+      lucide.createIcons();
+    }
+
+    function closeTarotCardModal() {
+      const cardModal = document.getElementById('tarotCardDetailModalCard');
+      if (cardModal) cardModal.classList.add('scale-95', 'opacity-0');
+      setTimeout(() => {
+        document.getElementById('tarotCardDetailModal').classList.add('hidden');
+      }, 250);
     }
 
     function renderTarotView() {
@@ -1728,27 +1853,66 @@
       const revealState = document.getElementById('tarotRevealState');
       const notesArea = document.getElementById('tarotNotesTextarea');
 
-      if (slotData) {
+      if (slotData && slotData.cards && slotData.cards.length === 3) {
         deckState.classList.add('hidden');
         revealState.classList.remove('hidden');
-        revealState.classList.add('grid');
+        revealState.classList.add('flex');
         notesArea.value = slotData.notes || "";
-        revealState.innerHTML = slotData.cards.map((card, i) => `
-          <div class="mystic-wicca-card p-5 flex flex-col items-center text-center tarot-card-reveal">
-            <span class="text-[9px] font-mono tracking-widest text-[#9b8da8] uppercase mb-2">Arcano ${i === 0 ? 'I · Pasado' : i === 1 ? 'II · Presente' : 'III · Futuro'}</span>
-            <div class="w-24 h-36 rounded-xl bg-[#090a0c] border-2 ${card.isReversed ? 'border-rose-500 shadow-[0_0_15px_rgba(244,63,94,0.3)]' : 'border-[#b09ba8] shadow-[0_0_15px_rgba(176,155,168,0.2)]'} flex flex-col items-center justify-center mb-4 relative ${card.isReversed ? 'rotate-180' : ''}">
-              <span class="text-4xl mb-1">${card.symbol}</span>
-              <span class="font-serif-luxury text-xs font-bold text-zinc-300">${card.num}</span>
-            </div>
-            <h4 class="font-serif-luxury text-xl font-bold text-zinc-100 mb-1">${card.name} ${card.isReversed ? '<span class="text-xs text-rose-400 font-mono font-normal">(Invertida)</span>' : ''}</h4>
-            <p class="text-xs text-zinc-300 mb-3">${card.isReversed ? card.rev : card.up}</p>
-            <div class="mt-auto pt-3 border-t border-zinc-800 w-full text-[11px] font-handwritten text-[#b4c7be] italic">"${card.advice}"</div>
+
+        if (selectedTarotCardIndex < 0 || selectedTarotCardIndex > 2) selectedTarotCardIndex = 0;
+        const selCard = slotData.cards[selectedTarotCardIndex];
+        const posLabels = ["Pasado", "Presente", "Futuro"];
+        const jointReading = generateJointTarotReading(slotData.cards);
+
+        revealState.innerHTML = `
+          <!-- FILA DE LAS 3 CARTAS (SOLO CARTA Y TÍTULO) -->
+          <div class="grid grid-cols-3 gap-2.5 sm:gap-5 w-full">
+            ${slotData.cards.map((card, i) => {
+              const isSelected = i === selectedTarotCardIndex;
+              return `
+                <div onclick="openTarotCardModal(${i})" class="mystic-wicca-card p-3 sm:p-5 flex flex-col items-center text-center tarot-card-reveal cursor-pointer group hover:-translate-y-1.5 transition-all duration-300 border ${isSelected ? 'border-[#8da89b]/70 shadow-[0_0_25px_rgba(141,168,155,0.2)]' : 'border-zinc-800/80 hover:border-[#9b8da8]/60'}">
+                  <span class="text-[8px] sm:text-[10px] font-mono tracking-widest text-[#9b8da8] uppercase mb-2">${posLabels[i]}</span>
+                  <div class="w-20 h-32 sm:w-28 sm:h-44 rounded-xl bg-[#090a0c] border-2 ${card.isReversed ? 'border-rose-500/90 shadow-[0_0_15px_rgba(244,63,94,0.25)] rotate-180' : 'border-[#b09ba8] shadow-[0_0_15px_rgba(176,155,168,0.2)]'} flex flex-col items-center justify-center mb-3 relative group-hover:scale-105 transition-transform">
+                    <span class="text-3xl sm:text-5xl mb-1">${card.symbol}</span>
+                    <span class="font-serif-luxury text-[10px] sm:text-xs font-bold text-zinc-300">${card.num}</span>
+                  </div>
+                  <h4 class="font-serif-luxury text-sm sm:text-xl font-bold text-zinc-100 leading-tight group-hover:text-[#8da89b] transition">${card.name}</h4>
+                  ${card.isReversed ? '<span class="text-[9px] text-rose-400 font-mono mt-0.5">(Invertida)</span>' : '<span class="text-[9px] text-zinc-500 font-mono mt-0.5">Pulsa para abrir</span>'}
+                </div>
+              `;
+            }).join('')}
           </div>
-        `).join('');
+
+          <!-- 📜 DESCRIPCIÓN CARTA SELECCIONADA -->
+          <div onclick="openTarotCardModal(${selectedTarotCardIndex})" class="mystic-wicca-card p-4 sm:p-5 border border-[#9b8da8]/30 bg-[#121317] cursor-pointer hover:border-[#8da89b]/50 transition group">
+            <div class="flex items-center justify-between mb-1.5">
+              <h3 class="text-xs font-mono uppercase tracking-widest text-[#c3b4c7] font-bold flex items-center gap-2">
+                <span>📜</span> Descripción Carta Seleccionada · <span class="text-[#8da89b]">${posLabels[selectedTarotCardIndex]}</span>
+              </h3>
+              <span class="text-[10px] font-mono text-zinc-400 group-hover:text-[#8da89b] transition flex items-center gap-1">
+                Ver en grande <i data-lucide="maximize-2" class="w-3 h-3"></i>
+              </span>
+            </div>
+            <p class="text-sm text-zinc-300 leading-relaxed">
+              Has seleccionado <strong class="text-zinc-100">${selCard.name} (${selCard.num})</strong>${selCard.isReversed ? ' <span class="text-rose-400 font-mono text-xs">(Invertida)</span>' : ''}: ${selCard.isReversed ? selCard.rev : selCard.up}
+            </p>
+          </div>
+
+          <!-- 🔮 INTERPRETACIÓN CONJUNTA -->
+          <div class="mystic-wicca-card p-5 sm:p-6 border border-[#8da89b]/35 bg-gradient-to-b from-[#131519] to-[#0d0e11]">
+            <h3 class="text-xs font-mono uppercase tracking-widest text-[#8da89b] font-bold mb-2.5 flex items-center gap-2">
+              <span>🔮</span> Interpretación Conjunta de la Tirada
+            </h3>
+            <p class="text-sm sm:text-base text-zinc-200 leading-relaxed font-serif-luxury">
+              ${jointReading}
+            </p>
+          </div>
+        `;
+        lucide.createIcons();
       } else {
         deckState.classList.remove('hidden');
         revealState.classList.add('hidden');
-        revealState.classList.remove('grid');
+        revealState.classList.remove('flex');
         notesArea.value = "";
         document.getElementById('btnShuffle').innerText = "1. Barajar";
         const btnCut = document.getElementById('btnCut');
