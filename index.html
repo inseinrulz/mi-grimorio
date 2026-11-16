@@ -1801,8 +1801,6 @@
       if (!slotData || !slotData.cards[cardIdx]) return;
 
       selectedTarotCardIndex = cardIdx;
-      renderTarotView();
-
       const card = slotData.cards[cardIdx];
       const posNames = ["Arcano I · Pasado", "Arcano II · Presente", "Arcano III · Futuro"];
 
@@ -1859,43 +1857,23 @@
         revealState.classList.add('flex');
         notesArea.value = slotData.notes || "";
 
-        if (selectedTarotCardIndex < 0 || selectedTarotCardIndex > 2) selectedTarotCardIndex = 0;
-        const selCard = slotData.cards[selectedTarotCardIndex];
         const posLabels = ["Pasado", "Presente", "Futuro"];
         const jointReading = generateJointTarotReading(slotData.cards);
 
         revealState.innerHTML = `
           <!-- FILA DE LAS 3 CARTAS (SOLO CARTA Y TÍTULO) -->
           <div class="grid grid-cols-3 gap-2.5 sm:gap-5 w-full">
-            ${slotData.cards.map((card, i) => {
-              const isSelected = i === selectedTarotCardIndex;
-              return `
-                <div onclick="openTarotCardModal(${i})" class="mystic-wicca-card p-3 sm:p-5 flex flex-col items-center text-center tarot-card-reveal cursor-pointer group hover:-translate-y-1.5 transition-all duration-300 border ${isSelected ? 'border-[#8da89b]/70 shadow-[0_0_25px_rgba(141,168,155,0.2)]' : 'border-zinc-800/80 hover:border-[#9b8da8]/60'}">
-                  <span class="text-[8px] sm:text-[10px] font-mono tracking-widest text-[#9b8da8] uppercase mb-2">${posLabels[i]}</span>
-                  <div class="w-20 h-32 sm:w-28 sm:h-44 rounded-xl bg-[#090a0c] border-2 ${card.isReversed ? 'border-rose-500/90 shadow-[0_0_15px_rgba(244,63,94,0.25)] rotate-180' : 'border-[#b09ba8] shadow-[0_0_15px_rgba(176,155,168,0.2)]'} flex flex-col items-center justify-center mb-3 relative group-hover:scale-105 transition-transform">
-                    <span class="text-3xl sm:text-5xl mb-1">${card.symbol}</span>
-                    <span class="font-serif-luxury text-[10px] sm:text-xs font-bold text-zinc-300">${card.num}</span>
-                  </div>
-                  <h4 class="font-serif-luxury text-sm sm:text-xl font-bold text-zinc-100 leading-tight group-hover:text-[#8da89b] transition">${card.name}</h4>
-                  ${card.isReversed ? '<span class="text-[9px] text-rose-400 font-mono mt-0.5">(Invertida)</span>' : '<span class="text-[9px] text-zinc-500 font-mono mt-0.5">Pulsa para abrir</span>'}
+            ${slotData.cards.map((card, i) => `
+              <div onclick="openTarotCardModal(${i})" class="mystic-wicca-card p-3 sm:p-5 flex flex-col items-center text-center tarot-card-reveal cursor-pointer group hover:-translate-y-1.5 transition-all duration-300 border border-zinc-800/80 hover:border-[#8da89b]/70 hover:shadow-[0_0_25px_rgba(141,168,155,0.2)]">
+                <span class="text-[8px] sm:text-[10px] font-mono tracking-widest text-[#9b8da8] uppercase mb-2">${posLabels[i]}</span>
+                <div class="w-20 h-32 sm:w-28 sm:h-44 rounded-xl bg-[#090a0c] border-2 ${card.isReversed ? 'border-rose-500/90 shadow-[0_0_15px_rgba(244,63,94,0.25)] rotate-180' : 'border-[#b09ba8] shadow-[0_0_15px_rgba(176,155,168,0.2)]'} flex flex-col items-center justify-center mb-3 relative group-hover:scale-105 transition-transform">
+                  <span class="text-3xl sm:text-5xl mb-1">${card.symbol}</span>
+                  <span class="font-serif-luxury text-[10px] sm:text-xs font-bold text-zinc-300">${card.num}</span>
                 </div>
-              `;
-            }).join('')}
-          </div>
-
-          <!-- 📜 DESCRIPCIÓN CARTA SELECCIONADA -->
-          <div onclick="openTarotCardModal(${selectedTarotCardIndex})" class="mystic-wicca-card p-4 sm:p-5 border border-[#9b8da8]/30 bg-[#121317] cursor-pointer hover:border-[#8da89b]/50 transition group">
-            <div class="flex items-center justify-between mb-1.5">
-              <h3 class="text-xs font-mono uppercase tracking-widest text-[#c3b4c7] font-bold flex items-center gap-2">
-                <span>📜</span> Descripción Carta Seleccionada · <span class="text-[#8da89b]">${posLabels[selectedTarotCardIndex]}</span>
-              </h3>
-              <span class="text-[10px] font-mono text-zinc-400 group-hover:text-[#8da89b] transition flex items-center gap-1">
-                Ver en grande <i data-lucide="maximize-2" class="w-3 h-3"></i>
-              </span>
-            </div>
-            <p class="text-sm text-zinc-300 leading-relaxed">
-              Has seleccionado <strong class="text-zinc-100">${selCard.name} (${selCard.num})</strong>${selCard.isReversed ? ' <span class="text-rose-400 font-mono text-xs">(Invertida)</span>' : ''}: ${selCard.isReversed ? selCard.rev : selCard.up}
-            </p>
+                <h4 class="font-serif-luxury text-sm sm:text-xl font-bold text-zinc-100 leading-tight group-hover:text-[#8da89b] transition">${card.name}</h4>
+                ${card.isReversed ? '<span class="text-[9px] text-rose-400 font-mono mt-0.5">(Invertida)</span>' : '<span class="text-[9px] text-zinc-500 font-mono mt-0.5">Pulsa para ver</span>'}
+              </div>
+            `).join('')}
           </div>
 
           <!-- 🔮 INTERPRETACIÓN CONJUNTA -->
