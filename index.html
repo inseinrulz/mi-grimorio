@@ -1382,12 +1382,10 @@
       const lunar = getLunarPhaseData(currentDate);
       const modal = document.getElementById('moonModal');
       const content = document.getElementById('lunarModalContent');
-      const rawSrc = `lunasOscuras${lunar.phaseIndex + 1}.png`;
-      const moonSrc = transparentMoonCache[rawSrc] || rawSrc;
       
       content.innerHTML = `
-        <div class="w-40 h-40 flex items-center justify-center mb-6 relative">
-           <img id="modalMoonImg" src="${moonSrc}" class="w-full h-full object-contain drop-shadow-[0_0_25px_rgba(141,168,155,0.35)]" alt="Fase Lunar">
+        <div class="w-40 h-40 rounded-full bg-[#090a0c] overflow-hidden flex items-center justify-center mb-6 shadow-[0_0_40px_rgba(141,168,155,0.2)] border-2 border-[#8da89b]/30 relative">
+           <img src="lunasOscuras${lunar.phaseIndex + 1}.png" class="w-full h-full object-cover scale-[1.75]" alt="Fase Lunar">
         </div>
         <h3 class="font-serif-luxury text-3xl text-zinc-100 font-bold tracking-wide">${lunar.phaseName}</h3>
         <p class="text-xs font-mono text-[#8da89b] tracking-widest uppercase mt-2 mb-6">${lunar.phaseDesc}</p>
@@ -1397,9 +1395,6 @@
           </p>
         </div>
       `;
-      if (!transparentMoonCache[rawSrc]) {
-        applyTransparentMoonIcon(document.getElementById('modalMoonImg'), rawSrc);
-      }
       modal.classList.remove('hidden');
     }
     
