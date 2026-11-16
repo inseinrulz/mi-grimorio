@@ -389,8 +389,8 @@
       <!-- Fila Superior: Fecha y Selector restaurado -->
       <div class="flex flex-nowrap items-center justify-between w-full bg-[#121316] rounded-2xl px-2 sm:px-5 py-2 sm:py-3 relative z-10 shadow-sm gap-2">
         
-        <button onclick="openMoonModal()" class="flex items-center justify-center flex-shrink-0 w-12 h-12 bg-transparent hover:bg-zinc-800/50 rounded-xl transition" title="Ver Fase Lunar">
-          <img id="headerMoonPhaseIcon" src="lunasOscuras1.png" class="w-10 h-10 object-contain drop-shadow-[0_0_8px_rgba(141,168,155,0.3)]" alt="Fase Lunar">
+        <button onclick="openMoonModal()" class="flex items-center justify-center flex-shrink-0 w-12 h-12 sm:w-16 sm:h-16 bg-transparent border-0 shadow-none hover:scale-110 transition-transform" title="Ver Fase Lunar">
+          <img id="headerMoonPhaseIcon" src="lunasOscuras1.png" class="w-full h-full object-contain drop-shadow-[0_0_10px_rgba(141,168,155,0.3)]" alt="Fase Lunar">
         </button>
         
         <!-- NAVEGADOR DE CALENDARIO RESTAURADO -->
@@ -1205,11 +1205,155 @@
       return { phaseName, phaseIndex, phaseDesc };
     }
 
+    const transparentMoonCache = {};
+
+    function applyTransparentMoonIcon(imgEl, src) {
+      if (!imgEl) return;
+      if (transparentMoonCache[src]) {
+        imgEl.src = transparentMoonCache[src];
+        return;
+      }
+
+      const tempImg = new Image();
+      tempImg.crossOrigin = "Anonymous";
+      tempImg.onload = function() {
+        try {
+          const w = tempImg.naturalWidth || tempImg.width;
+          const h = tempImg.naturalHeight || tempImg.height;
+          const canvas = document.createElement('canvas');
+          canvas.width = w;
+          canvas.height = h;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(tempImg, 0, 0);
+
+          const imgData = ctx.getImageData(0, 0, w, h);
+          const data = imgData.data;
+
+          // Tomamos el color base del fondo desde la esquina superior izquierda
+          const bgR = data[0], bgG = data[1], bgB = data[2];
+          const visited = new Uint8Array(w * h);
+          const isBg = new Uint8Array(w * h);
+          const queue = new Int32Array(w * h);
+          let head = 0, tail = 0;
+
+          function colorDist(idx) {
+            const dr = data[idx] - bgR;
+            const dg = data[idx + 1] - bgG;
+            const db = data[idx + 2] - bgB;
+            return Math.sqrt(dr * dr + dg * dg + db * db);
+          }
+
+          function isDarkBg(idx) {
+            const lum = 0.299 * data[idx] + 0.587 * data[idx + 1] + 0.114 * data[idx + 2];
+            return colorDist(idx) <= 38 && lum < 45;
+          }
+
+          // Inundamos desde los 4 bordes para eliminar todo el recuadro negro exterior
+          for (let x = 0; x < w; x++) {
+            let pTop = x;
+            let pBot = (h - 1) * w + x;
+            if (isDarkBg(pTop * 4)) { visited[pTop] = 1; queue[tail++] = pTop; }
+            if (isDarkBg(pBot * 4)) { visited[pBot] = 1; queue[tail++] = pBot; }
+          }
+          for (let y = 0; y < h; y++) {
+            let pLeft = y * w;
+            let pRight = y * w + (w - 1);
+            if (!visited[pLeft] && isDarkBg(pLeft * 4)) { visited[pLeft] = 1; queue[tail++] = pLeft; }
+            if (!visited[pRight] && isDarkBg(pRight * 4)) { visited[pRight] = 1; queue[tail++] = pRight; }
+          }
+
+          while (head < tail) {
+            const p = queue[head++];
+            isBg[p] = 1;
+            const x = p % w;
+            const y = (p / w) | 0;
+
+            const neighbors = [];
+            if (x > 0) neighbors.push(p - 1);
+            if (x < w - 1) neighbors.push(p + 1);
+            if (y > 0) neighbors.push(p - w);
+            if (y < h - 1) neighbors.push(p + w);
+
+            for (let i = 0; i < neighbors.length; i++) {
+              const np = neighbors[i];
+              if (!visited[np] && isDarkBg(np * 4)) {
+                visited[np] = 1;
+                queue[tail++] = np;
+              }
+            }
+          }
+
+          // Aplicamos transparencia al fondo y suavizamos los bordes de la luna
+          let minX = w, minY = h, maxX = 0, maxY = 0;
+          for (let y = 0; y < h; y++) {
+            for (let x = 0; x < w; x++) {
+              const p = y * w + x;
+              const idx = p * 4;
+              if (isBg[p]) {
+                data[idx + 3] = 0;
+              } else {
+                // Suavizado del borde si toca un píxel de fondo
+                const touchesBg = (x > 0 && isBg[p - 1]) || (x < w - 1 && isBg[p + 1]) || (y > 0 && isBg[p - w]) || (y < h - 1 && isBg[p + w]);
+                if (touchesBg) {
+                  const dist = colorDist(idx);
+                  if (dist < 65) {
+                    data[idx + 3] = Math.max(0, Math.min(255, Math.floor(((dist - 25) / 40) * 255)));
+                  }
+                }
+                if (data[idx + 3] > 35) {
+                  if (x < minX) minX = x;
+                  if (x > maxX) maxX = x;
+                  if (y < minY) minY = y;
+                  if (y > maxY) maxY = y;
+                }
+              }
+            }
+          }
+
+          ctx.putImageData(imgData, 0, 0);
+
+          // Recortamos el margen vacío alrededor de la luna para que tenga el tamaño exacto de los demás iconos
+          if (maxX > minX && maxY > minY) {
+            const cropW = maxX - minX + 1;
+            const cropH = maxY - minY + 1;
+            const size = Math.max(cropW, cropH);
+            const pad = Math.round(size * 0.04);
+            const finalSize = size + pad * 2;
+
+            const outCanvas = document.createElement('canvas');
+            outCanvas.width = finalSize;
+            outCanvas.height = finalSize;
+            const outCtx = outCanvas.getContext('2d');
+
+            const offsetX = pad + Math.round((size - cropW) / 2);
+            const offsetY = pad + Math.round((size - cropH) / 2);
+            outCtx.drawImage(canvas, minX, minY, cropW, cropH, offsetX, offsetY, cropW, cropH);
+
+            const dataUrl = outCanvas.toDataURL('image/png');
+            transparentMoonCache[src] = dataUrl;
+            imgEl.src = dataUrl;
+          } else {
+            const dataUrl = canvas.toDataURL('image/png');
+            transparentMoonCache[src] = dataUrl;
+            imgEl.src = dataUrl;
+          }
+        } catch (e) {
+          // Respaldo visual en caso de restricciones CORS locales
+          imgEl.src = src;
+          imgEl.classList.add('rounded-full', 'scale-125', 'mix-blend-lighten');
+        }
+      };
+      tempImg.onerror = function() {
+        imgEl.src = src;
+      };
+      tempImg.src = src;
+    }
+
     function updateMoonHeaderInfo() {
       const lunar = getLunarPhaseData(currentDate);
       const iconEl = document.getElementById('headerMoonPhaseIcon');
       if (iconEl) {
-        iconEl.src = `lunasOscuras${lunar.phaseIndex + 1}.png`;
+        applyTransparentMoonIcon(iconEl, `lunasOscuras${lunar.phaseIndex + 1}.png`);
       }
     }
 
@@ -1238,10 +1382,12 @@
       const lunar = getLunarPhaseData(currentDate);
       const modal = document.getElementById('moonModal');
       const content = document.getElementById('lunarModalContent');
+      const rawSrc = `lunasOscuras${lunar.phaseIndex + 1}.png`;
+      const moonSrc = transparentMoonCache[rawSrc] || rawSrc;
       
       content.innerHTML = `
-        <div class="w-40 h-40 rounded-full bg-[#090a0c] overflow-hidden flex items-center justify-center mb-6 shadow-[0_0_40px_rgba(141,168,155,0.2)] border-2 border-[#8da89b]/30 relative">
-           <img src="lunasOscuras${lunar.phaseIndex + 1}.png" class="w-full h-full object-cover scale-[1.75]" alt="Fase Lunar">
+        <div class="w-40 h-40 flex items-center justify-center mb-6 relative">
+           <img id="modalMoonImg" src="${moonSrc}" class="w-full h-full object-contain drop-shadow-[0_0_25px_rgba(141,168,155,0.35)]" alt="Fase Lunar">
         </div>
         <h3 class="font-serif-luxury text-3xl text-zinc-100 font-bold tracking-wide">${lunar.phaseName}</h3>
         <p class="text-xs font-mono text-[#8da89b] tracking-widest uppercase mt-2 mb-6">${lunar.phaseDesc}</p>
@@ -1251,6 +1397,9 @@
           </p>
         </div>
       `;
+      if (!transparentMoonCache[rawSrc]) {
+        applyTransparentMoonIcon(document.getElementById('modalMoonImg'), rawSrc);
+      }
       modal.classList.remove('hidden');
     }
     
