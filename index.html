@@ -1008,8 +1008,8 @@
   </div>
 
   <!-- POP-UP DE CARTA DE TAROT EN GRANDE -->
-  <div id="tarotCardDetailModal" onclick="if(event.target === this) closeTarotCardModal()" class="fixed inset-0 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 z-50 hidden">
-    <div class="bg-gradient-to-b from-[#16151e] to-[#0b0c0f] border border-[#9b8da8]/50 rounded-3xl max-w-md w-full max-h-[92vh] overflow-y-auto custom-scroll p-6 sm:p-8 shadow-[0_0_60px_rgba(155,141,168,0.3)] transform transition-all scale-95 opacity-0 duration-300 relative" id="tarotCardDetailModalCard">
+  <div id="tarotCardDetailModal" onclick="if(event.target === this) closeTarotCardModal()" class="fixed inset-0 bg-black/85 backdrop-blur-md items-center justify-center p-4 z-50 hidden">
+    <div class="bg-gradient-to-b from-[#16151e] to-[#0b0c0f] border border-[#9b8da8]/50 rounded-3xl max-w-md w-full max-h-[92vh] overflow-y-auto custom-scroll p-5 sm:p-7 shadow-[0_0_60px_rgba(155,141,168,0.3)] transform transition-all scale-95 opacity-0 duration-300 relative" id="tarotCardDetailModalCard">
       
       <div class="absolute top-0 left-0 w-full h-full pointer-events-none opacity-20 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#9b8da8] via-transparent to-transparent"></div>
       
@@ -1021,8 +1021,8 @@
         <span id="modalTarotPosition" class="text-[10px] font-mono tracking-widest text-[#8da89b] uppercase mb-3 px-3 py-1 rounded-full bg-[#8da89b]/10 border border-[#8da89b]/30">Arcano I · Pasado</span>
 
         <!-- Carta en Grande (Completa sin recorte) -->
-        <div id="modalTarotCardVisual" class="w-48 h-80 sm:w-56 sm:h-96 rounded-2xl bg-[#090a0c] border-2 border-[#b09ba8] shadow-[0_0_30px_rgba(176,155,168,0.3)] flex flex-col items-center justify-center overflow-hidden mb-5 p-1.5 relative transition-transform duration-500 flex-shrink-0">
-          <img id="modalTarotImg" src="Art/Tarot/0.png" alt="Arcano" class="w-full h-full object-contain rounded-xl" onerror="this.classList.add('hidden'); document.getElementById('modalTarotFallback').classList.remove('hidden'); document.getElementById('modalTarotFallback').classList.add('flex');">
+        <div id="modalTarotCardVisual" class="w-44 sm:w-56 aspect-[2/3] rounded-2xl bg-[#090a0c] border-2 border-[#b09ba8] shadow-[0_0_30px_rgba(176,155,168,0.3)] flex items-center justify-center overflow-hidden mb-4 p-1.5 relative transition-transform duration-500 flex-shrink-0">
+          <img id="modalTarotImg" src="Art/Tarot/0.png" alt="Arcano" class="w-full h-full object-contain rounded-xl transition-transform duration-500" onerror="this.classList.add('hidden'); document.getElementById('modalTarotFallback').classList.remove('hidden'); document.getElementById('modalTarotFallback').classList.add('flex');">
           <div id="modalTarotFallback" class="hidden w-full h-full flex-col items-center justify-between p-4">
             <div class="w-full flex justify-between items-center text-[10px] font-mono text-[#9b8da8]/70">
               <span>✦</span>
@@ -1040,7 +1040,7 @@
           </div>
         </div>
 
-        <h3 id="modalTarotTitle" class="font-serif-luxury text-3xl text-zinc-100 font-bold mb-1 tracking-wide">El Mago</h3>
+        <h3 id="modalTarotTitle" class="font-serif-luxury text-2xl sm:text-3xl text-zinc-100 font-bold mb-1 tracking-wide">El Mago</h3>
         <span id="modalTarotOrientation" class="text-[10px] font-mono uppercase tracking-widest text-[#8da89b] mb-4">Posición al Derecho · Flujo Armónico</span>
 
         <div class="w-full bg-black/45 p-4 rounded-2xl border border-[#9b8da8]/25 shadow-inner text-left mb-4">
@@ -1910,11 +1910,15 @@
       const orientEl = document.getElementById('modalTarotOrientation');
 
       if (card.isReversed) {
-        visualEl.className = "w-48 h-80 sm:w-56 sm:h-96 rounded-2xl bg-[#090a0c] border-2 border-rose-500 shadow-[0_0_30px_rgba(244,63,94,0.35)] flex flex-col items-center justify-center overflow-hidden mb-5 p-1.5 relative transition-transform duration-500 rotate-180 flex-shrink-0";
+        visualEl.className = "w-44 sm:w-56 aspect-[2/3] rounded-2xl bg-[#090a0c] border-2 border-rose-500 shadow-[0_0_30px_rgba(244,63,94,0.35)] flex items-center justify-center overflow-hidden mb-4 p-1.5 relative transition-transform duration-500 flex-shrink-0";
+        if (modalImg) modalImg.classList.add('rotate-180');
+        if (modalFallback) modalFallback.classList.add('rotate-180');
         orientEl.innerText = "Carta Invertida · Energía en Sombra o Bloqueo";
         orientEl.className = "text-[10px] font-mono uppercase tracking-widest text-rose-400 mb-4";
       } else {
-        visualEl.className = "w-48 h-80 sm:w-56 sm:h-96 rounded-2xl bg-[#090a0c] border-2 border-[#b09ba8] shadow-[0_0_30px_rgba(176,155,168,0.3)] flex flex-col items-center justify-center overflow-hidden mb-5 p-1.5 relative transition-transform duration-500 flex-shrink-0";
+        visualEl.className = "w-44 sm:w-56 aspect-[2/3] rounded-2xl bg-[#090a0c] border-2 border-[#b09ba8] shadow-[0_0_30px_rgba(176,155,168,0.3)] flex items-center justify-center overflow-hidden mb-4 p-1.5 relative transition-transform duration-500 flex-shrink-0";
+        if (modalImg) modalImg.classList.remove('rotate-180');
+        if (modalFallback) modalFallback.classList.remove('rotate-180');
         orientEl.innerText = "Carta al Derecho · Flujo Armónico";
         orientEl.className = "text-[10px] font-mono uppercase tracking-widest text-[#8da89b] mb-4";
       }
@@ -1924,17 +1928,20 @@
 
       const modal = document.getElementById('tarotCardDetailModal');
       modal.classList.remove('hidden');
+      modal.classList.add('flex');
       setTimeout(() => {
         document.getElementById('tarotCardDetailModalCard').classList.remove('scale-95', 'opacity-0');
       }, 10);
-      lucide.createIcons();
+      if (window.lucide) lucide.createIcons();
     }
 
     function closeTarotCardModal() {
       const cardModal = document.getElementById('tarotCardDetailModalCard');
       if (cardModal) cardModal.classList.add('scale-95', 'opacity-0');
       setTimeout(() => {
-        document.getElementById('tarotCardDetailModal').classList.add('hidden');
+        const modal = document.getElementById('tarotCardDetailModal');
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
       }, 250);
     }
 
@@ -1963,21 +1970,21 @@
             ${slotData.cards.map((card, i) => {
               const imgSrc = getCardImageSrc(card);
               return `
-              <div onclick="openTarotCardModal(${i})" class="mystic-wicca-card p-2.5 sm:p-4 flex flex-col items-center justify-between text-center tarot-card-reveal cursor-pointer group hover:-translate-y-1.5 transition-all duration-300 border border-zinc-800/80 hover:border-[#8da89b]/70 hover:shadow-[0_0_25px_rgba(141,168,155,0.2)] h-full">
+              <div onclick="openTarotCardModal(${i})" class="mystic-wicca-card p-2.5 sm:p-4 flex flex-col items-center justify-between text-center tarot-card-reveal cursor-pointer group hover:-translate-y-1.5 transition-all duration-300 border border-zinc-800/80 hover:border-[#8da89b]/70 hover:shadow-[0_0_25px_rgba(141,168,155,0.2)] h-full min-h-[250px] sm:min-h-[340px]">
                 <span class="text-[8px] sm:text-[10px] font-mono tracking-widest text-[#9b8da8] uppercase mb-2 flex-shrink-0">${posLabels[i]}</span>
-                <div class="w-20 h-36 sm:w-32 sm:h-56 flex-shrink-0 rounded-xl bg-[#090a0c] border-2 ${card.isReversed ? 'border-rose-500/90 shadow-[0_0_15px_rgba(244,63,94,0.25)] rotate-180' : 'border-[#b09ba8] shadow-[0_0_15px_rgba(176,155,168,0.2)]'} flex flex-col items-center justify-center mb-2.5 p-1 relative overflow-hidden group-hover:scale-105 transition-transform">
-                  <img src="${imgSrc}" alt="${card.name}" class="w-full h-full object-contain rounded-lg" onerror="this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden'); this.nextElementSibling.classList.add('flex');">
-                  <div class="hidden flex-col items-center justify-center w-full h-full">
+                <div class="w-full max-w-[96px] sm:max-w-[136px] aspect-[2/3] flex-shrink-0 rounded-xl bg-[#090a0c] border-2 ${card.isReversed ? 'border-rose-500/90 shadow-[0_0_15px_rgba(244,63,94,0.25)]' : 'border-[#b09ba8] shadow-[0_0_15px_rgba(176,155,168,0.2)]'} flex items-center justify-center mb-2.5 p-1 relative overflow-hidden group-hover:scale-105 transition-transform">
+                  <img src="${imgSrc}" alt="${card.name}" class="w-full h-full object-contain rounded-lg ${card.isReversed ? 'rotate-180' : ''}" onerror="this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden'); this.nextElementSibling.classList.add('flex');">
+                  <div class="hidden flex-col items-center justify-center w-full h-full ${card.isReversed ? 'rotate-180' : ''}">
                     <span class="text-3xl sm:text-5xl mb-1">${card.symbol}</span>
                     <span class="font-serif-luxury text-[10px] sm:text-xs font-bold text-zinc-300">${card.num}</span>
                   </div>
                 </div>
-                <div class="h-10 sm:h-12 flex items-center justify-center w-full px-1 flex-shrink-0">
+                <div class="h-9 sm:h-11 flex items-center justify-center w-full px-1 flex-shrink-0">
                   <h4 class="font-serif-luxury text-xs sm:text-lg font-bold text-zinc-100 leading-tight group-hover:text-[#8da89b] transition line-clamp-2">${card.name}</h4>
                 </div>
-                <div class="flex flex-col items-center justify-end gap-0.5 mt-1 min-h-[28px] flex-shrink-0">
-                  <span class="text-[9px] text-rose-400 font-mono leading-none ${card.isReversed ? 'opacity-100' : 'opacity-0 select-none'}">(Invertida)</span>
-                  <span class="text-[9px] text-zinc-500 group-hover:text-zinc-300 font-mono leading-none transition">Pulsa para ver</span>
+                <div class="flex flex-col items-center justify-center gap-1 mt-1 min-h-[30px] flex-shrink-0 w-full">
+                  ${card.isReversed ? '<span class="text-[9px] text-rose-400 font-mono leading-none">(Invertida)</span>' : '<span class="text-[9px] font-mono leading-none opacity-0 select-none">(Al derecho)</span>'}
+                  <span class="text-[9px] text-zinc-400 group-hover:text-[#8da89b] font-mono leading-none transition">(Pulsa para ver)</span>
                 </div>
               </div>
             `;
@@ -1994,7 +2001,7 @@
             </p>
           </div>
         `;
-        lucide.createIcons();
+        if (window.lucide) lucide.createIcons();
       } else {
         deckState.classList.remove('hidden');
         revealState.classList.add('hidden');
@@ -2010,7 +2017,7 @@
     function startTarotShuffle() {
       const deck = document.getElementById('theDeck');
       deck.classList.add('shuffling');
-      document.getElementById('btnShuffle').innerText = "Barajando el Eter...";
+      document.getElementById('btnShuffle').innerText = "Barajando el Éter...";
       setTimeout(() => {
         deck.classList.remove('shuffling');
         document.getElementById('btnShuffle').innerText = "1. Barajado";
@@ -2055,7 +2062,7 @@
       }
     }
 
-    function changePetType(type, e) {
+    function changePetType(type) {
       petState.type = type;
       saveData();
       renderPetsView();
@@ -2065,9 +2072,9 @@
     }
 
     function updateGlobalCompanionImage() {
-      const p = PET_DATA[petState.type];
+      const p = PET_DATA[petState.type] || PET_DATA.cat;
       const lvl = petState.levels[petState.type] || 1;
-      const stageIdx = lvl - 1;
+      const stageIdx = Math.min(2, Math.max(0, lvl - 1));
       const globalImg = document.getElementById('globalCompanionImg');
       if (globalImg) {
         globalImg.src = p.files[stageIdx];
@@ -2079,10 +2086,10 @@
       const reaction = document.getElementById('companionReaction');
       if (!globalImg) return;
       globalImg.classList.remove('anim-breathe', 'anim-eat', 'anim-pet', 'anim-cute');
-      void globalImg.offsetWidth; 
+      void globalImg.offsetWidth;
       globalImg.classList.add(animClass);
       
-      if (reactionEmoji) {
+      if (reactionEmoji && reaction) {
         reaction.innerText = reactionEmoji;
         reaction.classList.remove('opacity-0');
         reaction.classList.add('-translate-y-4');
@@ -2091,8 +2098,10 @@
       setTimeout(() => {
         globalImg.classList.remove(animClass);
         globalImg.classList.add('anim-breathe');
-        reaction.classList.add('opacity-0');
-        reaction.classList.remove('-translate-y-4');
+        if (reaction) {
+          reaction.classList.add('opacity-0');
+          reaction.classList.remove('-translate-y-4');
+        }
       }, 1000);
     }
 
@@ -2104,15 +2113,15 @@
       petState.xp += addedXp;
       petState.medals += addedMedals;
       saveData();
-      if(currentView === 'pets') renderPetsView();
+      if (currentView === 'pets') renderPetsView();
       showToast(`+${addedXp} XP | +${addedMedals} 🩸 (${reason})`);
       triggerGlobalPetAnimation('anim-cute', '✨');
     }
 
     function renderPetsView() {
-      const p = PET_DATA[petState.type];
+      const p = PET_DATA[petState.type] || PET_DATA.cat;
       const lvl = petState.levels[petState.type] || 1;
-      const stageIdx = lvl - 1;
+      const stageIdx = Math.min(2, Math.max(0, lvl - 1));
       
       document.getElementById('activePetName').innerText = p.stages[stageIdx];
       document.getElementById('activePetStageLabel').innerText = `Fase ${lvl}: ${p.name}`;
@@ -2155,7 +2164,7 @@
       updateGlobalCompanionImage();
     }
 
-    function interactPet(action, e) {
+    function interactPet(action) {
       if (action === 'feed') {
         if (petState.hunger >= 100) { showToast('Ya está plenamente saciado', true); return; }
         petState.hunger = Math.min(100, petState.hunger + 30);
@@ -2182,14 +2191,14 @@
       renderPetsView();
     }
 
-    function evolveActivePet(e) {
+    function evolveActivePet() {
       const lvl = petState.levels[petState.type] || 1;
       const reqXp = lvl === 1 ? 150 : 400;
       const reqMedals = lvl === 1 ? 5 : 15;
       
       if (petState.xp >= reqXp && petState.medals >= reqMedals && lvl < 3) {
         petState.medals -= reqMedals;
-        petState.xp -= reqXp; 
+        petState.xp -= reqXp;
         petState.levels[petState.type] = lvl + 1;
         saveData();
         renderPetsView();
@@ -2202,15 +2211,15 @@
 
     function openEsotericDetail(key) {
       const info = ESOTERIC_DATA[key];
-      if(!info) return;
+      if (!info) return;
       document.getElementById('esotericDetailTitle').innerText = info.title;
       document.getElementById('esotericDetailSubtitle').innerText = info.sub;
       document.getElementById('esotericDetailBody').innerText = info.desc;
 
       const iconContainer = document.getElementById('esotericDetailIconContainer');
       if (iconContainer) {
-        iconContainer.innerHTML = `<i data-lucide="${info.icon || 'star'}" class="w-8 h-8 text-[#c3b4c7] opacity-80"></i>`;
-        lucide.createIcons();
+        iconContainer.innerHTML = `<i data-lucide="${info.icon || 'star'}" class="w-9 h-9 text-[#c3b4c7] opacity-90"></i>`;
+        if (window.lucide) lucide.createIcons();
       }
 
       const modal = document.getElementById('esotericDetailModal');
@@ -2228,14 +2237,12 @@
     }
 
     let savedPin = localStorage.getItem('grimorio_pin_v1');
-    if (savedPin && !/^\d{6}$/.test(savedPin.trim())) {
+    if (savedPin && (!/^\d{6}$/.test(savedPin))) {
       localStorage.removeItem('grimorio_pin_v1');
       savedPin = null;
-    } else if (savedPin) {
-      savedPin = savedPin.trim();
     }
 
-    let userSettings = JSON.parse(localStorage.getItem('grimorio_settings_v1') || 'null') || {
+    let userSettings = JSON.parse(localStorage.getItem('grimorio_settings_v1')) || {
       sun: "Escorpio ♏",
       moon: "Acuario ♒",
       asc: "Tauro ♉"
@@ -2299,7 +2306,13 @@
     }
 
     function exportBackup() {
-      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(appData));
+      const backupPayload = {
+        appData,
+        petState,
+        userSettings,
+        globalHabits
+      };
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(backupPayload));
       const dlAnchor = document.createElement('a');
       dlAnchor.setAttribute("href", dataStr);
       dlAnchor.setAttribute("download", "grimorio_respaldo.json");
@@ -2318,8 +2331,22 @@
         try {
           const parsed = JSON.parse(evt.target.result);
           if (parsed && typeof parsed === 'object') {
-            appData = parsed;
+            if (parsed.appData) {
+              appData = parsed.appData;
+              if (parsed.petState) petState = parsed.petState;
+              if (parsed.userSettings) {
+                userSettings = parsed.userSettings;
+                localStorage.setItem('grimorio_settings_v1', JSON.stringify(userSettings));
+              }
+              if (parsed.globalHabits) {
+                globalHabits = parsed.globalHabits;
+                localStorage.setItem('mystic_habits_catalog', JSON.stringify(globalHabits));
+              }
+            } else {
+              appData = parsed;
+            }
             saveData();
+            applySettingsToTriad();
             renderCurrentView();
             closeBackupModal();
             showToast('Respaldo importado con éxito');
@@ -2337,56 +2364,53 @@
     const authPinInput = document.getElementById('authPin');
     const maxDash = 289;
     
-    let unlockTimer = null;
+    let unlockTimer;
     let unlockValue = 0;
     let isUnlocking = false;
     let hasUnlocked = false;
 
-    function getFingerprintIconEl() {
-      return document.getElementById('fingerprintIcon') || fBtn.querySelector('svg, i');
+    function getFingerprintIcon() {
+      return document.getElementById('fingerprintIcon');
     }
 
     function flashError() {
-      const fIcon = getFingerprintIconEl();
+      const fIcon = getFingerprintIcon();
       if (fIcon) {
         fIcon.classList.remove('text-[#8da89b]', 'text-[#8da89b]/70', 'text-zinc-600');
         fIcon.classList.add('text-rose-500');
       }
       fProgress.style.stroke = '#f43f5e';
-      fProgress.style.strokeDashoffset = '0';
       setTimeout(() => {
-        if (fIcon) {
-          fIcon.classList.remove('text-rose-500');
-          fIcon.classList.add('text-[#8da89b]/70');
+        const iconNow = getFingerprintIcon();
+        if (iconNow) {
+          iconNow.classList.remove('text-rose-500');
+          iconNow.classList.add('text-[#8da89b]/70');
         }
         fProgress.style.stroke = '#8da89b';
-        fProgress.style.strokeDashoffset = maxDash;
-        isUnlocking = false;
-        unlockValue = 0;
-      }, 600);
+        stopUnlock();
+      }, 500);
     }
 
     function startUnlock(e) {
       if (hasUnlocked || isUnlocking) return;
-      if (e && e.cancelable && e.type !== 'keydown') e.preventDefault();
+      if (e && e.cancelable && e.type === 'touchstart') e.preventDefault();
       
       const inputPin = authPinInput.value.trim();
       
-      if (inputPin.length !== 6 || !/^\d{6}$/.test(inputPin)) {
+      if (inputPin.length !== 6 || isNaN(inputPin)) {
         showToast("El PIN debe tener 6 números", true);
         flashError();
-        authPinInput.focus();
         return;
       }
 
       if (savedPin && inputPin !== savedPin) {
-        showToast("Sello incorrecto", true);
+        showToast("Sello numérico incorrecto", true);
         flashError();
         return;
       }
 
       isUnlocking = true;
-      const fIcon = getFingerprintIconEl();
+      const fIcon = getFingerprintIcon();
       if (fIcon) {
         fIcon.classList.remove('text-zinc-600', 'text-rose-500', 'text-[#8da89b]/70');
         fIcon.classList.add('text-[#8da89b]', 'drop-shadow-[0_0_15px_rgba(141,168,155,0.8)]');
@@ -2396,18 +2420,33 @@
 
       clearInterval(unlockTimer);
       unlockTimer = setInterval(() => {
-        unlockValue += 5; 
+        unlockValue += 5;
         const offset = maxDash - (unlockValue / 100) * maxDash;
         fProgress.style.strokeDashoffset = Math.max(0, offset);
 
         if (unlockValue >= 100) {
           completeUnlock(inputPin);
         }
-      }, 20);
+      }, 25);
+    }
+
+    function stopUnlock() {
+      if (hasUnlocked || !isUnlocking) return;
+      isUnlocking = false;
+      clearInterval(unlockTimer);
+      
+      unlockValue = 0;
+      fProgress.style.strokeDashoffset = maxDash;
+      const fIcon = getFingerprintIcon();
+      if (fIcon) {
+        fIcon.classList.remove('text-[#8da89b]', 'drop-shadow-[0_0_15px_rgba(141,168,155,0.8)]');
+        fIcon.classList.add('text-[#8da89b]/70');
+      }
+      uHint.classList.add('opacity-0');
+      fBtn.style.transform = 'scale(1)';
     }
 
     function completeUnlock(inputPin) {
-      if (hasUnlocked) return;
       hasUnlocked = true;
       isUnlocking = false;
       clearInterval(unlockTimer);
@@ -2417,7 +2456,7 @@
         localStorage.setItem('grimorio_pin_v1', savedPin);
       }
 
-      const fIcon = getFingerprintIconEl();
+      const fIcon = getFingerprintIcon();
       if (fIcon) {
         fIcon.classList.remove('text-[#8da89b]', 'text-[#8da89b]/70');
         fIcon.classList.add('text-white', 'drop-shadow-[0_0_20px_rgba(255,255,255,1)]');
@@ -2428,11 +2467,8 @@
 
       setTimeout(() => {
         const lockScreen = document.getElementById('lockScreen');
-        const lockContent = document.getElementById('lockContent');
-        if (lockContent) {
-          lockContent.style.transform = 'scale(1.1)';
-          lockContent.style.opacity = '0';
-        }
+        document.getElementById('lockContent').style.transform = 'scale(1.1)';
+        document.getElementById('lockContent').style.opacity = '0';
         lockScreen.style.opacity = '0';
         lockScreen.style.backdropFilter = 'blur(0px)';
         
@@ -2441,8 +2477,8 @@
           document.getElementById('mainBody').classList.remove('overflow-hidden');
           document.getElementById('appInterfaceWrapper').classList.remove('opacity-0', 'pointer-events-none');
           document.getElementById('globalCompanion').classList.remove('opacity-0', 'pointer-events-none');
-        }, 800);
-      }, 450);
+        }, 900);
+      }, 500);
     }
 
     fBtn.addEventListener('click', startUnlock);
