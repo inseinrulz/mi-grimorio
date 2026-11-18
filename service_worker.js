@@ -1,4 +1,4 @@
-const CACHE_NAME = 'grimorio-cache-v9';
+const CACHE_NAME = 'grimorio-cache-v10';
 const ASSETS = [
   './',
   './index.html',
@@ -7,6 +7,7 @@ const ASSETS = [
   './Art/Grimorio místico de cuero envejecido_2.png',
   './Art/Emblema Gótico de Fases Lunares_2.png',
   './Art/Emblema de Huella Gótica Verde_2.png',
+  './Art/Tarot/backTarot.png',
   './Art/logo.png'
 ];
 
