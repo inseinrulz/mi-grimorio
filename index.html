@@ -323,8 +323,8 @@
     
     <header id="mainHeader" class="flex flex-col w-full relative transition-all duration-500 gap-4">
       <div class="flex flex-nowrap items-center justify-between w-full bg-[#121316] rounded-2xl px-2 sm:px-5 py-2 sm:py-3 relative z-10 shadow-sm gap-2">
-        <button onclick="openMoonModal()" class="flex items-center justify-center flex-shrink-0 w-12 h-12 sm:w-16 sm:h-16 bg-transparent border-0 shadow-none hover:scale-110 transition-transform" title="Ver Fase Lunar">
-          <img id="headerMoonPhaseIcon" src="Art/lunasOscuras1.png" class="w-full h-full object-contain drop-shadow-[0_0_10px_rgba(141,168,155,0.3)]" alt="Fase Lunar">
+        <button onclick="openMoonModal()" class="flex items-center justify-center flex-shrink-0 w-14 h-14 sm:w-16 sm:h-16 p-0 bg-transparent border-0 shadow-none hover:scale-110 transition-transform" title="Ver Fase Lunar">
+          <img id="headerMoonPhaseIcon" src="Art/lunasOscuras1.png" class="w-full h-full object-contain object-center block mx-auto drop-shadow-[0_0_10px_rgba(141,168,155,0.35)]" alt="Fase Lunar">
         </button>
         
         <div class="flex items-center justify-center flex-1 min-w-0 px-1 sm:px-2 gap-1 sm:gap-3">
@@ -357,33 +357,33 @@
       </div>
 
       <nav class="w-full relative z-10">
-        <div class="grid grid-cols-4 gap-2 sm:gap-4">
-          <button onclick="switchView('agenda')" id="cardAgenda" class="nav-emblem-btn p-2 sm:p-3 rounded-2xl flex flex-col items-center text-center gap-1.5 group relative">
-            <div class="w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
-              <img src="Art/Calendario gótico con reloj celta_2.png" alt="Agenda" class="w-full h-full object-contain drop-shadow-[0_0_10px_rgba(141,168,155,0.3)]">
+        <div class="grid grid-cols-4 gap-3 sm:gap-6">
+          <button onclick="switchView('agenda')" id="cardAgenda" class="nav-emblem-btn py-2 px-1 sm:p-3 rounded-2xl flex flex-col items-center justify-center text-center gap-1.5 group relative">
+            <div class="w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
+              <img src="Art/Calendario gótico con reloj celta_2.png" alt="Agenda" class="w-full h-full object-contain object-center drop-shadow-[0_0_10px_rgba(141,168,155,0.3)]">
             </div>
-            <span id="headerDayNumName" class="font-serif-luxury text-[11px] sm:text-sm font-bold text-zinc-200 tracking-wide truncate">Agenda</span>
+            <span id="headerDayNumName" class="font-serif-luxury text-xs sm:text-sm font-bold text-zinc-200 tracking-wide truncate">Agenda</span>
           </button>
           
-          <button onclick="switchView('grimoire')" id="cardGrimorio" class="nav-emblem-btn p-2 sm:p-3 rounded-2xl flex flex-col items-center text-center gap-1.5 group relative">
-            <div class="w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
-              <img src="Art/Grimorio místico de cuero envejecido_2.png" alt="Grimorio" class="w-full h-full object-contain scale-125 drop-shadow-[0_0_10px_rgba(141,168,155,0.3)]">
+          <button onclick="switchView('grimoire')" id="cardGrimorio" class="nav-emblem-btn py-2 px-1 sm:p-3 rounded-2xl flex flex-col items-center justify-center text-center gap-1.5 group relative">
+            <div class="w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
+              <img src="Art/Grimorio místico de cuero envejecido_2.png" alt="Grimorio" class="w-full h-full object-contain object-center scale-110 drop-shadow-[0_0_10px_rgba(141,168,155,0.3)]">
             </div>
-            <span class="font-serif-luxury text-[11px] sm:text-sm font-bold text-zinc-200 tracking-wide truncate">Grimorio</span>
+            <span class="font-serif-luxury text-xs sm:text-sm font-bold text-zinc-200 tracking-wide truncate">Grimorio</span>
           </button>
 
-          <button onclick="switchView('tarot')" id="cardTarot" class="nav-emblem-btn p-2 sm:p-3 rounded-2xl flex flex-col items-center text-center gap-1.5 group relative">
-            <div class="w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
-              <img src="Art/Emblema Gótico de Fases Lunares_2.png" alt="Oráculo" class="w-full h-full object-contain drop-shadow-[0_0_10px_rgba(141,168,155,0.3)]">
+          <button onclick="switchView('tarot')" id="cardTarot" class="nav-emblem-btn py-2 px-1 sm:p-3 rounded-2xl flex flex-col items-center justify-center text-center gap-1.5 group relative">
+            <div class="w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
+              <img src="Art/Emblema Gótico de Fases Lunares_2.png" alt="Oráculo" class="w-full h-full object-contain object-center drop-shadow-[0_0_10px_rgba(141,168,155,0.3)]">
             </div>
-            <span class="font-serif-luxury text-[11px] sm:text-sm font-bold text-zinc-200 tracking-wide truncate">Oráculo</span>
+            <span class="font-serif-luxury text-xs sm:text-sm font-bold text-zinc-200 tracking-wide truncate">Oráculo</span>
           </button>
 
-          <button onclick="switchView('pets')" id="cardPets" class="nav-emblem-btn p-2 sm:p-3 rounded-2xl flex flex-col items-center text-center gap-1.5 group relative">
-            <div class="w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
-              <img src="Art/Emblema de Huella Gótica Verde_2.png" alt="Familiar" class="w-full h-full object-contain drop-shadow-[0_0_10px_rgba(141,168,155,0.3)]">
+          <button onclick="switchView('pets')" id="cardPets" class="nav-emblem-btn py-2 px-1 sm:p-3 rounded-2xl flex flex-col items-center justify-center text-center gap-1.5 group relative">
+            <div class="w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
+              <img src="Art/Emblema de Huella Gótica Verde_2.png" alt="Familiar" class="w-full h-full object-contain object-center drop-shadow-[0_0_10px_rgba(141,168,155,0.3)]">
             </div>
-            <span class="font-serif-luxury text-[11px] sm:text-sm font-bold text-zinc-200 tracking-wide truncate">Familiar</span>
+            <span class="font-serif-luxury text-xs sm:text-sm font-bold text-zinc-200 tracking-wide truncate">Familiar</span>
           </button>
         </div>
       </nav>
@@ -505,39 +505,57 @@
           <div class="w-12 h-px bg-gradient-to-l from-transparent to-[#9b8da8]/70"></div>
         </div>
 
-        <div class="relative w-full mystic-wicca-card p-4 mt-2 mb-4 flex items-center justify-center aspect-square sm:aspect-auto sm:min-h-[420px]">
-          <div class="relative w-[92%] max-w-[400px] aspect-square">
-            <div class="absolute inset-0 flex justify-center items-center pointer-events-none opacity-30">
-              <svg viewBox="20 20 360 360" class="w-full h-full animate-[spin_150s_linear_infinite]">
-                <circle cx="200" cy="200" r="160" fill="none" stroke="#9b8da8" stroke-width="0.5" stroke-dasharray="2 6"/>
-                <circle cx="200" cy="200" r="150" fill="none" stroke="#c3b4c7" stroke-width="1"/>
-                <g stroke="#9b8da8" stroke-width="0.8" opacity="0.7">
-                  <polygon points="200,50 330,125 330,275 200,350 70,275 70,125" fill="none" />
-                  <polygon points="200,50 330,275 70,275" fill="none" />
-                  <polygon points="200,350 330,125 70,125" fill="none" />
-                </g>
+        <div class="relative w-full bg-transparent p-6 mt-2 mb-4 flex items-center justify-center min-h-[410px] sm:min-h-[450px]">
+          <div class="relative w-full max-w-[420px] aspect-square flex items-center justify-center">
+            <!-- Geometría Sagrada & Astrolabio Rotatorio -->
+            <div class="absolute inset-0 flex justify-center items-center pointer-events-none">
+              <svg viewBox="0 0 400 400" class="w-full h-full animate-[spin_180s_linear_infinite] opacity-45">
+                <circle cx="200" cy="200" r="185" fill="none" stroke="#9b8da8" stroke-width="0.7" stroke-dasharray="3 6"/>
+                <circle cx="200" cy="200" r="160" fill="none" stroke="#c3b4c7" stroke-width="1"/>
+                <circle cx="200" cy="200" r="110" fill="none" stroke="#8da89b" stroke-width="0.7" stroke-dasharray="2 5"/>
+                <polygon points="200,40 338,120 338,280 200,360 62,280 62,120" fill="none" stroke="#9b8da8" stroke-width="0.8"/>
+                <polygon points="200,40 338,280 62,280" fill="none" stroke="#c3b4c7" stroke-width="1"/>
+                <polygon points="200,360 338,120 62,120" fill="none" stroke="#8da89b" stroke-width="0.8"/>
               </svg>
             </div>
 
-            <div onclick="openEsotericDetail('sol')" class="absolute top-[20%] left-[20%] -translate-x-1/2 -translate-y-1/2 flex justify-center items-center group cursor-pointer z-20">
-              <div class="w-16 h-16 flex items-center justify-center bg-[#090a0c]/90 rounded-full border border-[#9b8da8]/40">
-                <i data-lucide="sun" class="w-8 h-8 text-[#e0d6e8]"></i>
+            <!-- Líneas Fijas de la Tríada -->
+            <svg viewBox="0 0 400 400" class="absolute inset-0 w-full h-full pointer-events-none opacity-70">
+              <polygon points="200,66 78,305 322,305" fill="none" stroke="#c3b4c7" stroke-width="1.2" stroke-dasharray="4 4"/>
+              <line x1="200" y1="66" x2="200" y2="215" stroke="#9b8da8" stroke-width="0.8" opacity="0.6"/>
+              <line x1="78" y1="305" x2="200" y2="215" stroke="#9b8da8" stroke-width="0.8" opacity="0.6"/>
+              <line x1="322" y1="305" x2="200" y2="215" stroke="#9b8da8" stroke-width="0.8" opacity="0.6"/>
+            </svg>
+
+            <!-- Núcleo Central -->
+            <div class="absolute top-[54%] left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center pointer-events-none z-10">
+              <div class="w-12 h-12 rounded-full bg-transparent backdrop-blur-[2px] border border-[#9b8da8]/45 shadow-[0_0_25px_rgba(155,141,168,0.25)] flex items-center justify-center">
+                <span class="text-[#c3b4c7] text-lg">✦</span>
               </div>
-              <span id="dynSignSun" class="absolute top-full mt-2 text-[9px] font-mono tracking-widest text-[#9b8da8] uppercase bg-[#090a0c] px-3 py-1 rounded-full border border-[#9b8da8]/40 whitespace-nowrap">Sol Escorpio ♏</span>
             </div>
 
-            <div onclick="openEsotericDetail('luna')" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex justify-center items-center group cursor-pointer z-30">
-              <div class="w-20 h-20 flex items-center justify-center bg-[#090a0c]/95 rounded-full border border-[#c3b4c7]/50">
-                <i data-lucide="moon" class="w-10 h-10 text-white"></i>
+            <!-- Vértice Superior: SIGNO SOLAR -->
+            <div onclick="openEsotericDetail('sol')" class="absolute top-[16%] left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center group cursor-pointer z-20">
+              <div class="w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center bg-[#050608]/55 backdrop-blur-sm rounded-full border-2 border-amber-300/45 group-hover:border-amber-300 shadow-[0_0_25px_rgba(251,191,36,0.2)] transition-all group-hover:scale-110">
+                <span id="dynGlyphSun" class="font-serif-luxury text-3xl sm:text-4xl text-amber-200 leading-none select-none">♏︎</span>
               </div>
-              <span id="dynSignMoon" class="absolute top-full mt-2 text-[10px] font-mono tracking-widest text-[#c3b4c7] font-bold uppercase bg-[#090a0c] px-4 py-1 rounded-full border border-[#c3b4c7]/50 whitespace-nowrap">Luna Acuario ♒</span>
+              <span id="dynSignSun" class="mt-2 text-[10px] sm:text-xs font-mono tracking-widest text-amber-200 font-bold uppercase bg-[#050608]/75 backdrop-blur-sm px-3 py-1 rounded-full border border-amber-300/35 whitespace-nowrap shadow-lg">☀ Sol · Escorpio</span>
             </div>
 
-            <div onclick="openEsotericDetail('asc')" class="absolute top-[80%] left-[80%] -translate-x-1/2 -translate-y-1/2 flex justify-center items-center group cursor-pointer z-20">
-              <div class="w-16 h-16 flex items-center justify-center bg-[#090a0c]/90 rounded-full border border-[#9b8da8]/40">
-                <i data-lucide="compass" class="w-8 h-8 text-[#e0d6e8]"></i>
+            <!-- Vértice Inferior Izquierdo: SIGNO LUNAR -->
+            <div onclick="openEsotericDetail('luna')" class="absolute top-[76%] left-[20%] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center group cursor-pointer z-20">
+              <div class="w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center bg-[#050608]/55 backdrop-blur-sm rounded-full border-2 border-[#c3b4c7]/50 group-hover:border-white shadow-[0_0_25px_rgba(195,180,199,0.25)] transition-all group-hover:scale-110">
+                <span id="dynGlyphMoon" class="font-serif-luxury text-3xl sm:text-4xl text-white leading-none select-none">♒︎</span>
               </div>
-              <span id="dynSignAsc" class="absolute top-full mt-2 text-[9px] font-mono tracking-widest text-[#9b8da8] uppercase bg-[#090a0c] px-3 py-1 rounded-full border border-[#9b8da8]/40 whitespace-nowrap">Asc. Tauro ♉</span>
+              <span id="dynSignMoon" class="mt-2 text-[10px] sm:text-xs font-mono tracking-widest text-[#e0d6e8] font-bold uppercase bg-[#050608]/75 backdrop-blur-sm px-3 py-1 rounded-full border border-[#c3b4c7]/45 whitespace-nowrap shadow-lg">☾ Luna · Acuario</span>
+            </div>
+
+            <!-- Vértice Inferior Derecho: SIGNO ASCENDENTE -->
+            <div onclick="openEsotericDetail('asc')" class="absolute top-[76%] left-[80%] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center group cursor-pointer z-20">
+              <div class="w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center bg-[#050608]/55 backdrop-blur-sm rounded-full border-2 border-[#8da89b]/50 group-hover:border-[#b4c7be] shadow-[0_0_25px_rgba(141,168,155,0.25)] transition-all group-hover:scale-110">
+                <span id="dynGlyphAsc" class="font-serif-luxury text-3xl sm:text-4xl text-[#b4c7be] leading-none select-none">♉︎</span>
+              </div>
+              <span id="dynSignAsc" class="mt-2 text-[10px] sm:text-xs font-mono tracking-widest text-[#b4c7be] font-bold uppercase bg-[#050608]/75 backdrop-blur-sm px-3 py-1 rounded-full border border-[#8da89b]/45 whitespace-nowrap shadow-lg">✧ Asc. · Tauro</span>
             </div>
           </div>
         </div>
@@ -900,10 +918,10 @@
     </div>
   </div>
 
-  <div id="moonModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 z-50 hidden">
-    <div class="bg-[#121316] border border-zinc-800 rounded-2xl max-w-sm w-full p-8 shadow-2xl relative flex flex-col items-center">
-      <button type="button" onclick="closeMoonModal()" class="absolute top-4 right-4 text-zinc-500 hover:text-white"><i data-lucide="x" class="w-6 h-6"></i></button>
-      <div id="lunarModalContent" class="text-center w-full flex flex-col items-center mt-4"></div>
+  <div id="moonModal" onclick="if(event.target === this) closeMoonModal()" class="fixed inset-0 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 z-50 hidden">
+    <div class="bg-[#121316] border border-zinc-800 rounded-3xl max-w-sm w-full aspect-square p-6 shadow-2xl relative flex items-center justify-center">
+      <button type="button" onclick="closeMoonModal()" class="absolute top-4 right-4 text-zinc-500 hover:text-white z-10"><i data-lucide="x" class="w-6 h-6"></i></button>
+      <div id="lunarModalContent" class="w-full h-full flex items-center justify-center"></div>
     </div>
   </div>
 
@@ -1057,12 +1075,41 @@
     </div>
   </div>
 
+  <!-- POP-UP DECORADO DE INTERPRETACIÓN CONJUNTA DE LAS 3 CARTAS -->
+  <div id="tarotCombinedDetailModal" onclick="if(event.target === this) closeTarotCombinedModal()" class="fixed inset-0 bg-black/85 backdrop-blur-md items-center justify-center p-4 z-50 hidden">
+    <div class="bg-gradient-to-b from-[#171520] via-[#101116] to-[#0a0b0e] border-2 border-[#9b8da8]/50 rounded-3xl max-w-lg w-full max-h-[90vh] overflow-y-auto custom-scroll p-6 sm:p-8 shadow-[0_0_50px_rgba(155,141,168,0.25)] relative">
+      <button type="button" onclick="closeTarotCombinedModal()" class="absolute top-4 right-4 text-[#9b8da8] hover:text-white bg-black/60 p-2 rounded-full border border-[#9b8da8]/30">
+        <i data-lucide="x" class="w-4 h-4"></i>
+      </button>
+
+      <div class="flex flex-col items-center text-center">
+        <div class="flex items-center gap-2 text-[#8da89b] text-xs font-mono uppercase tracking-[0.25em] mb-2">
+          <span>✦</span><span>Oráculo Trinitario</span><span>✦</span>
+        </div>
+        <h3 class="font-serif-luxury text-2xl sm:text-3xl text-zinc-100 font-bold tracking-wide mb-3">Interpretación Conjunta</h3>
+        <div class="w-32 h-px bg-gradient-to-r from-transparent via-[#c3b4c7]/70 to-transparent mb-5"></div>
+
+        <div id="combinedModalCardsRow" class="grid grid-cols-3 gap-2 w-full mb-5"></div>
+
+        <div class="w-full bg-[#090a0c]/85 border border-[#9b8da8]/35 rounded-2xl p-5 sm:p-6 text-left relative shadow-inner">
+          <div class="flex items-center justify-center gap-2 text-[#c3b4c7]/70 text-xs mb-3">
+            <span>───</span><span>☾ ✦ ☽</span><span>───</span>
+          </div>
+          <div id="combinedModalReadingBody" class="font-serif-luxury text-base sm:text-lg text-zinc-200 leading-relaxed space-y-3"></div>
+          <div class="flex items-center justify-center gap-2 text-[#8da89b]/70 text-xs mt-4">
+            <span>───</span><span>✧</span><span>───</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- COMPAÑERO FLOTANTE GLOBAL -->
-  <div id="floatingPetWidget" onclick="switchView('pets')" class="fixed bottom-4 right-4 z-40 hidden items-center gap-2.5 bg-[#121316]/90 backdrop-blur-md border border-zinc-800/90 hover:border-[#8da89b]/50 px-3 py-2 rounded-2xl shadow-[0_10px_25px_rgba(0,0,0,0.8)] cursor-pointer transition-all hover:scale-105 group">
-    <img id="floatingPetImg" src="Art/Familiar/cat1.png" class="w-10 h-10 object-contain pet-float" alt="Familiar">
+  <div id="floatingPetWidget" onclick="switchView('pets')" class="fixed bottom-4 right-4 z-40 hidden items-center gap-3 bg-[#121316]/90 backdrop-blur-md border border-zinc-800/90 hover:border-[#8da89b]/50 px-3.5 py-2.5 rounded-2xl shadow-[0_12px_30px_rgba(0,0,0,0.85)] cursor-pointer transition-all hover:scale-105 group">
+    <img id="floatingPetImg" src="Art/Familiar/cat1.png" class="w-16 h-16 sm:w-20 sm:h-20 object-contain pet-float drop-shadow-[0_0_14px_rgba(141,168,155,0.45)]" alt="Familiar">
     <div class="hidden sm:flex flex-col pr-1">
-      <span id="floatingPetName" class="font-serif-luxury text-xs font-bold text-zinc-200 leading-none">Familiar</span>
-      <span id="floatingPetStatus" class="text-[9px] font-mono text-[#8da89b] uppercase mt-0.5">Nv. 1 · Custodiando</span>
+      <span id="floatingPetName" class="font-serif-luxury text-sm font-bold text-zinc-200 leading-none">Familiar</span>
+      <span id="floatingPetStatus" class="text-[10px] font-mono text-[#8da89b] uppercase mt-1">Nv. 1 · Custodiando</span>
     </div>
   </div>
 
@@ -1130,12 +1177,12 @@
               const i = (y * w + x) * 4;
               const r = data[i], g = data[i + 1], b = data[i + 2];
               const lum = (r + g + b) / 3;
-              if (lum < 22) {
+              if (lum < 34) {
                 data[i + 3] = 0;
-              } else if (lum < 45) {
-                data[i + 3] = Math.floor(((lum - 22) / 23) * 255);
+              } else if (lum < 68) {
+                data[i + 3] = Math.floor(((lum - 34) / 34) * 255);
               }
-              if (data[i + 3] > 25) {
+              if (data[i + 3] > 35) {
                 if (x < minX) minX = x;
                 if (x > maxX) maxX = x;
                 if (y < minY) minY = y;
@@ -1148,7 +1195,8 @@
           if (maxX > minX && maxY > minY) {
             const cropW = maxX - minX + 1;
             const cropH = maxY - minY + 1;
-            const size = Math.max(cropW, cropH);
+            const pad = Math.round(Math.max(cropW, cropH) * 0.06);
+            const size = Math.max(cropW, cropH) + pad * 2;
             const outCanvas = document.createElement('canvas');
             outCanvas.width = size;
             outCanvas.height = size;
@@ -1439,14 +1487,56 @@
         <div class="grid grid-cols-3 gap-2 sm:gap-4 w-full items-stretch">
           ${cardsHtml}
         </div>
-        <div class="w-full bg-[#0d0e12] border border-[#9b8da8]/30 rounded-2xl p-4 sm:p-5 mt-2 shadow-inner">
-          <div class="flex items-center justify-between border-b border-zinc-800 pb-2.5 mb-3">
-            <span class="text-xs font-mono uppercase tracking-widest text-[#c3b4c7] font-bold flex items-center gap-2">🔮 Interpretación Conjunta de la Tirada</span>
-            <button onclick="resetCurrentTarotSlot()" class="text-[10px] font-mono uppercase tracking-wider text-zinc-400 hover:text-white px-2.5 py-1 rounded-lg bg-zinc-900 border border-zinc-800 transition">Nueva Tirada</button>
+        <div class="w-full bg-[#0d0e12] border border-[#9b8da8]/30 rounded-2xl p-4 sm:p-5 mt-2 shadow-inner flex flex-col gap-3">
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-xs font-mono uppercase tracking-widest text-[#c3b4c7] font-bold flex items-center gap-2">🔮 Interpretación Conjunta</span>
+            <button onclick="openTarotCombinedModal()" class="text-[10px] sm:text-xs font-mono uppercase tracking-wider font-bold text-zinc-950 bg-gradient-to-r from-[#8da89b] to-[#c3b4c7] hover:opacity-90 px-3.5 py-1.5 rounded-xl shadow transition">Ver Descripción</button>
           </div>
-          <p class="font-serif-luxury text-base sm:text-lg text-zinc-200 leading-relaxed">${generateCombinedReading(slot.cards)}</p>
+          <p class="font-serif-luxury text-sm sm:text-base text-zinc-400 italic">Los tres arcanos han entrelazado su mensaje del Pasado, Presente y Futuro. Pulsa en «Ver Descripción» para revelar la lectura completa.</p>
+        </div>
+        <div class="flex justify-center mt-1">
+          <button onclick="resetCurrentTarotSlot()" class="text-[10px] font-mono uppercase tracking-widest text-zinc-500 hover:text-zinc-200 px-3 py-1.5 rounded-xl border border-zinc-800/80 bg-[#0d0e12] transition flex items-center gap-1.5">
+            <span>↺</span> Realizar Nueva Tirada en este Espacio
+          </button>
         </div>
       `;
+    }
+
+    function openTarotCombinedModal() {
+      const day = getDayData(currentDateStr);
+      const slot = day.tarotSlots[currentTarotSlot];
+      if (!slot || !slot.cards || slot.cards.length < 3) return;
+
+      const labels = ['Pasado', 'Presente', 'Futuro'];
+      const rowEl = document.getElementById('combinedModalCardsRow');
+      if (rowEl) {
+        rowEl.innerHTML = slot.cards.map((c, idx) => `
+          <div class="bg-[#090a0c] border border-[#9b8da8]/30 rounded-xl p-2 flex flex-col items-center text-center">
+            <span class="text-[8px] font-mono uppercase tracking-widest text-[#8da89b]">${labels[idx]}</span>
+            <span class="font-serif-luxury text-xs sm:text-sm font-bold text-zinc-100 mt-0.5 line-clamp-1">${c.name}</span>
+            <span class="text-[8px] font-mono ${c.isReversed ? 'text-rose-400' : 'text-zinc-500'}">${c.isReversed ? 'Invertida' : 'Al Derecho'}</span>
+          </div>
+        `).join('');
+      }
+
+      const bodyEl = document.getElementById('combinedModalReadingBody');
+      if (bodyEl) {
+        bodyEl.innerHTML = generateCombinedReading(slot.cards);
+      }
+
+      const modal = document.getElementById('tarotCombinedDetailModal');
+      if (modal) {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+      }
+    }
+
+    function closeTarotCombinedModal() {
+      const modal = document.getElementById('tarotCombinedDetailModal');
+      if (modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }
     }
 
     function resetCurrentTarotSlot() {
@@ -2140,12 +2230,9 @@
       const content = document.getElementById('lunarModalContent');
       if (content) {
         content.innerHTML = `
-          <div class="w-40 h-40 rounded-full bg-[#090a0c] border border-zinc-800 shadow-[0_0_35px_rgba(141,168,155,0.25)] flex items-center justify-center overflow-hidden mb-5 p-2">
-            <img src="${moon.img}" alt="${moon.name}" class="w-full h-full object-contain">
+          <div class="w-60 h-60 sm:w-68 sm:h-68 rounded-full bg-[#090a0c] border border-zinc-800/80 shadow-[0_0_45px_rgba(141,168,155,0.28)] flex items-center justify-center overflow-hidden mx-auto">
+            <img src="${moon.img}" alt="Fase Lunar" class="w-full h-full object-contain object-center scale-110">
           </div>
-          <span class="text-[10px] font-mono uppercase tracking-widest text-[#8da89b] mb-1">Influencia Astral del Día</span>
-          <h3 class="font-serif-luxury text-3xl text-zinc-100 font-bold mb-3">${moon.name}</h3>
-          <p class="text-sm text-zinc-300 leading-relaxed font-serif-luxury">${moon.desc}</p>
         `;
       }
       document.getElementById('moonModal').classList.remove('hidden');
@@ -2172,15 +2259,19 @@
         if (!day.appointments.length) {
           apptList.innerHTML = `<div class="h-full flex items-center justify-center text-xs font-mono text-zinc-500">Sin eventos agendados hoy</div>`;
         } else {
-          apptList.innerHTML = day.appointments.map((a, i) => `
-            <div onclick="openAppointmentDetail(${i})" class="p-3 mb-2 rounded-xl bg-[#090a0c]/80 hover:bg-[#16181d] border border-zinc-800/80 flex items-center justify-between cursor-pointer transition">
-              <div class="flex items-center gap-3 min-w-0">
-                <span class="text-xs font-mono text-[#8da89b] font-bold">${a.time || 'Día'}</span>
-                <span class="font-serif-luxury text-base text-zinc-100 truncate">${a.title}</span>
+          apptList.innerHTML = day.appointments.map((a, i) => {
+            const isDone = !!a.done;
+            return `
+              <div onclick="openAppointmentDetail(${i})" class="p-3 mb-2 rounded-xl bg-[#090a0c]/80 hover:bg-[#16181d] border border-zinc-800/80 flex items-center justify-between gap-2.5 cursor-pointer transition ${isDone ? 'opacity-65' : ''}">
+                <div class="flex items-center gap-3 min-w-0 flex-1">
+                  <input type="checkbox" class="executive-checkbox flex-shrink-0" ${isDone ? 'checked' : ''} onclick="event.stopPropagation()" onchange="toggleAppointmentDone(${i}, this.checked)">
+                  <span class="text-xs font-mono ${isDone ? 'text-zinc-500 line-through' : 'text-[#8da89b]'} font-bold flex-shrink-0">${a.time || 'Día'}</span>
+                  <span class="font-serif-luxury text-base ${isDone ? 'line-through text-zinc-500' : 'text-zinc-100'} truncate">${a.title}</span>
+                </div>
+                <i data-lucide="chevron-right" class="w-4 h-4 text-zinc-500 flex-shrink-0"></i>
               </div>
-              <i data-lucide="chevron-right" class="w-4 h-4 text-zinc-500 flex-shrink-0"></i>
-            </div>
-          `).join('');
+            `;
+          }).join('');
         }
       }
 
@@ -2213,6 +2304,19 @@
       if (type === 'morning') day.morningNotes = val;
       else day.nightNotes = val;
       saveAppData();
+    }
+
+    function toggleAppointmentDone(idx, isDone) {
+      const day = getDayData(currentDateStr);
+      if (!day.appointments[idx]) return;
+      day.appointments[idx].done = isDone;
+      if (isDone) {
+        appData.pets.xp = (appData.pets.xp || 0) + 5;
+        showToast('Tarea completada (+5 XP)');
+      }
+      saveAppData();
+      renderAgenda();
+      updateGlobalPetBar();
     }
 
     function toggleHabit(name, isDone) {
@@ -2422,14 +2526,36 @@
     // ==========================================
     // 10. AJUSTES Y CUSTODIA (BACKUP)
     // ==========================================
+    function parseZodiacSign(rawSign) {
+      const clean = (rawSign || '').trim();
+      const parts = clean.split(/\s+/);
+      const name = parts[0] || '';
+      const rawGlyph = parts[1] || '✦';
+      return {
+        name,
+        glyph: `${rawGlyph}\uFE0E`
+      };
+    }
+
     function applyNatalSigns() {
       const s = appData.settings || defaultAppData.settings;
+      const sunData = parseZodiacSign(s.sun);
+      const moonData = parseZodiacSign(s.moon);
+      const ascData = parseZodiacSign(s.asc);
+
+      const glyphSunEl = document.getElementById('dynGlyphSun');
+      const glyphMoonEl = document.getElementById('dynGlyphMoon');
+      const glyphAscEl = document.getElementById('dynGlyphAsc');
+      if (glyphSunEl) glyphSunEl.textContent = sunData.glyph;
+      if (glyphMoonEl) glyphMoonEl.textContent = moonData.glyph;
+      if (glyphAscEl) glyphAscEl.textContent = ascData.glyph;
+
       const sunEl = document.getElementById('dynSignSun');
       const moonEl = document.getElementById('dynSignMoon');
       const ascEl = document.getElementById('dynSignAsc');
-      if (sunEl) sunEl.textContent = `Sol ${s.sun}`;
-      if (moonEl) moonEl.textContent = `Luna ${s.moon}`;
-      if (ascEl) ascEl.textContent = `Asc. ${s.asc}`;
+      if (sunEl) sunEl.textContent = `☀ Sol · ${sunData.name}`;
+      if (moonEl) moonEl.textContent = `☾ Luna · ${moonData.name}`;
+      if (ascEl) ascEl.textContent = `✧ Asc. · ${ascData.name}`;
     }
 
     function openSettingsModal() {
@@ -2508,27 +2634,39 @@
       if (!appData.pin) {
         promptText.textContent = 'Crea tu Sello Numérico (6 dígitos)';
       } else {
-        promptText.textContent = 'Introduce tu Sello Numérico';
+        promptText.textContent = 'Introduce y mantén pulsado el Sello';
       }
 
-      function attemptUnlock() {
+      let holdTimer = null;
+      let progress = 0;
+      let isUnlocked = false;
+      const circumference = 289;
+
+      function validatePin() {
         const entered = (pinInput.value || '').trim();
         if (!/^\d{6}$/.test(entered)) {
           showToast('Introduce los 6 dígitos de tu Sello Numérico', true);
           pinInput.focus();
-          return;
+          return false;
         }
+        if (appData.pin && entered !== String(appData.pin)) {
+          showToast('Sello Numérico incorrecto', true);
+          pinInput.value = '';
+          return false;
+        }
+        return true;
+      }
+
+      function completeUnlock() {
+        if (isUnlocked) return;
+        isUnlocked = true;
+        clearInterval(holdTimer);
+        const entered = (pinInput.value || '').trim();
         if (!appData.pin) {
           appData.pin = entered;
           saveAppData();
           showToast('Sello Numérico consagrado');
-        } else if (entered !== String(appData.pin)) {
-          showToast('Sello Numérico incorrecto', true);
-          pinInput.value = '';
-          return;
         }
-
-        if (hint) hint.classList.remove('opacity-0');
         if (progressCircle) progressCircle.style.strokeDashoffset = '0';
 
         setTimeout(() => {
@@ -2546,20 +2684,57 @@
             body.classList.remove('overflow-hidden');
           }
           updateGlobalPetBar();
-        }, 320);
+        }, 250);
+      }
+
+      function startHold(e) {
+        if (e) e.preventDefault();
+        if (isUnlocked || holdTimer) return;
+        if (!validatePin()) return;
+
+        if (hint) hint.classList.remove('opacity-0');
+        fpBtn.classList.add('scale-105', 'border-[#8da89b]', 'shadow-[0_0_35px_rgba(141,168,155,0.6)]');
+        const svgEl = fpBtn.querySelector('svg');
+        if (svgEl) svgEl.classList.add('text-[#8da89b]');
+
+        holdTimer = setInterval(() => {
+          progress += 3;
+          const offset = Math.max(0, circumference - (progress / 100) * circumference);
+          if (progressCircle) progressCircle.style.strokeDashoffset = String(offset);
+          if (progress >= 100) {
+            completeUnlock();
+          }
+        }, 25);
+      }
+
+      function cancelHold() {
+        if (isUnlocked) return;
+        if (holdTimer) {
+          clearInterval(holdTimer);
+          holdTimer = null;
+        }
+        progress = 0;
+        if (progressCircle) progressCircle.style.strokeDashoffset = String(circumference);
+        if (hint) hint.classList.add('opacity-0');
+        fpBtn.classList.remove('scale-105', 'border-[#8da89b]', 'shadow-[0_0_35px_rgba(141,168,155,0.6)]');
+        const svgEl = fpBtn.querySelector('svg');
+        if (svgEl) svgEl.classList.remove('text-[#8da89b]');
       }
 
       if (fpBtn) {
-        fpBtn.addEventListener('click', (e) => {
-          e.preventDefault();
-          attemptUnlock();
-        });
+        fpBtn.addEventListener('pointerdown', startHold);
+        fpBtn.addEventListener('pointerup', cancelHold);
+        fpBtn.addEventListener('pointerleave', cancelHold);
+        fpBtn.addEventListener('pointercancel', cancelHold);
+        fpBtn.addEventListener('contextmenu', (e) => e.preventDefault());
       }
       if (pinInput) {
         pinInput.addEventListener('keydown', (e) => {
           if (e.key === 'Enter') {
             e.preventDefault();
-            attemptUnlock();
+            if (validatePin()) {
+              showToast('Mantén pulsada la huella para abrir el sello');
+            }
           }
         });
       }
