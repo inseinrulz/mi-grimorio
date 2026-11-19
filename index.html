@@ -367,14 +367,14 @@
           
           <button onclick="switchView('grimoire')" id="cardGrimorio" class="nav-emblem-btn py-2 px-1 sm:p-3 rounded-2xl flex flex-col items-center justify-center text-center gap-1.5 group relative">
             <div class="w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
-              <img src="Art/Grimorio místico de cuero envejecido_2.png" alt="Grimorio" class="w-full h-full object-contain object-center scale-110 drop-shadow-[0_0_10px_rgba(141,168,155,0.3)]">
+              <img src="Art/Grimorio místico de cuero envejecido_2.png" alt="Grimorio" class="w-full h-full object-contain object-center scale-[1.35] drop-shadow-[0_0_10px_rgba(141,168,155,0.3)]">
             </div>
             <span class="font-serif-luxury text-xs sm:text-sm font-bold text-zinc-200 tracking-wide truncate">Grimorio</span>
           </button>
 
           <button onclick="switchView('tarot')" id="cardTarot" class="nav-emblem-btn py-2 px-1 sm:p-3 rounded-2xl flex flex-col items-center justify-center text-center gap-1.5 group relative">
             <div class="w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
-              <img src="Art/Emblema Gótico de Fases Lunares_2.png" alt="Oráculo" class="w-full h-full object-contain object-center drop-shadow-[0_0_10px_rgba(141,168,155,0.3)]">
+              <img src="Art/Emblema Gótico de Fases Lunares_2.png" alt="Oráculo" class="w-full h-full object-contain object-center scale-[1.28] drop-shadow-[0_0_10px_rgba(141,168,155,0.3)]">
             </div>
             <span class="font-serif-luxury text-xs sm:text-sm font-bold text-zinc-200 tracking-wide truncate">Oráculo</span>
           </button>
@@ -647,7 +647,7 @@
             
             <button onclick="changePetType('cat')" id="btnSelectCat" class="flex items-center justify-between p-3 rounded-2xl bg-[#121316] hover:bg-[#16171b] border border-zinc-800/80 transition text-left">
               <div class="flex items-center gap-3">
-                <img id="thumbCat" src="Art/Familiar/cat1.png" class="w-12 h-12 object-contain rounded-xl bg-[#c75665]/10 border border-[#c75665]/30 p-1" onerror="this.src='https://placehold.co/100x100/121316/c75665?text=Gato'">
+                <img id="thumbCat" src="Art/Familiar/cat1.png" class="w-12 h-12 object-contain rounded-xl bg-transparent border border-[#c75665]/30 p-1" onerror="this.src='https://placehold.co/100x100/121316/c75665?text=Gato'">
                 <div class="flex flex-col">
                   <span class="font-serif-luxury text-lg text-zinc-100 font-bold leading-tight">Gato Sombrío</span>
                   <span class="text-[10px] font-mono text-[#c3b4c7] uppercase">Elemento: Éter</span>
@@ -661,7 +661,7 @@
             
             <button onclick="changePetType('bat')" id="btnSelectBat" class="flex items-center justify-between p-3 rounded-2xl bg-[#121316] hover:bg-[#16171b] border border-zinc-800/80 transition text-left">
               <div class="flex items-center gap-3">
-                <img id="thumbBat" src="Art/Familiar/bat1.png" class="w-12 h-12 object-contain rounded-xl bg-[#9b8da8]/10 border border-[#9b8da8]/30 p-1" onerror="this.src='https://placehold.co/100x100/121316/9b8da8?text=Bat'">
+                <img id="thumbBat" src="Art/Familiar/bat1.png" class="w-12 h-12 object-contain rounded-xl bg-transparent border border-[#9b8da8]/30 p-1" onerror="this.src='https://placehold.co/100x100/121316/9b8da8?text=Bat'">
                 <div class="flex flex-col">
                   <span class="font-serif-luxury text-lg text-zinc-100 font-bold leading-tight">Murciélago</span>
                   <span class="text-[10px] font-mono text-rose-400/90 uppercase">Elemento: Sangre</span>
@@ -675,7 +675,7 @@
             
             <button onclick="changePetType('rat')" id="btnSelectRat" class="flex items-center justify-between p-3 rounded-2xl bg-[#121316] hover:bg-[#16171b] border border-zinc-800/80 transition text-left">
               <div class="flex items-center gap-3">
-                <img id="thumbRat" src="Art/Familiar/rat1.png" class="w-12 h-12 object-contain rounded-xl bg-[#8da89b]/10 border border-[#8da89b]/30 p-1" onerror="this.src='https://placehold.co/100x100/121316/8da89b?text=Rata'">
+                <img id="thumbRat" src="Art/Familiar/rat1.png" class="w-12 h-12 object-contain rounded-xl bg-transparent border border-[#8da89b]/30 p-1" onerror="this.src='https://placehold.co/100x100/121316/8da89b?text=Rata'">
                 <div class="flex flex-col">
                   <span class="font-serif-luxury text-lg text-zinc-100 font-bold leading-tight">Rata Alquímica</span>
                   <span class="text-[10px] font-mono text-[#8da89b] uppercase">Elemento: Alquimia</span>
@@ -712,10 +712,10 @@
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full items-center my-2">
             <div class="flex flex-col items-center">
-              <div class="w-44 h-44 sm:w-48 sm:h-48 rounded-full bg-[#090a0c] border-2 border-zinc-800 shadow-[0_0_35px_rgba(199,86,101,0.2)] flex items-center justify-center pet-float relative overflow-hidden p-3">
-                <img id="activePetImg" src="Art/Familiar/cat1.png" alt="Mascota" class="w-full h-full object-contain filter drop-shadow-[0_0_12px_rgba(141,168,155,0.6)]" onerror="this.src='https://placehold.co/200x200/121316/c75665?text=Familiar'">
+              <div class="w-44 h-44 sm:w-48 sm:h-48 rounded-full bg-transparent border border-zinc-800/50 flex items-center justify-center pet-float relative overflow-hidden p-3">
+                <img id="activePetImg" src="Art/Familiar/cat1.png" alt="Mascota" class="w-full h-full object-contain filter drop-shadow-[0_0_16px_rgba(141,168,155,0.65)]" onerror="this.src='https://placehold.co/200x200/121316/c75665?text=Familiar'">
               </div>
-              <div class="flex items-center gap-2 mt-4 bg-[#090a0c]/90 px-3 py-1.5 rounded-full border border-zinc-800/80" id="evolutionChainPreview"></div>
+              <div class="flex items-center gap-2 mt-4 bg-transparent px-3 py-1.5 rounded-full border border-zinc-800/60" id="evolutionChainPreview"></div>
             </div>
 
             <div class="flex flex-col gap-3.5 w-full">
@@ -918,11 +918,9 @@
     </div>
   </div>
 
-  <div id="moonModal" onclick="if(event.target === this) closeMoonModal()" class="fixed inset-0 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 z-50 hidden">
-    <div class="bg-[#121316] border border-zinc-800 rounded-3xl max-w-sm w-full aspect-square p-6 shadow-2xl relative flex items-center justify-center">
-      <button type="button" onclick="closeMoonModal()" class="absolute top-4 right-4 text-zinc-500 hover:text-white z-10"><i data-lucide="x" class="w-6 h-6"></i></button>
-      <div id="lunarModalContent" class="w-full h-full flex items-center justify-center"></div>
-    </div>
+  <!-- POP-UP DE LA LUNA: SOLO LA LUNA AMPLIADA Y CENTRADA -->
+  <div id="moonModal" onclick="closeMoonModal()" class="fixed inset-0 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 z-50 hidden cursor-pointer">
+    <div id="lunarModalContent" class="flex items-center justify-center bg-transparent"></div>
   </div>
 
   <div id="appointmentModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 z-50 hidden">
@@ -1104,11 +1102,11 @@
     </div>
   </div>
 
-  <!-- COMPAÑERO FLOTANTE GLOBAL -->
-  <div id="floatingPetWidget" onclick="switchView('pets')" class="fixed bottom-4 right-4 z-40 hidden items-center gap-3 bg-[#121316]/90 backdrop-blur-md border border-zinc-800/90 hover:border-[#8da89b]/50 px-3.5 py-2.5 rounded-2xl shadow-[0_12px_30px_rgba(0,0,0,0.85)] cursor-pointer transition-all hover:scale-105 group">
-    <img id="floatingPetImg" src="Art/Familiar/cat1.png" class="w-16 h-16 sm:w-20 sm:h-20 object-contain pet-float drop-shadow-[0_0_14px_rgba(141,168,155,0.45)]" alt="Familiar">
-    <div class="hidden sm:flex flex-col pr-1">
-      <span id="floatingPetName" class="font-serif-luxury text-sm font-bold text-zinc-200 leading-none">Familiar</span>
+  <!-- COMPAÑERO FLOTANTE GLOBAL (LADO IZQUIERDO Y FONDO TRANSPARENTE) -->
+  <div id="floatingPetWidget" onclick="switchView('pets')" class="fixed bottom-4 left-4 z-40 hidden items-center gap-2.5 bg-transparent px-1 py-1 cursor-pointer transition-all hover:scale-105 group">
+    <img id="floatingPetImg" src="Art/Familiar/cat1.png" class="w-20 h-20 sm:w-24 sm:h-24 object-contain pet-float drop-shadow-[0_0_16px_rgba(141,168,155,0.5)]" alt="Familiar">
+    <div class="hidden sm:flex flex-col pr-1 drop-shadow-[0_2px_6px_rgba(0,0,0,0.95)]">
+      <span id="floatingPetName" class="font-serif-luxury text-sm font-bold text-zinc-100 leading-none">Familiar</span>
       <span id="floatingPetStatus" class="text-[10px] font-mono text-[#8da89b] uppercase mt-1">Nv. 1 · Custodiando</span>
     </div>
   </div>
@@ -1149,7 +1147,7 @@
     }
 
     // ==========================================
-    // 2. ICONO LUNAR TRANSPARENTE EN CABECERA
+    // 2. ICONO LUNAR TRANSPARENTE EN CABECERA Y POP-UP
     // ==========================================
     const transparentMoonCache = {};
     function applyTransparentMoonIcon(imgEl, srcUrl) {
@@ -1316,7 +1314,7 @@
       { id: 17, number: "XVII", name: "La Estrella", symbol: "✨", meaning: "Esperanza renovada, inspiración astral, guía divina y sanación del alma.", reversed: "Pesimismo pasajero o duda en tus propios dones.", advice: "Confía en la estrella que te guía; estás en sintonía con tu propósito." },
       { id: 18, number: "XVIII", name: "La Luna", symbol: "🌕", meaning: "Sueños profundos, inconsciente, intuición psíquica y misterios ocultos.", reversed: "Disipación de confusiones, verdades que salen a la luz.", advice: "Camina con cautela entre las sombras y confía en tu brújula intuitiva." },
       { id: 19, number: "XIX", name: "El Sol", symbol: "☀️", meaning: "Plenitud, éxito radiante, vitalidad, alegría y claridad absoluta.", reversed: "Éxito retrasado o necesidad de reconectar con tu entusiasmo.", advice: "Irradia tu luz sin reservas y celebra las bendiciones del presente." },
-      { id: 20, number: "XX", name: "El Juicio", symbol: "📯", meaning: "Despertar espiritual, llamado interior, redención y propósito superior.", reversed: "Duda ante el llamado o autocrítica excesiva.", advice: "Escucha la llamada de tu alma yperdona el pasado para elevarte." },
+      { id: 20, number: "XX", name: "El Juicio", symbol: "📯", meaning: "Despertar espiritual, llamado interior, redención y propósito superior.", reversed: "Duda ante el llamado o autocrítica excesiva.", advice: "Escucha la llamada de tu alma y perdona el pasado para elevarte." },
       { id: 21, number: "XXI", name: "El Mundo", symbol: "🌍", meaning: "Culminación gloriosa, integración total, realización y plenitud cósmica.", reversed: "Ciclo casi completo que requiere cerrar un último detalle.", advice: "Honra todo el camino recorrido; has alcanzado una maestría vital." }
     ];
 
@@ -2230,10 +2228,10 @@
       const content = document.getElementById('lunarModalContent');
       if (content) {
         content.innerHTML = `
-          <div class="w-60 h-60 sm:w-68 sm:h-68 rounded-full bg-[#090a0c] border border-zinc-800/80 shadow-[0_0_45px_rgba(141,168,155,0.28)] flex items-center justify-center overflow-hidden mx-auto">
-            <img src="${moon.img}" alt="Fase Lunar" class="w-full h-full object-contain object-center scale-110">
-          </div>
+          <img id="modalMoonImg" src="${moon.img}" alt="Fase Lunar" class="w-72 h-72 sm:w-96 sm:h-96 object-contain object-center drop-shadow-[0_0_45px_rgba(180,199,190,0.4)] transition-transform duration-300">
         `;
+        const modalMoonImg = document.getElementById('modalMoonImg');
+        if (modalMoonImg) applyTransparentMoonIcon(modalMoonImg, moon.img);
       }
       document.getElementById('moonModal').classList.remove('hidden');
     }
