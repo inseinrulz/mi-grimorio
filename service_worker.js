@@ -1,4 +1,4 @@
-const CACHE_NAME = 'grimorio-cache-v15';
+const CACHE_NAME = 'grimorio-cache-v16';
 const ASSETS = [
   './',
   './index.html',
@@ -36,6 +36,8 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
+  if (event.request.method !== 'GET') return;
+
   if (event.request.mode === 'navigate' || event.request.url.endsWith('index.html')) {
     event.respondWith(
       fetch(event.request).then((networkResponse) => {
@@ -50,7 +52,21 @@ self.addEventListener('fetch', (event) => {
 
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
-      return cachedResponse || fetch(event.request);
+      if (cachedResponse) return cachedResponse;
+
+      return fetch(event.request).then((networkResponse) => {
+        if (
+          networkResponse &&
+          networkResponse.status === 200 &&
+          event.request.url.startsWith(self.location.origin)
+        ) {
+          const responseToCache = networkResponse.clone();
+          caches.open(CACHE_NAME).then((cache) => {
+            cache.put(event.request, responseToCache);
+          });
+        }
+        return networkResponse;
+      });
     })
   );
 });
