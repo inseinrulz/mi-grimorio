@@ -173,10 +173,25 @@
 
     .mystic-wicca-card {
       position: relative;
-      background: linear-gradient(135deg, #111216 0%, #0c0d10 100%);
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7);
+      background: linear-gradient(145deg, #13121a 0%, #0b0c10 100%);
+      border: 1px solid rgba(155, 141, 168, 0.18);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.72), inset 0 1px 0 rgba(255, 255, 255, 0.04);
       border-radius: 16px;
       overflow: hidden;
+    }
+
+    .grimoire-hermetic-card {
+      position: relative;
+      background: linear-gradient(155deg, rgba(24, 21, 34, 0.92) 0%, rgba(11, 12, 16, 0.96) 100%);
+      border: 1px solid rgba(155, 141, 168, 0.25);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(195, 180, 199, 0.08);
+      border-radius: 16px;
+      transition: all 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .grimoire-hermetic-card:hover {
+      border-color: rgba(195, 180, 199, 0.55);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(155, 141, 168, 0.16);
     }
 
     .nav-emblem-btn {
@@ -220,7 +235,6 @@
       animation: unlockWave 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
 
-    /* Barajado multicapa del mazo */
     @keyframes shuffleCardLeft {
       0%, 100% { transform: translateX(0) rotate(0deg); }
       50% { transform: translateX(-34px) rotate(-11deg) translateY(-6px); }
@@ -247,7 +261,6 @@
     #theDeck.shuffling::before { animation: shuffleCardLeft 0.45s ease-in-out infinite; }
     #theDeck.shuffling::after { animation: shuffleCardRight 0.45s ease-in-out infinite 0.22s; }
 
-    /* Destello holográfico en cartas reveladas */
     @keyframes tarotSweep {
       0% { transform: translateX(-140%) skewX(-22deg); opacity: 0; }
       40% { opacity: 0.45; }
@@ -261,7 +274,6 @@
       pointer-events: none;
     }
 
-    /* Transmutación y Subida de Nivel del Familiar */
     @keyframes transmuteFlash {
       0% { transform: scale(1) rotate(0deg); filter: brightness(1); }
       35% { transform: scale(0.85) rotate(-12deg); filter: brightness(2.6) drop-shadow(0 0 28px #c75665); }
@@ -281,7 +293,6 @@
     .anim-transmute-ring { animation: transmuteRingExpand 0.85s ease-out forwards; }
     .anim-levelup { animation: levelUpGlow 0.7s ease-out; }
 
-    /* Partículas flotantes al acariciar/nutrir */
     @keyframes particleRise {
       0% { transform: translateY(0) scale(0.6); opacity: 0; }
       25% { opacity: 1; }
@@ -294,7 +305,6 @@
       pointer-events: none;
     }
 
-    /* Efectos Visuales (VFX) de Combate en el Plano Astral */
     @keyframes arenaImpactShake {
       0%, 100% { transform: translate3d(0, 0, 0); }
       20% { transform: translate3d(-6px, 3px, 0); }
@@ -540,114 +550,156 @@
       </section>
     </div>
 
-    <!-- VISTA 2: GRIMORIO -->
+    <!-- VISTA 2: GRIMORIO (ESTILO MÍSTICO RESTAURADO, KABBALAH & TRÍADA ASTRAL CON ICONOS VECTORIALES DE COLOR) -->
     <div id="viewGrimorio" class="hidden flex-col gap-6 day-fade">
       <section class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
         <div class="mystic-wicca-card flex flex-col h-96">
-          <div class="px-5 py-3.5 flex items-center justify-between bg-[#131418]">
-            <h2 class="font-serif-luxury text-xl text-zinc-100 font-bold tracking-wide">Ecos del Alma</h2>
-            <button type="button" onclick="openQuickNoteModal()" class="text-zinc-400 hover:text-[#9b8da8] transition">
-              <i data-lucide="plus" class="w-5 h-5"></i>
+          <div class="px-5 py-3.5 flex items-center justify-between bg-gradient-to-r from-[#171422] to-[#121318] border-b border-[#9b8da8]/20">
+            <h2 class="font-serif-luxury text-xl text-[#e0d6e8] font-bold tracking-wide flex items-center gap-2">
+              <i data-lucide="feather" class="w-4 h-4 text-[#9b8da8]"></i> Ecos del Alma
+            </h2>
+            <button type="button" onclick="openQuickNoteModal()" class="text-[#c3b4c7] hover:text-white bg-[#9b8da8]/15 hover:bg-[#9b8da8]/30 p-1.5 rounded-lg border border-[#9b8da8]/30 transition" title="Añadir nota al Grimorio">
+              <i data-lucide="plus" class="w-4 h-4"></i>
             </button>
           </div>
-          <div class="p-4 overflow-y-auto custom-scroll flex-grow flex flex-col gap-4" id="grimoireNotesList"></div>
+          <div class="p-4 overflow-y-auto custom-scroll flex-grow flex flex-col gap-3.5" id="grimoireNotesList"></div>
         </div>
 
         <div class="mystic-wicca-card flex flex-col h-96">
-          <div class="px-5 py-3.5 flex items-center justify-between bg-[#131418]">
-            <h2 class="font-serif-luxury text-xl text-zinc-100 font-bold tracking-wide">Manifestaciones</h2>
-            <button type="button" onclick="openProjectModal()" class="text-zinc-400 hover:text-[#c3b4c7] transition">
-              <i data-lucide="plus-circle" class="w-5 h-5"></i>
+          <div class="px-5 py-3.5 flex items-center justify-between bg-gradient-to-r from-[#171422] to-[#121318] border-b border-[#9b8da8]/20">
+            <h2 class="font-serif-luxury text-xl text-[#e0d6e8] font-bold tracking-wide flex items-center gap-2">
+              <i data-lucide="sparkles" class="w-4 h-4 text-amber-300/80"></i> Manifestaciones
+            </h2>
+            <button type="button" onclick="openProjectModal()" class="text-[#c3b4c7] hover:text-white bg-[#9b8da8]/15 hover:bg-[#9b8da8]/30 p-1.5 rounded-lg border border-[#9b8da8]/30 transition" title="Nueva manifestación">
+              <i data-lucide="plus-circle" class="w-4 h-4"></i>
             </button>
           </div>
-          <div class="p-4 overflow-y-auto custom-scroll flex-grow flex flex-col gap-4" id="projectsContainer"></div>
+          <div class="p-4 overflow-y-auto custom-scroll flex-grow flex flex-col gap-3.5" id="projectsContainer"></div>
         </div>
       </section>
 
       <section class="flex flex-col gap-4 pt-4">
         <div class="flex items-center justify-center gap-3 mb-2">
-          <div class="w-12 h-px bg-gradient-to-r from-transparent to-[#9b8da8]/70"></div>
-          <h2 class="font-serif-luxury text-2xl text-zinc-200 font-bold text-center">Los 7 Principios Herméticos & Kabbalah</h2>
-          <div class="w-12 h-px bg-gradient-to-l from-transparent to-[#9b8da8]/70"></div>
+          <div class="w-12 h-px bg-gradient-to-r from-transparent via-amber-400/50 to-[#9b8da8]"></div>
+          <h2 class="font-serif-luxury text-2xl sm:text-3xl text-[#e0d6e8] font-bold text-center tracking-wide">Los 7 Principios Herméticos & Kabbalah</h2>
+          <div class="w-12 h-px bg-gradient-to-l from-transparent via-amber-400/50 to-[#9b8da8]"></div>
         </div>
         
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-2.5">
-          <div onclick="openEsotericDetail('kabbalah')" class="mystic-wicca-card p-3 text-center flex flex-col justify-center items-center cursor-pointer hover:bg-[#15141c] transition">
-            <h3 class="text-[#c3b4c7] font-bold text-[10px] tracking-widest uppercase mb-1 flex items-center gap-1.5"><i data-lucide="star" class="w-3.5 h-3.5 text-[#9b8da8]"></i> Kabbalah</h3>
-            <p class="text-[9px] text-zinc-400">El Árbol de la Vida.</p>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div onclick="openEsotericDetail('kabbalah')" class="grimoire-hermetic-card p-3.5 text-center flex flex-col justify-center items-center cursor-pointer group">
+            <div class="w-9 h-9 rounded-full bg-amber-500/15 border border-amber-400/40 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(251,191,36,0.25)]">
+              <i data-lucide="git-fork" class="w-4 h-4 text-amber-300"></i>
+            </div>
+            <h3 class="text-amber-200 font-bold text-[10px] tracking-widest uppercase mb-1">Kabbalah</h3>
+            <p class="text-[10px] text-zinc-400 font-serif-luxury italic">El Árbol de la Vida</p>
           </div>
-          <div onclick="openEsotericDetail('mentalismo')" class="mystic-wicca-card p-3 text-center flex flex-col justify-center items-center cursor-pointer hover:bg-[#15141c] transition">
-            <h3 class="text-[#c3b4c7] font-bold text-[10px] tracking-widest uppercase mb-1 flex items-center gap-1.5"><i data-lucide="eye" class="w-3.5 h-3.5 text-[#9b8da8]"></i> Mentalismo</h3>
-            <p class="text-[9px] text-zinc-400">El Todo es Mente.</p>
+
+          <div onclick="openEsotericDetail('mentalismo')" class="grimoire-hermetic-card p-3.5 text-center flex flex-col justify-center items-center cursor-pointer group">
+            <div class="w-9 h-9 rounded-full bg-purple-500/15 border border-purple-400/40 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(192,132,252,0.2)]">
+              <i data-lucide="eye" class="w-4 h-4 text-purple-300"></i>
+            </div>
+            <h3 class="text-[#e0d6e8] font-bold text-[10px] tracking-widest uppercase mb-1">Mentalismo</h3>
+            <p class="text-[10px] text-zinc-400 font-serif-luxury italic">El Todo es Mente</p>
           </div>
-          <div onclick="openEsotericDetail('correspondencia')" class="mystic-wicca-card p-3 text-center flex flex-col justify-center items-center cursor-pointer hover:bg-[#15141c] transition">
-            <h3 class="text-[#c3b4c7] font-bold text-[10px] tracking-widest uppercase mb-1 flex items-center gap-1.5"><i data-lucide="infinity" class="w-3.5 h-3.5 text-[#9b8da8]"></i> Correspondencia</h3>
-            <p class="text-[9px] text-zinc-400">Como es arriba.</p>
+
+          <div onclick="openEsotericDetail('correspondencia')" class="grimoire-hermetic-card p-3.5 text-center flex flex-col justify-center items-center cursor-pointer group">
+            <div class="w-9 h-9 rounded-full bg-sky-500/15 border border-sky-400/40 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(56,189,248,0.2)]">
+              <i data-lucide="infinity" class="w-4 h-4 text-sky-300"></i>
+            </div>
+            <h3 class="text-[#e0d6e8] font-bold text-[10px] tracking-widest uppercase mb-1">Correspondencia</h3>
+            <p class="text-[10px] text-zinc-400 font-serif-luxury italic">Como es arriba</p>
           </div>
-          <div onclick="openEsotericDetail('vibracion')" class="mystic-wicca-card p-3 text-center flex flex-col justify-center items-center cursor-pointer hover:bg-[#15141c] transition">
-            <h3 class="text-[#c3b4c7] font-bold text-[10px] tracking-widest uppercase mb-1 flex items-center gap-1.5"><i data-lucide="waves" class="w-3.5 h-3.5 text-[#9b8da8]"></i> Vibración</h3>
-            <p class="text-[9px] text-zinc-400">Todo vibra.</p>
+
+          <div onclick="openEsotericDetail('vibracion')" class="grimoire-hermetic-card p-3.5 text-center flex flex-col justify-center items-center cursor-pointer group">
+            <div class="w-9 h-9 rounded-full bg-emerald-500/15 border border-emerald-400/40 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(52,211,153,0.2)]">
+              <i data-lucide="waves" class="w-4 h-4 text-emerald-300"></i>
+            </div>
+            <h3 class="text-[#e0d6e8] font-bold text-[10px] tracking-widest uppercase mb-1">Vibración</h3>
+            <p class="text-[10px] text-zinc-400 font-serif-luxury italic">Todo vibra</p>
           </div>
-          <div onclick="openEsotericDetail('polaridad')" class="mystic-wicca-card p-3 text-center flex flex-col justify-center items-center cursor-pointer hover:bg-[#15141c] transition">
-            <h3 class="text-[#c3b4c7] font-bold text-[10px] tracking-widest uppercase mb-1 flex items-center gap-1.5"><i data-lucide="sun-moon" class="w-3.5 h-3.5 text-[#9b8da8]"></i> Polaridad</h3>
-            <p class="text-[9px] text-zinc-400">Todo tiene opuestos.</p>
+
+          <div onclick="openEsotericDetail('polaridad')" class="grimoire-hermetic-card p-3.5 text-center flex flex-col justify-center items-center cursor-pointer group">
+            <div class="w-9 h-9 rounded-full bg-indigo-500/15 border border-indigo-400/40 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(129,140,248,0.2)]">
+              <i data-lucide="sun-moon" class="w-4 h-4 text-indigo-300"></i>
+            </div>
+            <h3 class="text-[#e0d6e8] font-bold text-[10px] tracking-widest uppercase mb-1">Polaridad</h3>
+            <p class="text-[10px] text-zinc-400 font-serif-luxury italic">Todo tiene opuestos</p>
           </div>
-          <div onclick="openEsotericDetail('ritmo')" class="mystic-wicca-card p-3 text-center flex flex-col justify-center items-center cursor-pointer hover:bg-[#15141c] transition">
-            <h3 class="text-[#c3b4c7] font-bold text-[10px] tracking-widest uppercase mb-1 flex items-center gap-1.5"><i data-lucide="activity" class="w-3.5 h-3.5 text-[#9b8da8]"></i> Ritmo</h3>
-            <p class="text-[9px] text-zinc-400">Todo fluye.</p>
+
+          <div onclick="openEsotericDetail('ritmo')" class="grimoire-hermetic-card p-3.5 text-center flex flex-col justify-center items-center cursor-pointer group">
+            <div class="w-9 h-9 rounded-full bg-teal-500/15 border border-teal-400/40 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(45,212,191,0.2)]">
+              <i data-lucide="activity" class="w-4 h-4 text-teal-300"></i>
+            </div>
+            <h3 class="text-[#e0d6e8] font-bold text-[10px] tracking-widest uppercase mb-1">Ritmo</h3>
+            <p class="text-[10px] text-zinc-400 font-serif-luxury italic">Todo fluye</p>
           </div>
-          <div onclick="openEsotericDetail('causa')" class="mystic-wicca-card p-3 text-center flex flex-col justify-center items-center cursor-pointer hover:bg-[#15141c] transition">
-            <h3 class="text-[#c3b4c7] font-bold text-[10px] tracking-widest uppercase mb-1 flex items-center gap-1.5"><i data-lucide="scale" class="w-3.5 h-3.5 text-[#9b8da8]"></i> Causa & Efecto</h3>
-            <p class="text-[9px] text-zinc-400">Toda causa tiene efecto.</p>
+
+          <div onclick="openEsotericDetail('causa')" class="grimoire-hermetic-card p-3.5 text-center flex flex-col justify-center items-center cursor-pointer group">
+            <div class="w-9 h-9 rounded-full bg-amber-500/15 border border-amber-400/40 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(251,191,36,0.2)]">
+              <i data-lucide="scale" class="w-4 h-4 text-amber-300"></i>
+            </div>
+            <h3 class="text-[#e0d6e8] font-bold text-[10px] tracking-widest uppercase mb-1">Causa & Efecto</h3>
+            <p class="text-[10px] text-zinc-400 font-serif-luxury italic">Toda causa tiene efecto</p>
           </div>
-          <div onclick="openEsotericDetail('genero')" class="mystic-wicca-card p-3 text-center flex flex-col justify-center items-center cursor-pointer hover:bg-[#15141c] transition">
-            <h3 class="text-[#c3b4c7] font-bold text-[10px] tracking-widest uppercase mb-1 flex items-center gap-1.5"><i data-lucide="dna" class="w-3.5 h-3.5 text-[#9b8da8]"></i> Género</h3>
-            <p class="text-[9px] text-zinc-400">Principio creador.</p>
+
+          <div onclick="openEsotericDetail('genero')" class="grimoire-hermetic-card p-3.5 text-center flex flex-col justify-center items-center cursor-pointer group">
+            <div class="w-9 h-9 rounded-full bg-rose-500/15 border border-rose-400/40 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(251,113,133,0.2)]">
+              <i data-lucide="dna" class="w-4 h-4 text-rose-300"></i>
+            </div>
+            <h3 class="text-[#e0d6e8] font-bold text-[10px] tracking-widest uppercase mb-1">Género</h3>
+            <p class="text-[10px] text-zinc-400 font-serif-luxury italic">Principio creador</p>
           </div>
         </div>
 
-        <div class="flex items-center justify-center gap-3 mb-2 mt-4">
-          <div class="w-12 h-px bg-gradient-to-r from-transparent to-[#9b8da8]/70"></div>
-          <h2 class="font-serif-luxury text-2xl text-zinc-200 font-bold text-center">Tríada Astral</h2>
-          <div class="w-12 h-px bg-gradient-to-l from-transparent to-[#9b8da8]/70"></div>
+        <div class="flex items-center justify-center gap-3 mb-2 mt-6">
+          <div class="w-12 h-px bg-gradient-to-r from-transparent via-amber-400/50 to-[#9b8da8]"></div>
+          <h2 class="font-serif-luxury text-2xl sm:text-3xl text-[#e0d6e8] font-bold text-center tracking-wide">Tríada Astral</h2>
+          <div class="w-12 h-px bg-gradient-to-l from-transparent via-amber-400/50 to-[#9b8da8]"></div>
         </div>
 
-        <!-- TRÍADA ASTRAL CON FONDO TRANSPARENTE Y GLIFO DEL SIGNO SELECCIONADO -->
-        <div class="relative w-full bg-transparent p-4 mt-2 mb-6 flex items-center justify-center min-h-[370px] sm:min-h-[430px]">
-          <div class="relative w-[92%] max-w-[390px] aspect-square">
-            <div class="absolute inset-0 flex justify-center items-center pointer-events-none opacity-45">
+        <!-- TRÍADA ASTRAL: FONDO TRANSPARENTE, GEOMETRÍA SAGRADA E ICONOS VECTORIALES UNIFORMES CON COLOR -->
+        <div class="relative w-full bg-transparent p-4 mt-2 mb-6 flex items-center justify-center min-h-[380px] sm:min-h-[440px]">
+          <div class="relative w-[94%] max-w-[400px] aspect-square">
+            <div class="absolute inset-0 flex justify-center items-center pointer-events-none opacity-65">
               <svg viewBox="20 20 360 360" class="w-full h-full animate-[spin_150s_linear_infinite]">
-                <circle cx="200" cy="200" r="165" fill="none" stroke="#9b8da8" stroke-width="0.7" stroke-dasharray="3 7"/>
-                <circle cx="200" cy="200" r="145" fill="none" stroke="#c3b4c7" stroke-width="1"/>
-                <g stroke="#9b8da8" stroke-width="0.9" opacity="0.8">
-                  <polygon points="200,55 325,275 75,275" fill="none" />
-                  <polygon points="200,345 325,125 75,125" fill="none" />
+                <defs>
+                  <linearGradient id="astralStarGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#fbbf24" stop-opacity="0.75"/>
+                    <stop offset="50%" stop-color="#c084fc" stop-opacity="0.65"/>
+                    <stop offset="100%" stop-color="#34d399" stop-opacity="0.75"/>
+                  </linearGradient>
+                </defs>
+                <circle cx="200" cy="200" r="168" fill="none" stroke="#9b8da8" stroke-width="0.8" stroke-dasharray="3 7"/>
+                <circle cx="200" cy="200" r="146" fill="none" stroke="url(#astralStarGrad)" stroke-width="1.2"/>
+                <g stroke="url(#astralStarGrad)" stroke-width="1.1">
+                  <polygon points="200,54 326,274 74,274" fill="none" />
+                  <polygon points="200,346 326,126 74,126" fill="none" />
                 </g>
               </svg>
             </div>
 
-            <!-- VÉRTICE SUPERIOR: SOL -->
-            <div onclick="openEsotericDetail('sol')" class="absolute top-[16%] left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center group cursor-pointer z-20">
-              <div class="w-20 h-20 flex items-center justify-center bg-[#090a0c]/85 backdrop-blur-sm rounded-full border border-[#c3b4c7]/50 group-hover:scale-110 group-hover:border-[#8da89b] transition-all shadow-[0_0_25px_rgba(155,141,168,0.25)]">
-                <span id="glyphSignSun" class="text-4xl text-[#e0d6e8] leading-none select-none">♏</span>
+            <!-- VÉRTICE SUPERIOR: SOL (DORADO ÁMBAR + COLOR ELEMENTAL DEL SIGNO) -->
+            <div onclick="openEsotericDetail('sol')" class="absolute top-[15%] left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center group cursor-pointer z-20">
+              <div id="nodeRingSun" class="w-20 h-20 flex items-center justify-center bg-[#090a0c]/90 backdrop-blur-sm rounded-full border-2 border-amber-400/60 group-hover:scale-110 transition-all shadow-[0_0_28px_rgba(251,191,36,0.3)]">
+                <div id="glyphSignSun" class="w-10 h-10 flex items-center justify-center"></div>
               </div>
-              <span id="dynSignSun" class="mt-2 text-[10px] font-mono tracking-widest text-[#c3b4c7] font-bold uppercase bg-[#090a0c]/90 px-3.5 py-1 rounded-full border border-[#9b8da8]/40 whitespace-nowrap">Sol Escorpio ♏</span>
+              <span id="dynSignSun" class="mt-2 text-[10px] font-mono tracking-widest text-amber-200 font-bold uppercase bg-[#090a0c]/95 px-3.5 py-1 rounded-full border border-amber-400/45 whitespace-nowrap shadow">Sol Escorpio</span>
             </div>
 
-            <!-- BASE IZQUIERDA: LUNA -->
-            <div onclick="openEsotericDetail('luna')" class="absolute top-[78%] left-[20%] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center group cursor-pointer z-20">
-              <div class="w-20 h-20 flex items-center justify-center bg-[#090a0c]/85 backdrop-blur-sm rounded-full border border-[#9b8da8]/45 group-hover:scale-110 group-hover:border-[#8da89b] transition-all shadow-[0_0_25px_rgba(155,141,168,0.2)]">
-                <span id="glyphSignMoon" class="text-4xl text-white leading-none select-none">♒</span>
+            <!-- BASE IZQUIERDA: LUNA (PLATEADO AMATISTA + COLOR ELEMENTAL DEL SIGNO) -->
+            <div onclick="openEsotericDetail('luna')" class="absolute top-[79%] left-[19%] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center group cursor-pointer z-20">
+              <div id="nodeRingMoon" class="w-20 h-20 flex items-center justify-center bg-[#090a0c]/90 backdrop-blur-sm rounded-full border-2 border-purple-400/60 group-hover:scale-110 transition-all shadow-[0_0_28px_rgba(192,132,252,0.28)]">
+                <div id="glyphSignMoon" class="w-10 h-10 flex items-center justify-center"></div>
               </div>
-              <span id="dynSignMoon" class="mt-2 text-[10px] font-mono tracking-widest text-[#9b8da8] font-bold uppercase bg-[#090a0c]/90 px-3.5 py-1 rounded-full border border-[#9b8da8]/40 whitespace-nowrap">Luna Acuario ♒</span>
+              <span id="dynSignMoon" class="mt-2 text-[10px] font-mono tracking-widest text-purple-200 font-bold uppercase bg-[#090a0c]/95 px-3.5 py-1 rounded-full border border-purple-400/45 whitespace-nowrap shadow">Luna Acuario</span>
             </div>
 
-            <!-- BASE DERECHA: ASCENDENTE -->
-            <div onclick="openEsotericDetail('asc')" class="absolute top-[78%] left-[80%] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center group cursor-pointer z-20">
-              <div class="w-20 h-20 flex items-center justify-center bg-[#090a0c]/85 backdrop-blur-sm rounded-full border border-[#9b8da8]/45 group-hover:scale-110 group-hover:border-[#8da89b] transition-all shadow-[0_0_25px_rgba(155,141,168,0.2)]">
-                <span id="glyphSignAsc" class="text-4xl text-[#e0d6e8] leading-none select-none">♉</span>
+            <!-- BASE DERECHA: ASCENDENTE (ESMERALDA SALVIA + COLOR ELEMENTAL DEL SIGNO) -->
+            <div onclick="openEsotericDetail('asc')" class="absolute top-[79%] left-[81%] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center group cursor-pointer z-20">
+              <div id="nodeRingAsc" class="w-20 h-20 flex items-center justify-center bg-[#090a0c]/90 backdrop-blur-sm rounded-full border-2 border-emerald-400/60 group-hover:scale-110 transition-all shadow-[0_0_28px_rgba(52,211,153,0.28)]">
+                <div id="glyphSignAsc" class="w-10 h-10 flex items-center justify-center"></div>
               </div>
-              <span id="dynSignAsc" class="mt-2 text-[10px] font-mono tracking-widest text-[#9b8da8] font-bold uppercase bg-[#090a0c]/90 px-3.5 py-1 rounded-full border border-[#9b8da8]/40 whitespace-nowrap">Asc. Tauro ♉</span>
+              <span id="dynSignAsc" class="mt-2 text-[10px] font-mono tracking-widest text-emerald-200 font-bold uppercase bg-[#090a0c]/95 px-3.5 py-1 rounded-full border border-emerald-400/45 whitespace-nowrap shadow">Asc. Tauro</span>
             </div>
           </div>
         </div>
@@ -980,13 +1032,13 @@
           <p class="text-[10px] text-[#8da89b] font-mono uppercase tracking-widest mb-2">Tu Carta Natal</p>
           <div class="flex flex-col gap-2.5">
             <select id="setSignSun" class="w-full px-3 py-2 bg-[#0f1013] border border-zinc-800 rounded-xl text-zinc-300 text-xs font-mono uppercase text-center">
-              <option value="Aries ♈">Aries ♈</option><option value="Tauro ♉">Tauro ♉</option><option value="Géminis ♊">Géminis ♊</option><option value="Cáncer ♋">Cáncer ♋</option><option value="Leo ♌">Leo ♌</option><option value="Virgo ♍">Virgo ♍</option><option value="Libra ♎">Libra ♎</option><option value="Escorpio ♏">Escorpio ♏</option><option value="Sagitario ♐">Sagitario ♐</option><option value="Capricornio ♑">Capricornio ♑</option><option value="Acuario ♒">Acuario ♒</option><option value="Piscis ♓">Piscis ♓</option>
+              <option value="Aries">Aries · Fuego</option><option value="Tauro">Tauro · Tierra</option><option value="Géminis">Géminis · Aire</option><option value="Cáncer">Cáncer · Agua</option><option value="Leo">Leo · Fuego</option><option value="Virgo">Virgo · Tierra</option><option value="Libra">Libra · Aire</option><option value="Escorpio">Escorpio · Agua</option><option value="Sagitario">Sagitario · Fuego</option><option value="Capricornio">Capricornio · Tierra</option><option value="Acuario">Acuario · Aire</option><option value="Piscis">Piscis · Agua</option>
             </select>
             <select id="setSignMoon" class="w-full px-3 py-2 bg-[#0f1013] border border-zinc-800 rounded-xl text-zinc-300 text-xs font-mono uppercase text-center">
-              <option value="Aries ♈">Aries ♈</option><option value="Tauro ♉">Tauro ♉</option><option value="Géminis ♊">Géminis ♊</option><option value="Cáncer ♋">Cáncer ♋</option><option value="Leo ♌">Leo ♌</option><option value="Virgo ♍">Virgo ♍</option><option value="Libra ♎">Libra ♎</option><option value="Escorpio ♏">Escorpio ♏</option><option value="Sagitario ♐">Sagitario ♐</option><option value="Capricornio ♑">Capricornio ♑</option><option value="Acuario ♒">Acuario ♒</option><option value="Piscis ♓">Piscis ♓</option>
+              <option value="Aries">Aries · Fuego</option><option value="Tauro">Tauro · Tierra</option><option value="Géminis">Géminis · Aire</option><option value="Cáncer">Cáncer · Agua</option><option value="Leo">Leo · Fuego</option><option value="Virgo">Virgo · Tierra</option><option value="Libra">Libra · Aire</option><option value="Escorpio">Escorpio · Agua</option><option value="Sagitario">Sagitario · Fuego</option><option value="Capricornio">Capricornio · Tierra</option><option value="Acuario">Acuario · Aire</option><option value="Piscis">Piscis · Agua</option>
             </select>
             <select id="setSignAsc" class="w-full px-3 py-2 bg-[#0f1013] border border-zinc-800 rounded-xl text-zinc-300 text-xs font-mono uppercase text-center">
-              <option value="Aries ♈">Aries ♈</option><option value="Tauro ♉">Tauro ♉</option><option value="Géminis ♊">Géminis ♊</option><option value="Cáncer ♋">Cáncer ♋</option><option value="Leo ♌">Leo ♌</option><option value="Virgo ♍">Virgo ♍</option><option value="Libra ♎">Libra ♎</option><option value="Escorpio ♏">Escorpio ♏</option><option value="Sagitario ♐">Sagitario ♐</option><option value="Capricornio ♑">Capricornio ♑</option><option value="Acuario ♒">Acuario ♒</option><option value="Piscis ♓">Piscis ♓</option>
+              <option value="Aries">Aries · Fuego</option><option value="Tauro">Tauro · Tierra</option><option value="Géminis">Géminis · Aire</option><option value="Cáncer">Cáncer · Agua</option><option value="Leo">Leo · Fuego</option><option value="Virgo">Virgo · Tierra</option><option value="Libra">Libra · Aire</option><option value="Escorpio">Escorpio · Agua</option><option value="Sagitario">Sagitario · Fuego</option><option value="Capricornio">Capricornio · Tierra</option><option value="Acuario">Acuario · Aire</option><option value="Piscis">Piscis · Agua</option>
             </select>
           </div>
         </div>
@@ -1132,13 +1184,15 @@
     </div>
   </div>
 
-  <div id="esotericDetailModal" class="fixed inset-0 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 z-50 hidden">
-    <div class="bg-gradient-to-b from-[#15141c] to-[#0c0d10] border border-[#9b8da8]/40 rounded-3xl max-w-md w-full p-8 shadow-2xl relative" id="esotericDetailModalCard">
-      <button type="button" onclick="closeEsotericDetail()" class="absolute top-5 right-5 text-[#9b8da8] hover:text-white bg-black/50 p-2 rounded-full"><i data-lucide="x" class="w-4 h-4"></i></button>
-      <div class="flex flex-col items-center text-center mt-2">
-        <h3 id="esotericDetailTitle" class="font-serif-luxury text-3xl text-zinc-100 font-bold mb-2">Título</h3>
-        <p id="esotericDetailSubtitle" class="text-[10px] font-mono tracking-widest text-[#9b8da8] uppercase mb-5">Subtítulo</p>
-        <div class="text-zinc-200 font-handwritten text-2xl leading-relaxed w-full bg-black/40 p-5 rounded-2xl border border-[#9b8da8]/20">
+  <!-- POP-UP ESOTÉRICO (KABBALAH CON ÁRBOL DE LA VIDA, PRINCIPIOS HERMÉTICOS Y SIGNOS CON ICONOS SVG DE COLOR) -->
+  <div id="esotericDetailModal" onclick="if(event.target === this) closeEsotericDetail()" class="fixed inset-0 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 z-50 hidden">
+    <div class="bg-gradient-to-b from-[#171522] to-[#0b0c10] border border-[#9b8da8]/45 rounded-3xl max-w-md w-full max-h-[90vh] overflow-y-auto custom-scroll p-6 sm:p-8 shadow-[0_0_50px_rgba(155,141,168,0.2)] relative" id="esotericDetailModalCard">
+      <button type="button" onclick="closeEsotericDetail()" class="absolute top-4 right-4 text-[#9b8da8] hover:text-white bg-black/60 p-2 rounded-full border border-[#9b8da8]/30 transition"><i data-lucide="x" class="w-4 h-4"></i></button>
+      <div class="flex flex-col items-center text-center mt-1">
+        <div id="esotericDetailVisual" class="mb-4 flex items-center justify-center"></div>
+        <h3 id="esotericDetailTitle" class="font-serif-luxury text-2xl sm:text-3xl text-zinc-100 font-bold mb-1">Título</h3>
+        <p id="esotericDetailSubtitle" class="text-[10px] font-mono tracking-widest text-[#9b8da8] uppercase mb-4">Subtítulo</p>
+        <div class="text-zinc-200 font-handwritten text-2xl leading-relaxed w-full bg-black/45 p-5 rounded-2xl border border-[#9b8da8]/25">
           <p id="esotericDetailBody"></p>
         </div>
       </div>
@@ -1340,7 +1394,7 @@
 
     const defaultAppData = {
       pin: null,
-      settings: { sun: 'Escorpio ♏', moon: 'Acuario ♒', asc: 'Tauro ♉' },
+      settings: { sun: 'Escorpio', moon: 'Acuario', asc: 'Tauro' },
       habitsCatalog: ['Meditación Astral', 'Lectura Hermética', 'Hidratación Consciente'],
       grimoireNotes: [
         { id: 1, title: 'Sincronicidad Lunar', body: 'El silencio nocturno revela lo que el ruido del día oculta.', date: '18 Nov 2026' }
@@ -2435,26 +2489,26 @@
       const illum = Math.round(((1 - Math.cos((2 * Math.PI * age) / synodic)) / 2) * 100);
 
       const zodiacs = [
-        { name: 'Aries ♈', el: 'Fuego' }, { name: 'Tauro ♉', el: 'Tierra' }, { name: 'Géminis ♊', el: 'Aire' },
-        { name: 'Cáncer ♋', el: 'Agua' }, { name: 'Leo ♌', el: 'Fuego' }, { name: 'Virgo ♍', el: 'Tierra' },
-        { name: 'Libra ♎', el: 'Aire' }, { name: 'Escorpio ♏', el: 'Agua' }, { name: 'Sagitario ♐', el: 'Fuego' },
-        { name: 'Capricornio ♑', el: 'Tierra' }, { name: 'Acuario ♒', el: 'Aire' }, { name: 'Piscis ♓', el: 'Agua' }
+        { name: 'Aries', el: 'Fuego' }, { name: 'Tauro', el: 'Tierra' }, { name: 'Géminis', el: 'Aire' },
+        { name: 'Cáncer', el: 'Agua' }, { name: 'Leo', el: 'Fuego' }, { name: 'Virgo', el: 'Tierra' },
+        { name: 'Libra', el: 'Aire' }, { name: 'Escorpio', el: 'Agua' }, { name: 'Sagitario', el: 'Fuego' },
+        { name: 'Capricornio', el: 'Tierra' }, { name: 'Acuario', el: 'Aire' }, { name: 'Piscis', el: 'Agua' }
       ];
       const moonSignObj = zodiacs[Math.floor((age / synodic) * 12) % 12];
       const monthDay = (d.getMonth() + 1) * 100 + d.getDate();
-      let sunSign = 'Escorpio ♏';
-      if (monthDay >= 321 && monthDay <= 419) sunSign = 'Aries ♈';
-      else if (monthDay >= 420 && monthDay <= 520) sunSign = 'Tauro ♉';
-      else if (monthDay >= 521 && monthDay <= 620) sunSign = 'Géminis ♊';
-      else if (monthDay >= 621 && monthDay <= 722) sunSign = 'Cáncer ♋';
-      else if (monthDay >= 723 && monthDay <= 822) sunSign = 'Leo ♌';
-      else if (monthDay >= 823 && monthDay <= 922) sunSign = 'Virgo ♍';
-      else if (monthDay >= 923 && monthDay <= 1022) sunSign = 'Libra ♎';
-      else if (monthDay >= 1023 && monthDay <= 1121) sunSign = 'Escorpio ♏';
-      else if (monthDay >= 1122 && monthDay <= 1221) sunSign = 'Sagitario ♐';
-      else if (monthDay >= 1222 || monthDay <= 119) sunSign = 'Capricornio ♑';
-      else if (monthDay >= 120 && monthDay <= 218) sunSign = 'Acuario ♒';
-      else if (monthDay >= 219 && monthDay <= 320) sunSign = 'Piscis ♓';
+      let sunSign = 'Escorpio';
+      if (monthDay >= 321 && monthDay <= 419) sunSign = 'Aries';
+      else if (monthDay >= 420 && monthDay <= 520) sunSign = 'Tauro';
+      else if (monthDay >= 521 && monthDay <= 620) sunSign = 'Géminis';
+      else if (monthDay >= 621 && monthDay <= 722) sunSign = 'Cáncer';
+      else if (monthDay >= 723 && monthDay <= 822) sunSign = 'Leo';
+      else if (monthDay >= 823 && monthDay <= 922) sunSign = 'Virgo';
+      else if (monthDay >= 923 && monthDay <= 1022) sunSign = 'Libra';
+      else if (monthDay >= 1023 && monthDay <= 1121) sunSign = 'Escorpio';
+      else if (monthDay >= 1122 && monthDay <= 1221) sunSign = 'Sagitario';
+      else if (monthDay >= 1222 || monthDay <= 119) sunSign = 'Capricornio';
+      else if (monthDay >= 120 && monthDay <= 218) sunSign = 'Acuario';
+      else if (monthDay >= 219 && monthDay <= 320) sunSign = 'Piscis';
 
       const phases = [
         { name: 'Luna Nueva', img: 'Art/lunasOscuras1.png', desc: 'Portal de oscuridad fértil: ideal para sembrar intenciones en silencio, meditar y trazar nuevos comienzos.' },
@@ -2704,29 +2758,304 @@
     }
 
     // ==========================================
-    // 9. GRIMORIO, PRINCIPIOS Y TRÍADA ASTRAL
+    // 9. GRIMORIO, ÁRBOL DE LA VIDA (KABBALAH), PRINCIPIOS Y TRÍADA ASTRAL SVG
     // ==========================================
+    const ZODIAC_DATA = {
+      Aries: {
+        element: 'Fuego',
+        color: '#fb7185',
+        border: 'rgba(251, 113, 133, 0.65)',
+        glow: 'rgba(251, 113, 133, 0.35)',
+        essence: 'Chispa primordial, coraje pionero, voluntad ardiente e impulso creador.',
+        svg: `<svg viewBox="0 0 32 32" class="w-full h-full" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 27V11c0-4.5-3.2-7-6.5-7-3 0-5.5 2.2-5.5 5 0 2.2 1.6 4 3.8 4"/><path d="M16 11c0-4.5 3.2-7 6.5-7 3 0 5.5 2.2 5.5 5 0 2.2-1.6 4-3.8 4"/></svg>`
+      },
+      Tauro: {
+        element: 'Tierra',
+        color: '#34d399',
+        border: 'rgba(52, 211, 153, 0.65)',
+        glow: 'rgba(52, 211, 153, 0.35)',
+        essence: 'Firmeza telúrica, perseverancia serena, alquimia sensorial y abundancia.',
+        svg: `<svg viewBox="0 0 32 32" class="w-full h-full" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="19" r="7.5"/><path d="M7 6c1.5 4 4.8 6 9 6s7.5-2 9-6"/></svg>`
+      },
+      Géminis: {
+        element: 'Aire',
+        color: '#38bdf8',
+        border: 'rgba(56, 189, 248, 0.65)',
+        glow: 'rgba(56, 189, 248, 0.35)',
+        essence: 'Dualidad luminosa, elocuencia, curiosidad intelectual y puente entre mundos.',
+        svg: `<svg viewBox="0 0 32 32" class="w-full h-full" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 6c5.5 2 12.5 2 18 0"/><path d="M7 26c5.5-2 12.5-2 18 0"/><line x1="12" y1="7.5" x2="12" y2="24.5"/><line x1="20" y1="7.5" x2="20" y2="24.5"/></svg>`
+      },
+      Cáncer: {
+        element: 'Agua',
+        color: '#818cf8',
+        border: 'rgba(129, 140, 248, 0.65)',
+        glow: 'rgba(129, 140, 248, 0.35)',
+        essence: 'Memoria ancestral, intuición lunar, refugio emocional y protección sagrada.',
+        svg: `<svg viewBox="0 0 32 32" class="w-full h-full" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="12" r="4"/><circle cx="21.5" cy="20" r="4"/><path d="M10.5 8c6.5 0 12 2.5 14.5 7"/><path d="M21.5 24c-6.5 0-12-2.5-14.5-7"/></svg>`
+      },
+      Leo: {
+        element: 'Fuego',
+        color: '#fbbf24',
+        border: 'rgba(251, 191, 36, 0.65)',
+        glow: 'rgba(251, 191, 36, 0.35)',
+        essence: 'Soberanía solar, corazón noble, creatividad radiante y liderazgo magnético.',
+        svg: `<svg viewBox="0 0 32 32" class="w-full h-full" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="20" r="4"/><path d="M13.5 18c1.5-5 3-11 7.5-11 3.5 0 5.5 2.8 4.5 6.5-1 3.5-4.5 6.5-4.5 10 0 2 1.5 3 3.5 2"/></svg>`
+      },
+      Virgo: {
+        element: 'Tierra',
+        color: '#8da89b',
+        border: 'rgba(141, 168, 155, 0.65)',
+        glow: 'rgba(141, 168, 155, 0.35)',
+        essence: 'Discernimiento sagrado, pureza alquímica, maestría técnica y servicio consciente.',
+        svg: `<svg viewBox="0 0 32 32" class="w-full h-full" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 8v13"/><path d="M7 11c0-3 4-3 4 0v10"/><path d="M11 11c0-3 4-3 4 0v10"/><path d="M15 11c0-3 4-3 4 0v11c0 3 2.5 4.5 5 3.5"/><path d="M19 15c3.5-2 6.5 0 5.5 4-1 3.5-5 6.5-8.5 8"/></svg>`
+      },
+      Libra: {
+        element: 'Aire',
+        color: '#c3b4c7',
+        border: 'rgba(195, 180, 199, 0.65)',
+        glow: 'rgba(195, 180, 199, 0.35)',
+        essence: 'Armonía cósmica, balanza de la verdad, belleza estética y justicia interior.',
+        svg: `<svg viewBox="0 0 32 32" class="w-full h-full" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="24" x2="27" y2="24"/><path d="M5 19h6.5a5 5 0 1 1 9 0H27"/></svg>`
+      },
+      Escorpio: {
+        element: 'Agua',
+        color: '#c084fc',
+        border: 'rgba(192, 132, 252, 0.65)',
+        glow: 'rgba(192, 132, 252, 0.35)',
+        essence: 'Transmutación abisal, magnetismo psíquico, verdad oculta y renacimiento del fénix.',
+        svg: `<svg viewBox="0 0 32 32" class="w-full h-full" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8v13"/><path d="M6 11c0-3 4-3 4 0v10"/><path d="M10 11c0-3 4-3 4 0v10"/><path d="M14 11c0-3 4-3 4 0v11c0 2.5 2 4 4.5 4H26"/><polyline points="23,23 26,26 23,29"/></svg>`
+      },
+      Sagitario: {
+        element: 'Fuego',
+        color: '#f97316',
+        border: 'rgba(249, 115, 22, 0.65)',
+        glow: 'rgba(249, 115, 22, 0.35)',
+        essence: 'Flecha hacia lo infinito, sabiduría filosófica, expansión y búsqueda de la verdad.',
+        svg: `<svg viewBox="0 0 32 32" class="w-full h-full" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="25" x2="25" y2="7"/><polyline points="16,7 25,7 25,16"/><line x1="9" y1="15" x2="17" y2="23"/></svg>`
+      },
+      Capricornio: {
+        element: 'Tierra',
+        color: '#a3e635',
+        border: 'rgba(163, 230, 53, 0.65)',
+        glow: 'rgba(163, 230, 53, 0.35)',
+        essence: 'Ascenso a la cumbre, maestría del tiempo, estructura inquebrantable y legado.',
+        svg: `<svg viewBox="0 0 32 32" class="w-full h-full" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 10l5 13 5-11c1.5-3 5-2.5 5 1v8c0 3-2.5 5-5 4.5"/><circle cx="22.5" cy="21.5" r="3.5"/></svg>`
+      },
+      Acuario: {
+        element: 'Aire',
+        color: '#22d3ee',
+        border: 'rgba(34, 211, 238, 0.65)',
+        glow: 'rgba(34, 211, 238, 0.35)',
+        essence: 'Ondas de visión futura, libertad soberana, genialidad creativa y despertar colectivo.',
+        svg: `<svg viewBox="0 0 32 32" class="w-full h-full" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="5,13 9,9 13,13 17,9 21,13 25,9 27,11"/><polyline points="5,21 9,17 13,21 17,17 21,21 25,17 27,19"/></svg>`
+      },
+      Piscis: {
+        element: 'Agua',
+        color: '#a78bfa',
+        border: 'rgba(167, 139, 250, 0.65)',
+        glow: 'rgba(167, 139, 250, 0.35)',
+        essence: 'Océano místico, empatía trascendente, sueños proféticos y disolución del ego.',
+        svg: `<svg viewBox="0 0 32 32" class="w-full h-full" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6c4 5.5 4 14.5 0 20"/><path d="M24 6c-4 5.5-4 14.5 0 20"/><line x1="6" y1="16" x2="26" y2="16"/></svg>`
+      }
+    };
+
+    function normalizeSignName(raw) {
+      const clean = String(raw || '').trim().split(/\s+/)[0];
+      return ZODIAC_DATA[clean] ? clean : 'Escorpio';
+    }
+
+    function getTreeOfLifeSvg() {
+      return `
+        <div class="w-52 h-64 bg-[#090a0c]/85 rounded-2xl border border-amber-400/35 p-3 shadow-[0_0_30px_rgba(251,191,36,0.18)] flex flex-col items-center justify-center">
+          <svg viewBox="0 0 220 290" class="w-full h-full">
+            <!-- 22 Senderos Sagrados -->
+            <g stroke="#9b8da8" stroke-width="1.3" opacity="0.65">
+              <!-- Pilares verticales -->
+              <line x1="55" y1="72" x2="55" y2="192" />
+              <line x1="165" y1="72" x2="165" y2="192" />
+              <line x1="110" y1="26" x2="110" y2="266" />
+              <!-- Triángulo Supremo -->
+              <line x1="110" y1="26" x2="55" y2="72" />
+              <line x1="110" y1="26" x2="165" y2="72" />
+              <line x1="55" y1="72" x2="165" y2="72" />
+              <!-- Conexiones hacia Tiphereth (Centro) -->
+              <line x1="55" y1="72" x2="110" y2="134" />
+              <line x1="165" y1="72" x2="110" y2="134" />
+              <line x1="55" y1="112" x2="165" y2="112" />
+              <line x1="55" y1="112" x2="110" y2="134" />
+              <line x1="165" y1="112" x2="110" y2="134" />
+              <!-- Triángulo Astral -->
+              <line x1="110" y1="134" x2="55" y2="192" />
+              <line x1="110" y1="134" x2="165" y2="192" />
+              <line x1="55" y1="192" x2="165" y2="192" />
+              <line x1="55" y1="192" x2="110" y2="226" />
+              <line x1="165" y1="192" x2="110" y2="226" />
+              <line x1="55" y1="192" x2="110" y2="266" />
+              <line x1="165" y1="192" x2="110" y2="266" />
+            </g>
+            <!-- 10 Sephiroth con sus colores cabalísticos tradicionales -->
+            <!-- 1. Kether (Corona - Blanco Brillante/Oro) -->
+            <circle cx="110" cy="26" r="11" fill="#ffffff" stroke="#fbbf24" stroke-width="2" />
+            <text x="110" y="29" text-anchor="middle" font-size="8" font-weight="bold" fill="#090a0c">1</text>
+
+            <!-- 2. Chokmah (Sabiduría - Gris Plata) -->
+            <circle cx="165" cy="72" r="10.5" fill="#cbd5e1" stroke="#f8fafc" stroke-width="1.5" />
+            <text x="165" y="75" text-anchor="middle" font-size="8" font-weight="bold" fill="#090a0c">2</text>
+
+            <!-- 3. Binah (Entendimiento - Índigo Profundo) -->
+            <circle cx="55" cy="72" r="10.5" fill="#312e81" stroke="#a5b4fc" stroke-width="1.5" />
+            <text x="55" y="75" text-anchor="middle" font-size="8" font-weight="bold" fill="#ffffff">3</text>
+
+            <!-- 4. Chesed (Misericordia - Azul Zafiro) -->
+            <circle cx="165" cy="112" r="10.5" fill="#2563eb" stroke="#93c5fd" stroke-width="1.5" />
+            <text x="165" y="115" text-anchor="middle" font-size="8" font-weight="bold" fill="#ffffff">4</text>
+
+            <!-- 5. Geburah (Rigor - Rojo Rubí) -->
+            <circle cx="55" cy="112" r="10.5" fill="#dc2626" stroke="#fca5a5" stroke-width="1.5" />
+            <text x="55" y="115" text-anchor="middle" font-size="8" font-weight="bold" fill="#ffffff">5</text>
+
+            <!-- 6. Tiphereth (Belleza - Oro Solar) -->
+            <circle cx="110" cy="134" r="12" fill="#f59e0b" stroke="#fef08a" stroke-width="2" />
+            <text x="110" y="137" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#090a0c">6</text>
+
+            <!-- 7. Netzach (Victoria - Verde Esmeralda) -->
+            <circle cx="165" cy="192" r="10.5" fill="#10b981" stroke="#6ee7b7" stroke-width="1.5" />
+            <text x="165" y="195" text-anchor="middle" font-size="8" font-weight="bold" fill="#090a0c">7</text>
+
+            <!-- 8. Hod (Esplendor - Naranja Ámbar) -->
+            <circle cx="55" cy="192" r="10.5" fill="#ea580c" stroke="#fdba74" stroke-width="1.5" />
+            <text x="55" y="195" text-anchor="middle" font-size="8" font-weight="bold" fill="#ffffff">8</text>
+
+            <!-- 9. Yesod (Fundamento - Violeta Amatista) -->
+            <circle cx="110" cy="226" r="10.5" fill="#7c3aed" stroke="#ddd6fe" stroke-width="1.5" />
+            <text x="110" y="229" text-anchor="middle" font-size="8" font-weight="bold" fill="#ffffff">9</text>
+
+            <!-- 10. Malkuth (Reino - Tierra / Oliva / Citrino) -->
+            <circle cx="110" cy="266" r="11" fill="#4d7c0f" stroke="#bef264" stroke-width="1.8" />
+            <text x="110" y="269" text-anchor="middle" font-size="7.5" font-weight="bold" fill="#ffffff">10</text>
+          </svg>
+          <span class="text-[8px] font-mono uppercase tracking-widest text-amber-300/90 mt-1">10 Sephiroth · 22 Senderos</span>
+        </div>
+      `;
+    }
+
     const ESOTERIC_INFO = {
-      kabbalah: { title: 'El Árbol de la Vida', sub: 'Tradición Hermética & Kabbalah', body: 'Los 10 Sephiroth trazan el mapa de la conciencia desde Kether (la Corona) hasta Malkuth (el Reino material).' },
-      mentalismo: { title: 'I. Principio del Mentalismo', sub: 'El Kybalión', body: '«El Todo es Mente; el Universo es Mental». Tus pensamientos moldean la arquitectura de tu realidad.' },
-      correspondencia: { title: 'II. Principio de Correspondencia', sub: 'El Kybalión', body: '«Como es arriba, es abajo; como es adentro, es afuera». Tu mundo exterior refleja tu estado interior.' },
-      vibracion: { title: 'III. Principio de Vibración', sub: 'El Kybalión', body: '«Nada está inmóvil; todo se mueve; todo vibra». Eleva tu frecuencia mediante la intención consciente.' },
-      polaridad: { title: 'IV. Principio de Polaridad', sub: 'El Kybalión', body: '«Todo es doble; los extremos se tocan». La sombra y la luz son grados de una misma escala alquímica.' },
-      ritmo: { title: 'V. Principio del Ritmo', sub: 'El Kybalión', body: '«Todo fluye y refluye». Aprende a sostener tu centro sereno cuando el péndulo oscile.' },
-      causa: { title: 'VI. Causa y Efecto', sub: 'El Kybalión', body: '«Toda causa tiene su efecto; el azar no es más que una ley no reconocida». Sé causa consciente de tu destino.' },
-      genero: { title: 'VII. Principio de Género', sub: 'El Kybalión', body: '«El Género está en todo». Integra tu energía proyectiva y receptiva en equilibrio creador.' },
-      sol: { title: 'El Sol Natal', sub: 'Esencia Consciente', body: 'Representa tu fuego central, tu propósito vital y la luz que proyectas al mundo.' },
-      luna: { title: 'La Luna Natal', sub: 'Mundo Emocional & Refugio', body: 'Gobierna tu intuición profunda, tu memoria ancestral y tus necesidades del alma.' },
-      asc: { title: 'El Ascendente', sub: 'Umbral de Manifestación', body: 'Es el lente a través del cual encarnas tu camino y te muestras ante el cosmos.' }
+      kabbalah: {
+        title: 'El Árbol de la Vida',
+        sub: 'Tradición Hermética & Kabbalah',
+        body: 'Los 10 Sephiroth trazan el mapa de la conciencia divina desde Kether (1 · Corona) hasta Malkuth (10 · Reino material), unidos por 22 senderos de sabiduría.'
+      },
+      mentalismo: {
+        title: 'I. Principio del Mentalismo',
+        sub: 'El Kybalión',
+        icon: 'eye',
+        color: '#c084fc',
+        body: '«El Todo es Mente; el Universo es Mental». Tus pensamientos moldean la arquitectura de tu realidad.'
+      },
+      correspondencia: {
+        title: 'II. Principio de Correspondencia',
+        sub: 'El Kybalión',
+        icon: 'infinity',
+        color: '#38bdf8',
+        body: '«Como es arriba, es abajo; como es adentro, es afuera». Tu mundo exterior refleja tu estado interior.'
+      },
+      vibracion: {
+        title: 'III. Principio de Vibración',
+        sub: 'El Kybalión',
+        icon: 'waves',
+        color: '#34d399',
+        body: '«Nada está inmóvil; todo se mueve; todo vibra». Eleva tu frecuencia mediante la intención consciente.'
+      },
+      polaridad: {
+        title: 'IV. Principio de Polaridad',
+        sub: 'El Kybalión',
+        icon: 'sun-moon',
+        color: '#818cf8',
+        body: '«Todo es doble; los extremos se tocan». La sombra y la luz son grados de una misma escala alquímica.'
+      },
+      ritmo: {
+        title: 'V. Principio del Ritmo',
+        sub: 'El Kybalión',
+        icon: 'activity',
+        color: '#2dd4bf',
+        body: '«Todo fluye y refluye». Aprende a sostener tu centro sereno cuando el péndulo oscile.'
+      },
+      causa: {
+        title: 'VI. Causa y Efecto',
+        sub: 'El Kybalión',
+        icon: 'scale',
+        color: '#fbbf24',
+        body: '«Toda causa tiene su efecto; el azar no es más que una ley no reconocida». Sé causa consciente de tu destino.'
+      },
+      genero: {
+        title: 'VII. Principio de Género',
+        sub: 'El Kybalión',
+        icon: 'dna',
+        color: '#fb7185',
+        body: '«El Género está en todo». Integra tu energía proyectiva y receptiva en equilibrio creador.'
+      },
+      sol: {
+        title: 'El Sol Natal',
+        sub: 'Esencia Consciente',
+        body: 'Representa tu fuego central, tu propósito vital y la luz que proyectas al mundo.'
+      },
+      luna: {
+        title: 'La Luna Natal',
+        sub: 'Mundo Emocional & Refugio',
+        body: 'Gobierna tu intuición profunda, tu memoria ancestral y tus necesidades del alma.'
+      },
+      asc: {
+        title: 'El Ascendente',
+        sub: 'Umbral de Manifestación',
+        body: 'Es el lente a través del cual encarnas tu camino y te muestras ante el cosmos.'
+      }
     };
 
     function openEsotericDetail(key) {
       const info = ESOTERIC_INFO[key];
       if (!info) return;
-      document.getElementById('esotericDetailTitle').textContent = info.title;
-      document.getElementById('esotericDetailSubtitle').textContent = info.sub;
-      document.getElementById('esotericDetailBody').textContent = info.body;
+
+      const visualEl = document.getElementById('esotericDetailVisual');
+      const titleEl = document.getElementById('esotericDetailTitle');
+      const subEl = document.getElementById('esotericDetailSubtitle');
+      const bodyEl = document.getElementById('esotericDetailBody');
+
+      if (key === 'kabbalah') {
+        if (visualEl) visualEl.innerHTML = getTreeOfLifeSvg();
+        titleEl.textContent = info.title;
+        subEl.textContent = info.sub;
+        bodyEl.textContent = info.body;
+      } else if (key === 'sol' || key === 'luna' || key === 'asc') {
+        const s = appData.settings || defaultAppData.settings;
+        const signKey = key === 'sol' ? normalizeSignName(s.sun) : (key === 'luna' ? normalizeSignName(s.moon) : normalizeSignName(s.asc));
+        const z = ZODIAC_DATA[signKey];
+        const roleLabel = key === 'sol' ? 'Sol en' : (key === 'luna' ? 'Luna en' : 'Ascendente en');
+        if (visualEl) {
+          visualEl.innerHTML = `
+            <div class="w-24 h-24 rounded-full bg-[#090a0c] flex items-center justify-center p-5" style="border: 2px solid ${z.border}; box-shadow: 0 0 30px ${z.glow}; color: ${z.color};">
+              ${z.svg}
+            </div>
+          `;
+        }
+        titleEl.textContent = `${roleLabel} ${signKey}`;
+        subEl.textContent = `${info.sub} · Elemento ${z.element}`;
+        bodyEl.textContent = `${info.body} En ${signKey}: ${z.essence}`;
+      } else {
+        const c = info.color || '#c3b4c7';
+        if (visualEl) {
+          visualEl.innerHTML = `
+            <div class="w-20 h-20 rounded-full bg-[#090a0c] flex items-center justify-center" style="border: 2px solid ${c}88; box-shadow: 0 0 28px ${c}44; color: ${c};">
+              <i data-lucide="${info.icon || 'sparkles'}" class="w-9 h-9"></i>
+            </div>
+          `;
+        }
+        titleEl.textContent = info.title;
+        subEl.textContent = info.sub;
+        bodyEl.textContent = info.body;
+      }
+
       document.getElementById('esotericDetailModal').classList.remove('hidden');
+      if (window.lucide) lucide.createIcons();
     }
     function closeEsotericDetail() { document.getElementById('esotericDetailModal').classList.add('hidden'); }
 
@@ -2734,12 +3063,12 @@
       const notesList = document.getElementById('grimoireNotesList');
       if (notesList) {
         notesList.innerHTML = appData.grimoireNotes.map((n, i) => `
-          <div class="p-3.5 rounded-xl bg-[#090a0c]/85 border border-zinc-800/80 flex flex-col gap-1">
+          <div class="p-3.5 rounded-xl bg-gradient-to-br from-[#161420] to-[#090a0c] border border-[#9b8da8]/25 hover:border-[#9b8da8]/45 flex flex-col gap-1 transition shadow">
             <div class="flex items-center justify-between">
-              <h4 class="font-serif-luxury text-lg font-bold text-[#c3b4c7]">${escapeHTML(n.title)}</h4>
-              <button onclick="deleteQuickNote(${i})" class="text-zinc-500 hover:text-rose-400 text-xs">✕</button>
+              <h4 class="font-serif-luxury text-lg font-bold text-[#e0d6e8] flex items-center gap-1.5"><span class="text-[#9b8da8] text-xs">✦</span> ${escapeHTML(n.title)}</h4>
+              <button onclick="deleteQuickNote(${i})" class="text-zinc-500 hover:text-rose-400 text-xs px-1">✕</button>
             </div>
-            <p class="font-handwritten text-xl text-zinc-300">${escapeHTML(n.body)}</p>
+            <p class="font-handwritten text-xl text-zinc-300 leading-snug">${escapeHTML(n.body)}</p>
           </div>
         `).join('');
       }
@@ -2747,10 +3076,10 @@
       const projList = document.getElementById('projectsContainer');
       if (projList) {
         projList.innerHTML = appData.projects.map((p, i) => `
-          <div class="p-3.5 rounded-xl bg-[#090a0c]/85 border border-zinc-800/80 flex flex-col gap-2">
+          <div class="p-3.5 rounded-xl bg-gradient-to-br from-[#161420] to-[#090a0c] border border-[#9b8da8]/25 hover:border-[#8da89b]/45 flex flex-col gap-2 transition shadow">
             <div class="flex items-center justify-between">
-              <span class="font-serif-luxury text-base font-bold text-zinc-100">${escapeHTML(p.title)}</span>
-              <span class="text-xs font-mono text-[#8da89b]">${p.progress}%</span>
+              <span class="font-serif-luxury text-base font-bold text-zinc-100 flex items-center gap-1.5"><span class="text-amber-300/80 text-xs">◈</span> ${escapeHTML(p.title)}</span>
+              <span class="text-xs font-mono font-bold text-[#8da89b] bg-[#8da89b]/10 px-2 py-0.5 rounded-full border border-[#8da89b]/30">${p.progress}%</span>
             </div>
             <input type="range" min="0" max="100" value="${p.progress}" onchange="updateProjectProgress(${i}, this.value)" class="w-full accent-[#8da89b] cursor-pointer">
           </div>
@@ -2805,34 +3134,74 @@
     // ==========================================
     // 10. AJUSTES Y CUSTODIA (BACKUP)
     // ==========================================
-    function extractZodiacGlyph(signStr, fallback) {
-      const parts = String(signStr || '').trim().split(/\s+/);
-      const last = parts[parts.length - 1];
-      return last && last.length <= 3 ? last : fallback;
-    }
-
     function applyNatalSigns() {
       const s = appData.settings || defaultAppData.settings;
+      const sunKey = normalizeSignName(s.sun);
+      const moonKey = normalizeSignName(s.moon);
+      const ascKey = normalizeSignName(s.asc);
+
+      const sunZ = ZODIAC_DATA[sunKey];
+      const moonZ = ZODIAC_DATA[moonKey];
+      const ascZ = ZODIAC_DATA[ascKey];
+
       const sunEl = document.getElementById('dynSignSun');
       const moonEl = document.getElementById('dynSignMoon');
       const ascEl = document.getElementById('dynSignAsc');
       const glyphSun = document.getElementById('glyphSignSun');
       const glyphMoon = document.getElementById('glyphSignMoon');
       const glyphAsc = document.getElementById('glyphSignAsc');
+      const ringSun = document.getElementById('nodeRingSun');
+      const ringMoon = document.getElementById('nodeRingMoon');
+      const ringAsc = document.getElementById('nodeRingAsc');
 
-      if (sunEl) sunEl.textContent = `Sol ${s.sun}`;
-      if (moonEl) moonEl.textContent = `Luna ${s.moon}`;
-      if (ascEl) ascEl.textContent = `Asc. ${s.asc}`;
-      if (glyphSun) glyphSun.textContent = extractZodiacGlyph(s.sun, '♏');
-      if (glyphMoon) glyphMoon.textContent = extractZodiacGlyph(s.moon, '♒');
-      if (glyphAsc) glyphAsc.textContent = extractZodiacGlyph(s.asc, '♉');
+      if (sunEl) {
+        sunEl.textContent = `Sol ${sunKey}`;
+        sunEl.style.color = sunZ.color;
+        sunEl.style.borderColor = sunZ.border;
+      }
+      if (moonEl) {
+        moonEl.textContent = `Luna ${moonKey}`;
+        moonEl.style.color = moonZ.color;
+        moonEl.style.borderColor = moonZ.border;
+      }
+      if (ascEl) {
+        ascEl.textContent = `Asc. ${ascKey}`;
+        ascEl.style.color = ascZ.color;
+        ascEl.style.borderColor = ascZ.border;
+      }
+
+      if (glyphSun) {
+        glyphSun.innerHTML = sunZ.svg;
+        glyphSun.style.color = sunZ.color;
+      }
+      if (glyphMoon) {
+        glyphMoon.innerHTML = moonZ.svg;
+        glyphMoon.style.color = moonZ.color;
+      }
+      if (glyphAsc) {
+        glyphAsc.innerHTML = ascZ.svg;
+        glyphAsc.style.color = ascZ.color;
+      }
+
+      if (ringSun) {
+        ringSun.style.borderColor = sunZ.border;
+        ringSun.style.boxShadow = `0 0 28px ${sunZ.glow}`;
+      }
+      if (ringMoon) {
+        ringMoon.style.borderColor = moonZ.border;
+        ringMoon.style.boxShadow = `0 0 28px ${moonZ.glow}`;
+      }
+      if (ringAsc) {
+        ringAsc.style.borderColor = ascZ.border;
+        ringAsc.style.boxShadow = `0 0 28px ${ascZ.glow}`;
+      }
     }
 
     function openSettingsModal() {
       const s = appData.settings || defaultAppData.settings;
-      document.getElementById('setSignSun').value = s.sun;
-      document.getElementById('setSignMoon').value = s.moon;
-      document.getElementById('setSignAsc').value = s.asc;
+      document.getElementById('setSignSun').value = normalizeSignName(s.sun);
+      document.getElementById('setSignMoon').value = normalizeSignName(s.moon);
+      document.getElementById('setSignAsc').value = normalizeSignName(s.asc);
       const newPinEl = document.getElementById('setNewPin');
       if (newPinEl) newPinEl.value = '';
       document.getElementById('settingsModal').classList.remove('hidden');
