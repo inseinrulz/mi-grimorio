@@ -85,6 +85,7 @@
       justify-content: center;
       cursor: pointer;
       transition: all 0.2s ease;
+      flex-shrink: 0;
     }
     .executive-checkbox:checked {
       background-color: var(--accent-sage);
@@ -151,7 +152,7 @@
 
     @keyframes floatPet {
       0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-5px); }
+      50% { transform: translateY(-6px); }
     }
     .pet-float { animation: floatPet 4s ease-in-out infinite; }
 
@@ -161,12 +162,6 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    @keyframes slideShuffle {
-      0% { transform: translateX(0) rotate(0deg); z-index: 1; }
-      50% { transform: translateX(40px) rotate(5deg); z-index: 10; }
-      100% { transform: translateX(0) rotate(0deg); z-index: 10; }
-    }
-    .shuffling { animation: slideShuffle 0.6s infinite alternate ease-in-out; }
     .tarot-card-reveal {
       animation: revealCard 0.7s ease-out forwards;
       opacity: 0;
@@ -200,12 +195,146 @@
       animation: celestialRotateDoubleSlow 240s linear infinite;
       transform-origin: center center;
     }
+
+    /* ==========================================
+       ANIMACIONES MÍSTICAS Y EFECTOS DE COMBATE
+       ========================================== */
+    @keyframes moteDrift {
+      0% { transform: translateY(0) translateX(0) scale(0.7); opacity: 0; }
+      20% { opacity: 0.75; }
+      80% { opacity: 0.55; }
+      100% { transform: translateY(-110px) translateX(18px) scale(1.15); opacity: 0; }
+    }
+    .astral-mote {
+      position: absolute;
+      border-radius: 9999px;
+      pointer-events: none;
+      animation: moteDrift linear infinite;
+    }
+
+    @keyframes unlockWave {
+      0% { transform: scale(0.8); opacity: 0.95; }
+      100% { transform: scale(2.8); opacity: 0; }
+    }
+    .unlock-shockwave-active {
+      animation: unlockWave 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    /* Barajado multicapa del mazo */
+    @keyframes shuffleCardLeft {
+      0%, 100% { transform: translateX(0) rotate(0deg); }
+      50% { transform: translateX(-34px) rotate(-11deg) translateY(-6px); }
+    }
+    @keyframes shuffleCardRight {
+      0%, 100% { transform: translateX(0) rotate(0deg); }
+      50% { transform: translateX(34px) rotate(11deg) translateY(-6px); }
+    }
+    #theDeck.shuffling {
+      animation: none;
+      overflow: visible;
+    }
+    #theDeck.shuffling::before,
+    #theDeck.shuffling::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 0.75rem;
+      border: 1.5px solid rgba(155, 141, 168, 0.65);
+      background: linear-gradient(135deg, rgba(22, 21, 30, 0.9), rgba(9, 10, 12, 0.95));
+      pointer-events: none;
+      z-index: -1;
+    }
+    #theDeck.shuffling::before { animation: shuffleCardLeft 0.45s ease-in-out infinite; }
+    #theDeck.shuffling::after { animation: shuffleCardRight 0.45s ease-in-out infinite 0.22s; }
+
+    /* Destello holográfico en cartas reveladas */
+    @keyframes tarotSweep {
+      0% { transform: translateX(-140%) skewX(-22deg); opacity: 0; }
+      40% { opacity: 0.45; }
+      100% { transform: translateX(220%) skewX(-22deg); opacity: 0; }
+    }
+    .tarot-shimmer-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(224, 214, 232, 0.35), transparent);
+      animation: tarotSweep 1.3s ease-out forwards;
+      pointer-events: none;
+    }
+
+    /* Transmutación y Subida de Nivel del Familiar */
+    @keyframes transmuteFlash {
+      0% { transform: scale(1) rotate(0deg); filter: brightness(1); }
+      35% { transform: scale(0.85) rotate(-12deg); filter: brightness(2.6) drop-shadow(0 0 28px #c75665); }
+      65% { transform: scale(1.22) rotate(8deg); filter: brightness(2.2) drop-shadow(0 0 32px #8da89b); }
+      100% { transform: scale(1) rotate(0deg); filter: brightness(1); }
+    }
+    @keyframes transmuteRingExpand {
+      0% { transform: scale(0.6) rotate(0deg); opacity: 1; }
+      100% { transform: scale(1.75) rotate(180deg); opacity: 0; }
+    }
+    @keyframes levelUpGlow {
+      0% { transform: translateY(0) scale(1); filter: brightness(1); }
+      45% { transform: translateY(-12px) scale(1.14); filter: brightness(1.9) drop-shadow(0 0 24px #8da89b); }
+      100% { transform: translateY(0) scale(1); filter: brightness(1); }
+    }
+    .anim-transmute { animation: transmuteFlash 0.85s cubic-bezier(0.22, 1, 0.36, 1); }
+    .anim-transmute-ring { animation: transmuteRingExpand 0.85s ease-out forwards; }
+    .anim-levelup { animation: levelUpGlow 0.7s ease-out; }
+
+    /* Partículas flotantes al acariciar/nutrir */
+    @keyframes particleRise {
+      0% { transform: translateY(0) scale(0.6); opacity: 0; }
+      25% { opacity: 1; }
+      100% { transform: translateY(-58px) scale(1.25); opacity: 0; }
+    }
+    .pet-particle {
+      position: absolute;
+      font-size: 1.15rem;
+      animation: particleRise 0.9s ease-out forwards;
+      pointer-events: none;
+    }
+
+    /* Efectos Visuales (VFX) de Combate en el Plano Astral */
+    @keyframes arenaImpactShake {
+      0%, 100% { transform: translate3d(0, 0, 0); }
+      20% { transform: translate3d(-6px, 3px, 0); }
+      40% { transform: translate3d(6px, -3px, 0); }
+      60% { transform: translate3d(-4px, -2px, 0); }
+      80% { transform: translate3d(4px, 2px, 0); }
+    }
+    .arena-shake { animation: arenaImpactShake 0.38s ease-in-out; }
+
+    @keyframes slashCut {
+      0% { transform: scale(0.4) rotate(-35deg); opacity: 0; }
+      35% { transform: scale(1.2) rotate(-35deg); opacity: 1; }
+      100% { transform: scale(1.45) rotate(-35deg); opacity: 0; }
+    }
+    @keyframes vfxBurstPulse {
+      0% { transform: scale(0.3); opacity: 0.95; }
+      60% { transform: scale(1.35); opacity: 0.85; }
+      100% { transform: scale(1.7); opacity: 0; }
+    }
+    .vfx-slash-arc {
+      width: 110px;
+      height: 6px;
+      border-radius: 9999px;
+      background: linear-gradient(90deg, transparent, #ffffff, #c75665, transparent);
+      box-shadow: 0 0 18px #c75665, 0 0 30px #ffffff;
+      animation: slashCut 0.45s ease-out forwards;
+    }
+    .vfx-burst-ring {
+      width: 105px;
+      height: 105px;
+      border-radius: 9999px;
+      animation: vfxBurstPulse 0.55s ease-out forwards;
+    }
   </style>
 </head>
 <body class="antialiased min-h-screen flex flex-col relative pb-44 overflow-hidden" id="mainBody">
 
   <!-- FONDO CÓSMICO GLOBAL -->
   <div class="fixed inset-0 pointer-events-none overflow-hidden z-[-2] flex items-center justify-center bg-[#050608]">
+    <div id="astralParticlesLayer" class="absolute inset-0 overflow-hidden pointer-events-none"></div>
     <div class="absolute w-[140vw] h-[140vw] sm:w-[95vw] sm:h-[95vw] max-w-[1000px] max-h-[1000px] celestial-sphere-reverse opacity-95">
       <svg class="w-full h-full" stroke="#8da89b" stroke-width="1.2" fill="none" viewBox="0 0 1000 1000">
         <g fill="#ffffff" stroke="none" opacity="0.95">
@@ -266,16 +395,17 @@
           </svg>
 
           <div class="relative w-32 h-32 flex items-center justify-center z-20">
+            <div id="unlockShockwave" class="pointer-events-none absolute inset-0 rounded-full border-2 border-[#8da89b] opacity-0"></div>
             <svg class="absolute inset-0 w-full h-full transform -rotate-90 pointer-events-none drop-shadow-[0_0_15px_rgba(141,168,155,0.7)]" viewBox="0 0 100 100">
               <circle cx="50" cy="50" r="46" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="2"></circle>
-              <circle id="unlockProgress" cx="50" cy="50" r="46" fill="none" stroke="#8da89b" stroke-width="2.5" stroke-dasharray="289" stroke-dashoffset="289" class="transition-all" style="transition-duration: 30ms;"></circle>
+              <circle id="unlockProgress" cx="50" cy="50" r="46" fill="none" stroke="#8da89b" stroke-width="2.5" stroke-dasharray="289" stroke-dashoffset="289" style="transition: stroke-dashoffset 40ms linear;"></circle>
             </svg>
-            <button type="button" id="fingerprintBtn" class="w-24 h-24 rounded-full bg-[#0d0e12]/80 backdrop-blur-sm flex items-center justify-center shadow-[0_0_40px_rgba(0,0,0,0.9)] border border-[#8da89b]/40 transition-transform cursor-pointer relative z-30 select-none touch-none">
-              <i data-lucide="fingerprint" class="w-12 h-12 text-[#8da89b]/70 transition-all duration-300" id="fingerprintIcon"></i>
+            <button type="button" id="fingerprintBtn" class="w-24 h-24 rounded-full bg-[#0d0e12]/80 backdrop-blur-sm flex items-center justify-center shadow-[0_0_40px_rgba(0,0,0,0.9)] border border-[#8da89b]/40 active:scale-95 transition-transform cursor-pointer relative z-30 select-none touch-none" title="Mantén pulsado para desbloquear">
+              <i data-lucide="fingerprint" class="w-12 h-12 text-[#8da89b]/70 transition-all duration-300 pointer-events-none" id="fingerprintIcon"></i>
             </button>
           </div>
         </div>
-        <p id="unlockHint" class="font-handwritten text-xl text-zinc-300 opacity-0 transition-opacity duration-300 mt-2 absolute bottom-2 whitespace-nowrap drop-shadow">Canalizando energía astral...</p>
+        <p id="unlockHint" class="font-handwritten text-xl text-zinc-300 opacity-0 transition-opacity duration-300 mt-2 absolute bottom-2 whitespace-nowrap drop-shadow">Mantén pulsado para canalizar energía astral...</p>
       </div>
       <div class="h-6"></div>
     </div>
@@ -297,8 +427,8 @@
     
     <header id="mainHeader" class="flex flex-col w-full relative transition-all duration-500 gap-4">
       <div class="flex flex-nowrap items-center justify-between w-full bg-[#121316] rounded-2xl px-2 sm:px-5 py-2 sm:py-3 relative z-10 shadow-sm gap-2">
-        <button onclick="openMoonModal()" class="flex items-center justify-center flex-shrink-0 w-14 h-14 sm:w-16 sm:h-16 p-0 bg-transparent border-0 shadow-none hover:scale-110 transition-transform" title="Ver Fase Lunar">
-          <img id="headerMoonPhaseIcon" src="Art/lunasOscuras1.png" class="w-full h-full object-contain object-center block mx-auto drop-shadow-[0_0_10px_rgba(141,168,155,0.35)]" alt="Fase Lunar">
+        <button onclick="openMoonModal()" class="flex items-center justify-center flex-shrink-0 w-12 h-12 sm:w-16 sm:h-16 bg-transparent border-0 shadow-none hover:scale-110 transition-transform overflow-visible" title="Ver Fase Lunar">
+          <img id="headerMoonPhaseIcon" src="Art/lunasOscuras1.png" class="w-full h-full object-contain drop-shadow-[0_0_10px_rgba(141,168,155,0.35)]" alt="Fase Lunar">
         </button>
         
         <div class="flex items-center justify-center flex-1 min-w-0 px-1 sm:px-2 gap-1 sm:gap-3">
@@ -331,33 +461,33 @@
       </div>
 
       <nav class="w-full relative z-10">
-        <div class="grid grid-cols-4 gap-3 sm:gap-6">
-          <button onclick="switchView('agenda')" id="cardAgenda" class="nav-emblem-btn py-2 px-1 sm:p-3 rounded-2xl flex flex-col items-center justify-center text-center gap-2.5 group relative">
-            <div class="w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
-              <img src="Art/Calendario gótico con reloj celta_2.png" alt="Agenda" class="w-full h-full object-contain object-center scale-[1.28] drop-shadow-[0_0_10px_rgba(141,168,155,0.3)]">
+        <div class="grid grid-cols-4 gap-2 sm:gap-4">
+          <button onclick="switchView('agenda')" id="cardAgenda" class="nav-emblem-btn p-2 sm:p-3 rounded-2xl flex flex-col items-center text-center gap-2 group relative">
+            <div class="w-14 h-14 sm:w-20 sm:h-20 flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
+              <img src="Art/Calendario gótico con reloj celta_2.png" alt="Agenda" class="w-full h-full object-contain scale-[1.28] drop-shadow-[0_0_12px_rgba(141,168,155,0.3)]">
             </div>
-            <span id="headerDayNumName" class="font-serif-luxury text-xs sm:text-sm font-bold text-zinc-200 tracking-wide truncate mt-1">Agenda</span>
+            <span id="headerDayNumName" class="font-serif-luxury text-xs sm:text-sm font-bold text-zinc-200 tracking-wide truncate">Agenda</span>
           </button>
           
-          <button onclick="switchView('grimoire')" id="cardGrimorio" class="nav-emblem-btn py-2 px-1 sm:p-3 rounded-2xl flex flex-col items-center justify-center text-center gap-2.5 group relative">
-            <div class="w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
-              <img src="Art/Grimorio místico de cuero envejecido_2.png" alt="Grimorio" class="w-full h-full object-contain object-center scale-[1.55] drop-shadow-[0_0_10px_rgba(141,168,155,0.3)]">
+          <button onclick="switchView('grimoire')" id="cardGrimorio" class="nav-emblem-btn p-2 sm:p-3 rounded-2xl flex flex-col items-center text-center gap-2 group relative">
+            <div class="w-14 h-14 sm:w-20 sm:h-20 flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
+              <img src="Art/Grimorio místico de cuero envejecido_2.png" alt="Grimorio" class="w-full h-full object-contain scale-[1.55] drop-shadow-[0_0_12px_rgba(141,168,155,0.3)]">
             </div>
-            <span class="font-serif-luxury text-xs sm:text-sm font-bold text-zinc-200 tracking-wide truncate mt-1">Grimorio</span>
+            <span class="font-serif-luxury text-xs sm:text-sm font-bold text-zinc-200 tracking-wide truncate">Grimorio</span>
           </button>
 
-          <button onclick="switchView('tarot')" id="cardTarot" class="nav-emblem-btn py-2 px-1 sm:p-3 rounded-2xl flex flex-col items-center justify-center text-center gap-2.5 group relative">
-            <div class="w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
-              <img src="Art/Emblema Gótico de Fases Lunares_2.png" alt="Oráculo" class="w-full h-full object-contain object-center scale-[1.28] drop-shadow-[0_0_10px_rgba(141,168,155,0.3)]">
+          <button onclick="switchView('tarot')" id="cardTarot" class="nav-emblem-btn p-2 sm:p-3 rounded-2xl flex flex-col items-center text-center gap-2 group relative">
+            <div class="w-14 h-14 sm:w-20 sm:h-20 flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
+              <img src="Art/Emblema Gótico de Fases Lunares_2.png" alt="Oráculo" class="w-full h-full object-contain scale-[1.28] drop-shadow-[0_0_12px_rgba(141,168,155,0.3)]">
             </div>
-            <span class="font-serif-luxury text-xs sm:text-sm font-bold text-zinc-200 tracking-wide truncate mt-1">Oráculo</span>
+            <span class="font-serif-luxury text-xs sm:text-sm font-bold text-zinc-200 tracking-wide truncate">Oráculo</span>
           </button>
 
-          <button onclick="switchView('pets')" id="cardPets" class="nav-emblem-btn py-2 px-1 sm:p-3 rounded-2xl flex flex-col items-center justify-center text-center gap-2.5 group relative">
-            <div class="w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
-              <img src="Art/Emblema de Huella Gótica Verde_2.png" alt="Familiar" class="w-full h-full object-contain object-center scale-[1.28] drop-shadow-[0_0_10px_rgba(141,168,155,0.3)]">
+          <button onclick="switchView('pets')" id="cardPets" class="nav-emblem-btn p-2 sm:p-3 rounded-2xl flex flex-col items-center text-center gap-2 group relative">
+            <div class="w-14 h-14 sm:w-20 sm:h-20 flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
+              <img src="Art/Emblema de Huella Gótica Verde_2.png" alt="Familiar" class="w-full h-full object-contain scale-[1.28] drop-shadow-[0_0_12px_rgba(141,168,155,0.3)]">
             </div>
-            <span class="font-serif-luxury text-xs sm:text-sm font-bold text-zinc-200 tracking-wide truncate mt-1">Familiar</span>
+            <span class="font-serif-luxury text-xs sm:text-sm font-bold text-zinc-200 tracking-wide truncate">Familiar</span>
           </button>
         </div>
       </nav>
@@ -380,7 +510,7 @@
           <div class="px-5 py-3.5 flex items-center justify-between bg-[#131418] z-10 relative">
             <div class="flex items-center gap-2.5">
               <h2 class="font-serif-luxury text-xl text-zinc-100 font-bold tracking-wide">Rituales</h2>
-              <span id="habitsProgressBadge" class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-[#8da89b]/15 border border-[#8da89b]/35 text-[#8da89b] font-bold">0/0</span>
+              <span id="habitsProgressBadge" class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-[#8da89b]/15 text-[#8da89b] border border-[#8da89b]/30">0/0</span>
             </div>
             <button type="button" onclick="openHabitModal()" class="text-zinc-400 hover:text-zinc-100 transition" title="Gestionar hábitos">
               <i data-lucide="list-plus" class="w-5 h-5"></i>
@@ -482,51 +612,42 @@
           <div class="w-12 h-px bg-gradient-to-l from-transparent to-[#9b8da8]/70"></div>
         </div>
 
-        <div class="relative w-full bg-transparent p-6 mt-2 mb-4 flex items-center justify-center min-h-[410px] sm:min-h-[450px]">
-          <div class="relative w-full max-w-[420px] aspect-square flex items-center justify-center">
-            <div class="absolute inset-0 flex justify-center items-center pointer-events-none">
-              <svg viewBox="0 0 400 400" class="w-full h-full animate-[spin_180s_linear_infinite] opacity-45">
-                <circle cx="200" cy="200" r="185" fill="none" stroke="#9b8da8" stroke-width="0.7" stroke-dasharray="3 6"/>
-                <circle cx="200" cy="200" r="160" fill="none" stroke="#c3b4c7" stroke-width="1"/>
-                <circle cx="200" cy="200" r="110" fill="none" stroke="#8da89b" stroke-width="0.7" stroke-dasharray="2 5"/>
-                <polygon points="200,40 338,120 338,280 200,360 62,280 62,120" fill="none" stroke="#9b8da8" stroke-width="0.8"/>
-                <polygon points="200,40 338,280 62,280" fill="none" stroke="#c3b4c7" stroke-width="1"/>
-                <polygon points="200,360 338,120 62,120" fill="none" stroke="#8da89b" stroke-width="0.8"/>
+        <!-- TRÍADA ASTRAL CON FONDO TRANSPARENTE Y GLIFO DEL SIGNO SELECCIONADO -->
+        <div class="relative w-full bg-transparent p-4 mt-2 mb-6 flex items-center justify-center min-h-[370px] sm:min-h-[430px]">
+          <div class="relative w-[92%] max-w-[390px] aspect-square">
+            <div class="absolute inset-0 flex justify-center items-center pointer-events-none opacity-45">
+              <svg viewBox="20 20 360 360" class="w-full h-full animate-[spin_150s_linear_infinite]">
+                <circle cx="200" cy="200" r="165" fill="none" stroke="#9b8da8" stroke-width="0.7" stroke-dasharray="3 7"/>
+                <circle cx="200" cy="200" r="145" fill="none" stroke="#c3b4c7" stroke-width="1"/>
+                <g stroke="#9b8da8" stroke-width="0.9" opacity="0.8">
+                  <polygon points="200,55 325,275 75,275" fill="none" />
+                  <polygon points="200,345 325,125 75,125" fill="none" />
+                </g>
               </svg>
             </div>
 
-            <svg viewBox="0 0 400 400" class="absolute inset-0 w-full h-full pointer-events-none opacity-70">
-              <polygon points="200,66 78,305 322,305" fill="none" stroke="#c3b4c7" stroke-width="1.2" stroke-dasharray="4 4"/>
-              <line x1="200" y1="66" x2="200" y2="215" stroke="#9b8da8" stroke-width="0.8" opacity="0.6"/>
-              <line x1="78" y1="305" x2="200" y2="215" stroke="#9b8da8" stroke-width="0.8" opacity="0.6"/>
-              <line x1="322" y1="305" x2="200" y2="215" stroke="#9b8da8" stroke-width="0.8" opacity="0.6"/>
-            </svg>
-
-            <div class="absolute top-[54%] left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center pointer-events-none z-10">
-              <div class="w-12 h-12 rounded-full bg-transparent backdrop-blur-[2px] border border-[#9b8da8]/45 shadow-[0_0_25px_rgba(155,141,168,0.25)] flex items-center justify-center">
-                <span class="text-[#c3b4c7] text-lg">✦</span>
-              </div>
-            </div>
-
+            <!-- VÉRTICE SUPERIOR: SOL -->
             <div onclick="openEsotericDetail('sol')" class="absolute top-[16%] left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center group cursor-pointer z-20">
-              <div class="w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center bg-[#050608]/55 backdrop-blur-sm rounded-full border-2 border-amber-300/45 group-hover:border-amber-300 shadow-[0_0_25px_rgba(251,191,36,0.2)] transition-all group-hover:scale-110">
-                <span id="dynGlyphSun" class="font-serif-luxury text-3xl sm:text-4xl text-amber-200 leading-none select-none">♏︎</span>
+              <div class="w-20 h-20 flex items-center justify-center bg-[#090a0c]/85 backdrop-blur-sm rounded-full border border-[#c3b4c7]/50 group-hover:scale-110 group-hover:border-[#8da89b] transition-all shadow-[0_0_25px_rgba(155,141,168,0.25)]">
+                <span id="glyphSignSun" class="text-4xl text-[#e0d6e8] leading-none select-none">♏</span>
               </div>
-              <span id="dynSignSun" class="mt-2 text-[10px] sm:text-xs font-mono tracking-widest text-amber-200 font-bold uppercase bg-[#050608]/75 backdrop-blur-sm px-3 py-1 rounded-full border border-amber-300/35 whitespace-nowrap shadow-lg">☀ Sol · Escorpio</span>
+              <span id="dynSignSun" class="mt-2 text-[10px] font-mono tracking-widest text-[#c3b4c7] font-bold uppercase bg-[#090a0c]/90 px-3.5 py-1 rounded-full border border-[#9b8da8]/40 whitespace-nowrap">Sol Escorpio ♏</span>
             </div>
 
-            <div onclick="openEsotericDetail('luna')" class="absolute top-[76%] left-[20%] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center group cursor-pointer z-20">
-              <div class="w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center bg-[#050608]/55 backdrop-blur-sm rounded-full border-2 border-[#c3b4c7]/50 group-hover:border-white shadow-[0_0_25px_rgba(195,180,199,0.25)] transition-all group-hover:scale-110">
-                <span id="dynGlyphMoon" class="font-serif-luxury text-3xl sm:text-4xl text-white leading-none select-none">♒︎</span>
+            <!-- BASE IZQUIERDA: LUNA -->
+            <div onclick="openEsotericDetail('luna')" class="absolute top-[78%] left-[20%] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center group cursor-pointer z-20">
+              <div class="w-20 h-20 flex items-center justify-center bg-[#090a0c]/85 backdrop-blur-sm rounded-full border border-[#9b8da8]/45 group-hover:scale-110 group-hover:border-[#8da89b] transition-all shadow-[0_0_25px_rgba(155,141,168,0.2)]">
+                <span id="glyphSignMoon" class="text-4xl text-white leading-none select-none">♒</span>
               </div>
-              <span id="dynSignMoon" class="mt-2 text-[10px] sm:text-xs font-mono tracking-widest text-[#e0d6e8] font-bold uppercase bg-[#050608]/75 backdrop-blur-sm px-3 py-1 rounded-full border border-[#c3b4c7]/45 whitespace-nowrap shadow-lg">☾ Luna · Acuario</span>
+              <span id="dynSignMoon" class="mt-2 text-[10px] font-mono tracking-widest text-[#9b8da8] font-bold uppercase bg-[#090a0c]/90 px-3.5 py-1 rounded-full border border-[#9b8da8]/40 whitespace-nowrap">Luna Acuario ♒</span>
             </div>
 
-            <div onclick="openEsotericDetail('asc')" class="absolute top-[76%] left-[80%] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center group cursor-pointer z-20">
-              <div class="w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center bg-[#050608]/55 backdrop-blur-sm rounded-full border-2 border-[#8da89b]/50 group-hover:border-[#b4c7be] shadow-[0_0_25px_rgba(141,168,155,0.25)] transition-all group-hover:scale-110">
-                <span id="dynGlyphAsc" class="font-serif-luxury text-3xl sm:text-4xl text-[#b4c7be] leading-none select-none">♉︎</span>
+            <!-- BASE DERECHA: ASCENDENTE -->
+            <div onclick="openEsotericDetail('asc')" class="absolute top-[78%] left-[80%] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center group cursor-pointer z-20">
+              <div class="w-20 h-20 flex items-center justify-center bg-[#090a0c]/85 backdrop-blur-sm rounded-full border border-[#9b8da8]/45 group-hover:scale-110 group-hover:border-[#8da89b] transition-all shadow-[0_0_25px_rgba(155,141,168,0.2)]">
+                <span id="glyphSignAsc" class="text-4xl text-[#e0d6e8] leading-none select-none">♉</span>
               </div>
-              <span id="dynSignAsc" class="mt-2 text-[10px] sm:text-xs font-mono tracking-widest text-[#b4c7be] font-bold uppercase bg-[#050608]/75 backdrop-blur-sm px-3 py-1 rounded-full border border-[#8da89b]/45 whitespace-nowrap shadow-lg">✧ Asc. · Tauro</span>
+              <span id="dynSignAsc" class="mt-2 text-[10px] font-mono tracking-widest text-[#9b8da8] font-bold uppercase bg-[#090a0c]/90 px-3.5 py-1 rounded-full border border-[#9b8da8]/40 whitespace-nowrap">Asc. Tauro ♉</span>
             </div>
           </div>
         </div>
@@ -547,7 +668,7 @@
 
         <div id="tarotDeckState" class="flex flex-col items-center gap-6 w-full">
           <div id="theDeck" onclick="startTarotShuffle()" class="w-36 h-56 sm:w-44 sm:h-68 bg-[#090a0c] border-2 border-[#b09ba8]/80 rounded-xl shadow-[0_0_25px_rgba(176,155,168,0.25)] flex items-center justify-center relative cursor-pointer hover:scale-105 transition-transform overflow-hidden p-1.5">
-            <img src="Art/Tarot/backTarot.png" alt="Reverso del Tarot" class="w-full h-full object-contain rounded-lg" onerror="handleTarotDeckError(this)">
+            <img src="Art/Tarot/backTarot.png" alt="Reverso del Tarot" class="w-full h-full object-contain rounded-lg" onerror="this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden'); this.nextElementSibling.classList.add('flex');">
             <div class="hidden w-full h-full items-center justify-center relative">
               <div class="absolute inset-2 border border-[#9b8da8]/30 rounded-lg"></div>
               <i data-lucide="sparkles" class="w-10 h-10 text-[#9b8da8]"></i>
@@ -618,7 +739,7 @@
             
             <button onclick="changePetType('cat')" id="btnSelectCat" class="flex items-center justify-between p-3 rounded-2xl bg-[#121316] hover:bg-[#16171b] border border-zinc-800/80 transition text-left">
               <div class="flex items-center gap-3">
-                <img id="thumbCat" src="Art/Familiar/cat1.png" class="w-12 h-12 object-contain rounded-xl bg-transparent border border-[#c75665]/30 p-1" onerror="handlePetImgError(this, 'Gato')">
+                <img id="thumbCat" src="Art/Familiar/cat1.png" class="w-12 h-12 object-contain rounded-xl bg-transparent p-1" onerror="handlePetImgError(this, 'Gato')">
                 <div class="flex flex-col">
                   <span class="font-serif-luxury text-lg text-zinc-100 font-bold leading-tight">Gato Sombrío</span>
                   <span class="text-[10px] font-mono text-[#c3b4c7] uppercase">Elemento: Éter</span>
@@ -632,7 +753,7 @@
             
             <button onclick="changePetType('bat')" id="btnSelectBat" class="flex items-center justify-between p-3 rounded-2xl bg-[#121316] hover:bg-[#16171b] border border-zinc-800/80 transition text-left">
               <div class="flex items-center gap-3">
-                <img id="thumbBat" src="Art/Familiar/bat1.png" class="w-12 h-12 object-contain rounded-xl bg-transparent border border-[#9b8da8]/30 p-1" onerror="handlePetImgError(this, 'Bat')">
+                <img id="thumbBat" src="Art/Familiar/bat1.png" class="w-12 h-12 object-contain rounded-xl bg-transparent p-1" onerror="handlePetImgError(this, 'Bat')">
                 <div class="flex flex-col">
                   <span class="font-serif-luxury text-lg text-zinc-100 font-bold leading-tight">Murciélago</span>
                   <span class="text-[10px] font-mono text-rose-400/90 uppercase">Elemento: Sangre</span>
@@ -646,7 +767,7 @@
             
             <button onclick="changePetType('rat')" id="btnSelectRat" class="flex items-center justify-between p-3 rounded-2xl bg-[#121316] hover:bg-[#16171b] border border-zinc-800/80 transition text-left">
               <div class="flex items-center gap-3">
-                <img id="thumbRat" src="Art/Familiar/rat1.png" class="w-12 h-12 object-contain rounded-xl bg-transparent border border-[#8da89b]/30 p-1" onerror="handlePetImgError(this, 'Rata')">
+                <img id="thumbRat" src="Art/Familiar/rat1.png" class="w-12 h-12 object-contain rounded-xl bg-transparent p-1" onerror="handlePetImgError(this, 'Rata')">
                 <div class="flex flex-col">
                   <span class="font-serif-luxury text-lg text-zinc-100 font-bold leading-tight">Rata Alquímica</span>
                   <span class="text-[10px] font-mono text-[#8da89b] uppercase">Elemento: Alquimia</span>
@@ -683,7 +804,9 @@
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full items-center my-2">
             <div class="flex flex-col items-center">
-              <div class="w-44 h-44 sm:w-48 sm:h-48 rounded-full bg-transparent border border-zinc-800/50 flex items-center justify-center pet-float relative overflow-hidden p-3">
+              <div class="w-44 h-44 sm:w-48 sm:h-48 rounded-full bg-transparent flex items-center justify-center pet-float relative overflow-visible p-3">
+                <div id="petTransmuteRing" class="pointer-events-none absolute inset-0 rounded-full border-2 border-[#c75665] opacity-0"></div>
+                <div id="petInteractionParticles" class="pointer-events-none absolute inset-0 flex items-center justify-center z-20"></div>
                 <img id="activePetImg" src="Art/Familiar/cat1.png" alt="Mascota" class="w-full h-full object-contain filter drop-shadow-[0_0_16px_rgba(141,168,155,0.65)]" onerror="handlePetImgError(this, 'Familiar')">
               </div>
               <div class="flex items-center gap-2 mt-4 bg-transparent px-3 py-1.5 rounded-full border border-zinc-800/60" id="evolutionChainPreview"></div>
@@ -769,7 +892,7 @@
           <div id="voidEnemiesSelector" class="grid grid-cols-2 sm:grid-cols-5 gap-2.5"></div>
         </div>
 
-        <div class="mystic-wicca-card p-5 sm:p-6 border border-[#9b8da8]/30 relative overflow-hidden">
+        <div id="battleArenaCard" class="mystic-wicca-card p-5 sm:p-6 border border-[#9b8da8]/30 relative overflow-hidden">
           <div class="flex items-center justify-between border-b border-zinc-800/90 pb-3 mb-5">
             <div class="flex items-center gap-2">
               <span id="battleRoundBadge" class="px-3 py-1 rounded-full bg-[#090a0c] border border-zinc-700 text-[10px] font-mono uppercase tracking-widest text-[#c3b4c7] font-bold">Turno 1</span>
@@ -781,6 +904,7 @@
           </div>
 
           <div class="grid grid-cols-2 gap-4 sm:gap-8 items-center my-2 min-h-[230px]">
+            <!-- JUGADOR -->
             <div class="flex flex-col items-center text-center relative">
               <div class="w-full max-w-[230px] bg-[#090a0c]/90 p-3 rounded-2xl border border-zinc-800 mb-3 text-left shadow-lg">
                 <div class="flex items-center justify-between mb-1">
@@ -798,11 +922,13 @@
 
               <div class="relative w-32 h-32 sm:w-40 sm:h-40 flex items-center justify-center">
                 <div id="playerFloatingDmg" class="absolute -top-4 left-1/2 -translate-x-1/2 z-30 pointer-events-none font-mono font-bold text-lg"></div>
+                <div id="playerVfxLayer" class="pointer-events-none absolute inset-0 flex items-center justify-center z-20"></div>
                 <div id="battlePlayerShieldRing" class="hidden absolute inset-1 rounded-full border-2 border-cyan-400/60 bg-cyan-500/10 animate-pulse pointer-events-none"></div>
                 <img id="battlePlayerSprite" src="Art/Familiar/cat1.png" class="w-full h-full object-contain drop-shadow-[0_0_15px_rgba(141,168,155,0.5)]" alt="Tu Familiar">
               </div>
             </div>
 
+            <!-- ENEMIGO (PC) -->
             <div class="flex flex-col items-center text-center relative">
               <div class="w-full max-w-[230px] bg-[#090a0c]/90 p-3 rounded-2xl border border-rose-950/60 mb-3 text-left shadow-lg">
                 <div class="flex items-center justify-between mb-1">
@@ -820,6 +946,7 @@
 
               <div class="relative w-32 h-32 sm:w-40 sm:h-40 flex items-center justify-center">
                 <div id="enemyFloatingDmg" class="absolute -top-4 left-1/2 -translate-x-1/2 z-30 pointer-events-none font-mono font-bold text-lg"></div>
+                <div id="enemyVfxLayer" class="pointer-events-none absolute inset-0 flex items-center justify-center z-20"></div>
                 <div id="battleEnemySprite" class="w-28 h-28 sm:w-36 sm:h-36 rounded-full bg-gradient-to-b from-[#1a121b] to-[#090a0c] border-2 border-rose-500/40 shadow-[0_0_35px_rgba(199,86,101,0.35)] flex flex-col items-center justify-center">
                   <span id="battleEnemyEmoji" class="text-5xl sm:text-6xl select-none">👁️</span>
                   <span id="battleEnemyTitleTag" class="text-[8px] font-mono uppercase tracking-widest text-rose-300/80 mt-1">Sombra del Vacío</span>
@@ -865,8 +992,8 @@
         </div>
 
         <div class="pt-3 border-t border-zinc-800/80">
-          <p class="text-[10px] text-[#c3b4c7] font-mono uppercase tracking-widest mb-2">Cambiar Sello Numérico (PIN)</p>
-          <input type="password" id="setNewPin" inputmode="numeric" pattern="[0-9]*" maxlength="6" placeholder="Nuevo PIN de 6 dígitos (opcional)" class="w-full px-3 py-2 bg-[#0f1013] border border-zinc-800 rounded-xl text-zinc-200 placeholder-zinc-600 font-mono text-sm tracking-[0.2em] text-center focus:outline-none focus:border-[#8da89b] transition" autocomplete="off">
+          <p class="text-[10px] text-[#9b8da8] font-mono uppercase tracking-widest mb-1.5">Seguridad · Cambiar Sello Numérico</p>
+          <input type="password" id="setNewPin" inputmode="numeric" pattern="[0-9]*" maxlength="6" placeholder="Nuevo PIN de 6 dígitos (opcional)" class="w-full px-3 py-2 bg-[#0f1013] border border-zinc-800 rounded-xl text-zinc-200 placeholder-zinc-600 font-mono text-xs tracking-widest text-center focus:outline-none focus:border-[#8da89b]">
         </div>
 
         <div class="flex justify-end pt-3 border-t border-zinc-800">
@@ -895,9 +1022,12 @@
     </div>
   </div>
 
-  <!-- POP-UP DE LA LUNA: LUNA AMPLIADA ARRIBA E INFORMACIÓN DE CICLOS Y ASTROS DEBAJO -->
+  <!-- MODAL LUNAR AMPLIADO CON INFORMACIÓN DE CICLOS Y ASTROS -->
   <div id="moonModal" onclick="if(event.target === this) closeMoonModal()" class="fixed inset-0 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 z-50 hidden">
-    <div id="lunarModalContent" class="w-full flex items-center justify-center"></div>
+    <div class="bg-gradient-to-b from-[#15141c] to-[#0b0c0f] border border-zinc-800/90 rounded-3xl max-w-md w-full max-h-[90vh] overflow-y-auto custom-scroll p-6 sm:p-8 shadow-2xl relative flex flex-col items-center">
+      <button type="button" onclick="closeMoonModal()" class="absolute top-4 right-4 text-zinc-500 hover:text-white bg-black/50 p-2 rounded-full transition"><i data-lucide="x" class="w-5 h-5"></i></button>
+      <div id="lunarModalContent" class="text-center w-full flex flex-col items-center mt-1"></div>
+    </div>
   </div>
 
   <div id="appointmentModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 z-50 hidden">
@@ -1026,7 +1156,7 @@
         <span id="modalTarotPosition" class="text-[10px] font-mono tracking-widest text-[#8da89b] uppercase mb-3 px-3 py-1 rounded-full bg-[#8da89b]/10 border border-[#8da89b]/30">Arcano I · Pasado</span>
 
         <div id="modalTarotCardVisual" class="w-44 sm:w-56 aspect-[2/3] rounded-2xl bg-[#090a0c] border-2 border-[#b09ba8] shadow-[0_0_30px_rgba(176,155,168,0.3)] flex items-center justify-center overflow-hidden mb-4 p-1.5 relative flex-shrink-0">
-          <img id="modalTarotImg" src="Art/Tarot/0.png" alt="Arcano" class="w-full h-full object-contain rounded-xl transition-transform duration-500" onerror="handleModalTarotImgError(this)">
+          <img id="modalTarotImg" src="Art/Tarot/0.png" alt="Arcano" class="w-full h-full object-contain rounded-xl transition-transform duration-500" onerror="this.classList.add('hidden'); document.getElementById('modalTarotFallback').classList.remove('hidden'); document.getElementById('modalTarotFallback').classList.add('flex');">
           <div id="modalTarotFallback" class="hidden w-full h-full flex-col items-center justify-between p-4">
             <span id="modalTarotNumTop" class="font-serif-luxury text-sm font-bold text-zinc-300">0</span>
             <span id="modalTarotSymbol" class="text-6xl">🃏</span>
@@ -1050,63 +1180,44 @@
     </div>
   </div>
 
-  <!-- POP-UP DECORADO DE INTERPRETACIÓN CONJUNTA DE LAS 3 CARTAS -->
-  <div id="tarotCombinedDetailModal" onclick="if(event.target === this) closeTarotCombinedModal()" class="fixed inset-0 bg-black/85 backdrop-blur-md items-center justify-center p-4 z-50 hidden">
-    <div class="bg-gradient-to-b from-[#171520] via-[#101116] to-[#0a0b0e] border-2 border-[#9b8da8]/50 rounded-3xl max-w-lg w-full max-h-[90vh] overflow-y-auto custom-scroll p-6 sm:p-8 shadow-[0_0_50px_rgba(155,141,168,0.25)] relative">
+  <!-- POP-UP DECORADO DE DESCRIPCIÓN CONJUNTA DE LA TIRADA -->
+  <div id="tarotCombinedModal" onclick="if(event.target === this) closeTarotCombinedModal()" class="fixed inset-0 bg-black/85 backdrop-blur-md items-center justify-center p-4 z-50 hidden">
+    <div class="bg-gradient-to-b from-[#171520] via-[#111216] to-[#0a0b0e] border border-[#9b8da8]/50 rounded-3xl max-w-lg w-full max-h-[90vh] overflow-y-auto custom-scroll p-6 sm:p-8 shadow-[0_0_50px_rgba(155,141,168,0.25)] relative">
       <button type="button" onclick="closeTarotCombinedModal()" class="absolute top-4 right-4 text-[#9b8da8] hover:text-white bg-black/60 p-2 rounded-full border border-[#9b8da8]/30">
         <i data-lucide="x" class="w-4 h-4"></i>
       </button>
 
       <div class="flex flex-col items-center text-center">
-        <div class="flex items-center gap-2 text-[#8da89b] text-xs font-mono uppercase tracking-[0.25em] mb-2">
-          <span>✦</span><span>Oráculo Trinitario</span><span>✦</span>
-        </div>
-        <h3 class="font-serif-luxury text-2xl sm:text-3xl text-zinc-100 font-bold tracking-wide mb-3">Interpretación Conjunta</h3>
-        <div class="w-32 h-px bg-gradient-to-r from-transparent via-[#c3b4c7]/70 to-transparent mb-5"></div>
-
-        <div id="combinedModalCardsRow" class="grid grid-cols-3 gap-2 w-full mb-5"></div>
-
-        <div class="w-full bg-[#090a0c]/85 border border-[#9b8da8]/35 rounded-2xl p-5 sm:p-6 text-left relative shadow-inner">
-          <div class="flex items-center justify-center gap-2 text-[#c3b4c7]/70 text-xs mb-3">
-            <span>───</span><span>☾ ✦ ☽</span><span>───</span>
-          </div>
-          <div id="combinedModalReadingBody" class="font-serif-luxury text-base sm:text-lg text-zinc-200 leading-relaxed space-y-3"></div>
-          <div class="flex items-center justify-center gap-2 text-[#8da89b]/70 text-xs mt-4">
-            <span>───</span><span>✧</span><span>───</span>
-          </div>
-        </div>
+        <span class="text-[10px] font-mono tracking-widest text-[#8da89b] uppercase mb-2 px-3 py-1 rounded-full bg-[#8da89b]/10 border border-[#8da89b]/30">✦ Oráculo Completo · Tríada del Destino ✦</span>
+        <h3 class="font-serif-luxury text-2xl sm:text-3xl text-zinc-100 font-bold mb-4">Lectura Conjunta de los Arcanos</h3>
+        <div id="tarotCombinedModalBody" class="w-full text-left space-y-4"></div>
       </div>
     </div>
   </div>
 
-  <!-- COMPAÑERO FLOTANTE GLOBAL (LADO IZQUIERDO, TRANSPARENTE Y MINIMIZABLE) -->
-  <div id="floatingPetWidget" class="fixed bottom-3 left-3 z-40 hidden items-end">
-    <!-- Vista Ampliada -->
-    <div id="floatingPetExpanded" onclick="switchView('pets')" class="relative flex items-center gap-2 bg-transparent px-1 py-1 cursor-pointer transition-all hover:scale-105 group">
-      <button type="button" onclick="event.stopPropagation(); toggleFloatingPetMinimize(true)" class="absolute top-1 left-1 z-50 w-7 h-7 rounded-full bg-[#090a0c]/80 hover:bg-[#16181d] border border-zinc-700/80 text-zinc-400 hover:text-white flex items-center justify-center shadow-lg transition" title="Minimizar familiar">
-        <i data-lucide="chevron-down" class="w-4 h-4"></i>
-      </button>
-      <img id="floatingPetImg" src="Art/Familiar/cat1.png" class="w-40 h-40 sm:w-48 sm:h-48 object-contain pet-float drop-shadow-[0_0_20px_rgba(141,168,155,0.55)]" alt="Familiar">
-      <div class="hidden sm:flex flex-col pr-1 drop-shadow-[0_2px_6px_rgba(0,0,0,0.95)]">
-        <span id="floatingPetName" class="font-serif-luxury text-base font-bold text-zinc-100 leading-none">Familiar</span>
-        <span id="floatingPetStatus" class="text-xs font-mono text-[#8da89b] uppercase mt-1">Nv. 1 · Custodiando</span>
-      </div>
-    </div>
+  <!-- COMPAÑERO FLOTANTE GLOBAL (ESQUINA INFERIOR IZQUIERDA, TRANSPARENTE, DOBLE TAMAÑO Y MINIMIZABLE) -->
+  <div id="floatingPetWidget" class="fixed bottom-4 left-4 z-40 hidden flex-col items-start select-none">
+    <button type="button" onclick="toggleFloatingPetMinimize(event)" id="floatingPetToggleBtn" class="mb-1 ml-2 px-2.5 py-1 rounded-full bg-[#121316]/85 backdrop-blur-md border border-zinc-800 hover:border-[#8da89b]/50 text-[10px] font-mono text-zinc-400 hover:text-white flex items-center gap-1 shadow-lg transition" title="Recoger / Desplegar Familiar">
+      <span id="floatingPetToggleIcon">⌄</span>
+      <span id="floatingPetMiniLabel" class="hidden font-serif-luxury text-xs text-zinc-200">Familiar</span>
+    </button>
 
-    <!-- Vista Minimizada -->
-    <div id="floatingPetMinimized" onclick="toggleFloatingPetMinimize(false)" class="hidden items-center gap-2.5 bg-[#121316]/90 backdrop-blur-md border border-zinc-800 hover:border-[#8da89b]/50 px-3 py-1.5 rounded-full shadow-xl cursor-pointer transition">
-      <img id="floatingPetMiniImg" src="Art/Familiar/cat1.png" class="w-8 h-8 object-contain" alt="Familiar">
-      <span id="floatingPetMiniLabel" class="text-[10px] font-mono uppercase tracking-wider text-[#8da89b] font-bold">Nv. 1</span>
-      <i data-lucide="chevron-up" class="w-3.5 h-3.5 text-zinc-400"></i>
+    <div id="floatingPetExpandedBox" onclick="switchView('pets')" class="flex flex-col items-center bg-transparent cursor-pointer transition-all hover:scale-105 group">
+      <img id="floatingPetImg" src="Art/Familiar/cat1.png" class="w-36 h-36 sm:w-44 sm:h-44 object-contain pet-float filter drop-shadow-[0_8px_22px_rgba(0,0,0,0.9)]" alt="Familiar">
+      <div class="mt-0.5 px-3 py-1 rounded-full bg-[#090a0c]/80 backdrop-blur-sm border border-zinc-800/70 flex flex-col items-center text-center">
+        <span id="floatingPetName" class="font-serif-luxury text-xs sm:text-sm font-bold text-zinc-100 leading-none">Familiar</span>
+        <span id="floatingPetStatus" class="text-[9px] font-mono text-[#8da89b] uppercase mt-0.5">Nv. 1 · Fase 1/3</span>
+      </div>
     </div>
   </div>
 
   <script>
     // ==========================================
-    // 1. UTILIDADES, ESCAPADO Y NOTIFICACIONES
+    // 1. UTILIDADES DE SEGURIDAD Y NOTIFICACIONES
     // ==========================================
     function escapeHTML(str) {
-      return String(str || '')
+      if (str === null || str === undefined) return '';
+      return String(str)
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;')
@@ -1115,28 +1226,8 @@
     }
 
     function handlePetImgError(imgEl, label) {
-      if (!imgEl || imgEl.dataset.fallbackApplied) return;
-      imgEl.dataset.fallbackApplied = '1';
-      imgEl.src = `https://placehold.co/200x200/121316/8da89b?text=${encodeURIComponent(label || 'Familiar')}`;
-    }
-
-    function handleTarotDeckError(imgEl) {
-      if (!imgEl) return;
-      imgEl.classList.add('hidden');
-      if (imgEl.nextElementSibling) {
-        imgEl.nextElementSibling.classList.remove('hidden');
-        imgEl.nextElementSibling.classList.add('flex');
-      }
-    }
-
-    function handleModalTarotImgError(imgEl) {
-      if (!imgEl) return;
-      imgEl.classList.add('hidden');
-      const fb = document.getElementById('modalTarotFallback');
-      if (fb) {
-        fb.classList.remove('hidden');
-        fb.classList.add('flex');
-      }
+      imgEl.onerror = null;
+      imgEl.src = `https://placehold.co/200x200/121316/c75665?text=${encodeURIComponent(label || 'Familiar')}`;
     }
 
     let toastTimeout = null;
@@ -1245,6 +1336,7 @@
     let currentView = 'agenda';
     let currentTarotSlot = 0;
     let currentDetailApptIdx = -1;
+    let isFloatingPetMinimized = false;
 
     const defaultAppData = {
       pin: null,
@@ -1259,7 +1351,6 @@
       days: {},
       pets: {
         active: 'cat',
-        minimized: false,
         medals: 5,
         xp: 60,
         wins: 0,
@@ -1455,6 +1546,56 @@
       return `Tu camino parte de <strong>${escapeHTML(c1.name)}${c1.isReversed ? ' (Invertida)' : ''}</strong> en el pasado, marcando una base de <em>${escapeHTML(m1.toLowerCase())}</em> En el momento presente, <strong>${escapeHTML(c2.name)}${c2.isReversed ? ' (Invertida)' : ''}</strong> actúa como eje central indicando <em>${escapeHTML(m2.toLowerCase())}</em> Todo ello converge hacia <strong>${escapeHTML(c3.name)}${c3.isReversed ? ' (Invertida)' : ''}</strong> en el futuro, revelando <em>${escapeHTML(m3.toLowerCase())}</em><br><br><span class="text-[#8da89b] font-semibold">Síntesis Alquímica:</span> ${escapeHTML(c2.advice)} ${escapeHTML(c3.advice)}`;
     }
 
+    function openTarotCombinedModal() {
+      const day = getDayData(currentDateStr);
+      const slot = day.tarotSlots[currentTarotSlot];
+      if (!slot || !slot.cards || slot.cards.length < 3) return;
+
+      const [c1, c2, c3] = slot.cards;
+      const bodyEl = document.getElementById('tarotCombinedModalBody');
+      if (bodyEl) {
+        bodyEl.innerHTML = `
+          <div class="grid grid-cols-3 gap-2 mb-3">
+            ${[c1, c2, c3].map((c, idx) => `
+              <div class="bg-[#090a0c]/85 border border-[#9b8da8]/30 rounded-xl p-2 flex flex-col items-center text-center">
+                <span class="text-[9px] font-mono uppercase text-[#8da89b]">${['I · Pasado', 'II · Presente', 'III · Futuro'][idx]}</span>
+                <span class="font-serif-luxury text-xs font-bold text-zinc-100 mt-1 line-clamp-2">${escapeHTML(c.name)}</span>
+                <span class="text-[8px] font-mono ${c.isReversed ? 'text-rose-400' : 'text-zinc-400'} mt-0.5">${c.isReversed ? 'Invertida ↺' : 'Al Derecho ↑'}</span>
+              </div>
+            `).join('')}
+          </div>
+
+          <div class="bg-black/50 border border-[#9b8da8]/30 rounded-2xl p-5 shadow-inner">
+            <p class="font-serif-luxury text-base sm:text-lg text-zinc-200 leading-relaxed">${generateCombinedReading(slot.cards)}</p>
+          </div>
+
+          <div class="bg-[#131418] border border-zinc-800/80 rounded-2xl p-4 flex flex-col gap-2">
+            <span class="text-[10px] font-mono uppercase tracking-widest text-[#c3b4c7] font-bold">🕯️ Hilo Conductor de los 3 Arcanos</span>
+            <p class="font-handwritten text-xl text-zinc-300 leading-snug">
+              • <strong>Raíz:</strong> ${escapeHTML(c1.advice)}<br>
+              • <strong>Acción presente:</strong> ${escapeHTML(c2.advice)}<br>
+              • <strong>Horizonte:</strong> ${escapeHTML(c3.advice)}
+            </p>
+          </div>
+
+          <div class="flex justify-center pt-2">
+            <button type="button" onclick="closeTarotCombinedModal(); resetCurrentTarotSlot();" class="px-4 py-2 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-[10px] font-mono uppercase tracking-widest text-zinc-300 hover:text-white transition">
+              ↻ Realizar Nueva Tirada en este Espacio
+            </button>
+          </div>
+        `;
+      }
+      const modal = document.getElementById('tarotCombinedModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeTarotCombinedModal() {
+      const modal = document.getElementById('tarotCombinedModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
     function renderTarotSlotView() {
       const day = getDayData(currentDateStr);
       const slot = day.tarotSlots[currentTarotSlot];
@@ -1485,10 +1626,11 @@
       const cardsHtml = slot.cards.map((c, idx) => {
         const imgSrc = `Art/Tarot/${c.id !== undefined ? c.id : 0}.png`;
         return `
-          <div onclick="openTarotCardModal(${idx})" class="tarot-card-reveal cursor-pointer group bg-[#0e0f13] hover:bg-[#15161c] border border-[#9b8da8]/30 hover:border-[#8da89b] rounded-2xl p-2.5 sm:p-3.5 flex flex-col items-center justify-between transition-all shadow-lg h-full" style="animation-delay:${idx * 120}ms">
+          <div onclick="openTarotCardModal(${idx})" class="tarot-card-reveal cursor-pointer group bg-[#0e0f13] hover:bg-[#15161c] border border-[#9b8da8]/30 hover:border-[#8da89b] rounded-2xl p-2.5 sm:p-3.5 flex flex-col items-center justify-between transition-all hover:-translate-y-1 shadow-lg h-full relative overflow-hidden" style="animation-delay:${idx * 140}ms">
+            <div class="tarot-shimmer-overlay" style="animation-delay:${idx * 180 + 250}ms"></div>
             <span class="text-[9px] sm:text-[10px] font-mono uppercase tracking-widest text-[#9b8da8] mb-2 text-center">${labels[idx]}</span>
             <div class="w-full aspect-[2/3] rounded-xl bg-[#090a0c] border border-[#b09ba8]/40 overflow-hidden flex items-center justify-center p-1 relative">
-              <img src="${imgSrc}" alt="${escapeHTML(c.name)}" class="w-full h-full object-contain rounded-lg transition-transform duration-300 group-hover:scale-105 ${c.isReversed ? 'rotate-180' : ''}" onerror="handleTarotDeckError(this)">
+              <img src="${imgSrc}" alt="${escapeHTML(c.name)}" class="w-full h-full object-contain rounded-lg transition-transform duration-300 group-hover:scale-105 ${c.isReversed ? 'rotate-180' : ''}" onerror="this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden'); this.nextElementSibling.classList.add('flex');">
               <div class="hidden w-full h-full flex-col items-center justify-center text-center p-2">
                 <span class="text-3xl mb-1">${c.symbol || '✦'}</span>
                 <span class="text-[10px] font-serif-luxury text-zinc-300">${escapeHTML(c.name)}</span>
@@ -1510,52 +1652,13 @@
           ${cardsHtml}
         </div>
         <div class="w-full bg-[#0d0e12] border border-[#9b8da8]/30 rounded-2xl p-4 sm:p-5 mt-2 shadow-inner">
-          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-zinc-800 pb-2.5 mb-3">
+          <div class="flex items-center justify-between border-b border-zinc-800 pb-2.5 mb-3">
             <span class="text-xs font-mono uppercase tracking-widest text-[#c3b4c7] font-bold flex items-center gap-2">🔮 Interpretación Conjunta de la Tirada</span>
-            <button onclick="openTarotCombinedModal()" class="text-[10px] font-mono uppercase tracking-wider text-[#b4c7be] hover:text-zinc-950 hover:bg-[#8da89b] px-3 py-1.5 rounded-lg bg-[#8da89b]/15 border border-[#8da89b]/40 font-bold transition">Ver Descripción</button>
+            <button onclick="openTarotCombinedModal()" class="text-[10px] font-mono uppercase tracking-wider text-zinc-950 font-bold px-3 py-1 rounded-lg bg-[#8da89b] hover:bg-[#b4c7be] transition shadow">Ver Descripción</button>
           </div>
           <p class="font-serif-luxury text-base sm:text-lg text-zinc-200 leading-relaxed line-clamp-3">${generateCombinedReading(slot.cards)}</p>
         </div>
-        <div class="flex justify-center mt-1">
-          <button onclick="resetCurrentTarotSlot()" class="text-[10px] font-mono uppercase tracking-widest text-zinc-400 hover:text-white px-4 py-2 rounded-xl bg-[#131418] border border-zinc-800 hover:border-[#9b8da8]/50 transition">Nueva Tirada</button>
-        </div>
       `;
-    }
-
-    function openTarotCombinedModal() {
-      const day = getDayData(currentDateStr);
-      const slot = day.tarotSlots[currentTarotSlot];
-      if (!slot || !slot.cards || slot.cards.length < 3) return;
-
-      const labels = ['I · Pasado', 'II · Presente', 'III · Futuro'];
-      const rowEl = document.getElementById('combinedModalCardsRow');
-      const bodyEl = document.getElementById('combinedModalReadingBody');
-      const modal = document.getElementById('tarotCombinedDetailModal');
-
-      if (rowEl) {
-        rowEl.innerHTML = slot.cards.map((c, i) => `
-          <div class="bg-[#090a0c] border border-[#9b8da8]/30 rounded-xl p-2 flex flex-col items-center text-center">
-            <span class="text-[8px] font-mono uppercase text-[#8da89b] mb-1">${labels[i]}</span>
-            <img src="Art/Tarot/${c.id !== undefined ? c.id : 0}.png" alt="${escapeHTML(c.name)}" class="w-12 h-18 object-contain rounded ${c.isReversed ? 'rotate-180' : ''}">
-            <span class="font-serif-luxury text-xs font-bold text-zinc-100 mt-1 line-clamp-1">${escapeHTML(c.name)}</span>
-          </div>
-        `).join('');
-      }
-      if (bodyEl) {
-        bodyEl.innerHTML = generateCombinedReading(slot.cards);
-      }
-      if (modal) {
-        modal.classList.remove('hidden');
-        modal.classList.add('flex');
-      }
-    }
-
-    function closeTarotCombinedModal() {
-      const modal = document.getElementById('tarotCombinedDetailModal');
-      if (modal) {
-        modal.classList.add('hidden');
-        modal.classList.remove('flex');
-      }
     }
 
     function resetCurrentTarotSlot() {
@@ -1668,14 +1771,6 @@
       if (typeof appData.pets.xp !== 'number') appData.pets.xp = 60;
       if (typeof appData.pets.medals !== 'number') appData.pets.medals = 5;
       if (typeof appData.pets.wins !== 'number') appData.pets.wins = 0;
-      if (typeof appData.pets.minimized !== 'boolean') appData.pets.minimized = false;
-    }
-
-    function toggleFloatingPetMinimize(minimize) {
-      ensurePetSystemData();
-      appData.pets.minimized = !!minimize;
-      saveAppData();
-      updateGlobalPetBar();
     }
 
     function getPetCombatStats(type) {
@@ -1744,6 +1839,14 @@
       saveAppData();
       renderPetsView();
       updateGlobalPetBar();
+
+      const img = document.getElementById('activePetImg');
+      if (img) {
+        img.classList.remove('anim-levelup');
+        void img.offsetWidth;
+        img.classList.add('anim-levelup');
+      }
+      spawnPetParticles('✦', '#8da89b', 4);
       showToast(`¡${PET_DATA[type].names[pet.level - 1]} subió a Nivel ${pet.combatLevel}!`);
     }
 
@@ -1770,7 +1873,37 @@
       saveAppData();
       renderPetsView();
       updateGlobalPetBar();
+
+      const img = document.getElementById('activePetImg');
+      const ring = document.getElementById('petTransmuteRing');
+      if (img) {
+        img.classList.remove('anim-transmute');
+        void img.offsetWidth;
+        img.classList.add('anim-transmute');
+      }
+      if (ring) {
+        ring.classList.remove('anim-transmute-ring');
+        void ring.offsetWidth;
+        ring.classList.add('anim-transmute-ring');
+      }
+      spawnPetParticles('🔮', '#c75665', 6);
       showToast(`¡Transmutación completada a ${PET_DATA[type].names[pet.level - 1]}!`);
+    }
+
+    function spawnPetParticles(symbol, color, count = 4) {
+      const box = document.getElementById('petInteractionParticles');
+      if (!box) return;
+      for (let i = 0; i < count; i++) {
+        const p = document.createElement('span');
+        p.className = 'pet-particle';
+        p.textContent = symbol;
+        p.style.color = color;
+        p.style.left = `${25 + Math.random() * 50}%`;
+        p.style.top = `${35 + Math.random() * 30}%`;
+        p.style.animationDelay = `${i * 90}ms`;
+        box.appendChild(p);
+        setTimeout(() => p.remove(), 1100);
+      }
     }
 
     function interactPet(action) {
@@ -1782,11 +1915,13 @@
         pet.hunger = Math.min(100, (pet.hunger || 80) + 30);
         appData.pets.xp += 10;
         if (img) { img.classList.remove('anim-eat'); void img.offsetWidth; img.classList.add('anim-eat'); }
+        spawnPetParticles('✦', '#8da89b', 4);
         showToast('Familiar nutrido (+10 XP)');
       } else if (action === 'pet') {
         pet.happy = Math.min(100, (pet.happy || 80) + 30);
         appData.pets.xp += 10;
         if (img) { img.classList.remove('anim-pet'); void img.offsetWidth; img.classList.add('anim-pet'); }
+        spawnPetParticles('♥', '#c75665', 5);
         showToast('Vínculo fortalecido (+10 XP)');
       }
       saveAppData();
@@ -1859,8 +1994,8 @@
           return `
             <div class="p-2.5 rounded-xl border ${unlocked ? 'bg-[#090a0c] border-zinc-800' : 'bg-[#090a0c]/40 border-zinc-900 opacity-50'} flex items-center justify-between gap-2">
               <div>
-                <div class="text-xs font-bold ${unlocked ? 'text-zinc-100' : 'text-zinc-500'}">${unlocked ? '✦' : '🔒'} ${m.name}</div>
-                <div class="text-[10px] text-zinc-400">${m.desc}</div>
+                <div class="text-xs font-bold ${unlocked ? 'text-zinc-100' : 'text-zinc-500'}">${unlocked ? '✦' : '🔒'} ${escapeHTML(m.name)}</div>
+                <div class="text-[10px] text-zinc-400">${escapeHTML(m.desc)}</div>
               </div>
               <span class="text-[9px] font-mono uppercase px-2 py-0.5 rounded bg-zinc-900 text-[#8da89b] flex-shrink-0">Fase ${m.stage}</span>
             </div>
@@ -1901,7 +2036,7 @@
         return `
           <button onclick="startVoidBattle('${en.id}')" class="p-2.5 rounded-xl border ${isCurrent ? 'bg-[#1a1318] border-[#c75665]' : 'bg-[#090a0c] border-zinc-800/80 hover:border-zinc-700'} flex flex-col items-center text-center transition">
             <span class="text-2xl mb-1">${en.emoji}</span>
-            <span class="font-serif-luxury text-xs font-bold text-zinc-100 leading-tight truncate w-full">${en.name}</span>
+            <span class="font-serif-luxury text-xs font-bold text-zinc-100 leading-tight truncate w-full">${escapeHTML(en.name)}</span>
             <span class="text-[9px] font-mono text-rose-400 mt-0.5">Nv.${en.level} · +${en.rewardXp} XP</span>
           </button>
         `;
@@ -1959,7 +2094,7 @@
       };
 
       const logEl = document.getElementById('battleCombatLog');
-      if (logEl) logEl.innerHTML = `<div class="text-[#c3b4c7]">✦ ¡<strong>${battleState.enemy.name}</strong> (Nv.${battleState.enemy.level}) se manifiesta en el Plano Astral!</div>`;
+      if (logEl) logEl.innerHTML = `<div class="text-[#c3b4c7]">✦ ¡<strong>${escapeHTML(battleState.enemy.name)}</strong> (Nv.${battleState.enemy.level}) se manifiesta en el Plano Astral!</div>`;
       renderVoidEnemiesSelector();
       updateBattleUI();
     }
@@ -1980,7 +2115,36 @@
     function showFloatingCombatText(side, text, colorClass) {
       const el = document.getElementById(side === 'player' ? 'playerFloatingDmg' : 'enemyFloatingDmg');
       if (!el) return;
-      el.innerHTML = `<span class="combat-float-text inline-block ${colorClass}">${text}</span>`;
+      el.innerHTML = `<span class="combat-float-text inline-block ${colorClass}">${escapeHTML(text)}</span>`;
+    }
+
+    function triggerCombatVfx(side, type, shakeArena = false) {
+      const layer = document.getElementById(side === 'player' ? 'playerVfxLayer' : 'enemyVfxLayer');
+      if (layer) {
+        if (type === 'slash') {
+          layer.innerHTML = `<div class="vfx-slash-arc"></div>`;
+        } else if (type === 'ult') {
+          layer.innerHTML = `<div class="vfx-burst-ring border-4 border-[#c75665] bg-[#9b2a3a]/35 shadow-[0_0_35px_#c75665]"></div>`;
+        } else if (type === 'heal') {
+          layer.innerHTML = `<div class="vfx-burst-ring border-2 border-emerald-400 bg-emerald-500/20 shadow-[0_0_25px_#34d399]"></div>`;
+        } else if (type === 'shield') {
+          layer.innerHTML = `<div class="vfx-burst-ring border-2 border-cyan-400 bg-cyan-500/20 shadow-[0_0_25px_#22d3ee]"></div>`;
+        } else if (type === 'dot') {
+          layer.innerHTML = `<div class="vfx-burst-ring border-2 border-amber-400 bg-amber-500/25 shadow-[0_0_25px_#fbbf24]"></div>`;
+        } else if (type === 'debuff') {
+          layer.innerHTML = `<div class="vfx-burst-ring border-2 border-purple-400 bg-purple-500/25 shadow-[0_0_25px_#c084fc]"></div>`;
+        }
+        setTimeout(() => { if (layer) layer.innerHTML = ''; }, 600);
+      }
+
+      if (shakeArena) {
+        const arena = document.getElementById('battleArenaCard');
+        if (arena) {
+          arena.classList.remove('arena-shake');
+          void arena.offsetWidth;
+          arena.classList.add('arena-shake');
+        }
+      }
     }
 
     function updateBattleUI() {
@@ -2025,10 +2189,10 @@
           return `
             <button onclick="executePlayerMove('${m.id}')" ${disabled ? 'disabled' : ''} class="p-3 rounded-xl border text-left transition flex flex-col justify-between ${unlocked ? 'bg-[#14161c] hover:bg-[#1c1f28] border-[#8da89b]/40 hover:border-[#8da89b]' : 'bg-[#090a0c]/50 border-zinc-900 opacity-45'} ${disabled ? 'cursor-not-allowed' : 'active:scale-95'}">
               <div class="flex items-center justify-between gap-1 mb-1">
-                <span class="font-serif-luxury text-sm font-bold text-zinc-100">${unlocked ? '⚔️' : '🔒'} ${m.name}</span>
+                <span class="font-serif-luxury text-sm font-bold text-zinc-100">${unlocked ? '⚔️' : '🔒'} ${escapeHTML(m.name)}</span>
                 <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-black/50 text-[#8da89b]">F${m.stage}</span>
               </div>
-              <p class="text-[10px] text-zinc-400 leading-snug">${unlocked ? m.desc : `Transmuta a Fase ${m.stage} para desbloquear`}</p>
+              <p class="text-[10px] text-zinc-400 leading-snug">${unlocked ? escapeHTML(m.desc) : `Transmuta a Fase ${m.stage} para desbloquear`}</p>
             </button>
           `;
         }).join('');
@@ -2056,44 +2220,54 @@
         const healAmt = Math.round(player.maxHp * 0.28);
         player.hp = Math.min(player.maxHp, player.hp + healAmt);
         player.shield = Math.round(player.maxHp * 0.12);
+        triggerCombatVfx('player', 'heal');
         showFloatingCombatText('player', `+${healAmt} PS`, 'text-emerald-400');
-        appendBattleLog(`<span class="text-emerald-400">✦ ${player.name} usa <strong>${move.name}</strong> y restaura ${healAmt} PS (+Escudo).</span>`);
+        appendBattleLog(`<span class="text-emerald-400">✦ ${escapeHTML(player.name)} usa <strong>${escapeHTML(move.name)}</strong> y restaura ${healAmt} PS (+Escudo).</span>`);
       } else if (move.type === 'drain') {
         enemy.hp = Math.max(0, enemy.hp - dmg);
         const drained = Math.round(dmg * 0.5);
         player.hp = Math.min(player.maxHp, player.hp + drained);
         if (eSprite) { eSprite.classList.remove('anim-hit'); void eSprite.offsetWidth; eSprite.classList.add('anim-hit'); }
+        triggerCombatVfx('enemy', 'slash');
+        triggerCombatVfx('player', 'heal');
         showFloatingCombatText('enemy', `-${dmg}`, 'text-rose-400');
         showFloatingCombatText('player', `+${drained}`, 'text-emerald-400');
-        appendBattleLog(`<span class="text-zinc-200">🩸 <strong>${move.name}</strong> inflige ${dmg} de daño y drena ${drained} PS.</span>`);
+        appendBattleLog(`<span class="text-zinc-200">🩸 <strong>${escapeHTML(move.name)}</strong> inflige ${dmg} de daño y drena ${drained} PS.</span>`);
       } else if (move.type === 'debuff') {
         enemy.hp = Math.max(0, enemy.hp - dmg);
         enemy.defDebuff = 6;
         if (eSprite) { eSprite.classList.remove('anim-hit'); void eSprite.offsetWidth; eSprite.classList.add('anim-hit'); }
+        triggerCombatVfx('enemy', 'debuff');
         showFloatingCombatText('enemy', `-${dmg} ⬇DEF`, 'text-purple-400');
-        appendBattleLog(`<span class="text-purple-300">🔊 <strong>${move.name}</strong> causa ${dmg} de daño y debilita la defensa rival.</span>`);
+        appendBattleLog(`<span class="text-purple-300">🔊 <strong>${escapeHTML(move.name)}</strong> causa ${dmg} de daño y debilita la defensa rival.</span>`);
       } else if (move.type === 'shield_atk') {
         enemy.hp = Math.max(0, enemy.hp - dmg);
         player.shield = Math.round(player.maxHp * 0.18);
         if (eSprite) { eSprite.classList.remove('anim-hit'); void eSprite.offsetWidth; eSprite.classList.add('anim-hit'); }
+        triggerCombatVfx('enemy', 'slash');
+        triggerCombatVfx('player', 'shield');
         showFloatingCombatText('enemy', `-${dmg}`, 'text-rose-400');
-        appendBattleLog(`<span class="text-cyan-300">🛡️ <strong>${move.name}</strong> causa ${dmg} de daño y activa Manto Protector.</span>`);
+        appendBattleLog(`<span class="text-cyan-300">🛡️ <strong>${escapeHTML(move.name)}</strong> causa ${dmg} de daño y activa Manto Protector.</span>`);
       } else if (move.type === 'dot') {
         enemy.hp = Math.max(0, enemy.hp - dmg);
         enemy.dotTurns = 3;
         enemy.dotType = move.status;
         if (eSprite) { eSprite.classList.remove('anim-hit'); void eSprite.offsetWidth; eSprite.classList.add('anim-hit'); }
+        triggerCombatVfx('enemy', 'dot');
         showFloatingCombatText('enemy', `-${dmg}`, 'text-amber-400');
-        appendBattleLog(`<span class="text-amber-300">🔥 <strong>${move.name}</strong> golpea por ${dmg} y aplica estado alterado (3 turnos).</span>`);
+        appendBattleLog(`<span class="text-amber-300">🔥 <strong>${escapeHTML(move.name)}</strong> golpea por ${dmg} y aplica estado alterado (3 turnos).</span>`);
       } else {
         enemy.hp = Math.max(0, enemy.hp - dmg);
         if (move.type === 'ult') {
           const bonusHeal = Math.round(dmg * 0.2);
           player.hp = Math.min(player.maxHp, player.hp + bonusHeal);
+          triggerCombatVfx('enemy', 'ult', true);
+        } else {
+          triggerCombatVfx('enemy', 'slash');
         }
         if (eSprite) { eSprite.classList.remove('anim-hit'); void eSprite.offsetWidth; eSprite.classList.add('anim-hit'); }
         showFloatingCombatText('enemy', `-${dmg}`, 'text-rose-400');
-        appendBattleLog(`<span class="text-zinc-100">⚔️ ${player.name} ejecuta <strong>${move.name}</strong> causando <strong>${dmg}</strong> de daño.</span>`);
+        appendBattleLog(`<span class="text-zinc-100">⚔️ ${escapeHTML(player.name)} ejecuta <strong>${escapeHTML(move.name)}</strong> causando <strong>${dmg}</strong> de daño.</span>`);
       }
 
       updateBattleUI();
@@ -2117,7 +2291,7 @@
         enemy.hp = Math.max(0, enemy.hp - dotDmg);
         enemy.dotTurns -= 1;
         showFloatingCombatText('enemy', `-${dotDmg}`, 'text-amber-400');
-        appendBattleLog(`<span class="text-amber-400/90">✦ ${enemy.name} sufre ${dotDmg} de daño por ${enemy.dotType === 'burn' ? 'Fuego Fatuo' : 'Miasma'}.</span>`);
+        appendBattleLog(`<span class="text-amber-400/90">✦ ${escapeHTML(enemy.name)} sufre ${dotDmg} de daño por ${enemy.dotType === 'burn' ? 'Fuego Fatuo' : 'Miasma'}.</span>`);
         updateBattleUI();
         if (enemy.hp <= 0) {
           handleBattleVictory();
@@ -2138,8 +2312,9 @@
 
       player.hp = Math.max(0, player.hp - incoming);
       if (pSprite) { pSprite.classList.remove('anim-hit'); void pSprite.offsetWidth; pSprite.classList.add('anim-hit'); }
+      triggerCombatVfx('player', 'slash', incoming >= 25);
       showFloatingCombatText('player', `-${incoming}`, 'text-rose-400');
-      appendBattleLog(`<span class="text-rose-300">👁️ ${enemy.name} usa <strong>${enemy.nextMove}</strong> y causa ${incoming} PS de daño.</span>`);
+      appendBattleLog(`<span class="text-rose-300">👁️ ${escapeHTML(enemy.name)} usa <strong>${escapeHTML(enemy.nextMove)}</strong> y causa ${incoming} PS de daño.</span>`);
 
       enemy.nextMove = enemy.moves[Math.floor(Math.random() * enemy.moves.length)];
       battleState.round += 1;
@@ -2159,7 +2334,7 @@
       appData.pets.medals += enemy.rewardMedals;
       appData.pets.wins = (appData.pets.wins || 0) + 1;
       saveAppData();
-      appendBattleLog(`<span class="text-[#8da89b] font-bold">🏆 ¡Victoria Astral! Has purificado a ${enemy.name}. Recompensa: +${enemy.rewardXp} XP y +${enemy.rewardMedals} 🩸.</span>`);
+      appendBattleLog(`<span class="text-[#8da89b] font-bold">🏆 ¡Victoria Astral! Has purificado a ${escapeHTML(enemy.name)}. Recompensa: +${enemy.rewardXp} XP y +${enemy.rewardMedals} 🩸.</span>`);
       document.getElementById('petGlobalMedals').textContent = appData.pets.medals;
       document.getElementById('petGlobalXP').textContent = appData.pets.xp;
       document.getElementById('petGlobalWins').textContent = appData.pets.wins;
@@ -2179,39 +2354,36 @@
       showToast('Tu familiar necesita descansar. Reinicia el duelo.', true);
     }
 
+    function toggleFloatingPetMinimize(e) {
+      if (e) e.stopPropagation();
+      isFloatingPetMinimized = !isFloatingPetMinimized;
+      const expanded = document.getElementById('floatingPetExpandedBox');
+      const miniLabel = document.getElementById('floatingPetMiniLabel');
+      const toggleIcon = document.getElementById('floatingPetToggleIcon');
+      if (isFloatingPetMinimized) {
+        if (expanded) expanded.classList.add('hidden');
+        if (miniLabel) miniLabel.classList.remove('hidden');
+        if (toggleIcon) toggleIcon.textContent = '⌃';
+      } else {
+        if (expanded) expanded.classList.remove('hidden');
+        if (miniLabel) miniLabel.classList.add('hidden');
+        if (toggleIcon) toggleIcon.textContent = '⌄';
+      }
+    }
+
     function updateGlobalPetBar() {
       ensurePetSystemData();
       const widget = document.getElementById('floatingPetWidget');
-      const expanded = document.getElementById('floatingPetExpanded');
-      const minimized = document.getElementById('floatingPetMinimized');
       const active = appData.pets.active;
       const pet = appData.pets[active];
       const info = PET_DATA[active];
       if (!widget) return;
-
       widget.classList.remove('hidden');
       widget.classList.add('flex');
-
-      const spriteSrc = info.sprites[pet.level - 1];
-      document.getElementById('floatingPetImg').src = spriteSrc;
+      document.getElementById('floatingPetImg').src = info.sprites[pet.level - 1];
       document.getElementById('floatingPetName').textContent = info.names[pet.level - 1];
+      document.getElementById('floatingPetMiniLabel').textContent = `${info.names[pet.level - 1]} · Nv.${pet.combatLevel}`;
       document.getElementById('floatingPetStatus').textContent = `Nv. ${pet.combatLevel} · Fase ${pet.level}/3`;
-
-      document.getElementById('floatingPetMiniImg').src = spriteSrc;
-      document.getElementById('floatingPetMiniLabel').textContent = `Nv. ${pet.combatLevel}`;
-
-      if (appData.pets.minimized) {
-        expanded.classList.add('hidden');
-        expanded.classList.remove('flex');
-        minimized.classList.remove('hidden');
-        minimized.classList.add('flex');
-      } else {
-        minimized.classList.add('hidden');
-        minimized.classList.remove('flex');
-        expanded.classList.remove('hidden');
-        expanded.classList.add('flex');
-      }
-      if (window.lucide) lucide.createIcons();
     }
 
     // ==========================================
@@ -2260,31 +2432,47 @@
       const diffDays = (d - refNewMoon) / (1000 * 60 * 60 * 24);
       const age = ((diffDays % synodic) + synodic) % synodic;
       const idx = Math.min(7, Math.floor((age / synodic) * 8));
-      const cycleDay = Math.floor(age) + 1;
-      const illumination = Math.round(((1 - Math.cos((2 * Math.PI * age) / synodic)) / 2) * 100);
+      const illum = Math.round(((1 - Math.cos((2 * Math.PI * age) / synodic)) / 2) * 100);
 
-      const zodiacList = ['Aries ♈', 'Tauro ♉', 'Géminis ♊', 'Cáncer ♋', 'Leo ♌', 'Virgo ♍', 'Libra ♎', 'Escorpio ♏', 'Sagitario ♐', 'Capricornio ♑', 'Acuario ♒', 'Piscis ♓'];
-      const dayOfYear = Math.floor((d - new Date(d.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
-      const sunSignIdx = Math.floor(((dayOfYear + 284) % 365) / 30.43) % 12;
-      const moonSignIdx = (sunSignIdx + Math.floor((age / synodic) * 12)) % 12;
+      const zodiacs = [
+        { name: 'Aries ♈', el: 'Fuego' }, { name: 'Tauro ♉', el: 'Tierra' }, { name: 'Géminis ♊', el: 'Aire' },
+        { name: 'Cáncer ♋', el: 'Agua' }, { name: 'Leo ♌', el: 'Fuego' }, { name: 'Virgo ♍', el: 'Tierra' },
+        { name: 'Libra ♎', el: 'Aire' }, { name: 'Escorpio ♏', el: 'Agua' }, { name: 'Sagitario ♐', el: 'Fuego' },
+        { name: 'Capricornio ♑', el: 'Tierra' }, { name: 'Acuario ♒', el: 'Aire' }, { name: 'Piscis ♓', el: 'Agua' }
+      ];
+      const moonSignObj = zodiacs[Math.floor((age / synodic) * 12) % 12];
+      const monthDay = (d.getMonth() + 1) * 100 + d.getDate();
+      let sunSign = 'Escorpio ♏';
+      if (monthDay >= 321 && monthDay <= 419) sunSign = 'Aries ♈';
+      else if (monthDay >= 420 && monthDay <= 520) sunSign = 'Tauro ♉';
+      else if (monthDay >= 521 && monthDay <= 620) sunSign = 'Géminis ♊';
+      else if (monthDay >= 621 && monthDay <= 722) sunSign = 'Cáncer ♋';
+      else if (monthDay >= 723 && monthDay <= 822) sunSign = 'Leo ♌';
+      else if (monthDay >= 823 && monthDay <= 922) sunSign = 'Virgo ♍';
+      else if (monthDay >= 923 && monthDay <= 1022) sunSign = 'Libra ♎';
+      else if (monthDay >= 1023 && monthDay <= 1121) sunSign = 'Escorpio ♏';
+      else if (monthDay >= 1122 && monthDay <= 1221) sunSign = 'Sagitario ♐';
+      else if (monthDay >= 1222 || monthDay <= 119) sunSign = 'Capricornio ♑';
+      else if (monthDay >= 120 && monthDay <= 218) sunSign = 'Acuario ♒';
+      else if (monthDay >= 219 && monthDay <= 320) sunSign = 'Piscis ♓';
 
       const phases = [
-        { name: 'Luna Nueva', img: 'Art/lunasOscuras1.png', cycleStage: 'Apertura del Ciclo · Oscuridad Fértil', element: 'Tierra & Éter', desc: 'Siembra de intenciones, introspección profunda y decretos de inicio.', astroFocus: 'El velo entre lo visible y lo invisible se vuelve permeable para plantar semillas de propósito.' },
-        { name: 'Luna Creciente', img: 'Art/lunasOscuras2.png', cycleStage: 'Emergencia · Primer Destello', element: 'Fuego', desc: 'Impulso inicial, planificación estratégica y atracción de recursos.', astroFocus: 'La luz comienza a ascender; es momento de dar forma tangible a tus primeros pasos.' },
-        { name: 'Cuarto Creciente', img: 'Art/lunasOscuras3.png', cycleStage: 'Expansión · Prueba de Voluntad', element: 'Fuego & Aire', desc: 'Superación de obstáculos, acción decidida y fortalecimiento de voluntad.', astroFocus: 'Los astros demandan determinación y compromiso firme con el camino elegido.' },
-        { name: 'Gibosa Creciente', img: 'Art/lunasOscuras4.png', cycleStage: 'Alquimia · Refinamiento Astral', element: 'Aire', desc: 'Perfeccionamiento, enfoque en los detalles y paciencia antes de la plenitud.', astroFocus: 'Ajusta tu energía y alinea tus pensamientos antes del clímax lunar.' },
-        { name: 'Luna Llena', img: 'Art/lunasOscuras5.png', cycleStage: 'Plenitud · Cenit de la Luz', element: 'Agua & Luz', desc: 'Plenitud energética, cosecha de manifestaciones, oráculo y carga de amuletos.', astroFocus: 'Máxima claridad intuitiva y magnetismo; ideal para consagrar herramientas y lecturas.' },
-        { name: 'Gibosa Menguante', img: 'Art/lunasOscuras6.png', cycleStage: 'Diseminación · Cosecha Sabia', element: 'Agua', desc: 'Gratitud, integración de aprendizajes y distribución de sabiduría.', astroFocus: 'Tiempo de compartir lo aprendido y agradecer los frutos recibidos en el ciclo.' },
-        { name: 'Cuarto Menguante', img: 'Art/lunasOscuras7.png', cycleStage: 'Purificación · Corte de Lazos', element: 'Tierra', desc: 'Limpieza energética, corte de lazos caducos y liberación de cargas.', astroFocus: 'Suelta aquello que ya cumplió su propósito para abrir espacio a lo nuevo.' },
-        { name: 'Luna Balsámica', img: 'Art/lunasOscuras8.png', cycleStage: 'Quietud · Umbral de Renacimiento', element: 'Éter', desc: 'Descanso sagrado, cierre de ciclos y preparación espiritual.', astroFocus: 'Recoge tu energía hacia el santuario interior y escucha la voz de tus sueños.' }
+        { name: 'Luna Nueva', img: 'Art/lunasOscuras1.png', desc: 'Portal de oscuridad fértil: ideal para sembrar intenciones en silencio, meditar y trazar nuevos comienzos.' },
+        { name: 'Luna Creciente', img: 'Art/lunasOscuras2.png', desc: 'Primer destello plateado: momento propicio para dar pasos concretos, planificar y atraer recursos.' },
+        { name: 'Cuarto Creciente', img: 'Art/lunasOscuras3.png', desc: 'Tensión creadora y empuje: supera bloqueos con decisión y reafirma tu compromiso con tus metas.' },
+        { name: 'Gibosa Creciente', img: 'Art/lunasOscuras4.png', desc: 'Refinamiento alquímico: ajusta los últimos detalles de tus proyectos y mantén la fe antes de la plenitud.' },
+        { name: 'Luna Llena', img: 'Art/lunasOscuras5.png', desc: 'Plenitud astral máxima: momento de cosecha, revelación intuitiva, lectura de Tarot y carga de amuletos.' },
+        { name: 'Gibosa Menguante', img: 'Art/lunasOscuras6.png', desc: 'Gratitud e integración: comparte la sabiduría adquirida y comienza a soltar la tensión acumulada.' },
+        { name: 'Cuarto Menguante', img: 'Art/lunasOscuras7.png', desc: 'Purificación y corte: cierra ciclos, limpia tu espacio energético y libera hábitos que ya no te sirven.' },
+        { name: 'Luna Balsámica', img: 'Art/lunasOscuras8.png', desc: 'Reposo sagrado: honra el descanso profundo, escucha tus sueños y prepárate para el renacer lunar.' }
       ];
-
       return {
         ...phases[idx],
-        cycleDay,
-        illumination,
-        sunSign: zodiacList[sunSignIdx],
-        moonSign: zodiacList[moonSignIdx]
+        ageDays: age.toFixed(1),
+        illumination: illum,
+        moonSign: moonSignObj.name,
+        element: moonSignObj.el,
+        sunSign
       };
     }
 
@@ -2293,38 +2481,35 @@
       const content = document.getElementById('lunarModalContent');
       if (content) {
         content.innerHTML = `
-          <div onclick="event.stopPropagation()" class="bg-gradient-to-b from-[#15141c]/95 to-[#0a0b0e]/95 border border-[#8da89b]/35 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-[0_0_50px_rgba(0,0,0,0.9)] relative flex flex-col items-center text-center max-h-[90vh] overflow-y-auto custom-scroll">
-            <button type="button" onclick="closeMoonModal()" class="absolute top-4 right-4 text-zinc-400 hover:text-white bg-black/50 p-2 rounded-full border border-zinc-800 transition">
-              <i data-lucide="x" class="w-4 h-4"></i>
-            </button>
+          <div class="w-44 h-44 sm:w-52 sm:h-52 rounded-full bg-[#07080a] border border-zinc-800/80 shadow-[0_0_45px_rgba(141,168,155,0.28)] flex items-center justify-center overflow-hidden mb-5 relative">
+            <img src="${moon.img}" alt="${moon.name}" class="w-full h-full object-cover scale-[1.58] filter drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">
+          </div>
+          <span class="text-[10px] font-mono uppercase tracking-widest text-[#8da89b] mb-1">Ciclo Astral · Día ${moon.ageDays} / 29.5</span>
+          <h3 class="font-serif-luxury text-3xl text-zinc-100 font-bold mb-1">${moon.name}</h3>
+          <span class="text-xs font-mono text-[#c3b4c7] mb-4">Iluminación: ${moon.illumination}%</span>
 
-            <div class="w-48 h-48 sm:w-56 sm:h-56 rounded-full overflow-hidden flex items-center justify-center my-2 relative flex-shrink-0 shadow-[0_0_40px_rgba(180,199,190,0.3)] border border-[#8da89b]/25 bg-[#090a0c]">
-              <img id="modalMoonImg" src="${moon.img}" alt="${moon.name}" class="w-full h-full object-cover object-center scale-[1.58] relative z-10">
+          <div class="grid grid-cols-3 gap-2 w-full mb-4 text-center">
+            <div class="bg-[#090a0c]/85 border border-zinc-800/80 rounded-xl p-2">
+              <div class="text-[9px] font-mono text-zinc-500 uppercase">Tránsito Lunar</div>
+              <div class="text-xs font-bold text-zinc-100 mt-0.5">${moon.moonSign}</div>
             </div>
-
-            <span class="text-[10px] font-mono uppercase tracking-[0.22em] text-[#8da89b] font-bold mt-2">${moon.cycleStage}</span>
-            <h3 class="font-serif-luxury text-3xl sm:text-4xl text-zinc-100 font-bold mt-1 mb-2.5">${moon.name}</h3>
-
-            <div class="flex flex-wrap items-center justify-center gap-2 mb-4">
-              <span class="px-3 py-1 rounded-full bg-[#090a0c] border border-zinc-800 text-[10px] font-mono text-zinc-300">🌓 Iluminación: <strong class="text-[#8da89b]">${moon.illumination}%</strong> · Día ${moon.cycleDay}/29</span>
-              <span class="px-3 py-1 rounded-full bg-[#090a0c] border border-[#9b8da8]/40 text-[10px] font-mono text-[#c3b4c7]">✦ Luna en <strong>${moon.moonSign}</strong> · Sol en ${moon.sunSign}</span>
+            <div class="bg-[#090a0c]/85 border border-zinc-800/80 rounded-xl p-2">
+              <div class="text-[9px] font-mono text-zinc-500 uppercase">Sol Actual</div>
+              <div class="text-xs font-bold text-zinc-100 mt-0.5">${moon.sunSign}</div>
             </div>
-
-            <div class="w-full bg-[#090a0c]/85 border border-zinc-800/90 rounded-2xl p-4 sm:p-5 text-left space-y-3">
-              <div>
-                <p class="text-[10px] font-mono uppercase tracking-widest text-[#8da89b] font-bold mb-1">🌙 Energía del Ciclo Lunar</p>
-                <p class="font-serif-luxury text-base sm:text-lg text-zinc-200 leading-relaxed">${moon.desc}</p>
-              </div>
-              <div class="border-t border-zinc-800/80 pt-3">
-                <p class="text-[10px] font-mono uppercase tracking-widest text-[#c3b4c7] font-bold mb-1">✨ Influencia Astral · Elemento ${moon.element}</p>
-                <p class="font-serif-luxury text-sm sm:text-base text-zinc-300 leading-relaxed">${moon.astroFocus} El tránsito lunar por <strong>${moon.moonSign}</strong> armoniza con el elemento <em>${moon.element}</em>.</p>
-              </div>
+            <div class="bg-[#090a0c]/85 border border-zinc-800/80 rounded-xl p-2">
+              <div class="text-[9px] font-mono text-zinc-500 uppercase">Elemento</div>
+              <div class="text-xs font-bold text-[#8da89b] mt-0.5">${moon.element}</div>
             </div>
+          </div>
+
+          <div class="w-full bg-black/45 p-4 rounded-2xl border border-[#9b8da8]/25 text-left">
+            <p class="text-[10px] font-mono uppercase tracking-widest text-[#c3b4c7] font-bold mb-1">🌙 Energía y Ritual del Día</p>
+            <p class="text-sm text-zinc-200 leading-relaxed font-serif-luxury">${moon.desc}</p>
           </div>
         `;
       }
       document.getElementById('moonModal').classList.remove('hidden');
-      if (window.lucide) lucide.createIcons();
     }
     function closeMoonModal() { document.getElementById('moonModal').classList.add('hidden'); }
 
@@ -2348,35 +2533,30 @@
         if (!day.appointments.length) {
           apptList.innerHTML = `<div class="h-full flex items-center justify-center text-xs font-mono text-zinc-500">Sin eventos agendados hoy</div>`;
         } else {
-          apptList.innerHTML = day.appointments.map((a, i) => {
-            const isDone = !!a.done;
-            return `
-              <div onclick="openAppointmentDetail(${i})" class="p-3 mb-2 rounded-xl bg-[#090a0c]/80 hover:bg-[#16181d] border border-zinc-800/80 flex items-center justify-between gap-2.5 cursor-pointer transition ${isDone ? 'opacity-65' : ''}">
-                <div class="flex items-center gap-3 min-w-0 flex-1">
-                  <input type="checkbox" class="executive-checkbox flex-shrink-0" ${isDone ? 'checked' : ''} onclick="event.stopPropagation()" onchange="toggleAppointmentDone(${i}, this.checked)">
-                  <span class="text-xs font-mono ${isDone ? 'text-zinc-500 line-through' : 'text-[#8da89b]'} font-bold flex-shrink-0">${escapeHTML(a.time || 'Día')}</span>
-                  <span class="font-serif-luxury text-base ${isDone ? 'line-through text-zinc-500' : 'text-zinc-100'} truncate">${escapeHTML(a.title)}</span>
-                </div>
-                <i data-lucide="chevron-right" class="w-4 h-4 text-zinc-500 flex-shrink-0"></i>
+          apptList.innerHTML = day.appointments.map((a, i) => `
+            <div class="p-3 mb-2 rounded-xl bg-[#090a0c]/80 hover:bg-[#16181d] border border-zinc-800/80 flex items-center justify-between gap-2.5 transition">
+              <input type="checkbox" class="executive-checkbox" ${a.done ? 'checked' : ''} onchange="toggleAppointmentDone(${i}, this.checked)" title="Tachar como completado">
+              <div onclick="openAppointmentDetail(${i})" class="flex items-center gap-3 min-w-0 flex-1 cursor-pointer">
+                <span class="text-xs font-mono ${a.done ? 'text-zinc-500' : 'text-[#8da89b]'} font-bold flex-shrink-0">${escapeHTML(a.time || 'Día')}</span>
+                <span class="font-serif-luxury text-base truncate ${a.done ? 'line-through text-zinc-500' : 'text-zinc-100'}">${escapeHTML(a.title)}</span>
               </div>
-            `;
-          }).join('');
+              <button type="button" onclick="openAppointmentDetail(${i})" class="text-zinc-500 hover:text-zinc-300 flex-shrink-0">
+                <i data-lucide="chevron-right" class="w-4 h-4"></i>
+              </button>
+            </div>
+          `).join('');
         }
       }
 
       const habitsEl = document.getElementById('habitsContainer');
       const progressBadge = document.getElementById('habitsProgressBadge');
-      const totalHabits = appData.habitsCatalog.length;
-      const doneHabits = appData.habitsCatalog.filter(h => !!day.habitsDone[h]).length;
-
-      if (progressBadge) {
-        progressBadge.textContent = `${doneHabits}/${totalHabits}`;
-        progressBadge.className = (totalHabits > 0 && doneHabits === totalHabits)
-          ? "text-[10px] font-mono px-2 py-0.5 rounded-full bg-[#8da89b] text-zinc-950 font-bold transition"
-          : "text-[10px] font-mono px-2 py-0.5 rounded-full bg-[#8da89b]/15 border border-[#8da89b]/35 text-[#8da89b] font-bold transition";
-      }
-
       if (habitsEl) {
+        const totalHabits = appData.habitsCatalog.length;
+        const doneCount = appData.habitsCatalog.filter(h => !!day.habitsDone[h]).length;
+        if (progressBadge) {
+          progressBadge.textContent = `${doneCount}/${totalHabits}`;
+        }
+
         if (!totalHabits) {
           habitsEl.innerHTML = `<div class="text-xs font-mono text-zinc-500">Añade rituales diarios con el botón superior.</div>`;
         } else {
@@ -2399,24 +2579,19 @@
       if (window.lucide) lucide.createIcons();
     }
 
+    function toggleAppointmentDone(idx, isDone) {
+      const day = getDayData(currentDateStr);
+      if (!day.appointments[idx]) return;
+      day.appointments[idx].done = isDone;
+      saveAppData();
+      renderAgenda();
+    }
+
     function onNotesInput(type, val) {
       const day = getDayData(currentDateStr);
       if (type === 'morning') day.morningNotes = val;
       else day.nightNotes = val;
       saveAppData();
-    }
-
-    function toggleAppointmentDone(idx, isDone) {
-      const day = getDayData(currentDateStr);
-      if (!day.appointments[idx]) return;
-      day.appointments[idx].done = isDone;
-      if (isDone) {
-        appData.pets.xp = (appData.pets.xp || 0) + 5;
-        showToast('Tarea completada (+5 XP)');
-      }
-      saveAppData();
-      renderAgenda();
-      updateGlobalPetBar();
     }
 
     function toggleHabitByIndex(idx, isDone) {
@@ -2455,14 +2630,15 @@
     function handleSaveAppointment(e) {
       e.preventDefault();
       const idx = parseInt(document.getElementById('apptEditIndex').value, 10);
+      const day = getDayData(currentDateStr);
+      const prevDone = (idx >= 0 && day.appointments[idx]) ? !!day.appointments[idx].done : false;
       const item = {
         title: document.getElementById('apptTitleInput').value.trim(),
         time: document.getElementById('apptTimeInput').value,
         type: document.getElementById('apptTypeInput').value,
         desc: document.getElementById('apptDescInput').value.trim(),
-        done: idx >= 0 ? !!(getDayData(currentDateStr).appointments[idx] || {}).done : false
+        done: prevDone
       };
-      const day = getDayData(currentDateStr);
       if (idx >= 0) day.appointments[idx] = item;
       else day.appointments.push(item);
       saveAppData();
@@ -2627,38 +2803,29 @@
     }
 
     // ==========================================
-    // 10. AJUSTES, CAMBIO DE PIN Y CUSTODIA (BACKUP)
+    // 10. AJUSTES Y CUSTODIA (BACKUP)
     // ==========================================
-    function parseZodiacSign(rawSign) {
-      const clean = (rawSign || '').trim();
-      const parts = clean.split(/\s+/);
-      const name = parts[0] || '';
-      const rawGlyph = parts[1] || '✦';
-      return {
-        name,
-        glyph: `${rawGlyph}\uFE0E`
-      };
+    function extractZodiacGlyph(signStr, fallback) {
+      const parts = String(signStr || '').trim().split(/\s+/);
+      const last = parts[parts.length - 1];
+      return last && last.length <= 3 ? last : fallback;
     }
 
     function applyNatalSigns() {
       const s = appData.settings || defaultAppData.settings;
-      const sunData = parseZodiacSign(s.sun);
-      const moonData = parseZodiacSign(s.moon);
-      const ascData = parseZodiacSign(s.asc);
-
-      const glyphSunEl = document.getElementById('dynGlyphSun');
-      const glyphMoonEl = document.getElementById('dynGlyphMoon');
-      const glyphAscEl = document.getElementById('dynGlyphAsc');
-      if (glyphSunEl) glyphSunEl.textContent = sunData.glyph;
-      if (glyphMoonEl) glyphMoonEl.textContent = moonData.glyph;
-      if (glyphAscEl) glyphAscEl.textContent = ascData.glyph;
-
       const sunEl = document.getElementById('dynSignSun');
       const moonEl = document.getElementById('dynSignMoon');
       const ascEl = document.getElementById('dynSignAsc');
-      if (sunEl) sunEl.textContent = `☀ Sol · ${sunData.name}`;
-      if (moonEl) moonEl.textContent = `☾ Luna · ${moonData.name}`;
-      if (ascEl) ascEl.textContent = `✧ Asc. · ${ascData.name}`;
+      const glyphSun = document.getElementById('glyphSignSun');
+      const glyphMoon = document.getElementById('glyphSignMoon');
+      const glyphAsc = document.getElementById('glyphSignAsc');
+
+      if (sunEl) sunEl.textContent = `Sol ${s.sun}`;
+      if (moonEl) moonEl.textContent = `Luna ${s.moon}`;
+      if (ascEl) ascEl.textContent = `Asc. ${s.asc}`;
+      if (glyphSun) glyphSun.textContent = extractZodiacGlyph(s.sun, '♏');
+      if (glyphMoon) glyphMoon.textContent = extractZodiacGlyph(s.moon, '♒');
+      if (glyphAsc) glyphAsc.textContent = extractZodiacGlyph(s.asc, '♉');
     }
 
     function openSettingsModal() {
@@ -2666,24 +2833,20 @@
       document.getElementById('setSignSun').value = s.sun;
       document.getElementById('setSignMoon').value = s.moon;
       document.getElementById('setSignAsc').value = s.asc;
-      const newPinInput = document.getElementById('setNewPin');
-      if (newPinInput) newPinInput.value = '';
+      const newPinEl = document.getElementById('setNewPin');
+      if (newPinEl) newPinEl.value = '';
       document.getElementById('settingsModal').classList.remove('hidden');
     }
     function closeSettingsModal() { document.getElementById('settingsModal').classList.add('hidden'); }
     function saveSettings() {
-      const newPinInput = document.getElementById('setNewPin');
-      const newPin = newPinInput ? (newPinInput.value || '').trim() : '';
-      let pinUpdated = false;
-
-      if (newPin.length > 0) {
-        if (!/^\d{6}$/.test(newPin)) {
+      const newPinEl = document.getElementById('setNewPin');
+      const newPinVal = newPinEl ? newPinEl.value.trim() : '';
+      if (newPinVal) {
+        if (!/^\d{6}$/.test(newPinVal)) {
           showToast('El nuevo PIN debe tener exactamente 6 dígitos', true);
-          newPinInput.focus();
           return;
         }
-        appData.pin = newPin;
-        pinUpdated = true;
+        appData.pin = newPinVal;
       }
 
       appData.settings = {
@@ -2694,7 +2857,7 @@
       saveAppData();
       applyNatalSigns();
       closeSettingsModal();
-      showToast(pinUpdated ? 'Tríada Astral y Sello Numérico actualizados' : 'Tríada Astral actualizada');
+      showToast(newPinVal ? 'Tríada Astral y Sello PIN actualizados' : 'Tríada Astral actualizada');
     }
 
     function openBackupModal() {
@@ -2736,12 +2899,13 @@
     }
 
     // ==========================================
-    // 11. PANTALLA DE BLOQUEO Y ARRANQUE SEGURO
+    // 11. PANTALLA DE BLOQUEO (MANTENER PULSADO) Y ARRANQUE
     // ==========================================
     function setupLockScreen() {
       const pinInput = document.getElementById('authPin');
       const promptText = document.getElementById('pinPromptText');
       const fpBtn = document.getElementById('fingerprintBtn');
+      const fpIcon = document.getElementById('fingerprintIcon');
       const progressCircle = document.getElementById('unlockProgress');
       const hint = document.getElementById('unlockHint');
 
@@ -2753,40 +2917,29 @@
       if (!appData.pin) {
         promptText.textContent = 'Crea tu Sello Numérico (6 dígitos)';
       } else {
-        promptText.textContent = 'Introduce y mantén pulsado el Sello';
+        promptText.textContent = 'Introduce tu Sello Numérico';
       }
 
       let holdTimer = null;
-      let progress = 0;
-      let isUnlocked = false;
+      let holdProgress = 0;
+      let unlocked = false;
       const circumference = 289;
 
-      function validatePin() {
-        const entered = (pinInput.value || '').trim();
-        if (!/^\d{6}$/.test(entered)) {
-          showToast('Introduce los 6 dígitos de tu Sello Numérico', true);
-          pinInput.focus();
-          return false;
-        }
-        if (appData.pin && entered !== String(appData.pin)) {
-          showToast('Sello Numérico incorrecto', true);
-          pinInput.value = '';
-          return false;
-        }
-        return true;
-      }
-
-      function completeUnlock() {
-        if (isUnlocked) return;
-        isUnlocked = true;
+      function completeUnlock(enteredPin) {
+        if (unlocked) return;
+        unlocked = true;
         clearInterval(holdTimer);
-        const entered = (pinInput.value || '').trim();
+        holdTimer = null;
+
         if (!appData.pin) {
-          appData.pin = entered;
+          appData.pin = enteredPin;
           saveAppData();
           showToast('Sello Numérico consagrado');
         }
+
         if (progressCircle) progressCircle.style.strokeDashoffset = '0';
+        const shockwave = document.getElementById('unlockShockwave');
+        if (shockwave) shockwave.classList.add('unlock-shockwave-active');
 
         setTimeout(() => {
           const lockScreen = document.getElementById('lockScreen');
@@ -2803,41 +2956,62 @@
             body.classList.remove('overflow-hidden');
           }
           updateGlobalPetBar();
-        }, 250);
+        }, 320);
       }
 
       function startHold(e) {
         if (e) e.preventDefault();
-        if (isUnlocked || holdTimer) return;
-        if (!validatePin()) return;
+        if (unlocked) return;
 
-        if (hint) hint.classList.remove('opacity-0');
-        fpBtn.classList.add('scale-105', 'border-[#8da89b]', 'shadow-[0_0_35px_rgba(141,168,155,0.6)]');
-        const svgEl = fpBtn.querySelector('svg');
-        if (svgEl) svgEl.classList.add('text-[#8da89b]');
+        const entered = (pinInput.value || '').trim();
+        if (!/^\d{6}$/.test(entered)) {
+          showToast('Introduce primero los 6 dígitos de tu Sello Numérico', true);
+          pinInput.focus();
+          return;
+        }
+        if (appData.pin && entered !== String(appData.pin)) {
+          showToast('Sello Numérico incorrecto', true);
+          pinInput.value = '';
+          return;
+        }
 
+        if (hint) {
+          hint.textContent = 'Canalizando energía astral...';
+          hint.classList.remove('opacity-0');
+        }
+        if (fpIcon) {
+          fpIcon.classList.remove('text-[#8da89b]/70');
+          fpIcon.classList.add('text-[#b4c7be]', 'scale-110');
+        }
+
+        clearInterval(holdTimer);
         holdTimer = setInterval(() => {
-          progress += 3;
-          const offset = Math.max(0, circumference - (progress / 100) * circumference);
-          if (progressCircle) progressCircle.style.strokeDashoffset = String(offset);
-          if (progress >= 100) {
-            completeUnlock();
+          holdProgress += 5;
+          if (holdProgress > 100) holdProgress = 100;
+          if (progressCircle) {
+            progressCircle.style.strokeDashoffset = String(circumference - (holdProgress / 100) * circumference);
           }
-        }, 25);
+          if (holdProgress >= 100) {
+            completeUnlock(entered);
+          }
+        }, 40);
       }
 
       function cancelHold() {
-        if (isUnlocked) return;
-        if (holdTimer) {
-          clearInterval(holdTimer);
-          holdTimer = null;
+        if (unlocked) return;
+        clearInterval(holdTimer);
+        holdTimer = null;
+        holdProgress = 0;
+        if (progressCircle) {
+          progressCircle.style.strokeDashoffset = String(circumference);
         }
-        progress = 0;
-        if (progressCircle) progressCircle.style.strokeDashoffset = String(circumference);
-        if (hint) hint.classList.add('opacity-0');
-        fpBtn.classList.remove('scale-105', 'border-[#8da89b]', 'shadow-[0_0_35px_rgba(141,168,155,0.6)]');
-        const svgEl = fpBtn.querySelector('svg');
-        if (svgEl) svgEl.classList.remove('text-[#8da89b]');
+        if (fpIcon) {
+          fpIcon.classList.add('text-[#8da89b]/70');
+          fpIcon.classList.remove('text-[#b4c7be]', 'scale-110');
+        }
+        if (hint) {
+          hint.textContent = 'Mantén pulsado el sello dactilar para entrar';
+        }
       }
 
       if (fpBtn) {
@@ -2851,8 +3025,9 @@
         pinInput.addEventListener('keydown', (e) => {
           if (e.key === 'Enter') {
             e.preventDefault();
-            if (validatePin()) {
-              showToast('Mantén pulsada la huella para abrir el sello');
+            if (hint) {
+              hint.textContent = 'Ahora mantén pulsado el sello dactilar';
+              hint.classList.remove('opacity-0');
             }
           }
         });
@@ -2868,7 +3043,28 @@
       if (window.lucide) lucide.createIcons();
     }
 
+    function initAstralParticles() {
+      const layer = document.getElementById('astralParticlesLayer');
+      if (!layer || layer.children.length > 0) return;
+      const colors = ['rgba(141, 168, 155, 0.55)', 'rgba(195, 180, 199, 0.5)', 'rgba(255, 255, 255, 0.45)'];
+      for (let i = 0; i < 18; i++) {
+        const mote = document.createElement('span');
+        mote.className = 'astral-mote';
+        const size = 2 + Math.random() * 2.5;
+        mote.style.width = `${size}px`;
+        mote.style.height = `${size}px`;
+        mote.style.left = `${Math.random() * 100}%`;
+        mote.style.top = `${20 + Math.random() * 80}%`;
+        mote.style.backgroundColor = colors[i % colors.length];
+        mote.style.boxShadow = `0 0 8px ${colors[i % colors.length]}`;
+        mote.style.animationDuration = `${7 + Math.random() * 9}s`;
+        mote.style.animationDelay = `${-Math.random() * 10}s`;
+        layer.appendChild(mote);
+      }
+    }
+
     window.addEventListener('DOMContentLoaded', () => {
+      initAstralParticles();
       setupLockScreen();
       renderAll();
       if ('serviceWorker' in navigator) {
