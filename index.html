@@ -918,9 +918,9 @@
     </div>
   </div>
 
-  <!-- POP-UP DE LA LUNA: SOLO LA LUNA AMPLIADA Y CENTRADA -->
-  <div id="moonModal" onclick="closeMoonModal()" class="fixed inset-0 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 z-50 hidden cursor-pointer">
-    <div id="lunarModalContent" class="flex items-center justify-center bg-transparent"></div>
+  <!-- POP-UP DE LA LUNA: LUNA AMPLIADA ARRIBA E INFORMACIÓN DE CICLOS Y ASTROS DEBAJO -->
+  <div id="moonModal" onclick="if(event.target === this) closeMoonModal()" class="fixed inset-0 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 z-50 hidden">
+    <div id="lunarModalContent" class="w-full flex items-center justify-center"></div>
   </div>
 
   <div id="appointmentModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 z-50 hidden">
@@ -2203,6 +2203,46 @@
       renderAll();
     }
 
+    function getAstroTransitForDate(d, age, synodic) {
+      const month = d.getMonth() + 1;
+      const day = d.getDate();
+      let sunIdx = 0;
+      if ((month === 3 && day >= 21) || (month === 4 && day <= 19)) sunIdx = 0;
+      else if ((month === 4 && day >= 20) || (month === 5 && day <= 20)) sunIdx = 1;
+      else if ((month === 5 && day >= 21) || (month === 6 && day <= 20)) sunIdx = 2;
+      else if ((month === 6 && day >= 21) || (month === 7 && day <= 22)) sunIdx = 3;
+      else if ((month === 7 && day >= 23) || (month === 8 && day <= 22)) sunIdx = 4;
+      else if ((month === 8 && day >= 23) || (month === 9 && day <= 22)) sunIdx = 5;
+      else if ((month === 9 && day >= 23) || (month === 10 && day <= 22)) sunIdx = 6;
+      else if ((month === 10 && day >= 23) || (month === 11 && day <= 21)) sunIdx = 7;
+      else if ((month === 11 && day >= 22) || (month === 12 && day <= 21)) sunIdx = 8;
+      else if ((month === 12 && day >= 22) || (month === 1 && day <= 19)) sunIdx = 9;
+      else if ((month === 1 && day >= 20) || (month === 2 && day <= 18)) sunIdx = 10;
+      else sunIdx = 11;
+
+      const signs = [
+        { name: 'Aries ♈', element: 'Fuego' },
+        { name: 'Tauro ♉', element: 'Tierra' },
+        { name: 'Géminis ♊', element: 'Aire' },
+        { name: 'Cáncer ♋', element: 'Agua' },
+        { name: 'Leo ♌', element: 'Fuego' },
+        { name: 'Virgo ♍', element: 'Tierra' },
+        { name: 'Libra ♎', element: 'Aire' },
+        { name: 'Escorpio ♏', element: 'Agua' },
+        { name: 'Sagitario ♐', element: 'Fuego' },
+        { name: 'Capricornio ♑', element: 'Tierra' },
+        { name: 'Acuario ♒', element: 'Aire' },
+        { name: 'Piscis ♓', element: 'Agua' }
+      ];
+
+      const moonIdx = (sunIdx + Math.floor((age / synodic) * 12)) % 12;
+      return {
+        sunSign: signs[sunIdx].name,
+        moonSign: signs[moonIdx].name,
+        element: signs[moonIdx].element
+      };
+    }
+
     function getMoonPhaseData(dateStr) {
       const d = new Date(dateStr + 'T12:00:00');
       const synodic = 29.53058867;
@@ -2210,17 +2250,77 @@
       const diffDays = (d - refNewMoon) / (1000 * 60 * 60 * 24);
       const age = ((diffDays % synodic) + synodic) % synodic;
       const idx = Math.min(7, Math.floor((age / synodic) * 8));
+      const illumination = Math.round(((1 - Math.cos((age / synodic) * 2 * Math.PI)) / 2) * 100);
+      const cycleDay = Math.floor(age) + 1;
+      const astro = getAstroTransitForDate(d, age, synodic);
+
       const phases = [
-        { name: 'Luna Nueva', img: 'Art/lunasOscuras1.png', desc: 'Siembra de intenciones, introspección profunda y decretos de inicio.' },
-        { name: 'Luna Creciente', img: 'Art/lunasOscuras2.png', desc: 'Impulso inicial, planificación estratégica y atracción de recursos.' },
-        { name: 'Cuarto Creciente', img: 'Art/lunasOscuras3.png', desc: 'Superación de obstáculos, acción decidida y fortalecimiento de voluntad.' },
-        { name: 'Gibosa Creciente', img: 'Art/lunasOscuras4.png', desc: 'Perfeccionamiento, enfoque en los detalles y paciencia antes de la plenitud.' },
-        { name: 'Luna Llena', img: 'Art/lunasOscuras5.png', desc: 'Plenitud energética, cosecha de manifestaciones, oráculo y carga de amuletos.' },
-        { name: 'Gibosa Menguante', img: 'Art/lunasOscuras6.png', desc: 'Gratitud, integración de aprendizajes y distribución de sabiduría.' },
-        { name: 'Cuarto Menguante', img: 'Art/lunasOscuras7.png', desc: 'Limpieza energética, corte de lazos caducos y liberación de cargas.' },
-        { name: 'Luna Balsámica', img: 'Art/lunasOscuras8.png', desc: 'Descanso sagrado, cierre de ciclos y preparación espiritual.' }
+        {
+          name: 'Luna Nueva',
+          cycleStage: 'Fase I · Apertura del Ciclo',
+          img: 'Art/lunasOscuras1.png',
+          desc: 'El cielo se cubre de silencio fértil. Es el umbral ideal para la siembra de intenciones, la introspección profunda y el trazado de nuevos decretos.',
+          astroFocus: 'Enciende una vela blanca o negra, escribe tus propósitos en el Grimorio y visualiza la semilla de tus proyectos.'
+        },
+        {
+          name: 'Luna Creciente',
+          cycleStage: 'Fase II · Impulso Ascendente',
+          img: 'Art/lunasOscuras2.png',
+          desc: 'La primera luz lunar emerge para dar movimiento a lo sembrado. Momento propicio para la planificación estratégica, el aprendizaje y la atracción de recursos.',
+          astroFocus: 'Da los primeros pasos tangibles hacia tus metas y nutre tu mente con estudio hermético.'
+        },
+        {
+          name: 'Cuarto Creciente',
+          cycleStage: 'Fase III · Fuerza y Decisión',
+          img: 'Art/lunasOscuras3.png',
+          desc: 'La luz y la sombra alcanzan equilibrio en ascenso. La energía astral exige determinación, superación de obstáculos y firmeza de voluntad.',
+          astroFocus: 'Toma decisiones valientes, ajusta el rumbo de tus manifestaciones y sostén tu disciplina diaria.'
+        },
+        {
+          name: 'Gibosa Creciente',
+          cycleStage: 'Fase IV · Alquimia y Perfección',
+          img: 'Art/lunasOscuras4.png',
+          desc: 'La Luna se aproxima a su esplendor. Tiempo de refinar los detalles, practicar la paciencia consciente y alinear tus emociones con tus actos.',
+          astroFocus: 'Revisa tus avances, purifica tus herramientas mágicas y prepara tu espíritu para la culminación lunar.'
+        },
+        {
+          name: 'Luna Llena',
+          cycleStage: 'Fase V · Plenitud y Revelación',
+          img: 'Art/lunasOscuras5.png',
+          desc: 'Máxima irradiación astral y expansión psíquica. Todo lo oculto sale a la luz; es el punto álgido para la cosecha de manifestaciones, el oráculo y la consagración.',
+          astroFocus: 'Realiza una lectura de Tarot profunda, carga tus cristales o agua lunar y agradece los frutos recibidos.'
+        },
+        {
+          name: 'Gibosa Menguante',
+          cycleStage: 'Fase VI · Sabiduría y Gratitud',
+          img: 'Art/lunasOscuras6.png',
+          desc: 'La luz comienza a recogerse hacia el interior. Favorece la gratitud, la integración de aprendizajes y la transmisión de conocimiento.',
+          astroFocus: 'Comparte tu sabiduría, ordena tus notas del alma y reconoce las lecciones que te deja este ciclo.'
+        },
+        {
+          name: 'Cuarto Menguante',
+          cycleStage: 'Fase VII · Liberación y Corte',
+          img: 'Art/lunasOscuras7.png',
+          desc: 'Corriente astral de depuración y cierre. Ideal para soltar hábitos caducos, cortar lazos energéticos y limpiar espacios físicos y mentales.',
+          astroFocus: 'Realiza una limpieza con incienso o sal, depura tu agenda y libera aquello que ya no vibra contigo.'
+        },
+        {
+          name: 'Luna Balsámica',
+          cycleStage: 'Fase VIII · Reposo y Transmutación',
+          img: 'Art/lunasOscuras8.png',
+          desc: 'Último suspiro antes del renacimiento lunar. El cosmos invita al descanso sagrado, la meditación contemplativa y la conexión con los sueños.',
+          astroFocus: 'Descansa, medita en silencio y permite que el universo disuelva los últimos residuos del ciclo.'
+        }
       ];
-      return phases[idx];
+
+      return {
+        ...phases[idx],
+        illumination,
+        cycleDay,
+        sunSign: astro.sunSign,
+        moonSign: astro.moonSign,
+        element: astro.element
+      };
     }
 
     function openMoonModal() {
@@ -2228,12 +2328,41 @@
       const content = document.getElementById('lunarModalContent');
       if (content) {
         content.innerHTML = `
-          <img id="modalMoonImg" src="${moon.img}" alt="Fase Lunar" class="w-72 h-72 sm:w-96 sm:h-96 object-contain object-center drop-shadow-[0_0_45px_rgba(180,199,190,0.4)] transition-transform duration-300">
+          <div onclick="event.stopPropagation()" class="bg-gradient-to-b from-[#15141c]/95 to-[#0a0b0e]/95 border border-[#8da89b]/35 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-[0_0_50px_rgba(0,0,0,0.9)] relative flex flex-col items-center text-center max-h-[90vh] overflow-y-auto custom-scroll">
+            <button type="button" onclick="closeMoonModal()" class="absolute top-4 right-4 text-zinc-400 hover:text-white bg-black/50 p-2 rounded-full border border-zinc-800 transition">
+              <i data-lucide="x" class="w-4 h-4"></i>
+            </button>
+
+            <div class="w-44 h-44 sm:w-52 sm:h-52 flex items-center justify-center my-1 relative flex-shrink-0">
+              <div class="absolute inset-4 rounded-full bg-[#8da89b]/10 blur-2xl pointer-events-none"></div>
+              <img id="modalMoonImg" src="${moon.img}" alt="${moon.name}" class="w-full h-full object-contain object-center drop-shadow-[0_0_30px_rgba(180,199,190,0.45)] relative z-10">
+            </div>
+
+            <span class="text-[10px] font-mono uppercase tracking-[0.22em] text-[#8da89b] font-bold mt-1">${moon.cycleStage}</span>
+            <h3 class="font-serif-luxury text-3xl sm:text-4xl text-zinc-100 font-bold mt-1 mb-2.5">${moon.name}</h3>
+
+            <div class="flex flex-wrap items-center justify-center gap-2 mb-4">
+              <span class="px-3 py-1 rounded-full bg-[#090a0c] border border-zinc-800 text-[10px] font-mono text-zinc-300">🌓 Iluminación: <strong class="text-[#8da89b]">${moon.illumination}%</strong> · Día ${moon.cycleDay}/29</span>
+              <span class="px-3 py-1 rounded-full bg-[#090a0c] border border-[#9b8da8]/40 text-[10px] font-mono text-[#c3b4c7]">✦ Luna en <strong>${moon.moonSign}</strong> · Sol en ${moon.sunSign}</span>
+            </div>
+
+            <div class="w-full bg-[#090a0c]/85 border border-zinc-800/90 rounded-2xl p-4 sm:p-5 text-left space-y-3">
+              <div>
+                <p class="text-[10px] font-mono uppercase tracking-widest text-[#8da89b] font-bold mb-1">🌙 Energía del Ciclo Lunar</p>
+                <p class="font-serif-luxury text-base sm:text-lg text-zinc-200 leading-relaxed">${moon.desc}</p>
+              </div>
+              <div class="border-t border-zinc-800/80 pt-3">
+                <p class="text-[10px] font-mono uppercase tracking-widest text-[#c3b4c7] font-bold mb-1">✨ Influencia Astral · Elemento ${moon.element}</p>
+                <p class="font-serif-luxury text-sm sm:text-base text-zinc-300 leading-relaxed">${moon.astroFocus} El tránsito lunar por <strong>${moon.moonSign}</strong> armoniza con el elemento <em>${moon.element}</em>.</p>
+              </div>
+            </div>
+          </div>
         `;
         const modalMoonImg = document.getElementById('modalMoonImg');
         if (modalMoonImg) applyTransparentMoonIcon(modalMoonImg, moon.img);
       }
       document.getElementById('moonModal').classList.remove('hidden');
+      if (window.lucide) lucide.createIcons();
     }
     function closeMoonModal() { document.getElementById('moonModal').classList.add('hidden'); }
 
