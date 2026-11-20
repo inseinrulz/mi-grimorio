@@ -358,32 +358,32 @@
 
       <nav class="w-full relative z-10">
         <div class="grid grid-cols-4 gap-3 sm:gap-6">
-          <button onclick="switchView('agenda')" id="cardAgenda" class="nav-emblem-btn py-2 px-1 sm:p-3 rounded-2xl flex flex-col items-center justify-center text-center gap-1.5 group relative">
+          <button onclick="switchView('agenda')" id="cardAgenda" class="nav-emblem-btn py-2 px-1 sm:p-3 rounded-2xl flex flex-col items-center justify-center text-center gap-2.5 group relative">
             <div class="w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
-              <img src="Art/Calendario gótico con reloj celta_2.png" alt="Agenda" class="w-full h-full object-contain object-center drop-shadow-[0_0_10px_rgba(141,168,155,0.3)]">
+              <img src="Art/Calendario gótico con reloj celta_2.png" alt="Agenda" class="w-full h-full object-contain object-center scale-[1.28] drop-shadow-[0_0_10px_rgba(141,168,155,0.3)]">
             </div>
-            <span id="headerDayNumName" class="font-serif-luxury text-xs sm:text-sm font-bold text-zinc-200 tracking-wide truncate">Agenda</span>
+            <span id="headerDayNumName" class="font-serif-luxury text-xs sm:text-sm font-bold text-zinc-200 tracking-wide truncate mt-1">Agenda</span>
           </button>
           
-          <button onclick="switchView('grimoire')" id="cardGrimorio" class="nav-emblem-btn py-2 px-1 sm:p-3 rounded-2xl flex flex-col items-center justify-center text-center gap-1.5 group relative">
+          <button onclick="switchView('grimoire')" id="cardGrimorio" class="nav-emblem-btn py-2 px-1 sm:p-3 rounded-2xl flex flex-col items-center justify-center text-center gap-2.5 group relative">
             <div class="w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
               <img src="Art/Grimorio místico de cuero envejecido_2.png" alt="Grimorio" class="w-full h-full object-contain object-center scale-[1.35] drop-shadow-[0_0_10px_rgba(141,168,155,0.3)]">
             </div>
-            <span class="font-serif-luxury text-xs sm:text-sm font-bold text-zinc-200 tracking-wide truncate">Grimorio</span>
+            <span class="font-serif-luxury text-xs sm:text-sm font-bold text-zinc-200 tracking-wide truncate mt-1">Grimorio</span>
           </button>
 
-          <button onclick="switchView('tarot')" id="cardTarot" class="nav-emblem-btn py-2 px-1 sm:p-3 rounded-2xl flex flex-col items-center justify-center text-center gap-1.5 group relative">
+          <button onclick="switchView('tarot')" id="cardTarot" class="nav-emblem-btn py-2 px-1 sm:p-3 rounded-2xl flex flex-col items-center justify-center text-center gap-2.5 group relative">
             <div class="w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
               <img src="Art/Emblema Gótico de Fases Lunares_2.png" alt="Oráculo" class="w-full h-full object-contain object-center scale-[1.28] drop-shadow-[0_0_10px_rgba(141,168,155,0.3)]">
             </div>
-            <span class="font-serif-luxury text-xs sm:text-sm font-bold text-zinc-200 tracking-wide truncate">Oráculo</span>
+            <span class="font-serif-luxury text-xs sm:text-sm font-bold text-zinc-200 tracking-wide truncate mt-1">Oráculo</span>
           </button>
 
-          <button onclick="switchView('pets')" id="cardPets" class="nav-emblem-btn py-2 px-1 sm:p-3 rounded-2xl flex flex-col items-center justify-center text-center gap-1.5 group relative">
+          <button onclick="switchView('pets')" id="cardPets" class="nav-emblem-btn py-2 px-1 sm:p-3 rounded-2xl flex flex-col items-center justify-center text-center gap-2.5 group relative">
             <div class="w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
-              <img src="Art/Emblema de Huella Gótica Verde_2.png" alt="Familiar" class="w-full h-full object-contain object-center drop-shadow-[0_0_10px_rgba(141,168,155,0.3)]">
+              <img src="Art/Emblema de Huella Gótica Verde_2.png" alt="Familiar" class="w-full h-full object-contain object-center scale-[1.28] drop-shadow-[0_0_10px_rgba(141,168,155,0.3)]">
             </div>
-            <span class="font-serif-luxury text-xs sm:text-sm font-bold text-zinc-200 tracking-wide truncate">Familiar</span>
+            <span class="font-serif-luxury text-xs sm:text-sm font-bold text-zinc-200 tracking-wide truncate mt-1">Familiar</span>
           </button>
         </div>
       </nav>
@@ -1103,11 +1103,11 @@
   </div>
 
   <!-- COMPAÑERO FLOTANTE GLOBAL (LADO IZQUIERDO Y FONDO TRANSPARENTE) -->
-  <div id="floatingPetWidget" onclick="switchView('pets')" class="fixed bottom-4 left-4 z-40 hidden items-center gap-2.5 bg-transparent px-1 py-1 cursor-pointer transition-all hover:scale-105 group">
-    <img id="floatingPetImg" src="Art/Familiar/cat1.png" class="w-20 h-20 sm:w-24 sm:h-24 object-contain pet-float drop-shadow-[0_0_16px_rgba(141,168,155,0.5)]" alt="Familiar">
+  <div id="floatingPetWidget" onclick="switchView('pets')" class="fixed bottom-3 left-3 z-40 hidden items-center gap-2 bg-transparent px-1 py-1 cursor-pointer transition-all hover:scale-105 group">
+    <img id="floatingPetImg" src="Art/Familiar/cat1.png" class="w-40 h-40 sm:w-48 sm:h-48 object-contain pet-float drop-shadow-[0_0_20px_rgba(141,168,155,0.55)]" alt="Familiar">
     <div class="hidden sm:flex flex-col pr-1 drop-shadow-[0_2px_6px_rgba(0,0,0,0.95)]">
-      <span id="floatingPetName" class="font-serif-luxury text-sm font-bold text-zinc-100 leading-none">Familiar</span>
-      <span id="floatingPetStatus" class="text-[10px] font-mono text-[#8da89b] uppercase mt-1">Nv. 1 · Custodiando</span>
+      <span id="floatingPetName" class="font-serif-luxury text-base font-bold text-zinc-100 leading-none">Familiar</span>
+      <span id="floatingPetStatus" class="text-xs font-mono text-[#8da89b] uppercase mt-1">Nv. 1 · Custodiando</span>
     </div>
   </div>
 
@@ -1147,7 +1147,7 @@
     }
 
     // ==========================================
-    // 2. ICONO LUNAR TRANSPARENTE EN CABECERA Y POP-UP
+    // 2. ICONO LUNAR TRANSPARENTE EN CABECERA
     // ==========================================
     const transparentMoonCache = {};
     function applyTransparentMoonIcon(imgEl, srcUrl) {
@@ -1175,12 +1175,12 @@
               const i = (y * w + x) * 4;
               const r = data[i], g = data[i + 1], b = data[i + 2];
               const lum = (r + g + b) / 3;
-              if (lum < 34) {
+              if (lum < 22) {
                 data[i + 3] = 0;
-              } else if (lum < 68) {
-                data[i + 3] = Math.floor(((lum - 34) / 34) * 255);
+              } else if (lum < 45) {
+                data[i + 3] = Math.floor(((lum - 22) / 23) * 255);
               }
-              if (data[i + 3] > 35) {
+              if (data[i + 3] > 25) {
                 if (x < minX) minX = x;
                 if (x > maxX) maxX = x;
                 if (y < minY) minY = y;
@@ -1193,8 +1193,7 @@
           if (maxX > minX && maxY > minY) {
             const cropW = maxX - minX + 1;
             const cropH = maxY - minY + 1;
-            const pad = Math.round(Math.max(cropW, cropH) * 0.06);
-            const size = Math.max(cropW, cropH) + pad * 2;
+            const size = Math.max(cropW, cropH);
             const outCanvas = document.createElement('canvas');
             outCanvas.width = size;
             outCanvas.height = size;
@@ -1485,17 +1484,15 @@
         <div class="grid grid-cols-3 gap-2 sm:gap-4 w-full items-stretch">
           ${cardsHtml}
         </div>
-        <div class="w-full bg-[#0d0e12] border border-[#9b8da8]/30 rounded-2xl p-4 sm:p-5 mt-2 shadow-inner flex flex-col gap-3">
-          <div class="flex items-center justify-between gap-2">
-            <span class="text-xs font-mono uppercase tracking-widest text-[#c3b4c7] font-bold flex items-center gap-2">🔮 Interpretación Conjunta</span>
-            <button onclick="openTarotCombinedModal()" class="text-[10px] sm:text-xs font-mono uppercase tracking-wider font-bold text-zinc-950 bg-gradient-to-r from-[#8da89b] to-[#c3b4c7] hover:opacity-90 px-3.5 py-1.5 rounded-xl shadow transition">Ver Descripción</button>
+        <div class="w-full bg-[#0d0e12] border border-[#9b8da8]/30 rounded-2xl p-4 sm:p-5 mt-2 shadow-inner">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-zinc-800 pb-2.5 mb-3">
+            <span class="text-xs font-mono uppercase tracking-widest text-[#c3b4c7] font-bold flex items-center gap-2">🔮 Interpretación Conjunta de la Tirada</span>
+            <button onclick="openTarotCombinedModal()" class="text-[10px] font-mono uppercase tracking-wider text-[#b4c7be] hover:text-zinc-950 hover:bg-[#8da89b] px-3 py-1.5 rounded-lg bg-[#8da89b]/15 border border-[#8da89b]/40 font-bold transition">Ver Descripción</button>
           </div>
-          <p class="font-serif-luxury text-sm sm:text-base text-zinc-400 italic">Los tres arcanos han entrelazado su mensaje del Pasado, Presente y Futuro. Pulsa en «Ver Descripción» para revelar la lectura completa.</p>
+          <p class="font-serif-luxury text-base sm:text-lg text-zinc-200 leading-relaxed line-clamp-3">${generateCombinedReading(slot.cards)}</p>
         </div>
         <div class="flex justify-center mt-1">
-          <button onclick="resetCurrentTarotSlot()" class="text-[10px] font-mono uppercase tracking-widest text-zinc-500 hover:text-zinc-200 px-3 py-1.5 rounded-xl border border-zinc-800/80 bg-[#0d0e12] transition flex items-center gap-1.5">
-            <span>↺</span> Realizar Nueva Tirada en este Espacio
-          </button>
+          <button onclick="resetCurrentTarotSlot()" class="text-[10px] font-mono uppercase tracking-widest text-zinc-400 hover:text-white px-4 py-2 rounded-xl bg-[#131418] border border-zinc-800 hover:border-[#9b8da8]/50 transition">Nueva Tirada</button>
         </div>
       `;
     }
@@ -1505,24 +1502,23 @@
       const slot = day.tarotSlots[currentTarotSlot];
       if (!slot || !slot.cards || slot.cards.length < 3) return;
 
-      const labels = ['Pasado', 'Presente', 'Futuro'];
+      const labels = ['I · Pasado', 'II · Presente', 'III · Futuro'];
       const rowEl = document.getElementById('combinedModalCardsRow');
+      const bodyEl = document.getElementById('combinedModalReadingBody');
+      const modal = document.getElementById('tarotCombinedDetailModal');
+
       if (rowEl) {
-        rowEl.innerHTML = slot.cards.map((c, idx) => `
+        rowEl.innerHTML = slot.cards.map((c, i) => `
           <div class="bg-[#090a0c] border border-[#9b8da8]/30 rounded-xl p-2 flex flex-col items-center text-center">
-            <span class="text-[8px] font-mono uppercase tracking-widest text-[#8da89b]">${labels[idx]}</span>
-            <span class="font-serif-luxury text-xs sm:text-sm font-bold text-zinc-100 mt-0.5 line-clamp-1">${c.name}</span>
-            <span class="text-[8px] font-mono ${c.isReversed ? 'text-rose-400' : 'text-zinc-500'}">${c.isReversed ? 'Invertida' : 'Al Derecho'}</span>
+            <span class="text-[8px] font-mono uppercase text-[#8da89b] mb-1">${labels[i]}</span>
+            <img src="Art/Tarot/${c.id !== undefined ? c.id : 0}.png" alt="${c.name}" class="w-12 h-18 object-contain rounded ${c.isReversed ? 'rotate-180' : ''}">
+            <span class="font-serif-luxury text-xs font-bold text-zinc-100 mt-1 line-clamp-1">${c.name}</span>
           </div>
         `).join('');
       }
-
-      const bodyEl = document.getElementById('combinedModalReadingBody');
       if (bodyEl) {
         bodyEl.innerHTML = generateCombinedReading(slot.cards);
       }
-
-      const modal = document.getElementById('tarotCombinedDetailModal');
       if (modal) {
         modal.classList.remove('hidden');
         modal.classList.add('flex');
@@ -2203,46 +2199,6 @@
       renderAll();
     }
 
-    function getAstroTransitForDate(d, age, synodic) {
-      const month = d.getMonth() + 1;
-      const day = d.getDate();
-      let sunIdx = 0;
-      if ((month === 3 && day >= 21) || (month === 4 && day <= 19)) sunIdx = 0;
-      else if ((month === 4 && day >= 20) || (month === 5 && day <= 20)) sunIdx = 1;
-      else if ((month === 5 && day >= 21) || (month === 6 && day <= 20)) sunIdx = 2;
-      else if ((month === 6 && day >= 21) || (month === 7 && day <= 22)) sunIdx = 3;
-      else if ((month === 7 && day >= 23) || (month === 8 && day <= 22)) sunIdx = 4;
-      else if ((month === 8 && day >= 23) || (month === 9 && day <= 22)) sunIdx = 5;
-      else if ((month === 9 && day >= 23) || (month === 10 && day <= 22)) sunIdx = 6;
-      else if ((month === 10 && day >= 23) || (month === 11 && day <= 21)) sunIdx = 7;
-      else if ((month === 11 && day >= 22) || (month === 12 && day <= 21)) sunIdx = 8;
-      else if ((month === 12 && day >= 22) || (month === 1 && day <= 19)) sunIdx = 9;
-      else if ((month === 1 && day >= 20) || (month === 2 && day <= 18)) sunIdx = 10;
-      else sunIdx = 11;
-
-      const signs = [
-        { name: 'Aries ♈', element: 'Fuego' },
-        { name: 'Tauro ♉', element: 'Tierra' },
-        { name: 'Géminis ♊', element: 'Aire' },
-        { name: 'Cáncer ♋', element: 'Agua' },
-        { name: 'Leo ♌', element: 'Fuego' },
-        { name: 'Virgo ♍', element: 'Tierra' },
-        { name: 'Libra ♎', element: 'Aire' },
-        { name: 'Escorpio ♏', element: 'Agua' },
-        { name: 'Sagitario ♐', element: 'Fuego' },
-        { name: 'Capricornio ♑', element: 'Tierra' },
-        { name: 'Acuario ♒', element: 'Aire' },
-        { name: 'Piscis ♓', element: 'Agua' }
-      ];
-
-      const moonIdx = (sunIdx + Math.floor((age / synodic) * 12)) % 12;
-      return {
-        sunSign: signs[sunIdx].name,
-        moonSign: signs[moonIdx].name,
-        element: signs[moonIdx].element
-      };
-    }
-
     function getMoonPhaseData(dateStr) {
       const d = new Date(dateStr + 'T12:00:00');
       const synodic = 29.53058867;
@@ -2250,76 +2206,31 @@
       const diffDays = (d - refNewMoon) / (1000 * 60 * 60 * 24);
       const age = ((diffDays % synodic) + synodic) % synodic;
       const idx = Math.min(7, Math.floor((age / synodic) * 8));
-      const illumination = Math.round(((1 - Math.cos((age / synodic) * 2 * Math.PI)) / 2) * 100);
       const cycleDay = Math.floor(age) + 1;
-      const astro = getAstroTransitForDate(d, age, synodic);
+      const illumination = Math.round(((1 - Math.cos((2 * Math.PI * age) / synodic)) / 2) * 100);
+
+      const zodiacList = ['Aries ♈', 'Tauro ♉', 'Géminis ♊', 'Cáncer ♋', 'Leo ♌', 'Virgo ♍', 'Libra ♎', 'Escorpio ♏', 'Sagitario ♐', 'Capricornio ♑', 'Acuario ♒', 'Piscis ♓'];
+      const dayOfYear = Math.floor((d - new Date(d.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
+      const sunSignIdx = Math.floor(((dayOfYear + 284) % 365) / 30.43) % 12;
+      const moonSignIdx = (sunSignIdx + Math.floor((age / synodic) * 12)) % 12;
 
       const phases = [
-        {
-          name: 'Luna Nueva',
-          cycleStage: 'Fase I · Apertura del Ciclo',
-          img: 'Art/lunasOscuras1.png',
-          desc: 'El cielo se cubre de silencio fértil. Es el umbral ideal para la siembra de intenciones, la introspección profunda y el trazado de nuevos decretos.',
-          astroFocus: 'Enciende una vela blanca o negra, escribe tus propósitos en el Grimorio y visualiza la semilla de tus proyectos.'
-        },
-        {
-          name: 'Luna Creciente',
-          cycleStage: 'Fase II · Impulso Ascendente',
-          img: 'Art/lunasOscuras2.png',
-          desc: 'La primera luz lunar emerge para dar movimiento a lo sembrado. Momento propicio para la planificación estratégica, el aprendizaje y la atracción de recursos.',
-          astroFocus: 'Da los primeros pasos tangibles hacia tus metas y nutre tu mente con estudio hermético.'
-        },
-        {
-          name: 'Cuarto Creciente',
-          cycleStage: 'Fase III · Fuerza y Decisión',
-          img: 'Art/lunasOscuras3.png',
-          desc: 'La luz y la sombra alcanzan equilibrio en ascenso. La energía astral exige determinación, superación de obstáculos y firmeza de voluntad.',
-          astroFocus: 'Toma decisiones valientes, ajusta el rumbo de tus manifestaciones y sostén tu disciplina diaria.'
-        },
-        {
-          name: 'Gibosa Creciente',
-          cycleStage: 'Fase IV · Alquimia y Perfección',
-          img: 'Art/lunasOscuras4.png',
-          desc: 'La Luna se aproxima a su esplendor. Tiempo de refinar los detalles, practicar la paciencia consciente y alinear tus emociones con tus actos.',
-          astroFocus: 'Revisa tus avances, purifica tus herramientas mágicas y prepara tu espíritu para la culminación lunar.'
-        },
-        {
-          name: 'Luna Llena',
-          cycleStage: 'Fase V · Plenitud y Revelación',
-          img: 'Art/lunasOscuras5.png',
-          desc: 'Máxima irradiación astral y expansión psíquica. Todo lo oculto sale a la luz; es el punto álgido para la cosecha de manifestaciones, el oráculo y la consagración.',
-          astroFocus: 'Realiza una lectura de Tarot profunda, carga tus cristales o agua lunar y agradece los frutos recibidos.'
-        },
-        {
-          name: 'Gibosa Menguante',
-          cycleStage: 'Fase VI · Sabiduría y Gratitud',
-          img: 'Art/lunasOscuras6.png',
-          desc: 'La luz comienza a recogerse hacia el interior. Favorece la gratitud, la integración de aprendizajes y la transmisión de conocimiento.',
-          astroFocus: 'Comparte tu sabiduría, ordena tus notas del alma y reconoce las lecciones que te deja este ciclo.'
-        },
-        {
-          name: 'Cuarto Menguante',
-          cycleStage: 'Fase VII · Liberación y Corte',
-          img: 'Art/lunasOscuras7.png',
-          desc: 'Corriente astral de depuración y cierre. Ideal para soltar hábitos caducos, cortar lazos energéticos y limpiar espacios físicos y mentales.',
-          astroFocus: 'Realiza una limpieza con incienso o sal, depura tu agenda y libera aquello que ya no vibra contigo.'
-        },
-        {
-          name: 'Luna Balsámica',
-          cycleStage: 'Fase VIII · Reposo y Transmutación',
-          img: 'Art/lunasOscuras8.png',
-          desc: 'Último suspiro antes del renacimiento lunar. El cosmos invita al descanso sagrado, la meditación contemplativa y la conexión con los sueños.',
-          astroFocus: 'Descansa, medita en silencio y permite que el universo disuelva los últimos residuos del ciclo.'
-        }
+        { name: 'Luna Nueva', img: 'Art/lunasOscuras1.png', cycleStage: 'Apertura del Ciclo · Oscuridad Fértil', element: 'Tierra & Éter', desc: 'Siembra de intenciones, introspección profunda y decretos de inicio.', astroFocus: 'El velo entre lo visible y lo invisible se vuelve permeable para plantar semillas de propósito.' },
+        { name: 'Luna Creciente', img: 'Art/lunasOscuras2.png', cycleStage: 'Emergencia · Primer Destello', element: 'Fuego', desc: 'Impulso inicial, planificación estratégica y atracción de recursos.', astroFocus: 'La luz comienza a ascender; es momento de dar forma tangible a tus primeros pasos.' },
+        { name: 'Cuarto Creciente', img: 'Art/lunasOscuras3.png', cycleStage: 'Expansión · Prueba de Voluntad', element: 'Fuego & Aire', desc: 'Superación de obstáculos, acción decidida y fortalecimiento de voluntad.', astroFocus: 'Los astros demandan determinación y compromiso firme con el camino elegido.' },
+        { name: 'Gibosa Creciente', img: 'Art/lunasOscuras4.png', cycleStage: 'Alquimia · Refinamiento Astral', element: 'Aire', desc: 'Perfeccionamiento, enfoque en los detalles y paciencia antes de la plenitud.', astroFocus: 'Ajusta tu energía y alinea tus pensamientos antes del clímax lunar.' },
+        { name: 'Luna Llena', img: 'Art/lunasOscuras5.png', cycleStage: 'Plenitud · Cenit de la Luz', element: 'Agua & Luz', desc: 'Plenitud energética, cosecha de manifestaciones, oráculo y carga de amuletos.', astroFocus: 'Máxima claridad intuitiva y magnetismo; ideal para consagrar herramientas y lecturas.' },
+        { name: 'Gibosa Menguante', img: 'Art/lunasOscuras6.png', cycleStage: 'Diseminación · Cosecha Sabia', element: 'Agua', desc: 'Gratitud, integración de aprendizajes y distribución de sabiduría.', astroFocus: 'Tiempo de compartir lo aprendido y agradecer los frutos recibidos en el ciclo.' },
+        { name: 'Cuarto Menguante', img: 'Art/lunasOscuras7.png', cycleStage: 'Purificación · Corte de Lazos', element: 'Tierra', desc: 'Limpieza energética, corte de lazos caducos y liberación de cargas.', astroFocus: 'Suelta aquello que ya cumplió su propósito para abrir espacio a lo nuevo.' },
+        { name: 'Luna Balsámica', img: 'Art/lunasOscuras8.png', cycleStage: 'Quietud · Umbral de Renacimiento', element: 'Éter', desc: 'Descanso sagrado, cierre de ciclos y preparación espiritual.', astroFocus: 'Recoge tu energía hacia el santuario interior y escucha la voz de tus sueños.' }
       ];
 
       return {
         ...phases[idx],
-        illumination,
         cycleDay,
-        sunSign: astro.sunSign,
-        moonSign: astro.moonSign,
-        element: astro.element
+        illumination,
+        sunSign: zodiacList[sunSignIdx],
+        moonSign: zodiacList[moonSignIdx]
       };
     }
 
@@ -2333,12 +2244,11 @@
               <i data-lucide="x" class="w-4 h-4"></i>
             </button>
 
-            <div class="w-44 h-44 sm:w-52 sm:h-52 flex items-center justify-center my-1 relative flex-shrink-0">
-              <div class="absolute inset-4 rounded-full bg-[#8da89b]/10 blur-2xl pointer-events-none"></div>
-              <img id="modalMoonImg" src="${moon.img}" alt="${moon.name}" class="w-full h-full object-contain object-center drop-shadow-[0_0_30px_rgba(180,199,190,0.45)] relative z-10">
+            <div class="w-48 h-48 sm:w-56 sm:h-56 rounded-full overflow-hidden flex items-center justify-center my-2 relative flex-shrink-0 shadow-[0_0_40px_rgba(180,199,190,0.3)] border border-[#8da89b]/25 bg-[#090a0c]">
+              <img id="modalMoonImg" src="${moon.img}" alt="${moon.name}" class="w-full h-full object-cover object-center scale-[1.58] relative z-10">
             </div>
 
-            <span class="text-[10px] font-mono uppercase tracking-[0.22em] text-[#8da89b] font-bold mt-1">${moon.cycleStage}</span>
+            <span class="text-[10px] font-mono uppercase tracking-[0.22em] text-[#8da89b] font-bold mt-2">${moon.cycleStage}</span>
             <h3 class="font-serif-luxury text-3xl sm:text-4xl text-zinc-100 font-bold mt-1 mb-2.5">${moon.name}</h3>
 
             <div class="flex flex-wrap items-center justify-center gap-2 mb-4">
@@ -2358,8 +2268,6 @@
             </div>
           </div>
         `;
-        const modalMoonImg = document.getElementById('modalMoonImg');
-        if (modalMoonImg) applyTransparentMoonIcon(modalMoonImg, moon.img);
       }
       document.getElementById('moonModal').classList.remove('hidden');
       if (window.lucide) lucide.createIcons();
